@@ -1,0 +1,18 @@
+\section{Normative late binding}
+\label{sec:late-binding}
+
+The four-layer design is motivated by different rates of change and different error costs. Core axiology is intended to be stable because silent drift in the system's highest-order commitments is difficult to detect and difficult to roll back. Norms vary by context and therefore require explicit jurisdiction, domain, and authority metadata. Purpose semantics change as the task changes. World state changes continuously and should be evidence-backed rather than memorized.
+
+Consider a privacy-review assistant. The core axiology may treat agency, dignity, truthfulness, and non-domination as persistent considerations. A governing institution may supply an L1 norm that confidential medical information should not be disclosed without an applicable authorization. The current purpose may be incident triage rather than treatment planning. L3 may contain a current authorization record with a source, validity interval, and confidence. The same value structure can therefore support different actions in a routine data request and a legally governed emergency without treating the emergency fact as a change to axiology.
+
+Likewise, a security-response system may receive a domain ontology connecting credentials, vulnerabilities, assets, authorization, and incident evidence. A world-state assertion that a credential is compromised is not itself a permission to act. The system must still distinguish evidence from policy and produce a candidate action whose scope, authority, affected parties, and uncertainty can be checked.
+
+Late binding does not mean that all norms are arbitrary at inference time. It means that context-specific norms are explicit inputs subject to provenance, precedence, conflict handling, and governance. A runtime ontology must not be able to override protected axiological constraints merely by being more recent or more salient. Conflicting authoritative sources should be represented as a conflict, escalated when necessary, and evaluated for calibrated abstention rather than hidden resolution.
+
+The distinction also matters for multilingual and cross-cultural evaluation. Recent work finds that value concepts and moral judgments can vary by language, demographic group, and cultural framing \citep{xu2024multilingualvalues,huang2024flames,yao2024fulcra}. A single fixed prompt or global scalar objective can conceal this variation. A late-bound design can represent multiple authorized perspectives or distributions, but it cannot by itself decide which authority is legitimate. That remains a governance and social-scientific question.
+
+\begin{quote}
+The model should learn reusable semantic structure while transient facts remain externally managed and dynamically bound.
+\end{quote}
+
+This design carries an operational burden: every action must retain enough context to reconstruct which ontology versions, norms, purpose, facts, and authority decisions influenced it. Without that traceability, late binding merely relocates opacity from weights to an un-audited context pipeline.

@@ -1,0 +1,17 @@
+# Novelty analysis
+
+This analysis bounds the manuscript's claims against the literature reviewed on 2026-09-07. It is a positioning document, not a priority claim.
+
+| Claim | Closest prior work | What prior work already demonstrates | What VGA changes | Remaining novelty | Confidence | Risk of overclaiming |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ontology-conditioned attention | KnowBERT, K-BERT, Graphormer, graph-guided representation learning | Structured knowledge can modify Transformer representations or attention-like computation | The proposed relevance channels are explicitly separated into axiology, normativity, and purpose | Alignment-specific intervention and evaluation, if implemented and shown | Medium | High if described as the first ontology/Transformer integration |
+| Ontology-conditioned MoE routing | Sparsely-Gated MoE and Switch Transformer | Routing can condition expert computation on learned representations | Test routing on reasoning functions under value and normative context, not on a single “morality expert” | Alignment-specific routing hypothesis | Low/medium | High until an implementation and ablation exist |
+| Axiological training objectives | Constitutional AI, value-based calibration, FULCRA, value alignment from text | Values and principles can guide supervision, preference optimization, or calibration | Treat value structure as an explicit auxiliary signal alongside representation and action formation | Joint architecture and controlled comparison | Medium | High if prior value-alignment work is ignored |
+| Normative ontology binding | Constitutional/deliberative alignment; pluralistic alignment roadmaps | Written principles and pluralistic value profiles can condition model behavior | Separate stable values from context-sensitive duties, permissions, exceptions, and conflicts | Explicit layer contract and governance boundary | Medium | Medium; adjacent work exists |
+| Differentiated ontology plasticity | K-Adapter; continual learning and modular knowledge work | Modular updates can reduce interference and support knowledge infusion | Assign distinct update authority to axiology, norms, domain ontology, and state | Governance-oriented plasticity schedule | Medium | Medium/high without continual-learning experiments |
+| Formal assurance | Z3; program verification; runtime action guards | Symbolic solvers can check formalized constraints | Place assurance at action/tool boundaries and keep it distinct from neural alignment | Combined intrinsic/extrinsic architecture | Low as a mechanism; medium as a combination | Very high if assurance is described as proving moral correctness |
+| Combined architecture | Neuro-symbolic surveys; knowledge-enhanced Transformers; alignment methods | Hybrid systems, external rules, and alignment procedures each have precedent | Combine differentiated value layers, late binding, structural participation, authority boundaries, and formal assurance | The combination is the paper's constrained research hypothesis | Low/medium pending literature-complete comparison | High; combination alone does not establish scientific novelty |
+
+## Positioning rule
+
+The paper therefore uses “proposes a framework” and “investigates whether” rather than “introduces the first,” “solves,” “guarantees,” or “creates moral intelligence.” Any stronger novelty assertion requires a later systematic review and implementation-level comparison.

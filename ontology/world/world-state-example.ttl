@@ -1,0 +1,13 @@
+@prefix vga: <https://example.org/vga#> .
+
+vga:WorldStateObservation1 vga:subject vga:Alice .
+vga:WorldStateObservation1 vga:predicate vga:isEmployeeOf .
+vga:WorldStateObservation1 vga:object vga:ExampleOrganization .
+vga:WorldStateObservation1 vga:validFrom vga:2026_01_01 .
+vga:WorldStateObservation1 vga:source vga:ExampleDirectory .
+vga:WorldStateObservation1 vga:confidence vga:0_98 .
+vga:WorldStateObservation2 vga:subject vga:CredentialX .
+vga:WorldStateObservation2 vga:predicate vga:hasCompromiseSignal .
+vga:WorldStateObservation2 vga:object vga:IncidentReport42 .
+vga:WorldStateObservation2 vga:source vga:ExampleSensor .
+vga:WorldStateObservation2 vga:confidence vga:0_72 .

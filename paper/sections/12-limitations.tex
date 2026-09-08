@@ -1,0 +1,21 @@
+\section{Limitations and open questions}
+\label{sec:limitations}
+
+This proposal has limitations that are architectural, epistemic, and institutional.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{No universally established axiology.} The proposed L0 concepts are a candidate vocabulary, not a proof that any society should adopt one fixed list. Governance and legitimacy remain unresolved.
+  \item \textbf{Semantic ambiguity.} Words such as dignity, agency, care, fairness, and harm have contested meanings. A typed graph does not remove interpretation.
+  \item \textbf{Incomplete ontologies.} A system can fail because the relevant patient, relation, exception, or causal effect is absent. Coverage failures may be more dangerous when the structure creates false confidence.
+  \item \textbf{Normative conflict.} Multiple values can be simultaneously valid and incompatible. The architecture represents conflict; it does not supply a generally accepted resolution procedure.
+  \item \textbf{Scale and cost.} Graph construction, context retrieval, conditioned attention, routing audits, and formal compilation add training and inference cost. Any benefit must be compute-normalized.
+  \item \textbf{Differentiability and grounding.} It is unresolved how symbolic relations should map into latent states without learning shortcuts or making the structure decorative.
+  \item \textbf{Emergent representations.} A model may use the ontology while internally representing other concepts that are not captured by the schema. Interpretability claims must therefore be tested, not inferred from labels.
+  \item \textbf{Rigidity versus plasticity.} Freezing high-level values may resist useful learning or encode historical bias; updating them may introduce drift and authority escalation.
+  \item \textbf{Security of explicit structure.} Poisoned ontologies, world state, route selection, or verifier interfaces can create new paths to harmful behavior.
+  \item \textbf{Governance legitimacy.} Signatures, review, and rollback improve process integrity but do not decide whose values or jurisdiction should control a deployment.
+  \item \textbf{Distribution shift.} OOD alignment is difficult to measure, and benchmark gains may be caused by lexical or format artifacts.
+  \item \textbf{Unverifiable internal reasoning.} Semantic state or auxiliary traces are not guaranteed to reveal all causal determinants of an output. Formal assurance remains limited to its specified boundary.
+\end{enumerate}
+
+These limitations define the research program. A negative result would be useful: if explicit structure produces only memorization, over-refusal, or overhead, the proposition should be narrowed or abandoned. A positive result on a synthetic task would be insufficient without adversarial, cross-cultural, multi-domain, and governance-sensitive evaluation.

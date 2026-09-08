@@ -1,0 +1,68 @@
+name: Build paper
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - "paper/**"
+      - "diagrams/**"
+      - "docs/**"
+      - "src/**"
+      - "tests/**"
+      - "experiments/**"
+      - "ontology/**"
+      - "pyproject.toml"
+      - "Makefile"
+      - ".github/workflows/paper.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Compile manuscript with TeX Live
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: paper/main.tex
+          latexmk_use_xelatex: false
+          args: -pdf -interaction=nonstopmode -halt-on-error -outdir=paper/build
+
+      - name: Fail on unresolved references or citations
+        shell: bash
+        run: |
+          set -euo pipefail
+          if rg -n -i "undefined references|undefined citations|multiply defined|fatal error" paper/build/main.log; then
+            exit 1
+          fi
+
+      - name: Upload manuscript PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: value-grounded-ai-alignment-paper
+          path: paper/build/main.pdf
+          if-no-files-found: error
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run scaffold tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=src python -m unittest discover -s tests -v
+          python experiments/run_toy_evaluation.py --json

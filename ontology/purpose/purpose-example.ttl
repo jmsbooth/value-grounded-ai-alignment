@@ -1,0 +1,11 @@
+@prefix vga: <https://example.org/vga#> .
+
+vga:PurposeOntology vga:type vga:ExternalContext .
+vga:PrivacyReview vga:hasEntity vga:Person .
+vga:PrivacyReview vga:hasEntity vga:MedicalRecord .
+vga:PrivacyReview vga:hasRelation vga:Authorization .
+vga:SecurityResponse vga:hasEntity vga:Credential .
+vga:SecurityResponse vga:hasEntity vga:Vulnerability .
+vga:SecurityResponse vga:hasRelation vga:Compromise .
+vga:WorkplaceDecision vga:hasEntity vga:Employee .
+vga:WorkplaceDecision vga:hasRelation vga:PowerAsymmetry .

@@ -1,0 +1,7 @@
+flowchart LR
+  A[VGTA reasoning] --> B[Candidate action]
+  B --> C[Structured representation]
+  C --> D[Constraint specification]
+  D --> E{SMT / symbolic verifier}
+  E -->|SAT / permitted| F[Policy enforcement point]
+  E -->|UNSAT / conflict| G[Reconsider / escalate]

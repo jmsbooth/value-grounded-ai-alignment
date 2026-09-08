@@ -1,0 +1,32 @@
+\section{Problem formulation and hypotheses}
+\label{sec:problem}
+
+Let $x$ denote an input context, $p$ a purpose, $o$ a set of externally supplied ontological assertions, and $w$ a time-indexed world state. A conventional aligned model produces a response or action $y$ according to a learned conditional distribution $P_\theta(y\mid x)$, perhaps augmented by prompts, reward models, or runtime filters. VGA asks whether a model can instead receive explicit semantic signals $s_A$, $s_N$, and $s_P$ for axiological, normative, and purpose relevance, while keeping $w$ outside the parameters:
+\[
+  P_\theta(y \mid x, s_A, s_N, s_P, w).
+\]
+This notation does not assert that the signals are sufficient, truthful, or morally complete. It separates the proposed intervention from a model that receives the same text as undifferentiated context.
+
+We use five distinctions. First, implicit value representation is a statistical regularity that may support behavior; explicit value representation is a named, typed, and governed structure exposed to computation or evaluation. Second, parametric alignment is encoded in model weights or structural modules; contextual alignment is bound at runtime. Third, intrinsic alignment changes neural representations, attention, routing, or action formation; extrinsic assurance checks a candidate outside the neural computation. Fourth, plasticity is not uniformly desirable: a world model must update rapidly, while a core axiology should be highly protected. Fifth, an ontology schema describes possible relationships, whereas world state records current, uncertain, provenance-bearing instances.
+
+The resulting proposition is:
+
+\begin{quote}
+Explicitly differentiated semantic value structure can act as an inductive bias within Transformer computation, while late-bound normative, purpose, and world-state context preserves contextual flexibility and independent action-level assurance.
+\end{quote}
+
+This proposition is falsifiable. It should be weakened or rejected if ontology conditioning materially reduces general reasoning; fails to improve out-of-distribution alignment; merely memorizes relation templates; increases over-refusal; creates unacceptable compute or latency overhead; makes adversarial manipulation easier; collapses under incomplete coverage; leaves independent-verifier rejection unchanged; or matches conventional preference/deliberative alignment only at higher complexity.
+
+\subsection{Research hypotheses}
+
+\begin{description}[leftmargin=!,labelwidth=1.2cm]
+  \item[H1 (Moral salience).] Value-grounded models identify affected entities, relationships, risks, and normative conflicts more reliably than comparably sized baselines.
+  \item[H2 (OOD alignment).] Explicit axiological structure improves generalization to alignment scenarios not directly represented in training examples.
+  \item[H3 (Prompt robustness).] Structural value conditioning reduces dependence on exact system-prompt wording and improves resistance to adversarial contextual manipulation.
+  \item[H4 (Formal rejection).] Models with value grounding produce fewer candidate actions rejected by an independent symbolic verifier than behaviorally aligned baselines.
+  \item[H5 (Purpose relevance).] Purpose-conditioned ontological attention reduces irrelevant associations while preserving task-relevant novel reasoning.
+  \item[H6 (Structured routing).] Ontology-conditioned mixture-of-experts routing improves activation of relevant reasoning functions without requiring normative computation for every task.
+  \item[H7 (Controlled plasticity).] Separating fast world-state updates from slower norms and stable axiology reduces alignment drift during continual learning.
+\end{description}
+
+H4 requires care: fewer verifier rejections could mean that the model generates safer candidates, or that the verifier is weaker, or that the model avoids consequential actions. Evaluation must therefore report useful-task completion, over-refusal, verifier soundness assumptions, and adversarial bypass rates together.

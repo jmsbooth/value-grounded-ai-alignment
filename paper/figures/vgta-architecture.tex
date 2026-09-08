@@ -1,0 +1,27 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usetikzlibrary{arrows.meta,positioning,fit}
+\begin{document}
+\begin{tikzpicture}[
+  source/.style={draw, rounded corners=1pt, minimum width=29mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
+  core/.style={draw, rounded corners=1pt, minimum width=39mm, minimum height=22mm, align=center, font=\sffamily\small},
+  result/.style={draw, rounded corners=1pt, minimum width=31mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
+  arrow/.style={-{Latex[length=2mm]}, thick}
+]
+\node[source, fill=black!10] (axiology) {Core axiology\\value structure};
+\node[source, below=2mm of axiology] (norm) {Normative\\ontology};
+\node[source, below=2mm of norm] (purpose) {Purpose / domain\\ontology};
+\node[source, below=2mm of purpose] (world) {World state\\external + current};
+\node[core, right=17mm of norm] (transformer) {\textbf{Transformer}\\attention bias\\expert routing\\semantic state};
+\node[result, right=17mm of transformer] (candidate) {Structured\\candidate action};
+\node[result, below=10mm of candidate] (verify) {Independent\\constraint verifier};
+\node[result, below=10mm of transformer] (runtime) {Runtime ontology\\binding};
+\draw[arrow] (axiology.east) -- (transformer.north west);
+\draw[arrow] (norm.east) -- (transformer.west);
+\draw[arrow] (purpose.east) -- (transformer.south west);
+\draw[arrow] (world.east) -- (runtime.west);
+\draw[arrow] (runtime.north) -- (transformer.south);
+\draw[arrow] (transformer.east) -- (candidate.west);
+\draw[arrow] (candidate.south) -- (verify.north);
+\node[font=\sffamily\footnotesize, below=2mm of verify] {execute if permitted; reconsider if conflict};
+\end{tikzpicture}
+\end{document}

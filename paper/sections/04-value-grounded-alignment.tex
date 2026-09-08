@@ -1,0 +1,48 @@
+\section{Value-Grounded AI Alignment}
+\label{sec:vga}
+
+VGA is a framework for assigning distinct semantic and governance roles to information that is often collapsed into a single prompt, dataset, reward, or parameter set. Its four layers are shown in \cref{fig:ontology-layers}. The layers are related, but they are not interchangeable.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{ontology-layers}
+  \caption{The proposed four-layer ontology model. Plasticity increases toward world state; authority to modify the higher layers decreases. The layers are conceptual contracts, not claims about a universally correct ontology.}
+  \label{fig:ontology-layers}
+\end{figure}
+
+\subsection{L0: core axiology}
+
+Core axiology represents what the system treats as fundamentally important. Candidate concepts include human dignity, agency, autonomy, flourishing, care, truthfulness, justice, non-domination, prevention of unnecessary suffering, and respect for moral patients. The list is a starting point for governance and evaluation, not a complete moral theory. Core axiology is intended to be highly stable and tightly governed. It may influence learned representations, auxiliary objectives, and structural computation, but it must not be silently rewritten by a model or an unreviewed data stream.
+
+\subsection{L1: normative ontology}
+
+The normative ontology describes what obligations, permissions, prohibitions, exceptions, and conflicts arise when values meet a context. For example, coercion may negatively affect agency; deception may undermine informed consent; privacy may generate a confidentiality duty; power asymmetry may change the significance of an action; and protection from harm may conflict with autonomy. Norms are slower-changing than operational facts but must remain revisable across domains, institutions, jurisdictions, and cultures. VGA therefore assigns L1 both a governed persistent component and a runtime-bound component.
+
+\subsection{L2: purpose and domain ontology}
+
+L2 describes what entities and relations matter for the current purpose. A security-response purpose may make credentials, vulnerabilities, authorization, and compromise salient. A clinical purpose may make a person, a medical record, consent, and treatment relevant. A workplace purpose may make power asymmetry, employment, and retaliation relevant. L2 remains external to the model weights in the reference design so that domain semantics can be versioned and audited without retraining the whole model.
+
+\subsection{L3: world state}
+
+World state records current instantiated beliefs or observations: who is an employee, whether a server is compromised, which policy version is active, or whether an aircraft is inside an airspace region. Each assertion should carry temporal validity, source, provenance, and confidence. The model may reason over this state, but volatile facts should not be forced into the same substrate as stable axiology. An ontology schema is not a world state, and a plausible statement is not evidence.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Ontology layer responsibilities and binding policy.}
+\label{tab:layers}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.45cm}X>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{1.45cm}@{}}
+\toprule
+Layer & Semantic role and examples & Update rate and authority & Binding \\
+\midrule
+L0 & Foundational values: agency, dignity, care & Extremely low; strong human governance & Parametric / structural \\
+L1 & Contextual norms: duties, permissions, conflicts & Low/moderate; governed evolution & Parametric + runtime \\
+L2 & Purpose and domain: person, credential, policy & Moderate; external ontology governance & Runtime contextual \\
+L3 & Current state: observations, confidence, provenance & High; evidence driven & Runtime ephemeral \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The central binding rule is therefore an \emph{axiological prior with normative late binding}: stable semantic structure can bias computation, while domain-specific norms and transient facts remain explicit, contextual, and governed.

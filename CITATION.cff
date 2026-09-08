@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this research scaffold or manuscript, please cite the draft."
+title: "Value-Grounded AI Alignment: A Neuro-Symbolic Architecture for Axiological, Normative, and Verifiable Transformer Models"
+type: software
+authors:
+  - family-names: Booth
+    given-names: James
+version: 0.1.0
+date-released: 2026-09-07
+repository-code: "https://github.com/jmsbooth/value-grounded-ai-alignment"
+license: Apache-2.0
+abstract: >-
+  A theoretical research artifact proposing differentiated axiological,
+  normative, purpose/domain, and world-state layers for alignment research.
+keywords:
+  - AI alignment
+  - neuro-symbolic AI
+  - Transformer architecture
+  - ontology
+  - formal assurance

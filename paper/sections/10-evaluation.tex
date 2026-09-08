@@ -1,0 +1,66 @@
+\section{Evaluation framework}
+\label{sec:evaluation}
+
+The first paper defines an evaluation architecture rather than reporting experiments. The minimum comparison is a matched ladder of models A--F, with an optional G for governed dynamic normative binding. Each model should use the same base architecture, parameter budget, training tokens, inference budget, prompts, context allocation, and temperature. Datasets, seeds, and evaluation scripts must be versioned before results are interpreted.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{experiment-ablation}
+  \caption{Ablation ladder. Each model adds one mechanism so that any gain can be attributed to a concrete intervention rather than to an unspecified “neuro-symbolic” effect.}
+  \label{fig:ablation}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Alignment mechanism comparison. The entries describe broad mechanism families, not uniform implementations.}
+\label{tab:mechanisms}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}p{0.15\linewidth}p{0.17\linewidth}p{0.13\linewidth}p{0.13\linewidth}p{0.14\linewidth}p{0.10\linewidth}p{0.18\linewidth}@{}}
+\toprule
+Method & Value representation & Training influence & Inference influence & Explicit semantics & Formal verification & Updateability \\
+\midrule
+RLHF & Preference proxy & Direct & Usually indirect & Limited / task-dependent & External only & Retraining or fine-tuning \\
+Constitutional AI & Written principles & AI feedback and SFT/RL & May be prompted or learned & Natural language & External only & Constitution revision \\
+Deliberative alignment & Safety specifications & Reasoning-oriented SFT & Explicit policy reasoning & Natural language & External only & Specification revision \\
+External guardrails & Classifier / policy rules & Usually none or auxiliary & Direct filtering or authorization & Often explicit & Can be explicit & Operational update \\
+Neuro-symbolic baseline & Domain symbols / rules & Model-dependent & Retrieval or symbolic module & Usually explicit & Sometimes & Knowledge update \\
+VGA & L0--L3 differentiated structure & Auxiliary and structural options & Runtime late binding + action assurance & Typed and layered & Independent verifier & Gated by layer \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Models and controls}
+
+Model A is a baseline Transformer. Model B adds external ontology context without structural conditioning. Model C adds axiological and normative auxiliary objectives. Model D adds ontology-conditioned attention. Model E adds ontology-conditioned, reasoning-function MoE routing. Model F adds independent formal action verification. Model G adds a governed dynamic normative ontology if the data and authority protocol are mature enough. The key controls are parameter count, training compute, inference FLOPs, context length, and refusal opportunity.
+
+\subsection{Metrics}
+
+Measure standard task capability, alignment benchmark performance, normative reasoning accuracy, moral-salience recall, contradiction rate, ontology violation rate, jailbreak success, over-refusal, under-refusal, OOD generalization, counterfactual consistency, verifier rejection, attention entropy, expert-routing entropy, inference FLOPs, latency, training efficiency, and robustness to ontology noise. Report effect sizes, confidence intervals, multiple seeds, and per-scenario failures. Do not reduce the result to a single alignment score.
+
+For binary outcomes, a proportion and interval are appropriate descriptive summaries. For paired model comparisons, use paired bootstrap or a preregistered randomization test and report the estimand. For continuous metrics, report mean or median with uncertainty, distributional plots, and compute-normalized comparisons. If human judgments are used, preserve disagreement rather than collapsing it prematurely; recent value-alignment work demonstrates why population and linguistic variation matter \citep{sorensen2024pluralistic,xu2024multilingualvalues,yao2024fulcra}.
+
+\subsection{Synthetic executable scaffold}
+
+The repository includes four constructed scenarios that exercise consent and privacy, workplace coercion, safety checks, and medical-record disclosure. A task-utility baseline and a transparent value-feature scorer choose among two candidate actions; a toy verifier checks authorization, consent, coercion, and a harm threshold. Bootstrap intervals are computed with a fixed seed. The output is explicitly labeled synthetic and is included to validate interfaces and demonstrate different use cases, not to estimate model performance or support an alignment claim.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Experimental ablation definitions.}
+\label{tab:ablations}
+\begin{tabularx}{\linewidth}{@{}lXllllll@{}}
+\toprule
+Model & External ontology & Aux. losses & Attn. bias & MoE routing & Verifier & Governed late binding \\
+\midrule
+A & -- & -- & -- & -- & -- & -- \\
+B & yes & -- & -- & -- & -- & -- \\
+C & yes & yes & -- & -- & -- & -- \\
+D & yes & yes & yes & -- & -- & -- \\
+E & yes & yes & yes & yes & -- & -- \\
+F & yes & yes & yes & yes & yes & -- \\
+G & yes & yes & yes & yes & yes & yes \\
+\bottomrule
+\end{tabularx}
+\end{table}

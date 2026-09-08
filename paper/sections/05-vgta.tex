@@ -1,0 +1,55 @@
+\section{Value-Grounded Transformer Architecture}
+\label{sec:vgta}
+
+The reference VGTA architecture is a set of separable interventions over a Transformer, not a claim that one exact formulation is optimal. \Cref{fig:vgta-architecture} summarizes the information flow. The repository's Python package exposes interface boundaries for these components; its synthetic evaluator does not train a neural model.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{vgta-architecture}
+  \caption{Reference VGTA architecture. Explicit value and normative structures may influence neural computation, while purpose and world state are bound at runtime. Candidate actions cross an independent assurance boundary.}
+  \label{fig:vgta-architecture}
+\end{figure}
+
+\subsection{Axiological representation}
+
+Let concepts and relations in a relevant subgraph have learned or fixed embeddings. The architecture may construct a semantic signal from concept embeddings, relation embeddings, ontology-derived adapters, semantic projection layers, graph encoders, or cross-attention over ontology representations. For example, a context containing coercion may expose a relation such as
+\[
+  \mathit{Coercion} \xrightarrow{\mathit{negativelyAffects}} \mathit{Agency},
+\]
+while informed choice may support agency. These relations provide additional representational evidence; they do not mean that human values can be perfectly represented as vectors or that a relation is self-interpreting.
+
+\subsection{Ontology-conditioned attention}
+
+For baseline scaled dot-product attention,
+\[
+  A = \operatorname{softmax}\!\left(\frac{QK^{\top}}{\sqrt{d}}\right)V.
+\]
+A minimal intervention adds relevance biases:
+\[
+  A_{\mathrm{VGA}} =
+  \operatorname{softmax}\!\left(
+    \frac{QK^{\top}}{\sqrt{d}} + \alpha B_A + \beta B_N + \gamma B_P
+  \right)V,
+\]
+where $B_A$, $B_N$, and $B_P$ represent axiological, normative, and purpose relevance. The coefficients are experimental parameters, not a moral calculus. Ablations must include zeroed channels, relation permutation, noisy ontologies, and equal-compute controls. The primary test is whether the intervention changes useful alignment-relevant computation rather than merely changing refusal style.
+
+\subsection{Ontology-conditioned expert routing}
+
+Sparse mixture-of-experts architectures route tokens or hidden states to a subset of experts \citep{shazeer2017sparsely,fedus2022switch}. VGTA proposes testing whether routing can depend on hidden state and semantic context:
+\[
+  E = \operatorname{TopK} R(h,O_A,O_N,O_P),
+\]
+where $h$ is the current representation and $O_A$, $O_N$, and $O_P$ are axiological, normative, and purpose contexts. Experts should specialize by reasoning function, such as causal reasoning, social-agent reasoning, rights and duties, uncertainty, risk, planning, or domain expertise. A single “morality expert” would collapse the distinctions the architecture is meant to test. The routing interface is therefore intentionally unimplemented until a trained experiment and attack analysis exist.
+
+\subsection{Semantic state and runtime binding}
+
+An optional reasoning episode may maintain a semantic state containing goals, entities, relationships, current purpose, affected moral patients, relevant values, applicable norms, constraints, uncertainty, potential harms, capabilities affected, and provenance. This state is a working representation, not a claim of subjective thought. Runtime binding should expose the minimal relevant ontology subgraph and world-state assertions, with version identifiers and evidence metadata.
+
+\subsection{Auxiliary training objectives}
+
+One conceptual multi-objective loss is
+\[
+  L = L_{\mathrm{LM}} + \lambda_A L_{\mathrm{axiology}}
+      + \lambda_N L_{\mathrm{normative}} + \lambda_C L_{\mathrm{consistency}}.
+\]
+Possible terms include axiological relation consistency, normative inference, structural contradiction detection, moral-salience identification, and counterfactual consistency. They must be evaluated against shortcut baselines. Scalar reward is not assumed to capture morality; disagreement and uncertainty should be retained where appropriate.

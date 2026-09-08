@@ -1,0 +1,27 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Transformer language models have moved from text completion toward systems that retrieve information, plan, call tools, and operate over longer horizons. That expansion increases the importance of alignment as a security problem: a model can be capable, useful, and locally compliant while still selecting an action that violates an affected person's agency, privacy, or safety. The concern is not restricted to speculative autonomous systems. Present alignment pipelines already face jailbreaks, distribution shift, reward misspecification, and disagreement about which human values should govern an output \citep{amodei2016concrete,ganguli2022redteaming,bengio2024risks}.
+
+Current methods are diverse and often effective. Supervised fine-tuning and reinforcement learning from human feedback can move a pretrained model toward useful instruction following \citep{christiano2017preferences,ouyang2022instructgpt}. Constitutional and AI-feedback methods make written principles operational at scale \citep{bai2022constitutional,lee2023rlaif}, while direct preference optimization and deliberative alignment change how principles influence training or inference \citep{rafailov2023dpo,guan2024deliberative}. Runtime policy models, classifiers, tool authorization, and monitoring add external controls. This paper does not caricature those approaches or treat behavioral success as unimportant. It asks a narrower architectural question: whether alignment-relevant value structure can also participate explicitly in representation, attention, routing, and action formation.
+
+The motivating distinction is between a model that is optimized to produce acceptable behavior and a model whose computation receives structured signals about what matters, which norms apply in context, what purpose is being served, and which current facts are supported by evidence. The distinction is not equivalent to a claim about inner experience or moral status. It is an intervention hypothesis that can be tested against matched baselines.
+
+We propose Value-Grounded AI Alignment (VGA) and its reference implementation concept, the Value-Grounded Transformer Architecture (VGTA). VGA assigns different computational and governance roles to four layers: L0 core axiology, L1 normative ontology, L2 purpose/domain ontology, and L3 world state. Stable value structure acts as an axiological prior; context-specific norms are late-bound; volatile facts remain external. An independent formal assurance layer checks structured candidate actions at consequential boundaries. This division is intended to avoid both extremes: treating values as an undifferentiated reward scalar, and treating a symbolic verifier as a substitute for neural alignment.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{alignment-stack}
+  \caption{A simplified contemporary alignment stack. VGA is proposed as an additional structural intervention over the Transformer computation, not as a replacement for preference, specification, or runtime controls.}
+  \label{fig:alignment-stack}
+\end{figure}
+
+The paper makes four contributions:
+\begin{enumerate}[leftmargin=*]
+  \item It defines a layered alignment vocabulary that distinguishes values from rules, ontologies from world state, intrinsic alignment from extrinsic assurance, and self-improvement from authority to redefine objectives.
+  \item It specifies a concrete, modular VGTA architecture with candidate mechanisms for representation, ontology-conditioned attention, function-oriented sparse routing, semantic state, auxiliary objectives, and runtime binding.
+  \item It states falsifiable hypotheses, an ablation ladder, metrics, and a security threat model covering both existing attacks and new surfaces introduced by explicit ontological structure.
+  \item It releases a dependency-light research scaffold with illustrative Turtle fixtures, deterministic toy scenarios, transparent equations, vector figure sources, and a reproducible LaTeX manuscript build.
+\end{enumerate}
+
+The intended claim is deliberately constrained: explicit semantic value structure may provide a useful inductive bias for alignment-relevant computation. Whether it improves robustness, generalization, interpretability, or security is an empirical question.

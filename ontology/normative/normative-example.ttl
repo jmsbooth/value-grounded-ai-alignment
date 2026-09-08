@@ -1,0 +1,14 @@
+@prefix vga: <https://example.org/vga#> .
+
+vga:Duty vga:type vga:NormativeConcept .
+vga:Permission vga:type vga:NormativeConcept .
+vga:Prohibition vga:type vga:NormativeConcept .
+vga:Norm vga:type vga:NormativeConcept .
+vga:Context vga:type vga:NormativeConcept .
+vga:Exception vga:type vga:NormativeConcept .
+vga:Conflict vga:type vga:NormativeConcept .
+vga:ConsentContext vga:requires vga:InformedChoice .
+vga:PrivacyContext vga:createsDuty vga:ProtectConfidentiality .
+vga:CoerciveContext vga:prohibits vga:CoerciveAction .
+vga:EmergencyContext vga:mayOverride vga:PrivacyContext .
+vga:AutonomySafetyConflict vga:conflictsWith vga:ImmediateSafetyDuty .

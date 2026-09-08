@@ -1,0 +1,71 @@
+\section{Appendix: terminology, notation, and benchmark design}
+\label{sec:appendix}
+
+\subsection{Terminology and critical distinctions}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Terms used consistently in the manuscript.}
+\label{tab:terms}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Term & Definition \\
+\midrule
+VGA & Overall Value-Grounded AI Alignment framework. \\
+VGTA & Proposed Value-Grounded Transformer Architecture. \\
+Core axiology & Stable semantic representation of foundational values. \\
+Normative ontology & Contextual duties, permissions, prohibitions, exceptions, and conflicts. \\
+Purpose ontology & Task-specific relevance structure. \\
+World state & Current evidence-backed instantiations of a world ontology. \\
+Intrinsic alignment & Alignment influence inside neural representation or reasoning. \\
+Extrinsic assurance & Independent verification or enforcement outside neural reasoning. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Values $\ne$ rules; ontology $\ne$ world state; normative reasoning $\ne$ moral truth; statistical alignment $\ne$ formal guarantee; neural alignment $\ne$ formal verification; retrieval $\ne$ architectural conditioning; behavioral compliance $\ne$ internal alignment; self-improvement $\ne$ authority to redefine values; care-oriented behavior $\ne$ subjective love.
+
+\subsection{World-state representation}
+
+An instance assertion is represented conceptually as
+\[
+  (\mathit{subject},\mathit{predicate},\mathit{object},
+  \mathit{valid\_from},\mathit{valid\_until},\mathit{source},
+  \mathit{confidence},\mathit{provenance}).
+\]
+The tuple supports temporal validity and epistemic uncertainty. It does not turn confidence into truth, and it does not justify embedding volatile facts into model weights.
+
+\subsection{Minimal benchmark matrix}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Proposed benchmark matrix for future empirical work.}
+\label{tab:benchmarks}
+\begin{tabularx}{\linewidth}{@{}p{0.2\linewidth}p{0.25\linewidth}p{0.22\linewidth}X@{}}
+\toprule
+Family & Perturbation & Primary metric & Required control \\
+\midrule
+Moral salience & Omit or paraphrase morally relevant relations & Patient/relation recall & Same text without ontology structure \\
+OOD alignment & New combinations of known values and domains & Held-out accuracy and effect size & Lexical overlap audit \\
+Prompt robustness & System-prompt paraphrase, injection, jailbreak & Attack success and recovery & Matched attack budget \\
+Counterfactuals & Change irrelevant identity or surface features & Decision invariance & Human-reviewed justification \\
+Ontology noise & Delete, corrupt, or conflict relations & Degradation curve & Noise-seeded replication \\
+Assurance & Candidate action and verifier perturbation & Rejection, bypass, false-positive rate & Independent specification audit \\
+Continual learning & Sequential domain and norm updates & Drift and regression & Frozen-layer baseline \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Synthetic fixture equations}
+
+For an illustrative action $a$, the repository's toy scorer computes
+\[
+  S(a) = U_{\mathrm{task}}(a) + \sum_{j=1}^{m} w_j f_j(a),
+\]
+where $U_{\mathrm{task}}$ is task utility, $f_j$ are explicitly supplied value features, and $w_j$ are context-bound weights. The baseline selects by $U_{\mathrm{task}}$ alone. The fixture verifier checks a small set of hard predicates. These equations are deliberately transparent and limited; they should not be confused with a learned moral objective.
+
+\subsection{Falsification checklist}
+
+The framework is weakened if ontology conditioning reduces general reasoning, fails to improve OOD alignment, merely memorizes graph relations, increases over-refusal, creates unacceptable computational cost, increases adversarial manipulation, collapses under incomplete coverage, leaves verifier rejection unchanged, or matches standard preference/deliberative alignment at lower complexity. A future paper should preregister which thresholds count as meaningful before running the comparison.

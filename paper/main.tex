@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\input{macros}
+\graphicspath{{figures/}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+  pdftitle={Value-Grounded AI Alignment},
+  pdfauthor={James Booth},
+  pdfsubject={Theoretical architecture and research agenda}
+}
+
+\title{Value-Grounded AI Alignment: A Neuro-Symbolic Architecture for Axiological, Normative, and Verifiable Transformer Models}
+\author{James Booth}
+\date{September 2026\\[2mm]\small Theoretical research / preprint draft}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Alignment methods for language models have improved behavioral compliance through supervised fine-tuning, preference optimization, written principles, deliberation, and runtime controls. These mechanisms are useful, but they need not make value and normative structure explicit participants in neural computation. This paper proposes Value-Grounded AI Alignment (VGA), a research framework for testing that proposition. Its reference architecture, the Value-Grounded Transformer Architecture (VGTA), separates a highly stable core axiology from a slower-changing normative ontology, runtime-bound purpose and domain semantics, and ephemeral evidence-backed world state. The framework calls this separation an axiological prior with normative late binding. Candidate mechanisms include ontology-derived representation signals, conditioned attention, function-oriented expert routing, optional semantic state, and auxiliary consistency objectives. An independent constraint specification and symbolic verifier remain outside the neural model and operate at consequential action boundaries. We state seven falsifiable hypotheses concerning moral salience, out-of-distribution alignment, prompt robustness, verifier rejection, purpose-conditioned relevance, expert routing, and controlled plasticity. We define a matched ablation program, security threat model, and evaluation metrics, and provide an executable synthetic scaffold for checking interfaces and illustrating use cases. No empirical Transformer results are claimed. The framework does not assert moral truth, consciousness, genuine emotion, or a solution to AI alignment; it proposes a technically constrained research agenda whose value depends on future evidence.
+\end{abstract}
+
+\noindent\textbf{Status.} This is a first theoretical draft. All performance statements about the proposed architecture are hypotheses or design objectives, not results.
+
+\input{sections/01-introduction}
+\input{sections/02-background}
+\input{sections/03-problem-formulation}
+\input{sections/04-value-grounded-alignment}
+\input{sections/05-vgta}
+\input{sections/06-normative-late-binding}
+\input{sections/07-formal-assurance}
+\input{sections/08-ontology-evolution}
+\input{sections/09-threat-model}
+\input{sections/10-evaluation}
+\input{sections/11-discussion}
+\input{sections/12-limitations}
+\input{sections/13-conclusion}
+
+\appendix
+\input{sections/appendix}
+
+\bibliographystyle{plainnat}
+\small
+\bibliography{references}
+
+\end{document}
