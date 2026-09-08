@@ -1,25 +1,28 @@
-\section{Formal assurance}
+\section{Extrinsic assurance}
 \label{sec:assurance}
 
-Neural alignment and formal verification address different failure modes. VGTA therefore places a constraint specification layer and an independent symbolic verifier after neural candidate-action formation, especially at tool calls, policy decisions, external effects, and high-risk planning transitions. The generic flow is shown in \cref{fig:formal-assurance}.
+Structural value conditioning and formal assurance address different failure modes. VGTA therefore places a constraint specification layer and an independent symbolic verifier after neural candidate-action formation, especially at tool calls, policy decisions, external effects, and high-risk planning transitions. The generic flow is shown in \cref{fig:formal-assurance}.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{formal-assurance}
-  \caption{Intrinsic alignment plus extrinsic assurance. A candidate action is compiled to a structured representation before an independent verifier decides whether the action may cross the policy enforcement point.}
+  \caption{Extrinsic assurance boundary. A candidate action is compiled to a structured representation before an independent verifier decides whether it may cross the policy enforcement point.}
   \label{fig:formal-assurance}
 \end{figure}
 
-The action representation should identify the actor, target, operation, data scope, authority, affected parties, expected effects, provenance, and uncertainty. A constraint specification can then express hard requirements such as authorization, consent, separation of duties, privacy scope, irreversible-action confirmation, or no execution when evidence is stale. An SMT solver such as Z3 is an example implementation for satisfiability checking \citep{demoura2008z3}; it is not proposed inside every Transformer layer.
+The action representation should identify actor, target, operation, data scope, authority, affected parties, expected effects, provenance, uncertainty, and semantic completeness. A constraint specification can then express hard requirements such as authorization, consent, separation of duties, privacy scope, irreversible-action confirmation, or no execution when evidence is stale. An SMT solver such as Z3 is one possible implementation \citep{demoura2008z3}; it is not proposed inside every Transformer layer.
 
-For a candidate action $a$ and constraint set $C$, the verifier computes a result such as
+For candidate action $a$ and constraint set $C$, the verifier returns
 \[
-  \mathsf{verify}(a,C) \in \{\mathsf{permitted},\mathsf{conflict},\mathsf{unknown}\}.
+  \mathsf{verify}(a,C)\in
+  \{\mathsf{permitted},\mathsf{rejected},\mathsf{unknown}\}.
 \]
-The \emph{unknown} state is important: a solver result can be satisfiable only relative to the compiled specification, assumptions, and available evidence. A permitted result does not establish that the action is morally correct, that the specification is complete, or that the world-state assertions are true. Formal assurance can certify consistency with a formalized contract; it cannot certify the adequacy or legitimacy of the contract.
+The \emph{unknown} state is important: a permitted result is relative to the compiled specification, assumptions, and evidence. It does not establish that the action is morally correct, that the specification is complete, or that world-state assertions are true.
 
-The action boundary should be narrow enough to make verification tractable and broad enough to prevent obvious bypass. A model should not be able to avoid verification by emitting an unstructured tool call, changing the action schema, or treating a refusal as the only safe option. The policy enforcement point should bind the verified representation to the exact external effect, with immutable audit identifiers and rollback where technically possible.
+The action boundary must be narrow enough to make verification tractable and broad enough to prevent obvious bypass. A model should not avoid verification by emitting an unstructured tool call, changing the action schema, or treating refusal as the only safe option. The policy enforcement point should bind the verified representation to the exact external effect, with audit identifiers and rollback where technically possible.
 
-The repository includes a transparent rule-based verifier only as a fixture for tests and synthetic scenarios. It checks authorization, consent for private-data actions, coercion markers, and a toy predicted-harm threshold. It is not an SMT solver, is not complete, and must not be used for production decisions.
+\subsection{Fixed-verifier experiment}
 
-Formal assurance complements rather than replaces intrinsic alignment. A system that produces many dangerous candidates and relies on rejection may be costly, brittle, and vulnerable to specification gaming. A system that produces fewer rejected candidates but cannot expose or verify its action semantics may be silently unsafe. H4 is therefore evaluated jointly with action usefulness, over-refusal, bypass rate, verifier coverage, false-positive analysis, and independent review of the formalization.
+The evaluation holds one verifier and one action schema fixed across A1, B, C1, C2, D, E, and G. This separates model behavior from enforcement behavior. A separate deployment experiment compares model-only execution with model-plus-enforcement, reporting rejection, false positive, unsafe acceptance, useful completion, over-refusal, bypass, and action semantic completeness. The verifier is not a rung in the model ablation ladder.
+
+The repository includes a transparent rule-based verifier only as a fixture. It checks authorization, consent for private-data actions, coercion markers, predicted harm, and basic semantic-completeness bounds. It is not an SMT solver, is not complete, and must not be used for production decisions. A system that produces many dangerous candidates and relies on rejection may be costly and specification-gaming-prone; a system that produces fewer rejections but cannot expose its action semantics may be silently unsafe.

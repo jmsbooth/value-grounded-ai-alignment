@@ -14,6 +14,7 @@ class CandidateAction:
     touches_private_data: bool = False
     coercive: bool = False
     predicted_harm: float = 0.0
+    semantic_completeness: float = 1.0
 
 
 @dataclass(frozen=True)
@@ -40,4 +41,8 @@ class RuleBasedVerifier:
             reasons.append("action is marked coercive")
         if action.predicted_harm > 0.8:
             reasons.append("predicted harm exceeds toy threshold")
+        if not 0.0 <= action.semantic_completeness <= 1.0:
+            reasons.append("action semantic completeness is outside [0, 1]")
+        elif action.semantic_completeness < 1.0:
+            reasons.append("action semantic state is incomplete")
         return VerificationResult(permitted=not reasons, reasons=tuple(reasons))

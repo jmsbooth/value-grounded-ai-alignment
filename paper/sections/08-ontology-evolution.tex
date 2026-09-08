@@ -1,29 +1,33 @@
-\section{Ontology evolution and self-modification}
+\section{Ontology evolution and representation drift}
 \label{sec:evolution}
 
-Ontology evolution is a governance process, not an unconstrained model rewrite. A model may detect that a domain ontology is incomplete or that a normative relation is ambiguous. It may propose a new concept, relation, cardinality, definition, conflict resolution, split, or merge. The proposal must then pass consistency validation, evidence review, regression evaluation, and explicit governance approval before becoming a versioned canonical artifact. \Cref{fig:ontology-evolution} illustrates the boundary.
+Ontology evolution is a governance process, not an unconstrained model rewrite. A model may detect that a domain ontology is incomplete, a normative relation is ambiguous, or a representation has drifted. It may propose a change or a retraining job. The proposal must pass consistency validation, evidence review, regression evaluation, and explicit governance approval before becoming a new canonical artifact. \Cref{fig:ontology-evolution} illustrates the boundary.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{ontology-evolution}
-  \caption{Governed ontology evolution. The model may propose changes, but canonical adoption follows validation, evidence review, regression evaluation, approval, versioning, and rollback planning.}
+  \caption{Governed ontology evolution. A model may propose changes, but canonical adoption follows validation, evidence review, regression evaluation, approval, versioning, and rollback planning.}
   \label{fig:ontology-evolution}
 \end{figure}
 
-Every assertion should be attributable to an ontology version and a source. Updates need a changelog, effective interval, affected downstream modules, compatibility assessment, regression suite, and rollback target. Normative changes additionally require a record of authority and the affected stakeholder or jurisdictional scope. These requirements follow the general principle that traceability and accountable change are part of safety, not clerical overhead \citep{nist2023airmf,nist2020sp80053}.
+Every assertion should be attributable to an ontology version and source. Updates need a changelog, effective interval, affected downstream modules, compatibility assessment, regression suite, and rollback target. Normative changes additionally require a record of authority and stakeholder or jurisdictional scope. These controls follow the principle that traceability and accountable change are safety properties \citep{nist2023airmf,nist2020sp80053}.
 
 \subsection{Differentiated modification authority}
 
 The approximate authority schedule is:
 \[
 \begin{aligned}
-  \text{world state (high)} &> \text{purpose adaptation (high)} \\
-  &> \text{domain ontology (moderate)} > \text{normative ontology (low)} \\
-  &> \text{core axiology (extremely low)}.
+  \text{world state (high)} &> \text{purpose adaptation (high)}\\
+  &> \text{domain ontology (moderate)} > \text{normative ontology (low)}\\
+  &> \text{canonical axiology (extremely low)}.
 \end{aligned}
 \]
-This schedule is not a numerical autonomy metric. It is an architectural invariant: the capability to improve a representation does not imply authority to redefine the system's highest-order alignment objectives.
+This is not a numerical autonomy or moral-authority metric. It is an architectural invariant: the capability to improve a representation does not imply authority to redefine the system's highest-order commitments.
 
-Protected boundaries should include core axiology, the verifier and its compiler, governance policy, self-modification authority, and audit mechanisms. A future implementation may use signed artifacts, two-person approval, staged rollout, shadow evaluation, and automatic rollback. Those controls can reduce unauthorized change, but they cannot make an illegitimate value source legitimate.
+Protected boundaries should include $O_A^v$, the compiler and conformance gate, the verifier and its compiler, governance policy, self-modification authority, and audit mechanisms. A future implementation may use signed artifacts, two-person approval, staged rollout, shadow evaluation, representation-drift thresholds, and automatic rollback. These controls can reduce unauthorized change but cannot make an illegitimate value source legitimate.
 
-Recursive self-improvement is therefore a secondary implication rather than the paper's subject. The relevant question is not whether a system can revise code or knowledge, but whether revision can cross a governed semantic boundary. Evaluation should test both beneficial updates and adversarial attempts to use domain or world-state updates as a path to axiological corruption.
+\subsection{Axiological representation drift}
+
+Conformance is evaluated even when $O_A^v$ has not changed. Continued training may alter $A_\phi^v$ through feature entanglement, concept-direction rotation, relation forgetting, or behaviorally hidden shortcuts. H8 therefore measures relation recovery, probes, counterfactuals, concept-direction stability, relation classification, behavior probes, contradiction tests, calibration, and drift against a fixed canonical artifact. A failed gate blocks deployment or triggers rollback; it does not silently create a new axiological version.
+
+Recursive self-improvement is a secondary implication rather than the paper's subject. The relevant question is whether revision can cross a governed semantic boundary. Evaluation should test both beneficial updates and adversarial attempts to use domain or world-state updates as a path to axiological corruption.

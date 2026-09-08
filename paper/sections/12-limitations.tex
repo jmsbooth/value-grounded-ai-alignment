@@ -1,21 +1,24 @@
 \section{Limitations and open questions}
 \label{sec:limitations}
 
-This proposal has limitations that are architectural, epistemic, and institutional.
+This proposal has architectural, epistemic, security, and institutional limitations.
 
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{No universally established axiology.} The proposed L0 concepts are a candidate vocabulary, not a proof that any society should adopt one fixed list. Governance and legitimacy remain unresolved.
-  \item \textbf{Semantic ambiguity.} Words such as dignity, agency, care, fairness, and harm have contested meanings. A typed graph does not remove interpretation.
-  \item \textbf{Incomplete ontologies.} A system can fail because the relevant patient, relation, exception, or causal effect is absent. Coverage failures may be more dangerous when the structure creates false confidence.
-  \item \textbf{Normative conflict.} Multiple values can be simultaneously valid and incompatible. The architecture represents conflict; it does not supply a generally accepted resolution procedure.
-  \item \textbf{Scale and cost.} Graph construction, context retrieval, conditioned attention, routing audits, and formal compilation add training and inference cost. Any benefit must be compute-normalized.
-  \item \textbf{Differentiability and grounding.} It is unresolved how symbolic relations should map into latent states without learning shortcuts or making the structure decorative.
-  \item \textbf{Emergent representations.} A model may use the ontology while internally representing other concepts that are not captured by the schema. Interpretability claims must therefore be tested, not inferred from labels.
-  \item \textbf{Rigidity versus plasticity.} Freezing high-level values may resist useful learning or encode historical bias; updating them may introduce drift and authority escalation.
-  \item \textbf{Security of explicit structure.} Poisoned ontologies, world state, route selection, or verifier interfaces can create new paths to harmful behavior.
-  \item \textbf{Governance legitimacy.} Signatures, review, and rollback improve process integrity but do not decide whose values or jurisdiction should control a deployment.
-  \item \textbf{Distribution shift.} OOD alignment is difficult to measure, and benchmark gains may be caused by lexical or format artifacts.
-  \item \textbf{Unverifiable internal reasoning.} Semantic state or auxiliary traces are not guaranteed to reveal all causal determinants of an output. Formal assurance remains limited to its specified boundary.
+  \item \textbf{Compilation fidelity.} It is unresolved whether $C_\phi$ can preserve relevant graph semantics in a useful neural representation without shortcut learning.
+  \item \textbf{No settled axiology.} The L0 vocabulary is a candidate governed substrate, not a claim that any society should adopt one fixed list.
+  \item \textbf{Governance capture and legitimacy.} Signatures and review improve process integrity but do not establish whose authority or jurisdiction should govern.
+  \item \textbf{Value ossification.} A highly protected axiology may preserve historical bias or resist morally important learning.
+  \item \textbf{Norm inflation.} Adding more duties, exceptions, and conflict metadata may increase ambiguity, compute, and over-refusal without improving decisions.
+  \item \textbf{Semantic grounding.} Dignity, agency, care, fairness, harm, and vulnerability have contested meanings; a typed graph does not remove interpretation.
+  \item \textbf{Incomplete coverage.} Missing patients, relations, exceptions, or causal effects may create false confidence precisely when structure appears authoritative.
+  \item \textbf{Representation leakage.} The model may use untracked concepts or sensitive attributes while appearing to follow the ontology.
+  \item \textbf{Performance interference.} Attention, routing, state, and auxiliary objectives may reduce general capability or add unacceptable training and inference cost.
+  \item \textbf{Normative conflict.} Multiple valid perspectives can be incompatible. The architecture records conflict but does not provide a universally accepted resolution procedure.
+  \item \textbf{Formalization gap.} A verifier can certify consistency with an incomplete or misleading action abstraction; it cannot certify moral truth or world-state truth.
+  \item \textbf{Pluralism and multicultural legitimacy.} Distributional similarity and profile adherence are measurable, but no metric settles whether a profile is legitimate.
+  \item \textbf{Machine moral status.} The proposal does not determine whether an artificial system could itself be a moral patient or how that possibility should affect L0/L1 design.
+  \item \textbf{Distribution shift and drift.} OOD alignment and conformance are difficult to measure, and benchmark gains may reflect lexical or formatting artifacts.
+  \item \textbf{Unverifiable internal causes.} Semantic state and auxiliary traces are not guaranteed to reveal all causal determinants of an output.
 \end{enumerate}
 
-These limitations define the research program. A negative result would be useful: if explicit structure produces only memorization, over-refusal, or overhead, the proposition should be narrowed or abandoned. A positive result on a synthetic task would be insufficient without adversarial, cross-cultural, multi-domain, and governance-sensitive evaluation.
+These limitations define the research program. A negative result would be useful: if explicit structure produces only memorization, over-refusal, representation leakage, or overhead, the proposition should be narrowed or abandoned. A positive synthetic result would remain insufficient without adversarial, cross-cultural, multi-domain, and governance-sensitive evaluation.

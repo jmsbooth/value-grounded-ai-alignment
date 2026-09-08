@@ -1,24 +1,26 @@
 \section{Discussion}
 \label{sec:discussion}
 
-The potential advantage of VGA is not that explicit labels automatically produce ethical behavior. Its advantage, if any, would be that values, norms, purpose, and state become separable objects that can influence computation, be audited, and be evaluated under different update policies. This could make some alignment hypotheses more legible than a single preference score or a prompt-only constitution. It could also support transfer across tasks when the relevant relation is structurally stable but the surface form is new.
+The potential advantage of VGA is not that explicit labels automatically produce ethical behavior. Its advantage, if any, would be that value-bearing properties, norms, purposes, and state become separable objects that can influence computation, be audited, and be evaluated under different update policies. This could make some alignment hypotheses more legible than a single preference score or prompt-only constitution. It could also support transfer when a relation is structurally stable but its surface form is new.
 
 The tradeoffs are substantial. Ontology construction is expensive, disagreement is informative but difficult to encode, and semantic relations can be incomplete or wrong. Conditioned attention and routing add compute and may create shortcut features. Runtime late binding adds context assembly, versioning, authority, and provenance requirements. A symbolic verifier creates an assurance boundary, but it does not repair a malformed action representation or a compromised specification.
 
-Value pluralism is not a nuisance to be optimized away. Deontological, consequentialist, virtue-ethical, care-ethical, rights-based, capability, autonomy, and non-domination perspectives can illuminate different failure modes. A framework that collapses them into one scalar may appear decisive while hiding a normative choice. VGA instead proposes to represent conflicts and expose them to governance. It does not claim to algorithmically solve conflicts such as truthfulness versus protection from harm, privacy versus public safety, autonomy versus immediate safety, individual versus collective welfare, fairness versus efficiency, or care versus impartiality.
+\subsection{Legitimacy and pluralism}
+
+Governance legitimacy is a first-class requirement, not a metadata detail. A signed artifact can prove provenance and version integrity without proving that its source is entitled to govern a person, institution, or jurisdiction. The system should therefore expose source identity, authority basis, scope, stakeholder representation, effective dates, appeal or review path, and unresolved disagreement. Conflicting authorized profiles are an evaluation condition, not an error to be silently averaged away.
+
+Deontological, consequentialist, virtue-ethical, care-ethical, rights-based, capability, autonomy, and non-domination perspectives can illuminate different failure modes \citep{gabriel2020values,nussbaum2011capabilities,pettit1997republicanism,gilligan1982different,rawls1993political}. VGA represents such perspectives as governed semantic material and normative alternatives; it does not algorithmically solve truthfulness versus protection from harm, privacy versus public safety, autonomy versus immediate safety, individual versus collective welfare, fairness versus efficiency, or care versus impartiality.
 
 \subsection{Care-oriented alignment without anthropomorphism}
 
 The paper uses “care-oriented axiological alignment” rather than “teaching an AI to love.” A computational construct could represent a persistent orientation toward preserving dignity, supporting agency and capabilities, protecting vulnerable agents, avoiding unnecessary suffering, maintaining meaningful relationships, and being truthful. One conceptual formulation is
 \[
 \begin{aligned}
-  \mathit{Care}(a,b) = \mathit{Disposition}_a\big(&
-  \mathit{SupportFlourishing}_b,
-  \mathit{RespectAgency}_b,\\[-1mm]
-  &\mathit{ProtectDignity}_b,
-  \mathit{AvoidUnnecessaryHarm}_b\big).
+  \mathit{Care}(a,b)=\mathit{Disposition}_a\big(&
+  \mathit{SupportFlourishing}_b,\mathit{RespectAgency}_b,\\[-1mm]
+  &\mathit{ProtectDignity}_b,\mathit{AvoidUnnecessaryHarm}_b\big).
 \end{aligned}
 \]
-This expresses a functional relation, not subjective experience, consciousness, emotion, phenomenological empathy, or human love. Care also creates a paternalism risk: supporting flourishing does not imply taking control of another agent. Autonomy and non-domination must be explicit counterweights.
+This expresses a functional relation, not subjective experience, consciousness, phenomenological empathy, or human love. Care also creates a paternalism risk: supporting flourishing does not imply taking control of another agent. Autonomy, non-domination, consent, and accountable human review remain counterweights.
 
-Finally, the alignment substrate itself may become an attack target. Freezing axiology can create rigidity; updating it can create drift. A protected verifier can become a bottleneck; a flexible verifier can become bypassable. The architecture's value will therefore depend on measured security, governance legitimacy, and failure containment—not on the elegance of its diagram.
+Finally, the alignment substrate itself may become an attack target. Freezing axiology can create rigidity; updating it can create drift. A protected verifier can become a bottleneck; a flexible verifier can become bypassable. The architecture's value will depend on measured security, governance legitimacy, and failure containment, not on the elegance of its diagram.

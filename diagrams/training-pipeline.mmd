@@ -1,0 +1,8 @@
+flowchart LR
+  A[Base pretraining] --> B[General Transformer]
+  B --> C[Axiological representation training]
+  C --> D[Normative reasoning training]
+  D --> E[Standard alignment<br/>SFT / RLHF / DPO]
+  E --> F[Conformance + security gate]
+  F --> G[Deployable model]
+  G --> H[Runtime norm / purpose / world binding]

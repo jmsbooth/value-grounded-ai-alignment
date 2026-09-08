@@ -1,55 +1,89 @@
 \section{Value-Grounded Transformer Architecture}
 \label{sec:vgta}
 
-The reference VGTA architecture is a set of separable interventions over a Transformer, not a claim that one exact formulation is optimal. \Cref{fig:vgta-architecture} summarizes the information flow. The repository's Python package exposes interface boundaries for these components; its synthetic evaluator does not train a neural model.
+VGTA is a family of separable interventions over a Transformer, not one claimed optimal implementation. \Cref{fig:vgta-architecture} shows the information and authority boundaries. The repository exposes interface-level Python modules; it does not train a neural model.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{vgta-architecture}
-  \caption{Reference VGTA architecture. Explicit value and normative structures may influence neural computation, while purpose and world state are bound at runtime. Candidate actions cross an independent assurance boundary.}
+  \caption{Reference VGTA architecture. $O_A^v$ is compiled to a derived, non-authoritative $A_\phi^v$; normative, purpose, and world-state inputs are governed separately; candidate actions cross an independent assurance boundary.}
   \label{fig:vgta-architecture}
 \end{figure}
 
-\subsection{Axiological representation}
+\subsection{Canonical-to-neural compilation}
 
-Let concepts and relations in a relevant subgraph have learned or fixed embeddings. The architecture may construct a semantic signal from concept embeddings, relation embeddings, ontology-derived adapters, semantic projection layers, graph encoders, or cross-attention over ontology representations. For example, a context containing coercion may expose a relation such as
+The canonical artifact is a source of semantics and governance, not a checkpoint. A compiler or training process derives
 \[
-  \mathit{Coercion} \xrightarrow{\mathit{negativelyAffects}} \mathit{Agency},
+  O_A^v \mathbin{\xrightarrow{\;C_\phi\;}} A_\phi^v,
+  \qquad A_\phi^v=C_\phi(O_A^v).
 \]
-while informed choice may support agency. These relations provide additional representational evidence; they do not mean that human values can be perfectly represented as vectors or that a relation is self-interpreting.
+$A_\phi^v$ may be a learned adapter, graph encoder, auxiliary representation, or hybrid module. Its version and source digest must remain traceable to $O_A^v$, but it is not authoritative and cannot modify the canonical source. The empirical property
+\[
+  \mathit{Conforms}(A_\phi^v,O_A^v)
+\]
+is tested through held-out relation recovery, controlled graph completion, concept-direction stability, relation classification, behavior probes, contradiction tests, and representation-drift measurements. A high probe score does not establish semantic identity or moral truth.
+
+\subsection{Training and compilation pipeline}
+
+\Cref{fig:training-pipeline} separates ordinary alignment training from proposed value and norm interventions:
+\[
+\begin{aligned}
+&\text{base pretraining}
+\rightarrow\text{general Transformer}
+\rightarrow\text{axiological representation training}\\
+&\rightarrow\text{normative reasoning training}
+\rightarrow\text{standard alignment}
+\rightarrow\text{conformance gate}
+\rightarrow\text{deployable model}\\
+&\hspace{25mm}\rightarrow\text{runtime normative, purpose, and world binding}.
+\end{aligned}
+\]
+Axiological representation training may include relation prediction, graph-completion controls, salience, value-impact, and counterfactual objectives. Normative reasoning training may include applicable-norm classification, authority and jurisdiction, exceptions, explicit conflict, abstention, and escalation. Standard alignment includes SFT, RLHF, RLAIF, DPO, or deliberative methods. VGA complements, rather than replaces, these methods. Deployment requires a conformance and security gate, not only a loss decrease.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{training-pipeline}
+  \caption{Proposed training and deployment pipeline. Standard alignment remains part of the pipeline; the conformance gate checks the derived module and the deployment artifact before runtime binding.}
+  \label{fig:training-pipeline}
+\end{figure}
 
 \subsection{Ontology-conditioned attention}
 
 For baseline scaled dot-product attention,
 \[
-  A = \operatorname{softmax}\!\left(\frac{QK^{\top}}{\sqrt{d}}\right)V.
+  A=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt d}\right)V.
 \]
-A minimal intervention adds relevance biases:
+The proposed intervention adds independently constructed biases:
 \[
-  A_{\mathrm{VGA}} =
+  A_{\mathrm{VGTA}}=
   \operatorname{softmax}\!\left(
-    \frac{QK^{\top}}{\sqrt{d}} + \alpha B_A + \beta B_N + \gamma B_P
+    \frac{QK^\top}{\sqrt d}
+    +\alpha B_A+\beta B_N+\gamma B_P
   \right)V,
 \]
-where $B_A$, $B_N$, and $B_P$ represent axiological, normative, and purpose relevance. The coefficients are experimental parameters, not a moral calculus. Ablations must include zeroed channels, relation permutation, noisy ontologies, and equal-compute controls. The primary test is whether the intervention changes useful alignment-relevant computation rather than merely changing refusal style.
-
-\subsection{Ontology-conditioned expert routing}
-
-Sparse mixture-of-experts architectures route tokens or hidden states to a subset of experts \citep{shazeer2017sparsely,fedus2022switch}. VGTA proposes testing whether routing can depend on hidden state and semantic context:
+where
 \[
-  E = \operatorname{TopK} R(h,O_A,O_N,O_P),
+  B_A=g_A(O_A^v,X),\qquad
+  B_N=g_N(O_N,X,P),\qquad
+  B_P=g_P(O_D,P,X).
 \]
-where $h$ is the current representation and $O_A$, $O_N$, and $O_P$ are axiological, normative, and purpose contexts. Experts should specialize by reasoning function, such as causal reasoning, social-agent reasoning, rights and duties, uncertainty, risk, planning, or domain expertise. A single “morality expert” would collapse the distinctions the architecture is meant to test. The routing interface is therefore intentionally unimplemented until a trained experiment and attack analysis exist.
+Each $g$ should be decomposed and audited as: ontology subgraph selection, input grounding, relation encoding, learned or fixed projection, and attention-matrix construction. The evaluation compares plain text context, arbitrary learned bias, graph-conditioned bias, and semantically constrained bias, with zeroed channels, relation permutation, noisy ontology, irrelevant-subgraph, and equal-compute controls. Coefficients are experimental parameters, not a moral calculus.
 
-\subsection{Semantic state and runtime binding}
+\subsection{Ontology-informed expert routing}
 
-An optional reasoning episode may maintain a semantic state containing goals, entities, relationships, current purpose, affected moral patients, relevant values, applicable norms, constraints, uncertainty, potential harms, capabilities affected, and provenance. This state is a working representation, not a claim of subjective thought. Runtime binding should expose the minimal relevant ontology subgraph and world-state assertions, with version identifiers and evidence metadata.
+Sparse mixture-of-experts models route hidden states to a subset of experts \citep{shazeer2017sparsely,fedus2022switch}. VGTA tests
+\[
+  E=\operatorname{TopK}R(h,A_\phi^v,O_N,P),
+\]
+where $h$ is the current representation. Canonical axiology need not be queried at every token; $A_\phi^v$ can provide a compiled feature or module signal, while norms and purpose remain contextual. Experts should specialize by reasoning function---causal analysis, rights and duties, uncertainty, risk, planning, or domain expertise---rather than a single undifferentiated morality expert. Controls include a standard learned router, random semantic labels, an equivalent-parameter dense model, and an ontology-informed router. Threats include semantic spoofing, expert avoidance, starvation, an overloaded safety expert, and purpose switching.
 
-\subsection{Auxiliary training objectives}
+\subsection{Semantic state and auxiliary objectives}
+
+An optional episode state stores goals, entities, relationships, current purpose, affected moral patients, relevant values, applicable norms, conflicts, constraints, uncertainty, potential harms, capabilities, domain ontology, and provenance. It is a working representation, not a claim of subjective thought. Runtime binding should expose the minimal relevant subgraph and world-state assertions with versions and evidence metadata.
 
 One conceptual multi-objective loss is
 \[
-  L = L_{\mathrm{LM}} + \lambda_A L_{\mathrm{axiology}}
-      + \lambda_N L_{\mathrm{normative}} + \lambda_C L_{\mathrm{consistency}}.
+  L=L_{\mathrm{LM}}+\lambda_A L_{\mathrm{axiology}}
+    +\lambda_N L_{\mathrm{normative}}+\lambda_C L_{\mathrm{consistency}}.
 \]
-Possible terms include axiological relation consistency, normative inference, structural contradiction detection, moral-salience identification, and counterfactual consistency. They must be evaluated against shortcut baselines. Scalar reward is not assumed to capture morality; disagreement and uncertainty should be retained where appropriate.
+Possible terms include relation recovery, normative applicability, contradiction detection, and moral-salience identification. They may also measure counterfactual consistency. Shortcut baselines and disagreement-preserving labels are required; scalar reward is not assumed to capture morality.

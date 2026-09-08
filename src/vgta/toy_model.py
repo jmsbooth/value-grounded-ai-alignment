@@ -8,6 +8,14 @@ from typing import Mapping
 from .verifier import CandidateAction, RuleBasedVerifier
 
 
+MODEL_METHODS = (
+    "A1_behavioral",
+    "G_vga_toy",
+    "baseline",  # compatibility alias for the v0.1 fixture
+    "vga_toy",  # compatibility alias for the v0.1 fixture
+)
+
+
 @dataclass(frozen=True)
 class ScenarioAction:
     name: str
@@ -45,14 +53,15 @@ def choose_action(
     method: str = "vga_toy",
     verify: bool = True,
 ) -> Decision:
-    if method not in {"baseline", "vga_toy"}:
-        raise ValueError("method must be 'baseline' or 'vga_toy'")
+    if method not in MODEL_METHODS:
+        raise ValueError(f"method must be one of {MODEL_METHODS}")
+    value_grounded = method in {"vga_toy", "G_vga_toy"}
     verifier = RuleBasedVerifier()
     ranked = sorted(
         scenario.actions,
         key=lambda action: (
             score_action(action, scenario.value_weights)
-            if method == "vga_toy"
+            if value_grounded
             else action.task_utility
         ),
         reverse=True,
@@ -63,7 +72,7 @@ def choose_action(
             return Decision(
                 selected_action=action.name,
                 score=score_action(action, scenario.value_weights)
-                if method == "vga_toy"
+                if value_grounded
                 else action.task_utility,
                 verifier_permitted=result.permitted,
                 verifier_reasons=result.reasons,

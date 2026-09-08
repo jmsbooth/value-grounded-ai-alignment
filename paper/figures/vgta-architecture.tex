@@ -2,26 +2,30 @@
 \usetikzlibrary{arrows.meta,positioning,fit}
 \begin{document}
 \begin{tikzpicture}[
-  source/.style={draw, rounded corners=1pt, minimum width=29mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
-  core/.style={draw, rounded corners=1pt, minimum width=39mm, minimum height=22mm, align=center, font=\sffamily\small},
-  result/.style={draw, rounded corners=1pt, minimum width=31mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
+  source/.style={draw, rounded corners=1pt, minimum width=31mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
+  core/.style={draw, rounded corners=1pt, minimum width=43mm, minimum height=25mm, align=center, font=\sffamily\small},
+  result/.style={draw, rounded corners=1pt, minimum width=32mm, minimum height=9mm, align=center, font=\sffamily\scriptsize},
   arrow/.style={-{Latex[length=2mm]}, thick}
 ]
-\node[source, fill=black!10] (axiology) {Core axiology\\value structure};
-\node[source, below=2mm of axiology] (norm) {Normative\\ontology};
-\node[source, below=2mm of norm] (purpose) {Purpose / domain\\ontology};
-\node[source, below=2mm of purpose] (world) {World state\\external + current};
-\node[core, right=17mm of norm] (transformer) {\textbf{Transformer}\\attention bias\\expert routing\\semantic state};
-\node[result, right=17mm of transformer] (candidate) {Structured\\candidate action};
-\node[result, below=10mm of candidate] (verify) {Independent\\constraint verifier};
-\node[result, below=10mm of transformer] (runtime) {Runtime ontology\\binding};
-\draw[arrow] (axiology.east) -- (transformer.north west);
-\draw[arrow] (norm.east) -- (transformer.west);
-\draw[arrow] (purpose.east) -- (transformer.south west);
-\draw[arrow] (world.east) -- (runtime.west);
+\node[source, fill=black!10] (axiology) {Canonical axiology\\$O_A^v$; external + governed};
+\node[source, below=2mm of axiology] (norm) {Normative sources\\$O_N$; authority + conflict};
+\node[source, below=2mm of norm] (domain) {Domain ontology\\$O_D$; L2a};
+\node[source, below=2mm of domain] (purpose) {Purpose model\\$P$; L2b};
+\node[source, below=2mm of purpose] (world) {World state\\$W_t$; uncertain + external};
+\node[core, right=18mm of norm] (compiler) {$C_\phi$\\semantic-to-neural\\compilation};
+\node[core, right=13mm of compiler] (transformer) {\textbf{Transformer}\\$A_\phi^v$ representation\\$B_A,B_N,B_P$ attention\\$R(h,A_\phi^v,O_N,P)$ routing};
+\node[result, right=15mm of transformer] (candidate) {Structured\\candidate action};
+\node[result, below=10mm of candidate] (verify) {Independent\\fixed verifier};
+\node[result, below=10mm of transformer] (runtime) {Late-bound runtime\\context resolver};
+\draw[arrow] (axiology.east) -- (compiler.north west);
+\draw[arrow] (compiler.east) -- (transformer.west);
+\draw[arrow] (norm.east) -- (runtime.north west);
+\draw[arrow] (domain.east) -- (runtime.west);
+\draw[arrow] (purpose.east) -- (runtime.south west);
+\draw[arrow] (world.east) -- (runtime.south);
 \draw[arrow] (runtime.north) -- (transformer.south);
 \draw[arrow] (transformer.east) -- (candidate.west);
 \draw[arrow] (candidate.south) -- (verify.north);
-\node[font=\sffamily\footnotesize, below=2mm of verify] {execute if permitted; reconsider if conflict};
+\node[font=\sffamily\footnotesize, below=2mm of verify] {execute if permitted;\\reconsider or escalate if conflict};
 \end{tikzpicture}
 \end{document}

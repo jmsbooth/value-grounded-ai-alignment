@@ -1,13 +1,29 @@
 @prefix vga: <https://example.org/vga#> .
 
-vga:WorldStateObservation1 vga:subject vga:Alice .
-vga:WorldStateObservation1 vga:predicate vga:isEmployeeOf .
-vga:WorldStateObservation1 vga:object vga:ExampleOrganization .
-vga:WorldStateObservation1 vga:validFrom vga:2026_01_01 .
-vga:WorldStateObservation1 vga:source vga:ExampleDirectory .
-vga:WorldStateObservation1 vga:confidence vga:0_98 .
-vga:WorldStateObservation2 vga:subject vga:CredentialX .
-vga:WorldStateObservation2 vga:predicate vga:hasCompromiseSignal .
-vga:WorldStateObservation2 vga:object vga:IncidentReport42 .
-vga:WorldStateObservation2 vga:source vga:ExampleSensor .
-vga:WorldStateObservation2 vga:confidence vga:0_72 .
+vga:WorldState_W_t vga:type vga:ExternalWorldState .
+vga:WorldState_W_t vga:time vga:2026_09_08T12_00_00Z .
+vga:WorldState_W_t vga:contains vga:Assertion_Employee .
+vga:WorldState_W_t vga:contains vga:Assertion_CompromiseSignal .
+
+vga:Assertion_Employee vga:type vga:WorldStateAssertion .
+vga:Assertion_Employee vga:subject vga:Alice .
+vga:Assertion_Employee vga:predicate vga:isEmployeeOf .
+vga:Assertion_Employee vga:object vga:ExampleOrganization .
+vga:Assertion_Employee vga:validFrom vga:2026_01_01 .
+vga:Assertion_Employee vga:validUntil vga:2027_01_01 .
+vga:Assertion_Employee vga:source vga:ExampleDirectory .
+vga:Assertion_Employee vga:confidence vga:0_98 .
+vga:Assertion_Employee vga:provenance vga:DirectorySnapshot_42 .
+
+vga:Assertion_CompromiseSignal vga:type vga:WorldStateAssertion .
+vga:Assertion_CompromiseSignal vga:subject vga:CredentialX .
+vga:Assertion_CompromiseSignal vga:predicate vga:hasCompromiseSignal .
+vga:Assertion_CompromiseSignal vga:object vga:IncidentReport42 .
+vga:Assertion_CompromiseSignal vga:validFrom vga:2026_09_08T11_45_00Z .
+vga:Assertion_CompromiseSignal vga:source vga:ExampleSensor .
+vga:Assertion_CompromiseSignal vga:confidence vga:0_72 .
+vga:Assertion_CompromiseSignal vga:provenance vga:SensorEvent_17 .
+vga:Assertion_CompromiseSignal vga:evidenceStatus vga:unverifiedEvidence .
+
+vga:WorldState_W_t vga:isNot vga:GroundTruth .
+vga:WorldState_W_t vga:ontologyIsNotState vga:true .

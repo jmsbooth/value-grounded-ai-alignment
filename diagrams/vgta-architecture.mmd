@@ -1,8 +1,12 @@
 flowchart LR
-  A[Core axiology] --> T[Transformer computation]
-  N[Normative ontology] --> T
-  P[Purpose ontology] --> T
-  W[World state] --> T
-  T --> X[Candidate action]
-  X --> V[Structured action + verifier]
-  V --> Y[Execute or reconsider]
+  A[Canonical axiology O_A^v] --> C[Compiler C_phi]
+  C --> M[Derived module A_phi^v]
+  N[Normative sources + Conflict state] --> R[Runtime resolver]
+  D[Domain ontology O_D] --> R
+  P[Purpose model P] --> R
+  W[World state W_t<br/>source + confidence] --> R
+  M --> T[Transformer computation<br/>representation + attention + routing]
+  R --> T
+  T --> X[Structured candidate action]
+  X --> V[Independent fixed verifier]
+  V --> Y[Execute if permitted<br/>reconsider / escalate otherwise]

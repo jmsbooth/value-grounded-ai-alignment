@@ -1,66 +1,76 @@
 \section{Evaluation framework}
 \label{sec:evaluation}
 
-The first paper defines an evaluation architecture rather than reporting experiments. The minimum comparison is a matched ladder of models A--F, with an optional G for governed dynamic normative binding. Each model should use the same base architecture, parameter budget, training tokens, inference budget, prompts, context allocation, and temperature. Datasets, seeds, and evaluation scripts must be versioned before results are interpreted.
+The theoretical v0.2 design defined an evaluation architecture rather than reporting experiments. The minimum comparison is a matched ladder of A0, A1, B, C1, C2, D, E, and G. The fixed verifier is evaluated beside the ladder, not as a model rung. Every model should use the same base architecture, parameter budget, training tokens, inference budget, prompts, context allocation, and temperature. Datasets, seeds, action schemas, and evaluation scripts must be versioned before results are interpreted.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.92\linewidth]{experiment-ablation}
-  \caption{Ablation ladder. Each model adds one mechanism so that any gain can be attributed to a concrete intervention rather than to an unspecified “neuro-symbolic” effect.}
+  \includegraphics[width=0.94\linewidth]{experiment-ablation}
+  \caption{Model ablation ladder with the fixed verifier beside, rather than inside, the model comparison. Deployment evaluation compares model-only and model-plus-enforcement paths.}
   \label{fig:ablation}
 \end{figure}
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Alignment mechanism comparison. The entries describe broad mechanism families, not uniform implementations.}
+\caption{Alignment comparison and model controls. No row is a claim of universal superiority.}
 \label{tab:mechanisms}
-\resizebox{\linewidth}{!}{%
-\begin{tabular}{@{}p{0.15\linewidth}p{0.17\linewidth}p{0.13\linewidth}p{0.13\linewidth}p{0.14\linewidth}p{0.10\linewidth}p{0.18\linewidth}@{}}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.07\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
-Method & Value representation & Training influence & Inference influence & Explicit semantics & Formal verification & Updateability \\
+Model & Role & Training influence & Structural influence & Runtime context & Primary control \\
 \midrule
-RLHF & Preference proxy & Direct & Usually indirect & Limited / task-dependent & External only & Retraining or fine-tuning \\
-Constitutional AI & Written principles & AI feedback and SFT/RL & May be prompted or learned & Natural language & External only & Constitution revision \\
-Deliberative alignment & Safety specifications & Reasoning-oriented SFT & Explicit policy reasoning & Natural language & External only & Specification revision \\
-External guardrails & Classifier / policy rules & Usually none or auxiliary & Direct filtering or authorization & Often explicit & Can be explicit & Operational update \\
-Neuro-symbolic baseline & Domain symbols / rules & Model-dependent & Retrieval or symbolic module & Usually explicit & Sometimes & Knowledge update \\
-VGA & L0--L3 differentiated structure & Auxiliary and structural options & Runtime late binding + action assurance & Typed and layered & Independent verifier & Gated by layer \\
-\bottomrule
-\end{tabular}%
-}
-\end{table}
-
-\subsection{Models and controls}
-
-Model A is a baseline Transformer. Model B adds external ontology context without structural conditioning. Model C adds axiological and normative auxiliary objectives. Model D adds ontology-conditioned attention. Model E adds ontology-conditioned, reasoning-function MoE routing. Model F adds independent formal action verification. Model G adds a governed dynamic normative ontology if the data and authority protocol are mature enough. The key controls are parameter count, training compute, inference FLOPs, context length, and refusal opportunity.
-
-\subsection{Metrics}
-
-Measure standard task capability, alignment benchmark performance, normative reasoning accuracy, moral-salience recall, contradiction rate, ontology violation rate, jailbreak success, over-refusal, under-refusal, OOD generalization, counterfactual consistency, verifier rejection, attention entropy, expert-routing entropy, inference FLOPs, latency, training efficiency, and robustness to ontology noise. Report effect sizes, confidence intervals, multiple seeds, and per-scenario failures. Do not reduce the result to a single alignment score.
-
-For binary outcomes, a proportion and interval are appropriate descriptive summaries. For paired model comparisons, use paired bootstrap or a preregistered randomization test and report the estimand. For continuous metrics, report mean or median with uncertainty, distributional plots, and compute-normalized comparisons. If human judgments are used, preserve disagreement rather than collapsing it prematurely; recent value-alignment work demonstrates why population and linguistic variation matter \citep{sorensen2024pluralistic,xu2024multilingualvalues,yao2024fulcra}.
-
-\subsection{Synthetic executable scaffold}
-
-The repository includes four constructed scenarios that exercise consent and privacy, workplace coercion, safety checks, and medical-record disclosure. A task-utility baseline and a transparent value-feature scorer choose among two candidate actions; a toy verifier checks authorization, consent, coercion, and a harm threshold. Bootstrap intervals are computed with a fixed seed. The output is explicitly labeled synthetic and is included to validate interfaces and demonstrate different use cases, not to estimate model performance or support an alignment claim.
-
-\begin{table}[t]
-\centering
-\small
-\caption{Experimental ablation definitions.}
-\label{tab:ablations}
-\begin{tabularx}{\linewidth}{@{}lXllllll@{}}
-\toprule
-Model & External ontology & Aux. losses & Attn. bias & MoE routing & Verifier & Governed late binding \\
-\midrule
-A & -- & -- & -- & -- & -- & -- \\
-B & yes & -- & -- & -- & -- & -- \\
-C & yes & yes & -- & -- & -- & -- \\
-D & yes & yes & yes & -- & -- & -- \\
-E & yes & yes & yes & yes & -- & -- \\
-F & yes & yes & yes & yes & yes & -- \\
-G & yes & yes & yes & yes & yes & yes \\
+A0 & Base Transformer & Pretraining & None & Plain task context & Capability floor \\
+A1 & Behavioral alignment control & SFT + DPO or preregistered equivalent & None & Same context budget & Primary control \\
+B & External ontology context & A1 training & Retrieval/context only & Typed graph input & Context-length control \\
+C1 & Axiological representation & A1 + value relation objectives & $A_\phi^v$ representation & L0 module & Relation-permutation control \\
+C2 & Normative reasoning & A1 + applicability/conflict objectives & Norm reasoning state & L1 metadata & Authority/conflict control \\
+D & Structural attention & C1/C2 training & $B_A,B_N,B_P$ & L0--L2 context & Arbitrary-bias control \\
+E & Structured routing & C1/C2 training & $R(h,A_\phi^v,O_N,P)$ & Selective context & Random-router control \\
+G & Normative late binding & Governed protocol & All enabled mechanisms & Runtime norms and purpose & Context-swap control \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\subsection{Baselines and controls}
+
+A0 is a base model. A1 is the primary behaviorally aligned control, using SFT plus DPO or another fully specified and reproducible preference method. B adds external ontology context without structural conditioning. C1 adds axiological representation training; C2 adds normative reasoning training. D adds ontology-conditioned attention. E adds function-oriented structured routing. G adds governed normative late binding. A verifier is not a rung. The principal controls are plain-text context, arbitrary learned biases, random semantic labels, equivalent-parameter dense models, relation permutations, purpose swaps, and equal-compute alternatives.
+
+\subsection{Metrics and statistical plan}
+
+Measure capability, normative reasoning accuracy, relation recovery, moral-salience recall, contradiction recognition, ontology violation rate, jailbreak success, over-refusal, unsafe acceptance, false confidence, OOD generalization, counterfactual consistency, verifier rejection, false positives, bypass rate, action semantic completeness, attention entropy, expert-routing entropy, FLOPs, latency, training efficiency, and calibration. Report effect sizes, confidence intervals, multiple seeds, and per-scenario failures. Do not reduce the result to one alignment score.
+
+For binary outcomes, report a proportion and an interval. For paired comparisons, preregister the estimand and use paired bootstrap or a randomization test. For continuous metrics, report mean or median with uncertainty and compute-normalized comparisons. Human judgments should preserve disagreement distributions. H8 additionally reports conformance stability after continued training with $O_A^v$ fixed; H9 reports conflict recognition, authority attribution, exception handling, abstention, escalation, and documented uncertainty.
+
+\subsection{OOD, coverage, and pluralism}
+
+Out-of-distribution tests must distinguish lexical OOD (new wording), compositional OOD (known concepts in new combinations), and structural OOD (new graph topology, relation composition, authority pattern, or domain structure). Structural OOD is the priority because it tests whether the model learned semantics rather than labels.
+
+Ontology coverage is degraded at 100, 75, 50, and 25 percent, then under contradictory, malicious, and irrelevant subgraphs. Report capability degradation, alignment degradation, calibration, abstention, and false confidence. Pluralism conditions include high consensus, moderate disagreement, strong disagreement, and conflicting authorized profiles. Report distributional similarity, value diversity, conflict recognition, uncertainty, and profile adherence; no majority outcome is treated as moral truth.
+
+\subsection{Fixed verifier and deployment separation}
+
+One independently specified verifier and action schema evaluate A1, B, C1, C2, D, E, and G. Report rejection, false positive, unsafe acceptance, useful completion, over-refusal, bypass, and action semantic completeness under identical constraints. A separate deployment experiment compares model-only execution with model-plus-enforcement. This prevents a lower rejection rate from being misread as safer behavior and prevents a higher rejection rate from being mistaken for alignment.
+
+\subsection{Synthetic executable scaffold}
+
+The repository includes four constructed scenarios covering consent and privacy, workplace coercion, safety checks, and medical-record disclosure. An A1 task-utility control and a transparent G value-feature scorer select candidates; the same toy verifier is then applied to both. Bootstrap intervals use a fixed seed. The output is explicitly labeled synthetic and validates interfaces and use-case wiring only. It is not a trained-model result, a population estimate, or evidence for H1--H9.
+
+\subsection{Generated small-scale mechanism-validation pilot}
+
+The empirical extension adds a controlled synthetic benchmark and a shared
+multilayer-perceptron proxy for the first go/no-go gate. A1, B, C1, and C2 are
+trained with three seeds under one configuration; A1 is surface-only, B adds
+runtime ontology context, C1 adds axiological value/relation objectives, and
+C2 adds normative conflict objectives. The proxy is deliberately not a
+Transformer. This v0.3 release therefore instantiates the first A1/B/C1/C2
+mechanism-validation gate with a deliberately smaller proxy model. The
+following artifacts are generated from raw JSONL predictions
+and are included for auditability when present; a missing artifact means that
+the empirical pipeline has not been executed.
+
+\IfFileExists{generated/primary-results.tex}{\input{generated/primary-results}}{}
+\IfFileExists{generated/hypothesis-resolution.tex}{\input{generated/hypothesis-resolution}}{}
+\IfFileExists{generated/security-results.tex}{\input{generated/security-results}}{}
+\IfFileExists{generated/conformance-results.tex}{\input{generated/conformance-results}}{}

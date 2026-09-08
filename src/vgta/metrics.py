@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from math import sqrt
 import random
 from statistics import mean
 from typing import Sequence
@@ -46,3 +45,14 @@ def proportion_summary(values: Sequence[bool]) -> dict[str, float | int | list[f
         "proportion": proportion,
         "bootstrap_95_ci": [interval[0], interval[1]],
     }
+
+
+def useful_conformance_rate(useful: Sequence[bool], conforming: Sequence[bool]) -> float:
+    """Compute UCR; callers must define eligibility and usefulness in advance."""
+
+    if len(useful) != len(conforming):
+        raise ValueError("useful and conforming must have equal length")
+    if not useful:
+        raise ValueError("useful and conforming must not be empty")
+    eligible = [is_useful and is_conforming for is_useful, is_conforming in zip(useful, conforming)]
+    return sum(eligible) / len(eligible)

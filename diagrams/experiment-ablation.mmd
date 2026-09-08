@@ -1,7 +1,10 @@
 flowchart LR
-  A[Model A<br/>baseline] --> B[Model B<br/>external ontology]
-  B --> C[Model C<br/>auxiliary losses]
-  C --> D[Model D<br/>attention]
-  D --> E[Model E<br/>MoE routing]
-  E --> F[Model F<br/>formal assurance]
-  F --> G[Model G<br/>governed late binding]
+  A0[A0 Base] --> A1[A1 Behavioral control]
+  A1 --> B[B External ontology]
+  B --> C1[C1 Axiological representation]
+  C1 --> C2[C2 Normative reasoning]
+  C2 --> D[D Structural attention]
+  D --> E[E Structured routing]
+  E --> G[G Normative late binding]
+  V[Fixed verifier] -. evaluates .-> A1
+  V -. evaluates .-> G

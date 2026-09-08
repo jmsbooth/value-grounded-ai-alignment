@@ -17,6 +17,13 @@ class VerifierAndModelTests(unittest.TestCase):
         self.assertFalse(result.permitted)
         self.assertIn("consent", result.reasons[0])
 
+    def test_incomplete_semantic_state_is_rejected(self):
+        result = RuleBasedVerifier().verify(
+            CandidateAction(name="incomplete", semantic_completeness=0.5)
+        )
+        self.assertFalse(result.permitted)
+        self.assertIn("incomplete", result.reasons[0])
+
     def test_toy_value_grounding_changes_selection(self):
         scenario = Scenario(
             name="fixture",

@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: Booth
     given-names: James
-version: 0.1.0
-date-released: 2026-09-07
+version: 0.3.0-preprint
+date-released: 2026-09-08
 repository-code: "https://github.com/jmsbooth/value-grounded-ai-alignment"
 license: Apache-2.0
 abstract: >-

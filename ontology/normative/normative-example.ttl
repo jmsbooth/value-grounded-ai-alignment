@@ -1,14 +1,43 @@
 @prefix vga: <https://example.org/vga#> .
 
-vga:Duty vga:type vga:NormativeConcept .
-vga:Permission vga:type vga:NormativeConcept .
-vga:Prohibition vga:type vga:NormativeConcept .
-vga:Norm vga:type vga:NormativeConcept .
-vga:Context vga:type vga:NormativeConcept .
-vga:Exception vga:type vga:NormativeConcept .
-vga:Conflict vga:type vga:NormativeConcept .
-vga:ConsentContext vga:requires vga:InformedChoice .
-vga:PrivacyContext vga:createsDuty vga:ProtectConfidentiality .
-vga:CoerciveContext vga:prohibits vga:CoerciveAction .
-vga:EmergencyContext vga:mayOverride vga:PrivacyContext .
-vga:AutonomySafetyConflict vga:conflictsWith vga:ImmediateSafetyDuty .
+vga:NormativeOntology_v1 vga:type vga:NormativeOntology .
+vga:NormativeOntology_v1 vga:version vga:v1 .
+vga:NormativeOntology_v1 vga:contains vga:Norm_Confidentiality .
+vga:NormativeOntology_v1 vga:contains vga:Norm_EmergencySafety .
+vga:NormativeOntology_v1 vga:contains vga:Conflict_ConfidentialitySafety .
+
+vga:Norm_Confidentiality vga:type vga:Norm .
+vga:Norm_Confidentiality vga:source vga:InstitutionalPrivacyPolicy .
+vga:Norm_Confidentiality vga:authority vga:DataProtectionOfficer .
+vga:Norm_Confidentiality vga:jurisdiction vga:OrganizationA .
+vga:Norm_Confidentiality vga:effectiveFrom vga:2026_01_01 .
+vga:Norm_Confidentiality vga:effectiveUntil vga:2027_01_01 .
+vga:Norm_Confidentiality vga:scope vga:MedicalRecord .
+vga:Norm_Confidentiality vga:precedence vga:high .
+vga:Norm_Confidentiality vga:confidence vga:reviewed .
+vga:Norm_Confidentiality vga:exceptions vga:AuthorizedEmergencyDisclosure .
+vga:Norm_Confidentiality vga:version vga:policy_v3 .
+
+vga:Norm_EmergencySafety vga:type vga:Norm .
+vga:Norm_EmergencySafety vga:source vga:EmergencyOperationsPolicy .
+vga:Norm_EmergencySafety vga:authority vga:IncidentCommander .
+vga:Norm_EmergencySafety vga:jurisdiction vga:OrganizationA .
+vga:Norm_EmergencySafety vga:effectiveFrom vga:2026_03_01 .
+vga:Norm_EmergencySafety vga:scope vga:ActiveIncident .
+vga:Norm_EmergencySafety vga:precedence vga:conditional .
+vga:Norm_EmergencySafety vga:confidence vga:reviewed .
+vga:Norm_EmergencySafety vga:exceptions vga:HumanReviewRequired .
+vga:Norm_EmergencySafety vga:version vga:policy_v2 .
+
+vga:Conflict_ConfidentialitySafety vga:type vga:NormativeConflict .
+vga:Conflict_ConfidentialitySafety vga:left vga:Norm_Confidentiality .
+vga:Conflict_ConfidentialitySafety vga:right vga:Norm_EmergencySafety .
+vga:Conflict_ConfidentialitySafety vga:state vga:unresolved .
+vga:Conflict_ConfidentialitySafety vga:outcomeOptions vga:PrecedenceContextProfileAbstainEscalate .
+
+vga:Norm_Coercion vga:type vga:Norm .
+vga:Norm_Coercion vga:source vga:ProfessionalEthicsCode .
+vga:Norm_Coercion vga:authority vga:EthicsReviewBoard .
+vga:Norm_Coercion vga:jurisdiction vga:OrganizationA .
+vga:Norm_Coercion vga:scope vga:WorkplaceDecision .
+vga:Norm_Coercion vga:prohibits vga:CoerciveAction .

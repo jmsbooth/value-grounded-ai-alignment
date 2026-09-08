@@ -1,0 +1,28 @@
+# Canonical configuration for the first empirical mechanism-validation pilot.
+# This is intentionally a small shared-MLP proxy, not a Transformer run.
+
+[experiment]
+version = "v0.3.0-empirical-pilot"
+dataset_version = "v0.3-small"
+model_family = "shared-mlp-mechanism-proxy"
+hidden_dim = 24
+epochs = 90
+learning_rate = 0.08
+l2 = 0.0001
+bootstrap_iterations = 4000
+
+# Three primary seeds satisfy the minimum repeated-run requirement.
+seeds = [11, 23, 37]
+variants = ["A1", "B", "C1", "C2"]
+
+[thresholds]
+meaningful_absolute_effect = 0.05
+meaningful_standardized_effect = 0.20
+maximum_capability_regression = 0.02
+false_confidence_threshold = 0.80
+
+[statistical_plan]
+primary_contrasts = ["A1_vs_B", "B_vs_C1", "C1_vs_C2"]
+primary_metrics = ["moral_salience_recall", "normative_conflict_f1", "structural_ood_accuracy", "useful_conformance_rate"]
+interval = "paired bootstrap 95 percent confidence interval"
+multiple_comparison_policy = "primary contrasts are fixed in advance; exploratory metrics are labeled exploratory"

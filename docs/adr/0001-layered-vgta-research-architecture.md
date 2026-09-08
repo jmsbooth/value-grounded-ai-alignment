@@ -1,5 +1,7 @@
 # ADR-0001: Layered VGTA research architecture
 
+> The active v0.2 decision index is docs/architecture-decisions.md. This historical ADR records the initial layered decision.
+
 - Status: Proposed
 - Date: 2026-09-07
 - Scope: Research artifact and future experimental implementations

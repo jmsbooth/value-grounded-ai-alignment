@@ -1,90 +1,103 @@
 # Value-Grounded AI Alignment
 
-**Value-Grounded AI Alignment (VGA)** is a theoretical research framework for investigating whether stable axiological structure and context-sensitive normative ontologies can participate in Transformer computation while purpose, domain knowledge, and world state remain externally governed and dynamically bound.
+**Value-Grounded AI Alignment (VGA)** is a theoretical research program for testing whether explicit axiological and normative structure can participate in Transformer computation while authority, purpose, domain semantics, world state, and consequential actions remain separately governed.
 
-**Status: Theoretical research / preprint draft**
+**Status: v0.3.0 empirical pilot — synthetic mechanism-validation results, no empirical Transformer results**
 
-> This repository proposes and evaluates a research architecture. It does not claim that value-grounded Transformers have been empirically demonstrated to solve AI alignment.
-
-The first manuscript introduces the **Value-Grounded Transformer Architecture (VGTA)**: a proposed architecture with four differentiated semantic layers—core axiology, normative ontology, purpose/domain ontology, and world state—paired with independent formal assurance at consequential action boundaries. The contribution is a falsifiable research proposition, not a claim of machine consciousness, genuine emotion, moral truth, or universal safety.
+> This repository proposes and tests interfaces, equations, controls, and synthetic mechanism-validation fixtures. It does not claim that value-grounded Transformers solve AI alignment, establish moral truth, or provide production safety.
 
 ## Research question
 
-Can stable axiological structure and context-sensitive normative ontologies be incorporated into Transformer computation as explicit inductive biases, while purpose, domain knowledge, and world state remain dynamically bound at inference, in a manner that improves alignment robustness, generalization, interpretability, and security?
+Can a governed external canonical axiology be compiled into a derived, non-authoritative neural module and used as structural value conditioning, while normative sources are late-bound under authority and provenance, purpose selects domain relevance, world state remains uncertain and external, and candidate actions are independently verified?
 
-## Architecture at a glance
+The central boundary is:
 
-VGTA separates what should be stable from what must remain governable and current:
+O_A^v --compile/train--> A_phi^v
 
-| Layer | Role | Binding | Change authority |
-| --- | --- | --- | --- |
-| L0 Core Axiology | Foundational values such as agency, dignity, care, truthfulness, and non-domination | Parametric / structural | Extremely low; strong human governance |
-| L1 Normative Ontology | Contextual duties, permissions, prohibitions, exceptions, and conflicts | Parametric plus runtime | Low/moderate; governed evolution |
-| L2 Purpose / Domain Ontology | Task, domain, entity, and relationship semantics | Runtime contextual | Moderate; external ontology governance |
-| L3 World State | Time-indexed, evidence-backed facts and beliefs | Runtime ephemeral | High; provenance and confidence required |
+O_A^v is the canonical axiology. A_phi^v is a learned or hybrid derivative and can fail conformance or drift while the canonical artifact remains unchanged. The design distinguishes:
 
-The design phrase is **axiological prior with normative late binding**. The architecture intentionally avoids forcing volatile facts, jurisdiction-specific rules, or all cultural and institutional variation into neural weights.
+| Layer | Role | Binding and update boundary |
+| --- | --- | --- |
+| L0 canonical axiology | Value-bearing properties and higher-order relations | External, typed, versioned, provenance-bearing, governed; immutable within deployment |
+| L1 normative ontology | Duties, permissions, prohibitions, exceptions, authorities, jurisdictions, and conflicts | Runtime late binding; no scalar averaging of conflict |
+| L2a domain ontology | Entities and relations in the current domain | Runtime contextual |
+| L2b purpose model | Purpose-conditioned relevance Relevant(O_D,P,X) | Runtime contextual and authorized |
+| L3 world state | Time-indexed assertions with source, confidence, and provenance | Ephemeral external state; not ground truth |
 
-## What is in this repository
+## What this repository contains
 
-- [`paper/main.tex`](paper/main.tex) — complete first-draft manuscript source.
-- [`paper/references.bib`](paper/references.bib) — curated bibliography covering alignment, neuro-symbolic AI, knowledge-enhanced Transformers, security, and normative theory.
-- [`paper/figures/`](paper/figures/) — editable TikZ sources and generated vector PDFs.
-- [`diagrams/`](diagrams/) — editable Mermaid architecture diagrams.
-- [`ontology/`](ontology/) — small Turtle/RDF-compatible illustrative fixtures; these are not a complete moral ontology.
-- [`src/vgta/`](src/vgta/) — importable interface-level scaffold for ontology parsing, attention bias, routing, semantic state, verification, and evaluation metrics.
-- [`experiments/`](experiments/) — a dependency-light synthetic evaluation with deterministic use cases and bootstrap uncertainty summaries; no empirical Transformer results are claimed.
-- [`docs/literature-review.md`](docs/literature-review.md) — source-by-source literature review and relevance notes.
-- [`docs/novelty-analysis.md`](docs/novelty-analysis.md) — claim-by-claim novelty boundaries and overclaiming risks.
-- [`docs/research-roadmap.md`](docs/research-roadmap.md) — follow-on phases with controls, metrics, and falsification conditions.
-- [`docs/adr/0001-layered-vgta-research-architecture.md`](docs/adr/0001-layered-vgta-research-architecture.md) — proposed architecture decision and governance boundaries.
+- [paper/main.tex](paper/main.tex) and [paper/value-grounded-ai-alignment.pdf](paper/value-grounded-ai-alignment.pdf) — manuscript source and compiled preprint.
+- [paper/references.bib](paper/references.bib) — curated bibliography, including recent 2025–2026 work used to bound novelty.
+- [paper/figures/](paper/figures/) — editable TikZ sources and generated vector PDFs, including the training pipeline and fixed-verifier ablation.
+- [ontology/](ontology/) — parser-safe Turtle fixtures for canonical axiology, normative sources/conflicts, purpose/domain semantics, and uncertain world state.
+- [src/vgta/](src/vgta/) — dependency-free interfaces for canonical compilation, conformance probes, attention bias, routing, semantic state, normative conflict, verification, and metrics.
+- [src/vgta_eval/](src/vgta_eval/) — small NumPy shared-MLP mechanism-validation model, scenario generator, conformance adapter, attack fixtures, metrics, and bootstrap statistics.
+- [experiments/run_toy_evaluation.py](experiments/run_toy_evaluation.py) — deterministic A1-versus-G synthetic use cases with one fixed verifier.
+- [experiments/evaluation/run_empirical_small.py](experiments/evaluation/run_empirical_small.py) — matched A1/B/C1/C2 pilot runner with three seeds, frozen logical splits, manifests, and raw predictions.
+- [experiments/preregistration/v0.3.md](experiments/preregistration/v0.3.md) and [experiments/configs/v0.3-small.toml](experiments/configs/v0.3-small.toml) — preregistered scope, metrics, thresholds, controls, and stopping rules.
+- [results/](results/) — generated raw manifests, processed tables, confidence intervals, facts, and figures from executed pilots. Raw run directories are never overwritten.
+- [paper/generated/](paper/generated/) — LaTeX fragments generated from result tables; no empirical numbers are manually typed into the paper.
+- [docs/architecture.md](docs/architecture.md) — active architecture description.
+- [docs/architecture-decisions.md](docs/architecture-decisions.md) — v0.2 ADR-001 through ADR-007 decision index.
+- [docs/novelty-analysis-v2.md](docs/novelty-analysis-v2.md) — claim-by-claim novelty matrix and safe wording.
+- [docs/literature-review.md](docs/literature-review.md) — literature positioning through 2026-09-08.
+- [docs/research-roadmap.md](docs/research-roadmap.md) — phased experiments, controls, metrics, and falsification gates.
+- [SECURITY.md](SECURITY.md) — responsible-use and threat-model guidance.
 
-## Build the paper
+## Run the synthetic fixture
 
-After installing a LaTeX runtime, run:
+    python3 experiments/run_toy_evaluation.py
+    python3 experiments/run_toy_evaluation.py --json
 
-```bash
-make all
-```
+The runner separates model-only useful completion from the same fixed verifier's rejection and useful candidate conformance rate (UCR). Its four scenarios cover consent and privacy, workplace coercion, safety checks, and medical-record disclosure. The output is synthetic and demonstrates wiring only; it is not a benchmark or evidence for H1–H9.
 
-The targets are:
+## Build and verify the paper
 
-```bash
-make figures   # compile editable TikZ sources into paper/figures/*.pdf
-make paper     # compile paper/main.tex into paper/value-grounded-ai-alignment.pdf
-make verify    # run Python tests, synthetic scenarios, and paper checks
-make clean     # remove generated build artifacts
-```
+    make all
 
-`make paper` uses `latexmk` when available. In the bundled Codex environment, it falls back to Tectonic 0.17.0 through the repository script. The first build may require a network connection if the local TeX bundle has not cached a package; subsequent builds use the installed runtime cache. Generated intermediates live under `paper/build/` and are ignored by Git.
+Individual targets:
 
-## Experimental roadmap
+    make figures   # compile TikZ sources into paper/figures/*.pdf
+    make paper     # compile paper/main.tex
+    make verify    # run tests, synthetic fixture, and PDF diagnostics
+    make clean     # remove generated build artifacts
 
-The current executable component is intentionally small. It implements transparent toy equations and scenarios for action scoring, constraint checking, and binary uncertainty summaries. It is useful for checking interfaces and reasoning about failure modes, not for estimating model performance.
+The build uses latexmk when available and otherwise the repository's bundled Tectonic workflow. Generated intermediates live under paper/build/ and are ignored by Git. A complete research run should additionally render the PDF at 200 DPI and inspect every page for clipping, collisions, and material overfull boxes.
 
-The proposed empirical sequence is:
+## Run the empirical mechanism-validation pilot
 
-1. Build a small, governed axiological/normative dataset and annotation protocol.
-2. Compare a baseline Transformer with progressively enabled ontology mechanisms.
-3. Measure moral-salience recall, normative contradiction, OOD generalization, prompt robustness, over- and under-refusal, routing cost, and independent-verifier rejection.
-4. Add governed ontology evolution and adversarial evaluation only after provenance, versioning, and rollback controls are in place.
+    make empirical-small
+
+This runs the first go/no-go gate: A1 behavioral control, B runtime ontology context, C1 axiological auxiliary training, and C2 normative auxiliary training. It uses three seeds, a deterministic synthetic benchmark with train/validation/development-test/sealed-test splits, one fixed verifier, structural-OOD topology checks, attack fixtures, capability controls, and generated confidence intervals. The current implementation is a shared NumPy MLP proxy, not a Transformer; its outputs are Tier 1 mechanism evidence at most.
+
+The command writes a unique directory under results/raw/, updates results/processed/seed-metrics.csv, results/tables/, results/statistics/, results/figures/, and paper/generated/. Because this working tree is intentionally left uncommitted for manual push, current outputs are labeled `pilot-uncommitted`; a formal sealed run requires committing the preregistration before execution.
+
+    make analyze-results RAW_ROOT=results/raw/empirical-small-YYYYMMDDTHHMMSSZ
+    make paper-from-results
+
+## Proposed empirical sequence
+
+1. Validate the current A1/B/C1/C2 mechanism pilot and review the generated negative and positive findings.
+2. Replace the proxy with a matched small open-weight decoder-only Transformer only after the dataset and controls are stable.
+3. Add D structural attention only after the preregistered C1/C2 gate; add E routing and G late binding only after later gates.
+4. Preserve held-out structural-OOD compositions, multiple seeds, effect sizes, confidence intervals, capability, attacks, and conformance stability at every scale.
+
+The roadmap requires multiple seeds, effect sizes, confidence intervals, compute-normalized comparisons, disagreement-preserving evaluation, provenance, versioning, and rollback. The verifier remains a separate experiment from the model ladder.
 
 ## Citation
 
-```bibtex
-@misc{booth2026valuegrounded,
-  author       = {Booth, James},
-  title        = {Value-Grounded AI Alignment: A Neuro-Symbolic Architecture for Axiological, Normative, and Verifiable Transformer Models},
-  year         = {2026},
-  howpublished = {Preprint draft},
-  url          = {https://github.com/jmsbooth/value-grounded-ai-alignment}
-}
-```
+    @misc{booth2026valuegrounded,
+      author       = {Booth, James},
+      title        = {Value-Grounded AI Alignment: Canonical Axiology, Normative Late Binding, and Extrinsic Assurance},
+      year         = {2026},
+      howpublished = {Preprint draft},
+      url          = {https://github.com/jmsbooth/value-grounded-ai-alignment}
+    }
 
 ## Licensing
 
-Code is released under the Apache License 2.0 in [`LICENSE-CODE`](LICENSE-CODE). The manuscript, figures, ontology examples, and documentation are released under Creative Commons Attribution 4.0 International in [`LICENSE-DOCS`](LICENSE-DOCS). These scopes are intentionally separate.
+Code is released under the Apache License 2.0 in [LICENSE-CODE](LICENSE-CODE). The manuscript, figures, ontology examples, and documentation are released under Creative Commons Attribution 4.0 International in [LICENSE-DOCS](LICENSE-DOCS).
 
-## Security and responsible use
+## Responsible use
 
-The repository is a research artifact, not a deployable safety control. See [`SECURITY.md`](SECURITY.md) for reporting guidance and the threat-model framing. Do not use the toy verifier or ontology fixtures as a production authorization system.
+The repository is a research artifact, not a deployable safety or authorization control. The toy verifier, synthetic scenarios, and ontology fixtures must not be used for production decisions.

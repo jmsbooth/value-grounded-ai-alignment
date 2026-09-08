@@ -1,18 +1,45 @@
-\section{Normative late binding}
+\section{Normative authority and late binding}
 \label{sec:late-binding}
 
-The four-layer design is motivated by different rates of change and different error costs. Core axiology is intended to be stable because silent drift in the system's highest-order commitments is difficult to detect and difficult to roll back. Norms vary by context and therefore require explicit jurisdiction, domain, and authority metadata. Purpose semantics change as the task changes. World state changes continuously and should be evidence-backed rather than memorized.
+The layers have different rates of change and different error costs. The canonical axiology is protected because silent drift in high-order commitments is hard to detect and roll back. Norms vary by context and require authority, jurisdiction, scope, and effective-date metadata. Purpose changes with the task. World state changes continuously and should be evidence-backed rather than memorized.
 
-Consider a privacy-review assistant. The core axiology may treat agency, dignity, truthfulness, and non-domination as persistent considerations. A governing institution may supply an L1 norm that confidential medical information should not be disclosed without an applicable authorization. The current purpose may be incident triage rather than treatment planning. L3 may contain a current authorization record with a source, validity interval, and confidence. The same value structure can therefore support different actions in a routine data request and a legally governed emergency without treating the emergency fact as a change to axiology.
+\subsection{Multiple normative sources}
 
-Likewise, a security-response system may receive a domain ontology connecting credentials, vulnerabilities, assets, authorization, and incident evidence. A world-state assertion that a credential is compromised is not itself a permission to act. The system must still distinguish evidence from policy and produce a candidate action whose scope, authority, affected parties, and uncertainty can be checked.
+For a normative assertion $N_i$, the runtime record includes
+\[
+  N_i=(\mathit{source},\mathit{authority},\mathit{jurisdiction},
+  t_{\mathrm{from}},t_{\mathrm{until}},\mathit{scope},
+  \mathit{precedence},\mathit{confidence},\mathit{exceptions},v).
+\]
+The authority function is metadata-valued:
+\[
+  \mathit{Auth}(N_i)=
+  (\mathit{source},\mathit{authority},\mathit{jurisdiction},
+  \mathit{scope},\mathit{precedence},t_{\mathrm{from}},t_{\mathrm{until}},v).
+\]
+It is not a scalar moral-weight function.
+Sources may be legal, institutional, professional-ethical, safety-related, stakeholder-specific, or jurisdictional. Authority metadata is not a scalar moral weight: it helps determine governed applicability. Truth claims, recency, confidence, and authority remain distinct. A recent norm does not automatically override a higher-authority norm.
 
-Late binding does not mean that all norms are arbitrary at inference time. It means that context-specific norms are explicit inputs subject to provenance, precedence, conflict handling, and governance. A runtime ontology must not be able to override protected axiological constraints merely by being more recent or more salient. Conflicting authoritative sources should be represented as a conflict, escalated when necessary, and evaluated for calibrated abstention rather than hidden resolution.
+\subsection{Conflict as runtime state}
 
-The distinction also matters for multilingual and cross-cultural evaluation. Recent work finds that value concepts and moral judgments can vary by language, demographic group, and cultural framing \citep{xu2024multilingualvalues,huang2024flames,yao2024fulcra}. A single fixed prompt or global scalar objective can conceal this variation. A late-bound design can represent multiple authorized perspectives or distributions, but it cannot by itself decide which authority is legitimate. That remains a governance and social-scientific question.
+If two assertions are incompatible, the system records
+\[
+  \mathit{Conflict}(N_i,N_j)
+\]
+with its reason, scope, source records, and unresolved state. A resolution procedure may use governed precedence, request missing context, select an authorized profile, abstain, escalate to a human, or document uncertainty. It must not conceal the conflict by averaging incompatible duties into a single moral score. A conflict fixture in the repository demonstrates this state without claiming to resolve it.
+
+Consider a privacy-review assistant. L0 may expose agency, dignity, vulnerability, and welfare as value-bearing properties. A governing institution may provide an L1 confidentiality norm, while an incident authority provides a conditional emergency-safety norm. The current purpose may be triage rather than treatment planning; L3 may contain a current authorization record with source, validity, and confidence. The same canonical substrate can therefore support different context bindings without treating an emergency fact as a change to axiology.
+
+Likewise, a security-response system may receive a domain graph connecting credentials, vulnerabilities, assets, authorization, and incident evidence. A world-state assertion that a credential is compromised is not itself permission to act. The system must distinguish evidence from policy, expose uncertainty, and produce a candidate action whose scope, authority, affected parties, and expected effects can be checked.
+
+\subsection{Purpose and pluralism}
+
+Late binding does not mean that norms are arbitrary at inference time. It means that context-specific norms are explicit inputs subject to provenance, precedence, conflict handling, and governance. Runtime context must not override protected axiology merely because it is newer or more salient. The design can represent multiple authorized profiles, but it cannot determine which authority is legitimate by architecture alone.
+
+This matters for multilingual and cross-cultural evaluation. Value concepts and moral judgments can vary by language, demographic group, and cultural framing \citep{xu2024multilingualvalues,huang2024flames,yao2024fulcra,russo2026pluralistic}. Pluralism conditions should include high consensus, moderate disagreement, strong disagreement, and conflicting authorized profiles. Evaluation should report distributional similarity, value diversity, conflict recognition, uncertainty, and profile adherence rather than treating majority agreement as truth.
 
 \begin{quote}
-The model should learn reusable semantic structure while transient facts remain externally managed and dynamically bound.
+The model should learn reusable semantic structure while transient facts and context-specific duties remain externally managed, dynamically bound, and auditable.
 \end{quote}
 
-This design carries an operational burden: every action must retain enough context to reconstruct which ontology versions, norms, purpose, facts, and authority decisions influenced it. Without that traceability, late binding merely relocates opacity from weights to an un-audited context pipeline.
+This design carries an operational burden: every consequential action must retain enough context to reconstruct which axiology version, module version, normative sources, purpose, world-state assertions, and authority decisions influenced it. Without that traceability, late binding merely relocates opacity from weights to an unaudited context pipeline.

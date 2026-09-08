@@ -1,0 +1,57 @@
+{
+  "base_model_hash": "shared-mlp-mechanism-proxy-v0.3",
+  "cost_estimate_method": "2 * allocated parameters * examples * epochs; CPU-only pilot; approximate",
+  "dataset_manifest_sha": "f3d7d88a3dece4ed221b26d5dd6abdfab4b9103889450c303dab967974534a98",
+  "dataset_version": "v0.3-small",
+  "drift_summary": {
+    "acd_frozen_axiology": 0.05555555555555558,
+    "acd_unrestricted": 0.05555555555555558,
+    "relation_accuracy_after_frozen_axiology": 0.7222222222222222,
+    "relation_accuracy_after_unrestricted": 0.7222222222222222,
+    "relation_accuracy_before": 0.7777777777777778
+  },
+  "end_time": "2026-09-08T20:46:29.891865+00:00",
+  "fit_summary": {
+    "epochs": 90.0,
+    "final_loss": 0.007794048750834983,
+    "initial_loss": 3.2040261016832914
+  },
+  "git_sha": "a98d1f6cdc6dd8eeebabe0ada44d79af6fbb0bd6",
+  "gpu_hours": 0.0,
+  "hardware": {
+    "gpu": "none",
+    "machine": "arm64",
+    "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O"
+  },
+  "hyperparameters": {
+    "epochs": 90,
+    "groups": [
+      "surface",
+      "ontology",
+      "purpose",
+      "world",
+      "axiological",
+      "normative"
+    ],
+    "hidden_dim": 24,
+    "l2": 0.0001,
+    "learning_rate": 0.08
+  },
+  "inference_flops_estimate": 1079390,
+  "model_family": "shared-mlp-mechanism-proxy",
+  "model_variant": "C2",
+  "ontology_version": "core-axiology-v1",
+  "parameter_count": 5681,
+  "preregistration_committed": false,
+  "preregistration_sha": "3448ec4662e3930820746e8114c185b102fd77da",
+  "preregistration_sha_kind": "git-blob-content-digest",
+  "run_id": "empirical-small-20260908T204618Z-c2-seed-11",
+  "scientific_status": "pilot-uncommitted",
+  "sealed_test_rows": 51,
+  "seed": 11,
+  "start_time": "2026-09-08T20:46:28.130712+00:00",
+  "status": "complete",
+  "training_flops_estimate": 126799920,
+  "training_seconds": 1.7611579895019531,
+  "verifier_version": "rule-based-toy-v0.2-fixed"
+}

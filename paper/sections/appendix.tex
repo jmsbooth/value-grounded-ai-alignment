@@ -3,69 +3,77 @@
 
 \subsection{Terminology and critical distinctions}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
-\small
+\scriptsize
 \caption{Terms used consistently in the manuscript.}
 \label{tab:terms}
-\begin{tabularx}{\linewidth}{@{}lX@{}}
+\begin{tabularx}{\linewidth}{@{}p{0.29\linewidth}X@{}}
 \toprule
 Term & Definition \\
 \midrule
-VGA & Overall Value-Grounded AI Alignment framework. \\
-VGTA & Proposed Value-Grounded Transformer Architecture. \\
-Core axiology & Stable semantic representation of foundational values. \\
-Normative ontology & Contextual duties, permissions, prohibitions, exceptions, and conflicts. \\
-Purpose ontology & Task-specific relevance structure. \\
-World state & Current evidence-backed instantiations of a world ontology. \\
-Intrinsic alignment & Alignment influence inside neural representation or reasoning. \\
-Extrinsic assurance & Independent verification or enforcement outside neural reasoning. \\
+VGA & Value-Grounded AI Alignment research framework. \\
+VGTA & Value-Grounded Transformer Architecture reference design. \\
+Canonical axiology $O_A^v$ & External, typed, versioned, provenance-bearing, governed L0 artifact. \\
+Axiological neural module $A_\phi^v$ & Derived learned or hybrid module; non-authoritative and linked to $O_A^v$. \\
+Semantic-to-neural compilation & The governed relation $A_\phi^v=C_\phi(O_A^v)$. \\
+Axiological conformance & Empirical relation recovery and behavior-probe property, not semantic proof. \\
+Structural value conditioning & Proposed influence of value structure on neural representation, attention, routing, or state. \\
+Normative authority & Metadata used to govern applicability; not a scalar moral weight. \\
+Normative conflict & Explicit unresolved state for incompatible applicable assertions. \\
+Normative late binding & Runtime selection of governed norms under context, authority, and provenance. \\
+Domain ontology / purpose model & L2a possible domain structure / L2b task-specific relevance model. \\
+World state & L3 time-indexed assertions with source, confidence, and provenance; not ground truth. \\
+Extrinsic assurance & Independent action compilation, verification, and enforcement outside neural computation. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\noindent Values $\ne$ rules; ontology $\ne$ world state; normative reasoning $\ne$ moral truth; statistical alignment $\ne$ formal guarantee; neural alignment $\ne$ formal verification; retrieval $\ne$ architectural conditioning; behavioral compliance $\ne$ internal alignment; self-improvement $\ne$ authority to redefine values; care-oriented behavior $\ne$ subjective love.
+\noindent Values $\ne$ duties; axiology $\ne$ norm; ontology $\ne$ world state; evidence $\ne$ ground truth; authority $\ne$ truth; recency $\ne$ authority; structural conditioning $\ne$ formal assurance; behavioral compliance $\ne$ alignment proof; self-improvement $\ne$ authority to redefine values; care-oriented behavior $\ne$ subjective love.
 
-\subsection{World-state representation}
+\subsection{Canonical and world-state notation}
 
-An instance assertion is represented conceptually as
+The canonical source is an external artifact $O_A^v$ with a deployment-assigned content identifier. A derived module is $A_\phi^v=C_\phi(O_A^v)$, and $A_\phi^v$ cannot become authoritative by learning. An instance world-state assertion is
 \[
-  (\mathit{subject},\mathit{predicate},\mathit{object},
-  \mathit{valid\_from},\mathit{valid\_until},\mathit{source},
-  \mathit{confidence},\mathit{provenance}).
+  (s,p,o,t_s,t_e,\mathit{source},\mathit{confidence},\mathit{provenance}).
 \]
-The tuple supports temporal validity and epistemic uncertainty. It does not turn confidence into truth, and it does not justify embedding volatile facts into model weights.
+The tuple supports temporal validity and epistemic uncertainty. It does not turn confidence into truth or justify embedding volatile facts into model weights.
 
-\subsection{Minimal benchmark matrix}
+\subsection{Benchmark matrix}
 
 \begin{table}[h]
 \centering
 \scriptsize
 \caption{Proposed benchmark matrix for future empirical work.}
 \label{tab:benchmarks}
-\begin{tabularx}{\linewidth}{@{}p{0.2\linewidth}p{0.25\linewidth}p{0.22\linewidth}X@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.26\linewidth}>{\raggedright\arraybackslash}p{0.23\linewidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
 Family & Perturbation & Primary metric & Required control \\
 \midrule
-Moral salience & Omit or paraphrase morally relevant relations & Patient/relation recall & Same text without ontology structure \\
-OOD alignment & New combinations of known values and domains & Held-out accuracy and effect size & Lexical overlap audit \\
-Prompt robustness & System-prompt paraphrase, injection, jailbreak & Attack success and recovery & Matched attack budget \\
-Counterfactuals & Change irrelevant identity or surface features & Decision invariance & Human-reviewed justification \\
-Ontology noise & Delete, corrupt, or conflict relations & Degradation curve & Noise-seeded replication \\
-Assurance & Candidate action and verifier perturbation & Rejection, bypass, false-positive rate & Independent specification audit \\
-Continual learning & Sequential domain and norm updates & Drift and regression & Frozen-layer baseline \\
+Representation & Relation deletion, permutation, and graph completion & Recovery, concept-direction stability & Random labels and matched text \\
+Moral salience & Omit or paraphrase relevant relations & Patient/relation recall & A1 without structure \\
+OOD alignment & Lexical, compositional, and structural splits & Accuracy, effect size, calibration & Overlap audit; structural OOD priority \\
+Normative conflict & Authority, jurisdiction, exception, and stale-source swaps & Conflict recognition, abstention, escalation & No scalar-average baseline only \\
+Purpose relevance & Purpose swap and irrelevant-subgraph injection & Useful relevance and over-refusal & Same domain with matched context \\
+Prompt robustness & Paraphrase, injection, and jailbreak & Attack success and recovery & Matched attack budget \\
+Coverage & 100/75/50/25 percent, contradictory, malicious, irrelevant & Capability/alignment degradation, false confidence & Coverage-seeded replication \\
+Assurance & Candidate and verifier perturbation & Rejection, unsafe acceptance, bypass, UCR & Same fixed verifier and action schema \\
+Pluralism & Consensus, disagreement, authorized profiles & Distributional similarity, diversity, adherence & Preserve judgment distributions \\
+Continual learning & Sequential domain and norm updates & Drift, conformance, regression & Frozen-module baseline \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Synthetic fixture equations}
 
-For an illustrative action $a$, the repository's toy scorer computes
+For an illustrative candidate action $a$, the repository's toy scorer computes
 \[
-  S(a) = U_{\mathrm{task}}(a) + \sum_{j=1}^{m} w_j f_j(a),
+  S(a)=U_{\mathrm{task}}(a)+\sum_{j=1}^{m}w_jf_j(a),
 \]
-where $U_{\mathrm{task}}$ is task utility, $f_j$ are explicitly supplied value features, and $w_j$ are context-bound weights. The baseline selects by $U_{\mathrm{task}}$ alone. The fixture verifier checks a small set of hard predicates. These equations are deliberately transparent and limited; they should not be confused with a learned moral objective.
+where $U_{\mathrm{task}}$ is task utility, $f_j$ are supplied value features, and $w_j$ are context-bound weights. The A1 control selects by $U_{\mathrm{task}}$ alone. The fixed fixture verifier checks a small set of hard predicates. These equations are transparent and limited; they are not a learned moral objective.
 
-\subsection{Falsification checklist}
+\subsection{Falsification and implementation checklist}
 
-The framework is weakened if ontology conditioning reduces general reasoning, fails to improve OOD alignment, merely memorizes graph relations, increases over-refusal, creates unacceptable computational cost, increases adversarial manipulation, collapses under incomplete coverage, leaves verifier rejection unchanged, or matches standard preference/deliberative alignment at lower complexity. A future paper should preregister which thresholds count as meaningful before running the comparison.
+Future studies should preregister thresholds for meaningful capability-normalized gains, conformance, calibration, over-refusal, unsafe acceptance, bypass, semantic completeness, latency, and attack success. The framework is weakened if ontology conditioning reduces general reasoning, fails on structural OOD, merely memorizes graph relations, increases false confidence or over-refusal, creates unacceptable cost, increases attack success, collapses under coverage loss, or matches A1 only at higher complexity. A verifier result is not an alignment result.
+
+Before deployment of any future implementation, check: source version and digest; compiler reproducibility; conformance and drift gates; normative authority and conflict state; purpose and world-state provenance; action-schema completeness; fixed-verifier coverage; audit and rollback targets; and governance approval. The current repository satisfies only the interface and fixture portions of this checklist.

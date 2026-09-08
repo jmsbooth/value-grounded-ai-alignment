@@ -1,0 +1,48 @@
+\documentclass[tikz,border=5pt]{standalone}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+\node[font=\sffamily\small\bfseries] at (3.8,4.8) {Ontology degradation};
+\draw[->] (0,0) -- (7.4,0);
+\draw[->] (0,0) -- (0,4.35);
+\node[rotate=90] at (-0.45,2.2) {accuracy};
+\draw[gray!35] (0,0.000) -- (7.2,0.000);
+\node[anchor=east] at (-0.08,0.000) {0.00};
+\draw[gray!35] (0,1.000) -- (7.2,1.000);
+\node[anchor=east] at (-0.08,1.000) {0.25};
+\draw[gray!35] (0,2.000) -- (7.2,2.000);
+\node[anchor=east] at (-0.08,2.000) {0.50};
+\draw[gray!35] (0,3.000) -- (7.2,3.000);
+\node[anchor=east] at (-0.08,3.000) {0.75};
+\draw[gray!35] (0,4.000) -- (7.2,4.000);
+\node[anchor=east] at (-0.08,4.000) {1.00};
+\draw[black, thick] (0.600,1.000) -- (1.950,0.000) -- (3.300,0.000) -- (4.650,0.000) -- (6.000,0.000);
+\fill[black] (0.600,1.000) circle (1.2pt);
+\fill[black] (1.950,0.000) circle (1.2pt);
+\fill[black] (3.300,0.000) circle (1.2pt);
+\fill[black] (4.650,0.000) circle (1.2pt);
+\fill[black] (6.000,0.000) circle (1.2pt);
+\node[anchor=west] at (5.90,4.10) {A1};
+\draw[black!55, thick] (0.600,1.000) -- (1.950,0.000) -- (3.300,0.000) -- (4.650,0.000) -- (6.000,0.000);
+\fill[black!55] (0.600,1.000) circle (1.2pt);
+\fill[black!55] (1.950,0.000) circle (1.2pt);
+\fill[black!55] (3.300,0.000) circle (1.2pt);
+\fill[black!55] (4.650,0.000) circle (1.2pt);
+\fill[black!55] (6.000,0.000) circle (1.2pt);
+\node[anchor=west] at (6.70,4.10) {B};
+\draw[black, thick] (0.600,1.000) -- (1.950,0.000) -- (3.300,0.000) -- (4.650,0.000) -- (6.000,0.000);
+\fill[black] (0.600,1.000) circle (1.2pt);
+\fill[black] (1.950,0.000) circle (1.2pt);
+\fill[black] (3.300,0.000) circle (1.2pt);
+\fill[black] (4.650,0.000) circle (1.2pt);
+\fill[black] (6.000,0.000) circle (1.2pt);
+\node[anchor=west] at (5.90,3.75) {C1};
+\draw[black!55, thick] (0.600,1.000) -- (1.950,0.000) -- (3.300,0.000) -- (4.650,0.000) -- (6.000,0.000);
+\fill[black!55] (0.600,1.000) circle (1.2pt);
+\fill[black!55] (1.950,0.000) circle (1.2pt);
+\fill[black!55] (3.300,0.000) circle (1.2pt);
+\fill[black!55] (4.650,0.000) circle (1.2pt);
+\fill[black!55] (6.000,0.000) circle (1.2pt);
+\node[anchor=west] at (6.70,3.75) {C2};
+\node[anchor=north] at (3.8,-0.18) {ontology coverage};
+\end{tikzpicture}
+\end{document}

@@ -6,6 +6,7 @@ cd "$repo_root"
 
 PYTHONPATH="$repo_root/src${PYTHONPATH:+:$PYTHONPATH}" python3 -m unittest discover -s tests -v
 python3 experiments/run_toy_evaluation.py --json >/dev/null
+PYTHONPATH="$repo_root/src${PYTHONPATH:+:$PYTHONPATH}" python3 experiments/evaluation/run_empirical_small.py --smoke >/dev/null
 
 pdf="paper/value-grounded-ai-alignment.pdf"
 log="paper/build/main.log"

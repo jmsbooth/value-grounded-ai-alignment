@@ -2,21 +2,27 @@
 \usetikzlibrary{arrows.meta,positioning}
 \begin{document}
 \begin{tikzpicture}[
-  row/.style={draw, rounded corners=1pt, minimum width=91mm, minimum height=7mm, align=left, font=\sffamily\scriptsize, inner xsep=3mm},
+  row/.style={draw, rounded corners=1pt, minimum width=83mm, minimum height=7mm, align=left, font=\sffamily\scriptsize, inner xsep=3mm},
+  verifier/.style={draw, rounded corners=1pt, minimum width=32mm, minimum height=26mm, align=center, font=\sffamily\scriptsize, fill=black!8},
   arrow/.style={-{Latex[length=2mm]}, thick}
 ]
-\node[row, fill=black!3] (a) {\textbf{A} Baseline Transformer};
-\node[row, below=1mm of a] (b) {\textbf{B} + external ontology context};
-\node[row, below=1mm of b] (c) {\textbf{C} + axiological / normative auxiliary losses};
-\node[row, below=1mm of c] (d) {\textbf{D} + ontology-conditioned attention};
-\node[row, below=1mm of d] (e) {\textbf{E} + ontology-conditioned MoE routing};
-\node[row, below=1mm of e] (f) {\textbf{F} + independent formal action verification};
-\node[row, below=1mm of f, fill=black!10] (g) {\textbf{G} + governed dynamic normative late binding};
-\draw[arrow] (a) -- (b);
-\draw[arrow] (b) -- (c);
-\draw[arrow] (c) -- (d);
+\node[row, fill=black!3] (a0) {\textbf{A0} Base Transformer};
+\node[row, below=1mm of a0] (a1) {\textbf{A1} Behaviorally aligned control};
+\node[row, below=1mm of a1] (b) {\textbf{B} + external ontology context};
+\node[row, below=1mm of b] (c1) {\textbf{C1} + axiological representation training};
+\node[row, below=1mm of c1] (c2) {\textbf{C2} + normative reasoning training};
+\node[row, below=1mm of c2] (d) {\textbf{D} + structural attention};
+\node[row, below=1mm of d] (e) {\textbf{E} + structured expert routing};
+\node[row, below=1mm of e, fill=black!10] (g) {\textbf{G} + governed normative late binding};
+\draw[arrow] (a0) -- (a1);
+\draw[arrow] (a1) -- (b);
+\draw[arrow] (b) -- (c1);
+\draw[arrow] (c1) -- (c2);
+\draw[arrow] (c2) -- (d);
 \draw[arrow] (d) -- (e);
-\draw[arrow] (e) -- (f);
-\draw[arrow] (f) -- (g);
+\draw[arrow] (e) -- (g);
+\node[verifier, right=10mm of c2] (v) {One fixed verifier\\and action schema\\applied to\\A1/B/C1/C2/D/E/G};
+\draw[arrow] (a1.east) -- ++(5mm,0) |- (v.north);
+\draw[arrow] (g.east) -- ++(5mm,0) |- (v.south);
 \end{tikzpicture}
 \end{document}

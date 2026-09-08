@@ -1,48 +1,61 @@
-\section{Value-Grounded AI Alignment}
+\section{Value-grounded alignment as a layered substrate}
 \label{sec:vga}
 
-VGA is a framework for assigning distinct semantic and governance roles to information that is often collapsed into a single prompt, dataset, reward, or parameter set. Its four layers are shown in \cref{fig:ontology-layers}. The layers are related, but they are not interchangeable.
+VGA assigns distinct semantic and governance roles to information often collapsed into one prompt, dataset, reward, or parameter set. Its five layers are shown in \cref{fig:ontology-layers}. They are conceptual contracts, not a claim that the boundary between values and norms is philosophically settled.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.92\linewidth]{ontology-layers}
-  \caption{The proposed four-layer ontology model. Plasticity increases toward world state; authority to modify the higher layers decreases. The layers are conceptual contracts, not claims about a universally correct ontology.}
+  \caption{Proposed VGTA layers. L0 is a governed axiological substrate; L1 carries contextual norms and conflict; L2 is split into domain and purpose; L3 is external, uncertain world state. Update authority decreases toward L0.}
   \label{fig:ontology-layers}
 \end{figure}
 
-\subsection{L0: core axiology}
+\subsection{L0: canonical axiology}
 
-Core axiology represents what the system treats as fundamentally important. Candidate concepts include human dignity, agency, autonomy, flourishing, care, truthfulness, justice, non-domination, prevention of unnecessary suffering, and respect for moral patients. The list is a starting point for governance and evaluation, not a complete moral theory. Core axiology is intended to be highly stable and tightly governed. It may influence learned representations, auxiliary objectives, and structural computation, but it must not be silently rewritten by a model or an unreviewed data stream.
+The canonical axiology $O_A^v$ is an external implementation-neutral RDF, OWL, or typed-graph artifact. It is typed, versioned, provenance-bearing, reviewable, cryptographically identifiable by a deployment-assigned content digest, independently auditable, and immutable within a deployed version. Changes occur only through a governed version transition. The repository deliberately does not invent a digest for an illustrative fixture.
+
+L0 is a governed constitutional substrate about what may be treated as value-bearing, not a declaration of immutable universal morality. Candidate concepts include moral patienthood, agency, autonomy, dignity, flourishing, welfare, suffering, capability, relational dependence, and vulnerability. Higher-order relations can express that one value-bearing property supports, undermines, affects, enables, constrains, causes risk to, or is relevant to another. The distinction is between what has value and what ought to be done; the latter is more directly represented in L1.
 
 \subsection{L1: normative ontology}
 
-The normative ontology describes what obligations, permissions, prohibitions, exceptions, and conflicts arise when values meet a context. For example, coercion may negatively affect agency; deception may undermine informed consent; privacy may generate a confidentiality duty; power asymmetry may change the significance of an action; and protection from harm may conflict with autonomy. Norms are slower-changing than operational facts but must remain revisable across domains, institutions, jurisdictions, and cultures. VGA therefore assigns L1 both a governed persistent component and a runtime-bound component.
+L1 represents duties, permissions, prohibitions, exceptions, and conflicts from multiple authoritative sources. A normative assertion carries source, authority, jurisdiction, effective-from and effective-until dates, scope, precedence, confidence, exceptions, and version. It may also identify whether it is a legal, institutional, professional, safety, stakeholder-profile, or jurisdictional assertion.
 
-\subsection{L2: purpose and domain ontology}
+Authority is not truth, truth is not recency, and recency does not automatically override higher authority. At runtime, an explicit state $\mathit{Conflict}(N_i,N_j)$ records unresolved incompatibility. Possible outcomes include governed precedence, requested context, an authorized profile, abstention, human escalation, or documented uncertainty. A scalar moral average is not a substitute for this state.
 
-L2 describes what entities and relations matter for the current purpose. A security-response purpose may make credentials, vulnerabilities, authorization, and compromise salient. A clinical purpose may make a person, a medical record, consent, and treatment relevant. A workplace purpose may make power asymmetry, employment, and retaliation relevant. L2 remains external to the model weights in the reference design so that domain semantics can be versioned and audited without retraining the whole model.
+\subsection{L2a: domain ontology and L2b: purpose model}
 
-\subsection{L3: world state}
+L2a describes domain entities and relations: for example, a clinical domain may include persons, medical records, treatment, and consent; a security domain may include credentials, vulnerabilities, assets, and incidents. L2b describes the task purpose and its intended relevance pattern. For domain graph $O_D$, purpose $P$, and input $X$, the architecture exposes
+\[
+  \mathit{Relevant}(O_D,P,X).
+\]
+Purpose selects context; it does not authorize an action or rewrite L0/L1.
 
-World state records current instantiated beliefs or observations: who is an employee, whether a server is compromised, which policy version is active, or whether an aircraft is inside an airspace region. Each assertion should carry temporal validity, source, provenance, and confidence. The model may reason over this state, but volatile facts should not be forced into the same substrate as stable axiology. An ontology schema is not a world state, and a plausible statement is not evidence.
+\subsection{L3: external world state}
+
+World state is represented as
+\[
+  W_t = \{(s,p,o,t_s,t_e,\mathit{source},\mathit{confidence},\mathit{provenance})\}.
+\]
+Each assertion is time-indexed and epistemically qualified. $W_t$ is not guaranteed truth, trusted evidence, or ground truth. A domain ontology describes possible structure; world state instantiates uncertain assertions; evidence is a source or record supporting an assertion; ground truth is a separate evaluation construct. Keeping these distinctions explicit prevents a plausible text completion from acquiring authority merely by entering context.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Ontology layer responsibilities and binding policy.}
+\caption{Layer responsibilities and binding policy.}
 \label{tab:layers}
 \renewcommand{\arraystretch}{1.15}
 \setlength{\tabcolsep}{3pt}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.45cm}X>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{1.45cm}@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.85cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{1.65cm}@{}}
 \toprule
-Layer & Semantic role and examples & Update rate and authority & Binding \\
+Layer & Semantic role and examples & Update authority & Binding \\
 \midrule
-L0 & Foundational values: agency, dignity, care & Extremely low; strong human governance & Parametric / structural \\
-L1 & Contextual norms: duties, permissions, conflicts & Low/moderate; governed evolution & Parametric + runtime \\
-L2 & Purpose and domain: person, credential, policy & Moderate; external ontology governance & Runtime contextual \\
-L3 & Current state: observations, confidence, provenance & High; evidence driven & Runtime ephemeral \\
+L0 & Value-bearing properties and higher-order relations: agency, dignity, vulnerability, flourishing & Extremely low; governed version transition & External source; derived neural module may condition \\
+L1 & Duties, permissions, prohibitions, exceptions, and conflicts from legal, institutional, professional, safety, and stakeholder sources & Low/moderate; authority and jurisdiction review & Runtime late binding \\
+L2a & Domain entities and relations: person, credential, record, resource, threat & Moderate; domain governance & Runtime contextual \\
+L2b & Purpose and relevance model: incident response, clinical care, privacy review, navigation & Contextual; authorized task owner & Runtime contextual \\
+L3 & Current assertions, validity, source, confidence, and provenance & High; evidence and monitoring & Runtime ephemeral \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The central binding rule is therefore an \emph{axiological prior with normative late binding}: stable semantic structure can bias computation, while domain-specific norms and transient facts remain explicit, contextual, and governed.
+The resulting design phrase is \emph{canonical axiology with normative late binding}: stable, externally governed semantic structure may influence computation, while context-specific norms, purposes, and uncertain facts remain explicit and auditable.

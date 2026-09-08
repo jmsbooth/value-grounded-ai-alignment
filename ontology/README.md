@@ -4,9 +4,9 @@ These Turtle files are intentionally small examples for parser tests and concept
 
 The four files correspond to the paper's semantic layers:
 
-- `axiology/` — slowly changing value concepts and illustrative relations.
-- `normative/` — context-sensitive duties, permissions, prohibitions, and conflicts.
-- `purpose/` — domain and task concepts used to select relevant semantics.
-- `world/` — time-indexed state assertions with source and confidence fields represented as relation nodes.
+- `axiology/` — an external, versioned, provenance-bearing canonical axiology fixture.
+- `normative/` — multiple context-sensitive sources with authority metadata and an explicit conflict state.
+- `purpose/` — separate domain classes and purpose-conditioned relevance examples.
+- `world/` — time-indexed state assertions with source, confidence, provenance, and evidence status.
 
 Changes to canonical axiology or normative fixtures should include provenance, a version change, and regression cases. A model may propose changes in the research architecture; it does not authorize them.

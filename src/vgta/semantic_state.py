@@ -20,6 +20,9 @@ class SemanticState:
     potential_harms: list[str] = field(default_factory=list)
     capabilities_affected: list[str] = field(default_factory=list)
     provenance: list[str] = field(default_factory=list)
+    domain_ontology: list[str] = field(default_factory=list)
+    purpose_model: str | None = None
+    normative_conflicts: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)

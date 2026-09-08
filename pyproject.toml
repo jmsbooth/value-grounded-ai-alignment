@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "value-grounded-ai-alignment"
-version = "0.1.0"
+version = "0.3.0.dev0"
 description = "Reproducible scaffold for the Value-Grounded Transformer Architecture research program"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE-CODE"}
 authors = [{name = "James Booth"}]
-dependencies = []
+dependencies = ["numpy>=1.24"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]

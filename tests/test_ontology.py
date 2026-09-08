@@ -14,7 +14,7 @@ class OntologyTests(unittest.TestCase):
         self.assertTrue(
             ontology.contains(
                 "https://example.org/vga#Coercion",
-                "https://example.org/vga#negativelyAffects",
+                "https://example.org/vga#causesRiskTo",
                 "https://example.org/vga#Agency",
             )
         )

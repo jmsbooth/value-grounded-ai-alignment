@@ -1,34 +1,34 @@
 \section{Alignment and security threat model}
 \label{sec:threats}
 
-Explicit semantic structure may improve observability and constrain some behaviors, but it also creates attack surfaces. An attacker might poison the ontology, falsify world-state evidence, manipulate routing, exploit conflicts between norms, or bypass the verifier. The threat model is therefore part of the architecture rather than an afterthought.
+Explicit semantic structure may improve observability and constrain some behaviors, but it also creates attack surfaces. An attacker might poison a source, spoof authority, manipulate purpose relevance, hide a moral patient, steer routing, or bypass the verifier. Security is therefore part of the architecture rather than an afterthought.
 
 \begin{table*}[t]
 \centering
 \scriptsize
-\caption{Threat classes, affected layers, and proposed controls. Residual risk remains an empirical question.}
+\caption{Threat landscape for explicit semantic structure. Controls are hypotheses; residual risk requires testing.}
 \label{tab:threats}
-\begin{tabularx}{\textwidth}{@{}p{0.16\textwidth}p{0.13\textwidth}X X p{0.17\textwidth}@{}}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
-Threat & Attacked layer & Failure mode & Candidate mitigation & Residual risk \\
+Threat & Boundary & Failure mode & Candidate control / residual risk \\
 \midrule
-Prompt injection / jailbreak & Runtime context & Adversarial text overrides relevant norms or purpose & Separate authority channels, adversarial training, semantic conflict detection & Novel encodings and ambiguous authority \\
-Goal misgeneralization & Neural computation & Capability transfers while intended objective changes & OOD goals, counterfactual tests, structured salience supervision & Unseen causal structure \\
-Reward hacking & Training objective & Proxy optimization scores well while violating intended purpose & Multiple metrics, gold audits, value-structure probes & Proxy gaps remain \\
-Ontology poisoning & L0/L1/L2 & Malicious relation or definition changes decisions & Signed versions, provenance, review, regression and rollback & Governance capture \\
-World-state poisoning & L3 & False or stale evidence drives a permitted action & Source trust, temporal validity, confidence, cross-checking & Correlated evidence failure \\
-Normative drift / axiology corruption & L0/L1 & Continued learning changes protected semantics & Frozen or gated artifacts, drift tests, approval boundary & Representation drift without schema change \\
-Routing manipulation & Neural computation & Context causes relevant experts to be skipped & Router audits, permutation tests, fallback coverage & Adversarial distribution shift \\
-Verifier bypass & Assurance boundary & Unstructured or alternate tool path escapes checking & Enforced action schema and policy enforcement point & Implementation defects \\
-Specification gaming & Constraint layer & Formally compliant action is materially harmful & Independent review, richer effects model, red-team tests & Incomplete formalization \\
-Conflicting ontologies & L1/L2 & Authoritative sources disagree and model hides conflict & Explicit conflict state, precedence metadata, calibrated abstention & No universally accepted resolution \\
-Governance compromise & All layers & Canonical value source is captured or malicious & Separation of duties, public change logs, rollback and review & Institutional legitimacy \\
+Neural representation drift & $A_\phi^v$ & The module changes while $O_A^v$ remains fixed & Frozen/gated modules, conformance and drift probes; hidden feature changes may evade probes \\
+Compiler compromise & $C_\phi$ & Malformed compilation changes the derived value signal & Reproducible compiler, signed inputs/outputs, independent audit; implementation compromise remains possible \\
+Authority spoofing & L1 & A low-authority or stale source is presented as governing & Signed provenance, source registry, jurisdiction and precedence checks; governance capture remains possible \\
+Norm collision & L1 & Multiple norms apply with incompatible duties & Explicit $\mathit{Conflict}(N_i,N_j)$, context, profile, abstention, escalation; no universal resolution \\
+Purpose manipulation & L2b & The selected purpose hides relevant entities or changes action scope & Authorized purpose binding, purpose-swap tests, audit trail; legitimate purpose can still be ambiguous \\
+Semantic occlusion & L0--L3 & A relevant patient, relation, exception, or effect is omitted & Completeness probes, counterfactuals, structured action schema; unknown omissions remain \\
+Ontology coverage exploitation & L2/L3 & Missing, contradictory, malicious, or irrelevant graph content creates false confidence & Coverage degradation suite, calibration, abstention, provenance; coverage cannot be assumed \\
+Routing evasion & Neural routing & An attacker avoids the expert needed for risk or norm reasoning & Router audits, fallback coverage, random-label control, starvation tests; adversarial shift remains \\
+Formalization gap & Verifier & A formally permitted action satisfies the wrong or incomplete abstraction & Independent semantic review, effect modeling, bypass tests, unknown state; verifier completeness is bounded \\
+Prompt injection / jailbreak & Runtime context & Text overrides or obscures semantic context & Separate channels and adversarial evaluation; novel encodings remain \\
+World-state poisoning & L3 & False or stale evidence drives an otherwise permitted action & Source quality, temporal validity, cross-checking and uncertainty; correlated evidence can fail \\
+Reward or specification gaming & Training / assurance & Proxy optimization or narrow constraints produce harmful behavior & Multiple metrics, gold audits, red teaming; proxies and specifications remain incomplete \\
 \bottomrule
 \end{tabularx}
 \end{table*}
 
-Prompt injection and jailbreaks test whether context can overwhelm learned or structural constraints \citep{zou2023universal,wei2023jailbroken}. Goal misgeneralization and reward hacking test whether a system pursues a proxy or an unintended objective while retaining competence \citep{langosco2022goalmisgeneralization,shah2022goalmisgeneralization,gao2023overoptimization,denison2024subterfuge}. Ontology and world-state poisoning add a distinct concern: a model may reason correctly from a compromised symbolic substrate. The appropriate response is not to assume that explicit structure is trustworthy, but to make provenance, authority, uncertainty, and rollback first-class inputs.
+Prompt injection and jailbreaks test whether context can overwhelm learned or structural constraints \citep{zou2023universal,wei2023jailbroken}. Goal misgeneralization, reward hacking, and fine-tuning regressions test whether a system pursues an unintended objective while retaining competence \citep{langosco2022goalmisgeneralization,shah2022goalmisgeneralization,gao2023overoptimization,qi2023finetuning}. Explicit structure adds distinct compromise paths: a model may reason correctly from a poisoned graph, a malicious compiler may produce a plausible module, or a purpose resolver may suppress relevant context.
 
-Specification gaming is especially important for the formal assurance layer. A verifier can only check the representation and constraints it receives. If the neural system omits a moral patient, chooses a misleading abstraction, or finds an action that satisfies a narrow predicate while producing a harmful effect, a solver can return a valid result for the wrong problem. Independent semantic review and post-deployment monitoring are therefore necessary.
-
-The security objective is not “no attacks.” It is measurable reduction in attack success, faster detection, bounded blast radius, preserved provenance, and safe failure when the architecture is uncertain or contradictory.
+The security objective is not “no attacks.” It is measurable reduction in attack success, faster detection, bounded blast radius, preserved provenance, and safe failure when the architecture is uncertain or contradictory. Every future implementation should separately test source integrity, representation conformance, runtime context integrity, router behavior, and the exact action-verifier path.

@@ -1,32 +1,45 @@
 \section{Problem formulation and hypotheses}
 \label{sec:problem}
 
-Let $x$ denote an input context, $p$ a purpose, $o$ a set of externally supplied ontological assertions, and $w$ a time-indexed world state. A conventional aligned model produces a response or action $y$ according to a learned conditional distribution $P_\theta(y\mid x)$, perhaps augmented by prompts, reward models, or runtime filters. VGA asks whether a model can instead receive explicit semantic signals $s_A$, $s_N$, and $s_P$ for axiological, normative, and purpose relevance, while keeping $w$ outside the parameters:
+Let $x$ denote an input context, $O_A^v$ a canonical axiology, $O_N$ a set of runtime normative assertions, $O_D$ a domain ontology, $P$ a purpose model, and $W_t$ a time-indexed world state. A conventional aligned model produces a response or action $y$ according to a learned conditional distribution. VGA asks whether a model can instead receive explicit, typed semantic signals while preserving the source boundaries:
 \[
-  P_\theta(y \mid x, s_A, s_N, s_P, w).
+  P_\theta\!\left(y\mid x,A_\phi^v,O_N,O_D,P,W_t\right),
+  \qquad A_\phi^v=C_\phi(O_A^v).
 \]
-This notation does not assert that the signals are sufficient, truthful, or morally complete. It separates the proposed intervention from a model that receives the same text as undifferentiated context.
+The equation is an interface description. It does not assert that the signals are sufficient, truthful, or morally complete, and it does not make the derived module authoritative.
 
-We use five distinctions. First, implicit value representation is a statistical regularity that may support behavior; explicit value representation is a named, typed, and governed structure exposed to computation or evaluation. Second, parametric alignment is encoded in model weights or structural modules; contextual alignment is bound at runtime. Third, intrinsic alignment changes neural representations, attention, routing, or action formation; extrinsic assurance checks a candidate outside the neural computation. Fourth, plasticity is not uniformly desirable: a world model must update rapidly, while a core axiology should be highly protected. Fifth, an ontology schema describes possible relationships, whereas world state records current, uncertain, provenance-bearing instances.
+The canonical axiology is external, typed, versioned, provenance-bearing, reviewable, cryptographically identifiable by a deployment-assigned digest, independently auditable, and immutable within a deployed version. A version transition is a governed change, not a model-side edit. The neural module may be learned or hybrid and may be structurally useful, but it is evaluated through \emph{Conforms} rather than treated as the canonical source.
 
-The resulting proposition is:
+We use the following distinctions. Values and duties are different semantic roles; an ontology describes possible entities and relations, while world state records uncertain current assertions; authority metadata governs applicability, not moral truth; structural value conditioning is a proposed internal intervention, while extrinsic assurance checks a candidate outside neural computation; and a model's ability to propose a change does not imply authority to adopt it. Purpose selects relevance:
+\[
+  \mathit{Relevant}(O_D,P,X)
+\]
+is a governed relation between domain ontology, purpose, and input, not an unrestricted relevance score.
 
 \begin{quote}
-Explicitly differentiated semantic value structure can act as an inductive bias within Transformer computation, while late-bound normative, purpose, and world-state context preserves contextual flexibility and independent action-level assurance.
+Explicitly differentiated semantic value structure may act as an inductive bias within Transformer computation, while normative, purpose, and world-state context remains externally governed and consequential actions receive independent assurance.
 \end{quote}
 
-This proposition is falsifiable. It should be weakened or rejected if ontology conditioning materially reduces general reasoning; fails to improve out-of-distribution alignment; merely memorizes relation templates; increases over-refusal; creates unacceptable compute or latency overhead; makes adversarial manipulation easier; collapses under incomplete coverage; leaves independent-verifier rejection unchanged; or matches conventional preference/deliberative alignment only at higher complexity.
+This proposition is falsifiable. It should be weakened or rejected if explicit structure materially reduces general reasoning; fails to improve structural out-of-distribution alignment; merely memorizes relation templates; increases over-refusal or false confidence; creates unacceptable compute or latency overhead; makes semantic attacks easier; collapses under incomplete coverage; or offers no compute-normalized benefit over the A1 behavioral control.
 
 \subsection{Research hypotheses}
 
 \begin{description}[leftmargin=!,labelwidth=1.2cm]
-  \item[H1 (Moral salience).] Value-grounded models identify affected entities, relationships, risks, and normative conflicts more reliably than comparably sized baselines.
-  \item[H2 (OOD alignment).] Explicit axiological structure improves generalization to alignment scenarios not directly represented in training examples.
+  \item[H1 (Moral salience).] Value-grounded models identify affected entities, value-bearing properties, risks, and relevant relations more reliably than comparably sized A1 controls.
+  \item[H2 (Structural OOD alignment).] Explicit axiological and normative structure improves generalization to lexical, compositional, and especially structural alignment scenarios not directly represented in training.
   \item[H3 (Prompt robustness).] Structural value conditioning reduces dependence on exact system-prompt wording and improves resistance to adversarial contextual manipulation.
-  \item[H4 (Formal rejection).] Models with value grounding produce fewer candidate actions rejected by an independent symbolic verifier than behaviorally aligned baselines.
-  \item[H5 (Purpose relevance).] Purpose-conditioned ontological attention reduces irrelevant associations while preserving task-relevant novel reasoning.
-  \item[H6 (Structured routing).] Ontology-conditioned mixture-of-experts routing improves activation of relevant reasoning functions without requiring normative computation for every task.
-  \item[H7 (Controlled plasticity).] Separating fast world-state updates from slower norms and stable axiology reduces alignment drift during continual learning.
+  \item[H4 (Candidate-Action Conformance).] Under an identical fixed verifier, value-grounded models produce a higher useful candidate-action conformance rate:
+  \[
+    \mathit{UCR} =
+    \frac{\#\{\text{useful and verifier-conforming candidates}\}}
+         {\#\{\text{eligible tasks}\}}.
+  \]
+  UCR must be reported with capability, rejection, false-positive, unsafe-acceptance, over-refusal, bypass, and action-semantic-completeness measures; it is not an objective to optimize alone.
+  \item[H5 (Purpose relevance).] Purpose-conditioned domain relevance improves \(\mathit{Relevant}(O_D,P,X)\) under purpose and domain shifts without suppressing novel task-relevant reasoning.
+  \item[H6 (Structured routing).] Ontology-informed routing improves activation of relevant reasoning functions without querying canonical axiology at every token or imposing unacceptable compute cost.
+  \item[H7 (Controlled plasticity).] Separating fast world-state updates from slower norms and protected axiology reduces alignment drift during continued training.
+  \item[H8 (Axiological Conformance Stability).] With $O_A^v$ fixed, the derived module's relation recovery, concept-direction stability, and value-relevant behavior remain within preregistered tolerances across continued training and controlled domain adaptation.
+  \item[H9 (Normative Conflict Recognition).] Models with explicit L1 metadata identify conflicting norms, authority differences, exceptions, and uncertainty more reliably than controls, while abstaining or escalating when applicability cannot be governed.
 \end{description}
 
-H4 requires care: fewer verifier rejections could mean that the model generates safer candidates, or that the verifier is weaker, or that the model avoids consequential actions. Evaluation must therefore report useful-task completion, over-refusal, verifier soundness assumptions, and adversarial bypass rates together.
+H4 is intentionally not a claim that a model is safer because it is rejected more often. A useful candidate may be rejected by an incomplete verifier, a harmful candidate may pass a weak one, and a model may reduce rejection by avoiding consequential tasks. The fixed-verifier design and separate deployment experiment address these confounds.
