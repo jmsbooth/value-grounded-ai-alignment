@@ -12,6 +12,7 @@ from vgta_eval.scenario_generator import (
     dataset_manifest,
     generate_dataset,
 )
+from vgta_eval.statistical_tests import paired_bootstrap_difference
 
 
 class EmpiricalPipelineTests(unittest.TestCase):
@@ -53,3 +54,7 @@ class EmpiricalPipelineTests(unittest.TestCase):
         self.assertEqual(degraded["labels"]["action"], "request_context")
         self.assertEqual(contradictory["labels"]["action"], "request_context")
         self.assertGreater(len(intact["feature_groups"]["axiological"]), len(degraded["feature_groups"]["axiological"]))
+
+    def test_zero_variance_effect_is_explicitly_undefined(self):
+        _, _, effect = paired_bootstrap_difference((0.2, 0.2, 0.2), (0.1, 0.1, 0.1))
+        self.assertIsNone(effect)

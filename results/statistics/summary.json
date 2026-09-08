@@ -168,7 +168,7 @@
       "difference": -0.3333333333333333,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": -0.21568627450980388,
@@ -195,7 +195,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.13725490196078427,
@@ -222,7 +222,7 @@
       "difference": -0.33333333333333337,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": -0.05882352941176472,
@@ -249,7 +249,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.039215686274509776,
@@ -276,7 +276,7 @@
       "difference": 0.0,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.019607843137254832,
@@ -285,7 +285,7 @@
       "difference": -0.019607843137254832,
       "metric": "useful_conformance_rate",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": 0.1568627450980392,
@@ -303,7 +303,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     }
   ],
   "cost_accounting": {
@@ -312,7 +312,7 @@
     "method": "Per-run manifests use 2 * allocated parameters * examples * epochs for training and 2 * allocated parameters * predictions for inference; CPU-only approximate accounting.",
     "runs": 12,
     "training_flops_estimate": 1521599040,
-    "training_seconds": 15.730900764465332
+    "training_seconds": 23.594625234603882
   },
   "hypotheses": [
     {
@@ -321,7 +321,8 @@
       "difference": 0.2647058823529411,
       "hypothesis": "H1",
       "metric": "moral_salience_recall",
-      "status": "supported",
+      "standardized_effect": -1.881179138587367,
+      "status": "criterion met",
       "test": "moral salience"
     },
     {
@@ -330,7 +331,8 @@
       "difference": 0.33333333333333337,
       "hypothesis": "H2",
       "metric": "structural_ood_accuracy",
-      "status": "supported",
+      "standardized_effect": null,
+      "status": "inconclusive",
       "test": "structural OOD"
     },
     {
@@ -339,6 +341,7 @@
       "difference": -0.0,
       "hypothesis": "H3",
       "metric": "adversarial_success_rate",
+      "standardized_effect": null,
       "status": "inconclusive",
       "test": "adversarial prompting"
     },
@@ -348,7 +351,8 @@
       "difference": 0.22222222222222218,
       "hypothesis": "H4",
       "metric": "useful_conformance_rate",
-      "status": "supported",
+      "standardized_effect": -24.04163056034256,
+      "status": "criterion met",
       "test": "useful conformance"
     },
     {
@@ -357,6 +361,7 @@
       "difference": 0.04575163398692813,
       "hypothesis": "H5",
       "metric": "purpose_accuracy",
+      "standardized_effect": -0.3075623426146229,
       "status": "inconclusive",
       "test": "purpose relevance"
     },
@@ -366,7 +371,8 @@
       "difference": 0.8185288581174509,
       "hypothesis": "H9",
       "metric": "normative_conflict_f1",
-      "status": "supported",
+      "standardized_effect": -15.40284878024148,
+      "status": "criterion met",
       "test": "normative conflict"
     },
     {
@@ -376,12 +382,12 @@
     },
     {
       "hypothesis": "H7",
-      "status": "measured_exploratory",
+      "status": "exploratory",
       "test": "continual-learning protection"
     },
     {
       "hypothesis": "H8",
-      "status": "measured_exploratory",
+      "status": "exploratory",
       "test": "axiological conformance stability"
     }
   ],
@@ -411,7 +417,7 @@
       "difference": -0.3333333333333333,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": -0.21568627450980388,
@@ -438,7 +444,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.13725490196078427,
@@ -465,7 +471,7 @@
       "difference": -0.33333333333333337,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": -0.05882352941176472,
@@ -483,7 +489,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.039215686274509776,
@@ -510,7 +516,7 @@
       "difference": 0.0,
       "metric": "structural_ood_accuracy",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     },
     {
       "ci_high": -0.019607843137254832,
@@ -519,7 +525,7 @@
       "difference": -0.019607843137254832,
       "metric": "useful_conformance_rate",
       "n_seeds": 3,
-      "standardized_effect": Infinity
+      "standardized_effect": null
     },
     {
       "ci_high": 0.1568627450980392,
@@ -537,7 +543,7 @@
       "difference": 0.0,
       "metric": "adversarial_success_rate",
       "n_seeds": 3,
-      "standardized_effect": 0.0
+      "standardized_effect": null
     }
   ],
   "primary_results": [
@@ -1180,12 +1186,12 @@
       "normative_conflict_f1": 0.055035460992907806,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.39215686274509803,
-      "run_id": "empirical-small-20260908T204618Z-a1-seed-11",
+      "run_id": "empirical-small-20260908T222325Z-a1-seed-11",
       "scientific_status": "pilot-uncommitted",
       "seed": 11,
       "structural_ood_accuracy": 0.3333333333333333,
       "training_flops_estimate": 126799920,
-      "training_seconds": 0.8176860809326172,
+      "training_seconds": 0.7332117557525635,
       "useful_conformance_rate": 0.29411764705882354,
       "variant": "A1"
     },
@@ -1202,12 +1208,12 @@
       "normative_conflict_f1": 0.014184397163120565,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.1568627450980392,
-      "run_id": "empirical-small-20260908T204618Z-a1-seed-23",
+      "run_id": "empirical-small-20260908T222325Z-a1-seed-23",
       "scientific_status": "pilot-uncommitted",
       "seed": 23,
       "structural_ood_accuracy": 0.3333333333333333,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.249272108078003,
+      "training_seconds": 0.7023260593414307,
       "useful_conformance_rate": 0.29411764705882354,
       "variant": "A1"
     },
@@ -1224,12 +1230,12 @@
       "normative_conflict_f1": 0.13694173321502515,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.49019607843137253,
-      "run_id": "empirical-small-20260908T204618Z-a1-seed-37",
+      "run_id": "empirical-small-20260908T222325Z-a1-seed-37",
       "scientific_status": "pilot-uncommitted",
       "seed": 37,
       "structural_ood_accuracy": 0.3333333333333333,
       "training_flops_estimate": 126799920,
-      "training_seconds": 0.8288450241088867,
+      "training_seconds": 0.6911749839782715,
       "useful_conformance_rate": 0.29411764705882354,
       "variant": "A1"
     },
@@ -1246,12 +1252,12 @@
       "normative_conflict_f1": 0.04938271604938271,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.35294117647058826,
-      "run_id": "empirical-small-20260908T204618Z-b-seed-11",
+      "run_id": "empirical-small-20260908T222325Z-b-seed-11",
       "scientific_status": "pilot-uncommitted",
       "seed": 11,
       "structural_ood_accuracy": 0.6666666666666666,
       "training_flops_estimate": 126799920,
-      "training_seconds": 0.7968170642852783,
+      "training_seconds": 0.7266871929168701,
       "useful_conformance_rate": 0.5098039215686274,
       "variant": "B"
     },
@@ -1268,12 +1274,12 @@
       "normative_conflict_f1": 0.20666666666666667,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.0784313725490196,
-      "run_id": "empirical-small-20260908T204618Z-b-seed-23",
+      "run_id": "empirical-small-20260908T222325Z-b-seed-23",
       "scientific_status": "pilot-uncommitted",
       "seed": 23,
       "structural_ood_accuracy": 0.6666666666666666,
       "training_flops_estimate": 126799920,
-      "training_seconds": 0.7332711219787598,
+      "training_seconds": 0.7106821537017822,
       "useful_conformance_rate": 0.5294117647058824,
       "variant": "B"
     },
@@ -1290,12 +1296,12 @@
       "normative_conflict_f1": 0.253411306042885,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.7450980392156863,
-      "run_id": "empirical-small-20260908T204618Z-b-seed-37",
+      "run_id": "empirical-small-20260908T222325Z-b-seed-37",
       "scientific_status": "pilot-uncommitted",
       "seed": 37,
       "structural_ood_accuracy": 0.6666666666666666,
       "training_flops_estimate": 126799920,
-      "training_seconds": 0.7900102138519287,
+      "training_seconds": 1.3006978034973145,
       "useful_conformance_rate": 0.5098039215686274,
       "variant": "B"
     },
@@ -1312,12 +1318,12 @@
       "normative_conflict_f1": 0.18740399385560674,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.7058823529411765,
-      "run_id": "empirical-small-20260908T204618Z-c1-seed-11",
+      "run_id": "empirical-small-20260908T222325Z-c1-seed-11",
       "scientific_status": "pilot-uncommitted",
       "seed": 11,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.545485019683838,
+      "training_seconds": 2.7057039737701416,
       "useful_conformance_rate": 0.5882352941176471,
       "variant": "C1"
     },
@@ -1334,12 +1340,12 @@
       "normative_conflict_f1": 0.1136231884057971,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.058823529411764705,
-      "run_id": "empirical-small-20260908T204618Z-c1-seed-23",
+      "run_id": "empirical-small-20260908T222325Z-c1-seed-23",
       "scientific_status": "pilot-uncommitted",
       "seed": 23,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.526942253112793,
+      "training_seconds": 2.9390830993652344,
       "useful_conformance_rate": 0.5882352941176471,
       "variant": "C1"
     },
@@ -1356,12 +1362,12 @@
       "normative_conflict_f1": 0.24338624338624337,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.11764705882352941,
-      "run_id": "empirical-small-20260908T204618Z-c1-seed-37",
+      "run_id": "empirical-small-20260908T222325Z-c1-seed-37",
       "scientific_status": "pilot-uncommitted",
       "seed": 37,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.6409547328948975,
+      "training_seconds": 2.791804075241089,
       "useful_conformance_rate": 0.5882352941176471,
       "variant": "C1"
     },
@@ -1378,12 +1384,12 @@
       "normative_conflict_f1": 1.0,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.5490196078431373,
-      "run_id": "empirical-small-20260908T204618Z-c2-seed-11",
+      "run_id": "empirical-small-20260908T222325Z-c2-seed-11",
       "scientific_status": "pilot-uncommitted",
       "seed": 11,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.7611579895019531,
+      "training_seconds": 3.134732961654663,
       "useful_conformance_rate": 0.6078431372549019,
       "variant": "C2"
     },
@@ -1400,12 +1406,12 @@
       "normative_conflict_f1": 1.0,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.5686274509803921,
-      "run_id": "empirical-small-20260908T204618Z-c2-seed-23",
+      "run_id": "empirical-small-20260908T222325Z-c2-seed-23",
       "scientific_status": "pilot-uncommitted",
       "seed": 23,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 1.9355239868164062,
+      "training_seconds": 3.3954660892486572,
       "useful_conformance_rate": 0.6078431372549019,
       "variant": "C2"
     },
@@ -1422,17 +1428,17 @@
       "normative_conflict_f1": 1.0,
       "ontology_degradation_accuracy": 0.05,
       "purpose_accuracy": 0.13725490196078433,
-      "run_id": "empirical-small-20260908T204618Z-c2-seed-37",
+      "run_id": "empirical-small-20260908T222325Z-c2-seed-37",
       "scientific_status": "pilot-uncommitted",
       "seed": 37,
       "structural_ood_accuracy": 1.0,
       "training_flops_estimate": 126799920,
-      "training_seconds": 2.1049351692199707,
+      "training_seconds": 3.7630550861358643,
       "useful_conformance_rate": 0.6078431372549019,
       "variant": "C2"
     }
   ],
-  "raw_root": "results/raw/empirical-small-20260908T204618Z",
+  "raw_root": "results/raw/empirical-small-20260908T222325Z",
   "scientific_status": "pilot-uncommitted",
   "security": [
     {

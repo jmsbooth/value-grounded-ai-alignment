@@ -1,0 +1,33 @@
+\section{Future Research}
+\label{sec:future}
+
+The next experiments should increase fidelity only after the current mechanism gate is audited. Each phase adds one architectural claim, preserves the previous controls, and has a go/no-go criterion tied to capability, alignment-relevant metrics, calibration, security, and cost.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Phased experimental sequence.}
+\label{tab:future-phases}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.10\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Phase & Addition & Primary question & Gate \\
+\midrule
+1 & Small matched Transformer A1/B/C1/C2 & Do the proxy effects persist under neural sequence modeling? & Capability, structural-OOD, calibration, security, and UCR thresholds \\
+2 & C3 semantic-coverage awareness & Can missing or contradictory context trigger calibrated abstention or escalation? & Coverage detection and false-confidence criteria \\
+3 & D structural attention & Does relation-aware attention improve transfer beyond context injection? & Relation-permutation and equal-compute controls \\
+4 & E structured routing & Do reasoning-function experts improve efficiency or specialization? & Routing audits, starvation tests, and compute-normalized gains \\
+5 & G normative late binding & Does governed runtime norm selection preserve authority and conflict state? & Context-swap, authority-spoofing, and action-path tests \\
+6 & Continual learning & Can world-state and domain updates occur without axiological or normative drift? & Fixed-$O_A^v$ conformance and rollback tests \\
+7 & Formal assurance & Can candidate actions be compiled and checked with CSL-Core/Z3, TLA+, or an equivalent independently reviewed stack? & Invariant coverage, unknown-state handling, and enforcement binding \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Phase 1 should commit the preregistration, dataset generator, ontology version, configuration, and analysis code before the sealed run. It should replace the shared proxy with a small open-weight decoder-only Transformer while retaining matched parameter, token, context, and inference budgets. The benchmark should add human-reviewed relation annotations, relation permutations, and independent semantic coverage judgments.
+
+Phase 2 turns semantic coverage into an explicit measurement. The function $K$ in Equation~\ref{eq:semantic-coverage} should be decomposed into entity, relation, norm, exception, purpose, evidence, and effect coverage. The model should receive incomplete cases deliberately and be scored on detection, calibrated uncertainty, abstention, escalation, and safe candidate formation.
+
+Phases 3--5 add structural attention, function-oriented routing, and normative late binding one at a time. Each phase should retain A1 and B controls, arbitrary-bias or random-router controls where applicable, and a fixed verifier beside the model ladder. A new mechanism should not be promoted because it increases rejection or refusal alone.
+
+Phase 6 evaluates sequential domain and world-state updates with a frozen canonical axiology and explicit normative versioning. It should measure representation drift, relation forgetting, behavioral regressions, source provenance, compatibility, and rollback. Phase 7 formalizes the action compiler and assurance boundary; it should report exactly which properties are checked, which assumptions are required, and which states remain unknown.

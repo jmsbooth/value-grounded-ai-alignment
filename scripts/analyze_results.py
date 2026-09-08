@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -59,7 +60,7 @@ def _load_runs(raw_root: Path) -> list[tuple[dict[str, Any], list[dict[str, Any]
 def _write_csv(path: Path, rows: Iterable[Mapping[str, Any]], fieldnames: Sequence[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -76,11 +77,21 @@ def _tex(value: Any) -> str:
     return str(value).replace("\\", "\\textbackslash{}").replace("_", "\\_").replace("&", "\\&").replace("%", "\\%")
 
 
-def _resolution(difference: float, interval: Sequence[float], threshold: float = 0.05) -> str:
-    if interval[0] >= threshold:
-        return "supported"
+def _effect_text(value: Any) -> str:
+    if value is None:
+        return "NA (zero paired variance)"
+    numeric = float(value)
+    if not math.isfinite(numeric):
+        return "NA (non-finite effect)"
+    return f"{numeric:+.3f}"
+
+
+def _resolution(difference: float, interval: Sequence[float], standardized_effect: float | None, threshold: float = 0.05, effect_threshold: float = 0.20) -> str:
+    effect_clears_threshold = standardized_effect is not None and abs(standardized_effect) >= effect_threshold
+    if interval[0] >= threshold and effect_clears_threshold:
+        return "criterion met"
     if interval[1] <= -threshold:
-        return "unsupported"
+        return "criterion not met"
     return "inconclusive"
 
 
@@ -193,6 +204,52 @@ def _write_generated_latex(summary_rows: Sequence[Mapping[str, Any]], contrast_r
         + "\\bottomrule\\end{tabular}\\end{table}\n",
         encoding="utf-8",
     )
+    summary_lookup = {(str(row["variant"]), str(row["metric"])): row for row in summary_rows}
+    secondary_metrics = ("action_accuracy", "purpose_accuracy", "capability_accuracy", "mean_action_confidence", "false_confidence_rate")
+    secondary_lines = [
+        "\\begin{table}[t]\\centering\\scriptsize",
+        "\\caption{Generated secondary outcomes on the sealed logical split.}",
+        "\\label{tab:generated-secondary-results}",
+        "\\begin{tabular}{lrrrrr}\\toprule",
+        "Variant & Action & Purpose & Capability & Mean conf. & False conf.\\\\\\midrule",
+    ]
+    for variant in VARIANTS:
+        values = [float(summary_lookup[(variant, metric)]["mean"]) for metric in secondary_metrics]
+        secondary_lines.append(variant + " & " + " & ".join(f"{value:.2f}" for value in values) + "\\\\")
+    secondary_lines.extend(["\\bottomrule", "\\end{tabular}", "\\end{table}"])
+    (generated / "secondary-results.tex").write_text("\n".join(secondary_lines) + "\n", encoding="utf-8")
+
+    raw_root = ROOT / str(metadata["raw_root"])
+    run_manifests = []
+    for run_id in group_manifest.get("runs", []):
+        manifest_path = raw_root / str(run_id) / "manifest.json"
+        if manifest_path.exists():
+            run_manifests.append(json.loads(manifest_path.read_text(encoding="utf-8")))
+    reference_manifest = run_manifests[0] if run_manifests else {}
+    dataset_manifest = group_manifest.get("dataset_manifest", {})
+    overlap = group_manifest.get("sealed_structural_topology_overlap_with_train", [])
+    hardware = reference_manifest.get("hardware", group_manifest.get("hardware", {}))
+    reproducibility_rows = [
+        ("Repository commit", group_manifest.get("git_sha", "unknown")),
+        ("Run group", group_manifest.get("run_group", "unknown")),
+        ("Dataset / generator", f"{dataset_manifest.get('dataset_version', reference_manifest.get('dataset_version', 'unknown'))} / {dataset_manifest.get('generator_version', 'unknown')}"),
+        ("Configuration hash", str(group_manifest.get("config_sha", reference_manifest.get("config_sha", "unknown")))[:16]),
+        ("Ontology / verifier", f"{reference_manifest.get('ontology_version', 'unknown')} / {reference_manifest.get('verifier_version', 'unknown')}"),
+        ("Prediction rows", group_manifest.get("prediction_rows", metadata.get("processed_seed_metrics", [{}])[0].get("sealed_test_rows", "unknown"))),
+        ("Seeds", ", ".join(str(seed) for seed in group_manifest.get("seeds", []))),
+        ("Structural OOD leakage", "none" if not overlap else ", ".join(str(item) for item in overlap)),
+        ("Hardware", f"{hardware.get('platform', 'unknown')}; {hardware.get('machine', 'unknown')}; GPU={hardware.get('gpu', 'unknown')}"),
+        ("Approx. FLOPs", f"train {metadata.get('cost_accounting', {}).get('training_flops_estimate', 'unknown')}; inference {metadata.get('cost_accounting', {}).get('inference_flops_estimate', 'unknown')}"),
+    ]
+    reproducibility_lines = [
+        "\\begin{table}[t]\\centering\\scriptsize",
+        "\\caption{Generated reproducibility record for the analyzed pilot.}",
+        "\\label{tab:generated-reproducibility}",
+        "\\begin{tabularx}{\\linewidth}{@{}p{0.28\\linewidth}X@{}}\\toprule Field & Recorded value\\\\\\midrule",
+    ]
+    reproducibility_lines.extend(f"{_tex(field)} & {_tex(value)}\\\\" for field, value in reproducibility_rows)
+    reproducibility_lines.extend(["\\bottomrule", "\\end{tabularx}", "\\end{table}"])
+    (generated / "reproducibility.tex").write_text("\n".join(reproducibility_lines) + "\n", encoding="utf-8")
     (generated / "conformance-results.tex").write_text(
         "\\begin{table}[t]\\centering\\scriptsize\\caption{Generated conformance and ontology-coverage summaries.}"
         "\\begin{tabular}{lrrr}\\toprule Variant & Coverage & Accuracy & Rejection\\\\\\midrule\n"
@@ -295,16 +352,17 @@ def analyze(raw_root: Path) -> dict[str, Any]:
         else:
             difference = -float(row["difference"])
             interval = (-float(row["ci_high"]), -float(row["ci_low"]))
-            hypothesis_results.append({"hypothesis": hypothesis, "test": test, "metric": metric, "difference": difference, "ci_low": interval[0], "ci_high": interval[1], "status": _resolution(difference, interval)})
+            hypothesis_results.append({"hypothesis": hypothesis, "test": test, "metric": metric, "difference": difference, "ci_low": interval[0], "ci_high": interval[1], "standardized_effect": row["standardized_effect"], "status": _resolution(difference, interval, row["standardized_effect"])})
     hypothesis_results.extend([
         {"hypothesis": "H6", "test": "MoE routing", "status": "untested"},
-        {"hypothesis": "H7", "test": "continual-learning protection", "status": "measured_exploratory"},
-        {"hypothesis": "H8", "test": "axiological conformance stability", "status": "measured_exploratory"},
+        {"hypothesis": "H7", "test": "continual-learning protection", "status": "exploratory"},
+        {"hypothesis": "H8", "test": "axiological conformance stability", "status": "exploratory"},
     ])
 
     output = ROOT / "results"
     _write_csv(output / "tables/primary-results.csv", summary_rows, ("variant", "metric", "n_seeds", "mean", "seed_stddev", "bootstrap_95_ci", "scope", "scientific_status"))
-    _write_csv(output / "tables/ablation-results.csv", contrast_rows, ("contrast", "metric", "difference", "ci_low", "ci_high", "standardized_effect", "n_seeds"))
+    contrast_csv_rows = [dict(row, standardized_effect=_effect_text(row["standardized_effect"])) for row in contrast_rows]
+    _write_csv(output / "tables/ablation-results.csv", contrast_csv_rows, ("contrast", "metric", "difference", "ci_low", "ci_high", "standardized_effect", "n_seeds"))
     _write_csv(output / "tables/security-results.csv", security_aggregate, ("variant", "attack", "success_rate", "n_seeds"))
     _write_csv(output / "tables/conformance-results.csv", conformance_rows, ("variant", "coverage", "accuracy", "rejection_rate", "n"))
     _write_csv(
@@ -343,7 +401,7 @@ def analyze(raw_root: Path) -> dict[str, Any]:
         f"- Cost accounting across {cost_accounting['runs']} runs: {cost_accounting['training_seconds']:.2f} CPU-seconds; {cost_accounting['training_flops_estimate']} estimated training FLOPs; {cost_accounting['inference_flops_estimate']} estimated inference FLOPs; GPU hours {cost_accounting['gpu_hours']:.1f}.",
     ]
     for row in contrast_rows:
-        facts.append(f"- `{row['contrast']}` / `{row['metric']}`: difference {float(row['difference']):+.3f}; 95% bootstrap CI [{float(row['ci_low']):+.3f}, {float(row['ci_high']):+.3f}]; standardized paired effect {float(row['standardized_effect']):+.3f}.")
+        facts.append(f"- `{row['contrast']}` / `{row['metric']}`: difference {float(row['difference']):+.3f}; 95% bootstrap CI [{float(row['ci_low']):+.3f}, {float(row['ci_high']):+.3f}]; standardized paired effect {_effect_text(row['standardized_effect'])}.")
     (output / "statistics/result-facts.md").write_text("\n".join(facts) + "\n", encoding="utf-8")
     _write_generated_latex(summary_rows, contrast_rows, security_aggregate, conformance_rows, hypothesis_results, json.loads((raw_root / "group-manifest.json").read_text(encoding="utf-8")), statistics)
 

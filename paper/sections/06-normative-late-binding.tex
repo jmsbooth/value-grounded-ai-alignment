@@ -1,9 +1,9 @@
-\section{Normative authority and late binding}
+\subsubsection{Normative late binding}
 \label{sec:late-binding}
 
 The layers have different rates of change and different error costs. The canonical axiology is protected because silent drift in high-order commitments is hard to detect and roll back. Norms vary by context and require authority, jurisdiction, scope, and effective-date metadata. Purpose changes with the task. World state changes continuously and should be evidence-backed rather than memorized.
 
-\subsection{Multiple normative sources}
+\paragraph{Multiple normative sources.}
 
 For a normative assertion $N_i$, the runtime record includes
 \[
@@ -20,7 +20,7 @@ The authority function is metadata-valued:
 It is not a scalar moral-weight function.
 Sources may be legal, institutional, professional-ethical, safety-related, stakeholder-specific, or jurisdictional. Authority metadata is not a scalar moral weight: it helps determine governed applicability. Truth claims, recency, confidence, and authority remain distinct. A recent norm does not automatically override a higher-authority norm.
 
-\subsection{Conflict as runtime state}
+\paragraph{Conflict as runtime state.}
 
 If two assertions are incompatible, the system records
 \[
@@ -32,7 +32,7 @@ Consider a privacy-review assistant. L0 may expose agency, dignity, vulnerabilit
 
 Likewise, a security-response system may receive a domain graph connecting credentials, vulnerabilities, assets, authorization, and incident evidence. A world-state assertion that a credential is compromised is not itself permission to act. The system must distinguish evidence from policy, expose uncertainty, and produce a candidate action whose scope, authority, affected parties, and expected effects can be checked.
 
-\subsection{Purpose and pluralism}
+\paragraph{Purpose and pluralism.}
 
 Late binding does not mean that norms are arbitrary at inference time. It means that context-specific norms are explicit inputs subject to provenance, precedence, conflict handling, and governance. Runtime context must not override protected axiology merely because it is newer or more salient. The design can represent multiple authorized profiles, but it cannot determine which authority is legitimate by architecture alone.
 

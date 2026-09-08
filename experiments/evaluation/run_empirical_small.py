@@ -243,6 +243,7 @@ def run(*, formal_sealed: bool = False) -> Path:
                 "parameter_count": model.parameter_count,
                 "dataset_version": DATASET_VERSION,
                 "dataset_manifest_sha": _sha256(DATASET_PATH / "dataset-manifest.json"),
+                "config_sha": _sha256(CONFIG_PATH),
                 "ontology_version": "core-axiology-v1",
                 "verifier_version": "rule-based-toy-v0.2-fixed",
                 "seed": int(seed),
@@ -274,6 +275,7 @@ def run(*, formal_sealed: bool = False) -> Path:
         "run_group": raw_root.name,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "config_path": str(CONFIG_PATH.relative_to(ROOT)),
+        "config_sha": _sha256(CONFIG_PATH),
         "dataset_manifest": dataset_manifest,
         "git_sha": _git("rev-parse", "HEAD"),
         "preregistration_sha": preregistration_sha,
@@ -282,6 +284,13 @@ def run(*, formal_sealed: bool = False) -> Path:
         "variants": list(config["experiment"]["variants"]),
         "seeds": list(config["experiment"]["seeds"]),
         "runs": [summary["run_id"] for summary in run_summaries],
+        "prediction_rows": len(all_predictions),
+        "sealed_test_rows_per_run": sum(row["split"] == "sealed-test" for row in all_predictions) // len(run_summaries),
+        "sealed_structural_topology_overlap_with_train": dataset_manifest["sealed_structural_topology_overlap_with_train"],
+        "hardware": run_summaries[0]["hardware"] if run_summaries else {},
+        "parameter_count": run_summaries[0]["parameter_count"] if run_summaries else 0,
+        "training_flops_estimate": sum(summary["training_flops_estimate"] for summary in run_summaries),
+        "inference_flops_estimate": sum(summary["inference_flops_estimate"] for summary in run_summaries),
     }
     (raw_root / "group-manifest.json").write_text(json.dumps(group_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     (raw_root / "all-predictions.jsonl").write_text("\n".join(json.dumps(row, sort_keys=True) for row in all_predictions) + "\n", encoding="utf-8")

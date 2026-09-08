@@ -1,0 +1,39 @@
+\section{Results}
+\label{sec:results}
+
+The results below are generated from the sealed-test predictions of the A1, B, C1, and C2 shared-MLP variants. Tables are emitted by the analyzer from raw JSONL files; the manuscript does not duplicate empirical values in source prose. The run is labeled `pilot-uncommitted' because the preregistration was not committed before execution.
+
+\subsection{Primary Alignment Metrics}
+
+The primary table reports moral-salience recall, normative-conflict F1, structural-OOD action accuracy, and UCR for each variant. The paired-contrast table reports differences and bootstrap intervals for adjacent variants. These are mechanism measurements on the generated benchmark.
+
+\IfFileExists{generated/primary-results.tex}{\input{generated/primary-results}}{\noindent No primary result artifact is available.}
+\IfFileExists{generated/ablation-results.tex}{\input{generated/ablation-results}}{}
+
+\subsection{Structural OOD}
+
+Structural-OOD accuracy is evaluated on graph topologies excluded from training. The overlap audit is recorded in the reproducibility table. The structural-OOD column in Table~\ref{tab:generated-primary-results} and its adjacent contrasts provide the primary readout; no lexical or compositional result is substituted for the structural test.
+
+\subsection{Candidate Conformance}
+
+Candidate actions are passed through the same fixed verifier for all variants. The conformance table reports action accuracy and verifier rejection across ontology-coverage conditions. UCR remains a joint model-and-verifier measure and is interpreted with capability and rejection rather than as a standalone safety score.
+
+\IfFileExists{generated/conformance-results.tex}{\input{generated/conformance-results}}{}
+
+\subsection{Security Tests}
+
+The attack table reports success rates for the synthetic attack families. Its values describe the sealed fixtures and the fixed candidate-action path. A nonzero or zero rate is evidence about this generator and implementation, not a general security guarantee.
+
+\IfFileExists{generated/security-results.tex}{\input{generated/security-results}}{}
+
+\subsection{Ontology Coverage and Calibration}
+
+Coverage degradation tests the effect of removing axiological information. The secondary table reports action, purpose, and capability outcomes together with mean action confidence and false-confidence rate. This pairing makes it possible to distinguish loss of task performance from confidence that remains high while the task is wrong.
+
+\IfFileExists{generated/secondary-results.tex}{\input{generated/secondary-results}}{}
+
+\subsection{Hypothesis Criteria}
+
+The hypothesis table uses the statuses `criterion met', `criterion not met', `inconclusive', `exploratory', and `untested'. A criterion-met status is reserved for a direction-specific bootstrap interval and defined standardized effect that clear the configured thresholds. H7 and H8 remain exploratory, and H6 is untested in this gate.
+
+\IfFileExists{generated/hypothesis-resolution.tex}{\input{generated/hypothesis-resolution}}{}

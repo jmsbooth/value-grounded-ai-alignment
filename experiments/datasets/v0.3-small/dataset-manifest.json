@@ -1,5 +1,6 @@
 {
   "dataset_version": "v0.3-small",
+  "generator_version": "v0.3-small",
   "row_counts": {
     "development-test": 22,
     "sealed-test": 51,

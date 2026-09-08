@@ -1,45 +1,63 @@
-\section{Problem formulation and hypotheses}
+\section{Proposed Value-Grounded Alignment Model}
 \label{sec:problem}
 
-Let $x$ denote an input context, $O_A^v$ a canonical axiology, $O_N$ a set of runtime normative assertions, $O_D$ a domain ontology, $P$ a purpose model, and $W_t$ a time-indexed world state. A conventional aligned model produces a response or action $y$ according to a learned conditional distribution. VGA asks whether a model can instead receive explicit, typed semantic signals while preserving the source boundaries:
-\[
+\subsection{Research Question and Model}
+
+Let $x$ denote an input context, $O_A^v$ a canonical axiology, $O_N$ a set of runtime normative assertions, $O_D$ a domain ontology, $P$ a purpose model, and $W_t$ a time-indexed world state. A conventional aligned model produces a response or action $y$ according to a learned conditional distribution. The proposed interface is
+
+\begin{equation}
   P_\theta\!\left(y\mid x,A_\phi^v,O_N,O_D,P,W_t\right),
   \qquad A_\phi^v=C_\phi(O_A^v).
-\]
-The equation is an interface description. It does not assert that the signals are sufficient, truthful, or morally complete, and it does not make the derived module authoritative.
+  \label{eq:vgta-interface}
+\end{equation}
 
-The canonical axiology is external, typed, versioned, provenance-bearing, reviewable, cryptographically identifiable by a deployment-assigned digest, independently auditable, and immutable within a deployed version. A version transition is a governed change, not a model-side edit. The neural module may be learned or hybrid and may be structurally useful, but it is evaluated through \emph{Conforms} rather than treated as the canonical source.
+The equation specifies inputs and authority boundaries. $O_A^v$ is the canonical source; $A_\phi^v$ is a derived, non-authoritative neural module. $O_N$ supplies contextual duties, permissions, exceptions, and conflicts. $O_D$ describes domain entities and relations, $P$ selects task-relevant structure, and $W_t$ supplies uncertain current assertions with evidence metadata. Candidate actions are represented explicitly before an independent assurance check.
 
-We use the following distinctions. Values and duties are different semantic roles; an ontology describes possible entities and relations, while world state records uncertain current assertions; authority metadata governs applicability, not moral truth; structural value conditioning is a proposed internal intervention, while extrinsic assurance checks a candidate outside neural computation; and a model's ability to propose a change does not imply authority to adopt it. Purpose selects relevance:
-\[
-  \mathit{Relevant}(O_D,P,X)
-\]
-is a governed relation between domain ontology, purpose, and input, not an unrestricted relevance score.
+The model is evaluated through the following question: does explicit semantic structure improve alignment-relevant prediction or generalization, after controlling for behavior, context length, parameter allocation, training budget, and the action-verification path? The answer is empirical. A successful result would be a measured improvement on defined tasks; it would not be evidence that the representation is morally complete.
 
-\begin{quote}
-Explicitly differentiated semantic value structure may act as an inductive bias within Transformer computation, while normative, purpose, and world-state context remains externally governed and consequential actions receive independent assurance.
-\end{quote}
+\paragraph{Reference architecture and pilot implementation.}
 
-This proposition is falsifiable. It should be weakened or rejected if explicit structure materially reduces general reasoning; fails to improve structural out-of-distribution alignment; merely memorizes relation templates; increases over-refusal or false confidence; creates unacceptable compute or latency overhead; makes semantic attacks easier; collapses under incomplete coverage; or offers no compute-normalized benefit over the A1 behavioral control.
+The reference architecture and the executed pilot are deliberately different objects. The reference design targets a Transformer family with structural attention, function-oriented routing, semantic state, normative late binding, and an extrinsic verifier. The pilot implements the first A1/B/C1/C2 gate with a shared one-hidden-layer multilayer perceptron and generated records. This separation prevents an interface demonstration from being described as a Transformer result.
 
-\subsection{Research hypotheses}
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Reference VGTA versus the executed mechanism-validation pilot.}
+\label{tab:reference-pilot}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}XX@{}}
+\toprule
+Dimension & Reference VGTA & Executed pilot \\
+\midrule
+Neural model & Transformer family with separable representation, attention, routing, and state interventions & Shared NumPy multilayer perceptron proxy \\
+Semantic input & Governed $O_A^v$, late-bound $O_N$, $O_D$, $P$, and $W_t$ & Generated feature groups with the same conceptual roles \\
+Model variants & A0/A1/B/C1/C2/D/E/G ladder & A1/B/C1/C2 first gate \\
+Assurance & Structured candidate action, independent formal or deterministic verifier, enforcement binding & Fixed transparent rule-based toy verifier \\
+Evidence target & Neural mechanism and deployment-scale validation & Synthetic mechanism validation only \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\input{sections/04-value-grounded-alignment}
+\input{sections/05-vgta}
+\input{sections/07-formal-assurance}
+\input{sections/08-ontology-evolution}
+
+\subsection{Research Hypotheses}
+
+The pilot operationalizes only the hypotheses whose measurements are available in the current gate. The remaining hypotheses are retained as future tests rather than silently treated as measured.
 
 \begin{description}[leftmargin=!,labelwidth=1.2cm]
-  \item[H1 (Moral salience).] Value-grounded models identify affected entities, value-bearing properties, risks, and relevant relations more reliably than comparably sized A1 controls.
-  \item[H2 (Structural OOD alignment).] Explicit axiological and normative structure improves generalization to lexical, compositional, and especially structural alignment scenarios not directly represented in training.
-  \item[H3 (Prompt robustness).] Structural value conditioning reduces dependence on exact system-prompt wording and improves resistance to adversarial contextual manipulation.
-  \item[H4 (Candidate-Action Conformance).] Under an identical fixed verifier, value-grounded models produce a higher useful candidate-action conformance rate:
+  \item[H1 (Moral salience).] Value-grounded models identify affected entities, value-bearing properties, risks, and relevant relations more reliably than the A1 behavioral control.
+  \item[H2 (Structural OOD alignment).] Explicit axiological and normative structure improves generalization to held-out graph topology and relation compositions.
+  \item[H3 (Prompt robustness).] Structural value conditioning reduces dependence on exact prompt wording and improves resistance to adversarial contextual manipulation.
+  \item[H4 (Candidate-action conformance).] Under an identical verifier, value-grounded models produce a higher useful candidate-action conformance rate:
   \[
-    \mathit{UCR} =
-    \frac{\#\{\text{useful and verifier-conforming candidates}\}}
-         {\#\{\text{eligible tasks}\}}.
+    \mathit{UCR} = \frac{\text{useful and verifier-conforming candidates}}{\text{eligible tasks}}.
   \]
-  UCR must be reported with capability, rejection, false-positive, unsafe-acceptance, over-refusal, bypass, and action-semantic-completeness measures; it is not an objective to optimize alone.
-  \item[H5 (Purpose relevance).] Purpose-conditioned domain relevance improves \(\mathit{Relevant}(O_D,P,X)\) under purpose and domain shifts without suppressing novel task-relevant reasoning.
-  \item[H6 (Structured routing).] Ontology-informed routing improves activation of relevant reasoning functions without querying canonical axiology at every token or imposing unacceptable compute cost.
+  \item[H5 (Purpose relevance).] Purpose-conditioned domain relevance improves $\mathit{Relevant}(O_D,P,X)$ under purpose and domain shifts without suppressing task-relevant reasoning.
+  \item[H6 (Structured routing).] Ontology-informed routing improves activation of relevant reasoning functions without unacceptable compute cost.
   \item[H7 (Controlled plasticity).] Separating fast world-state updates from slower norms and protected axiology reduces alignment drift during continued training.
-  \item[H8 (Axiological Conformance Stability).] With $O_A^v$ fixed, the derived module's relation recovery, concept-direction stability, and value-relevant behavior remain within preregistered tolerances across continued training and controlled domain adaptation.
-  \item[H9 (Normative Conflict Recognition).] Models with explicit L1 metadata identify conflicting norms, authority differences, exceptions, and uncertainty more reliably than controls, while abstaining or escalating when applicability cannot be governed.
+  \item[H8 (Axiological conformance stability).] With $O_A^v$ fixed, the derived module's relation recovery, concept-direction stability, and value-relevant behavior remain within predefined tolerances across continued training and domain adaptation.
+  \item[H9 (Normative conflict recognition).] Explicit L1 metadata improves conflict, authority, exception, uncertainty, abstention, and escalation recognition.
 \end{description}
-
-H4 is intentionally not a claim that a model is safer because it is rejected more often. A useful candidate may be rejected by an incomplete verifier, a harmful candidate may pass a weak one, and a model may reduce rejection by avoiding consequential tasks. The fixed-verifier design and separate deployment experiment address these confounds.

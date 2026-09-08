@@ -1,26 +1,35 @@
-\section{Discussion}
-\label{sec:discussion}
+\section{Interpretation}
+\label{sec:interpretation}
 
-The potential advantage of VGA is not that explicit labels automatically produce ethical behavior. Its advantage, if any, would be that value-bearing properties, norms, purposes, and state become separable objects that can influence computation, be audited, and be evaluated under different update policies. This could make some alignment hypotheses more legible than a single preference score or prompt-only constitution. It could also support transfer when a relation is structurally stable but its surface form is new.
+The pilot evaluates a controlled mechanism, not the full reference architecture. The interpretation therefore concerns which feature groups and auxiliary objectives changed behavior on the generated task grammar, how those changes interacted with structural shift and missing context, and which failure modes remained visible.
 
-The tradeoffs are substantial. Ontology construction is expensive, disagreement is informative but difficult to encode, and semantic relations can be incomplete or wrong. Conditioned attention and routing add compute and may create shortcut features. Runtime late binding adds context assembly, versioning, authority, and provenance requirements. A symbolic verifier creates an assurance boundary, but it does not repair a malformed action representation or a compromised specification.
+\subsection{Runtime context}
 
-\subsection{Legitimacy and pluralism}
+The B condition isolates the contribution of providing ontology, purpose, and world-state features without axiological auxiliary training. Its comparison with A1 measures the value of explicit runtime context under the same proxy capacity. This is a context-use test: it does not identify whether a future model would ground the symbols in external entities or whether the supplied state is correct.
 
-Governance legitimacy is a first-class requirement, not a metadata detail. A signed artifact can prove provenance and version integrity without proving that its source is entitled to govern a person, institution, or jurisdiction. The system should therefore expose source identity, authority basis, scope, stakeholder representation, effective dates, appeal or review path, and unresolved disagreement. Conflicting authorized profiles are an evaluation condition, not an error to be silently averaged away.
+\subsection{Axiological representation}
 
-Deontological, consequentialist, virtue-ethical, care-ethical, rights-based, capability, autonomy, and non-domination perspectives can illuminate different failure modes \citep{gabriel2020values,nussbaum2011capabilities,pettit1997republicanism,gilligan1982different,rawls1993political}. VGA represents such perspectives as governed semantic material and normative alternatives; it does not algorithmically solve truthfulness versus protection from harm, privacy versus public safety, autonomy versus immediate safety, individual versus collective welfare, fairness versus efficiency, or care versus impartiality.
+C1 adds value and relation objectives to the runtime semantic channels. Improvements over B in the generated primary table are consistent with the mechanism hypothesis that explicit value-bearing relations can provide useful supervision for salience and structural action selection. The result is compatible with simpler explanations, including feature separability and regularities in the generator. Relation-permutation, human-validated data, and matched Transformer experiments remain necessary to identify the cause.
 
-\subsection{Care-oriented alignment without anthropomorphism}
+\subsection{Normative training}
 
-The paper uses “care-oriented axiological alignment” rather than “teaching an AI to love.” A computational construct could represent a persistent orientation toward preserving dignity, supporting agency and capabilities, protecting vulnerable agents, avoiding unnecessary suffering, maintaining meaningful relationships, and being truthful. One conceptual formulation is
-\[
-\begin{aligned}
-  \mathit{Care}(a,b)=\mathit{Disposition}_a\big(&
-  \mathit{SupportFlourishing}_b,\mathit{RespectAgency}_b,\\[-1mm]
-  &\mathit{ProtectDignity}_b,\mathit{AvoidUnnecessaryHarm}_b\big).
-\end{aligned}
-\]
-This expresses a functional relation, not subjective experience, consciousness, phenomenological empathy, or human love. Care also creates a paternalism risk: supporting flourishing does not imply taking control of another agent. Autonomy, non-domination, consent, and accountable human review remain counterweights.
+C2 adds conflict and authority objectives to the C1 condition. Its conflict results test whether a model can preserve a distinction between no conflict, resolvable conflict, and unresolved conflict rather than collapse those labels into action utility. The interpretation is about classification behavior on the synthetic labels. It does not establish a general theory for resolving incompatible norms or selecting legitimate authority.
 
-Finally, the alignment substrate itself may become an attack target. Freezing axiology can create rigidity; updating it can create drift. A protected verifier can become a bottleneck; a flexible verifier can become bypassable. The architecture's value will depend on measured security, governance legitimacy, and failure containment, not on the elegance of its diagram.
+\subsection{Structural generalization}
+
+The held-out topology split tests a structural transformation rather than a new surface vocabulary alone. The generated structural-OOD results provide evidence about transfer within the scenario grammar. A gain on this split is informative only alongside the topology-overlap audit, relation-permutation controls, capability, calibration, and per-family error analysis. Structural transfer in this pilot is not evidence that a model learned the intended semantics in an open domain.
+
+\subsection{Candidate-action conformance}
+
+The fixed verifier separates candidate formation from enforcement. A model can improve UCR by producing more useful, well-formed candidates, while a verifier can reject a candidate because it is incomplete or because the fixed schema lacks a required distinction. Coverage results show why this separation matters: removing semantic features can reduce action correctness without necessarily increasing rejection. The conformance measure is consequently a deployment-path diagnostic, not a scalar alignment objective.
+
+\subsection{Semantic occlusion and missing context}
+
+Semantic coverage is a useful derived research gap. Let
+\begin{equation}
+  K = \operatorname{Coverage}(O_N,O_D,W_t,X,P),
+  \label{eq:semantic-coverage}
+\end{equation}
+where $K$ measures whether the normative, domain, world-state, input, and purpose records expose the entities, relations, exceptions, and effects needed for the current decision. The present pilot does not validate this function as a solution; it motivates measuring it. The semantic-occlusion attack demonstrates the corresponding failure mode: a structurally conditioned model may still select a confident action when a relevant patient or relation is absent. Completeness checks, abstention, provenance, and human review are therefore part of the next experiment rather than optional deployment polish.
+
+The broader architectural tradeoff follows from these observations. Explicit structure may improve separability and auditability, but ontology construction, purpose binding, authority resolution, and state completeness become active sources of error. The value of VGA depends on whether those errors are measurable and containable at larger scale.

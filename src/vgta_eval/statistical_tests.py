@@ -18,7 +18,7 @@ def bootstrap_ci(values: Sequence[float], *, iterations: int = 4000, seed: int =
     return estimates[int(tail * iterations)], estimates[max(0, int((1.0 - tail) * iterations) - 1)]
 
 
-def paired_bootstrap_difference(left: Sequence[float], right: Sequence[float], *, iterations: int = 4000, seed: int = 1729) -> tuple[float, tuple[float, float], float]:
+def paired_bootstrap_difference(left: Sequence[float], right: Sequence[float], *, iterations: int = 4000, seed: int = 1729) -> tuple[float, tuple[float, float], float | None]:
     if len(left) != len(right) or not left:
         raise ValueError("paired inputs must have equal non-zero length")
     differences = [float(a) - float(b) for a, b in zip(left, right)]
@@ -26,9 +26,13 @@ def paired_bootstrap_difference(left: Sequence[float], right: Sequence[float], *
     return mean(differences), interval, _standardized_effect(differences)
 
 
-def _standardized_effect(values: Sequence[float]) -> float:
+def _standardized_effect(values: Sequence[float]) -> float | None:
     deviation = pstdev(values)
-    return mean(values) / deviation if deviation else (0.0 if not mean(values) else float("inf"))
+    # A standardized effect is undefined when the paired differences have no
+    # variance. Returning None keeps JSON/CSV/LaTeX outputs finite and makes
+    # the estimand's limitation explicit instead of fabricating an infinite
+    # effect size.
+    return mean(values) / deviation if deviation else None
 
 
 def summarize_seed_values(values: Sequence[float]) -> dict[str, float | int | list[float]]:

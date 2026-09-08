@@ -1,4 +1,4 @@
-\section{Extrinsic assurance}
+\subsection{Extrinsic Assurance}
 \label{sec:assurance}
 
 Structural value conditioning and formal assurance address different failure modes. VGTA therefore places a constraint specification layer and an independent symbolic verifier after neural candidate-action formation, especially at tool calls, policy decisions, external effects, and high-risk planning transitions. The generic flow is shown in \cref{fig:formal-assurance}.
@@ -21,7 +21,7 @@ The \emph{unknown} state is important: a permitted result is relative to the com
 
 The action boundary must be narrow enough to make verification tractable and broad enough to prevent obvious bypass. A model should not avoid verification by emitting an unstructured tool call, changing the action schema, or treating refusal as the only safe option. The policy enforcement point should bind the verified representation to the exact external effect, with audit identifiers and rollback where technically possible.
 
-\subsection{Fixed-verifier experiment}
+\subsubsection{Fixed-verifier experiment}
 
 The evaluation holds one verifier and one action schema fixed across A1, B, C1, C2, D, E, and G. This separates model behavior from enforcement behavior. A separate deployment experiment compares model-only execution with model-plus-enforcement, reporting rejection, false positive, unsafe acceptance, useful completion, over-refusal, bypass, and action semantic completeness. The verifier is not a rung in the model ablation ladder.
 

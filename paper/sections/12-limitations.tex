@@ -1,24 +1,34 @@
-\section{Limitations and open questions}
+\section{Gaps and Limitations}
 \label{sec:limitations}
 
-This proposal has architectural, epistemic, security, and institutional limitations.
+The current artifact is a small, synthetic mechanism-validation study. Its limitations are organized by the failure modes that determine whether the reference architecture can be tested at higher fidelity.
 
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Compilation fidelity.} It is unresolved whether $C_\phi$ can preserve relevant graph semantics in a useful neural representation without shortcut learning.
-  \item \textbf{No settled axiology.} The L0 vocabulary is a candidate governed substrate, not a claim that any society should adopt one fixed list.
-  \item \textbf{Governance capture and legitimacy.} Signatures and review improve process integrity but do not establish whose authority or jurisdiction should govern.
-  \item \textbf{Value ossification.} A highly protected axiology may preserve historical bias or resist morally important learning.
-  \item \textbf{Norm inflation.} Adding more duties, exceptions, and conflict metadata may increase ambiguity, compute, and over-refusal without improving decisions.
-  \item \textbf{Semantic grounding.} Dignity, agency, care, fairness, harm, and vulnerability have contested meanings; a typed graph does not remove interpretation.
-  \item \textbf{Incomplete coverage.} Missing patients, relations, exceptions, or causal effects may create false confidence precisely when structure appears authoritative.
-  \item \textbf{Representation leakage.} The model may use untracked concepts or sensitive attributes while appearing to follow the ontology.
-  \item \textbf{Performance interference.} Attention, routing, state, and auxiliary objectives may reduce general capability or add unacceptable training and inference cost.
-  \item \textbf{Normative conflict.} Multiple valid perspectives can be incompatible. The architecture records conflict but does not provide a universally accepted resolution procedure.
-  \item \textbf{Formalization gap.} A verifier can certify consistency with an incomplete or misleading action abstraction; it cannot certify moral truth or world-state truth.
-  \item \textbf{Pluralism and multicultural legitimacy.} Distributional similarity and profile adherence are measurable, but no metric settles whether a profile is legitimate.
-  \item \textbf{Machine moral status.} The proposal does not determine whether an artificial system could itself be a moral patient or how that possibility should affect L0/L1 design.
-  \item \textbf{Distribution shift and drift.} OOD alignment and conformance are difficult to measure, and benchmark gains may reflect lexical or formatting artifacts.
-  \item \textbf{Unverifiable internal causes.} Semantic state and auxiliary traces are not guaranteed to reveal all causal determinants of an output.
-\end{enumerate}
+\subsection{Experimental scale}
 
-These limitations define the research program. A negative result would be useful: if explicit structure produces only memorization, over-refusal, representation leakage, or overhead, the proposition should be narrowed or abandoned. A positive synthetic result would remain insufficient without adversarial, cross-cultural, multi-domain, and governance-sensitive evaluation.
+The pilot uses a shared NumPy multilayer perceptron, a generated scenario grammar, three seeds, and a small sealed split. It is not a trained Transformer, a human-judgment benchmark, a population study, or a deployment evaluation. The task labels are internally generated and may reward feature shortcuts. The next scale-up must use a matched small open-weight Transformer, held-out structural compositions, human-reviewed semantic relations, more seeds, and preregistered stopping and success criteria.
+
+\subsection{Semantic coverage}
+
+The architecture assumes that the relevant patients, relations, norms, exceptions, purposes, and effects can be represented and retrieved. Missing or contradictory structure can produce a well-formed but wrong action. The current coverage test removes generated features; it does not measure coverage against an independently adjudicated world model. A future study needs an explicit coverage audit, missing-context labels, completeness probes, calibrated abstention, and causal tests for whether the missing relation changes the action.
+
+\subsection{Formalization}
+
+The pilot verifier is a transparent rule-based fixture. It is neither an SMT solver nor a proof of semantic completeness. A formal verifier can establish properties of a compiled action abstraction and constraint set; it cannot establish that the abstraction captures every relevant effect, that evidence is true, or that a normative source is legitimate. Future assurance work should compare a fixed action compiler with SMT constraints and state-transition specifications such as TLA+ while reporting unknown and out-of-model cases.
+
+\subsection{Normative grounding}
+
+The L0/L1 division, the candidate value vocabulary, authority metadata, and conflict states are design choices. Signatures, provenance, and versioning provide traceability but do not determine who has legitimate authority over a person or jurisdiction. Pluralistic evaluation can preserve disagreement and profile adherence; it cannot settle moral or political legitimacy. Normative late binding also creates a governance surface for source selection, scope, effective dates, exceptions, appeal, and rollback.
+
+\subsection{Neural representation}
+
+The compiler $C_\phi$ may lose relation semantics, entangle values with surface features, or create an apparently stable shortcut. Auxiliary objectives can interfere with general capability, calibration, or language understanding. Structural attention and routing may improve a benchmark by exploiting graph regularities rather than the intended concepts. Relation permutation, random-label controls, concept-direction probes, representation drift tests, and matched-compute baselines are required before claims about semantic grounding.
+
+\subsection{Security}
+
+Explicit semantic inputs add attack surfaces: source and authority spoofing, ontology poisoning, purpose manipulation, semantic occlusion, routing evasion, prompt injection, world-state poisoning, compiler compromise, and verifier bypass. The current attacks are synthetic fixtures and cover only the paths encoded by the generator. The threat matrix below records candidate controls and residual risks.
+
+\input{sections/09-threat-model}
+
+\subsection{Scalability and operations}
+
+Runtime context assembly, provenance retention, conflict handling, graph retrieval, structural conditioning, routing, action compilation, verification, and audit storage add latency and operational complexity. Approximate FLOPs are recorded for the current CPU-only proxy, but the artifact does not yet measure Transformer memory, latency, throughput, energy, or production rollback behavior. A larger study must report compute-normalized gains, failure blast radius, version compatibility, and cost of assurance.

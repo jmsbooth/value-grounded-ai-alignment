@@ -1,37 +1,29 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Transformer language models increasingly retrieve information, plan, call tools, and operate over longer horizons. That expansion makes alignment an operational and security problem: a model can be capable, useful, and locally compliant while selecting an action that violates an affected person's agency, privacy, dignity, or safety. Present alignment pipelines also face jailbreaks, distribution shift, reward misspecification, and disagreement about which human values should govern an output \citep{amodei2016concrete,ganguli2022redteaming,bengio2024risks}.
+Language-model alignment is commonly studied as a behavioral problem: training and evaluation move a model toward useful instruction following, preference satisfaction, or compliance with a written policy. That framing has produced effective methods, but it leaves open a narrower systems question. A model may satisfy a local behavioral target while losing track of which entities are affected, which values are at stake, which norms apply, what purpose governs the task, or whether current world-state assertions are reliable.
 
-Current methods are diverse and often effective. Supervised fine-tuning and preference optimization move pretrained models toward useful instruction following \citep{christiano2017preferences,ouyang2022instructgpt,rafailov2023dpo}. Constitutional, AI-feedback, and deliberative methods make written principles or safety specifications more operational \citep{bai2022constitutional,lee2023rlaif,guan2024deliberative}. Runtime policy models, classifiers, tool authorization, and monitoring add external controls. This paper does not caricature these approaches or treat behavioral success as unimportant. It asks whether alignment-relevant semantic structure can also participate explicitly in representation, attention, routing, and action formation.
+This paper asks whether those distinctions can become explicit computational inputs. The research question is:
 
-The motivating distinction is between a model optimized to produce acceptable behavior and a model whose computation receives structured signals about what matters, which norms apply in context, what purpose is being served, and which current assertions are supported by evidence. This is not a claim about inner experience, moral status, or a settled theory of value. It is an intervention hypothesis with explicit controls.
+\begin{quote}
+Can a governed external canonical axiology be compiled into a derived neural module and used as structural conditioning, while contextual norms are late-bound, purpose selects domain relevance, world state remains evidence-bearing, and consequential candidate actions are independently checked?
+\end{quote}
 
-We propose Value-Grounded AI Alignment (VGA) and its reference Value-Grounded Transformer Architecture (VGTA). VGA separates:
+The proposed answer is Value-Grounded AI Alignment (VGA), instantiated by the reference Value-Grounded Transformer Architecture (VGTA). VGA separates a canonical axiology $O_A^v$, normative assertions $O_N$, a domain ontology $O_D$, a purpose model $P$, and a time-indexed world state $W_t$. A compiler derives the non-authoritative module $A_\phi^v=C_\phi(O_A^v)$. Neural interventions may use that module for representation, attention, routing, or semantic state; normative authority and current evidence remain explicit context; and an independent verifier evaluates structured candidate actions before external effects.
+
+The paper develops the model, places it among alignment, neuro-symbolic, knowledge-enhanced, and formal-methods research, and evaluates an initial mechanism-validation implementation. The implementation is a deterministic synthetic benchmark paired with a shared NumPy multilayer perceptron. It compares A1, B, C1, and C2 across three seeds, tests structural out-of-distribution behavior, candidate conformance, ontology coverage, calibration, and synthetic attacks, and generates all reported numerical artifacts from raw predictions.
+
+\subsection{Contributions}
+
+The contributions are:
 
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{L0 canonical axiology:} a governed external substrate of value-bearing properties and higher-order relations;
-  \item \textbf{L1 normative ontology:} multiple authoritative sources, duties, permissions, exceptions, and unresolved conflicts;
-  \item \textbf{L2a domain ontology and L2b purpose model:} what entities and relations exist in a domain and which are relevant to the current purpose;
-  \item \textbf{L3 world state:} time-indexed assertions with source, confidence, and provenance, without assuming truth.
+  \item a layered computational model distinguishing canonical axiology, normative authority, domain semantics, purpose relevance, uncertain world state, and extrinsic action assurance;
+  \item a reference architecture with separable semantic-to-neural compilation, structural conditioning, normative late binding, and a fixed-verifier boundary;
+  \item a falsifiable experimental design with matched model variants, structural-OOD splits, coverage degradation, security fixtures, candidate-action conformance, and seed-level uncertainty;
+  \item a runnable research artifact containing ontology fixtures, interface modules, a synthetic pilot, generated tables and figures, tests, and reproducibility records.
 \end{enumerate}
 
-The canonical axiology $O_A^v$ is not a model checkpoint. A compiler or training process may derive an axiological neural module $A_\phi^v=C_\phi(O_A^v)$, but that module is non-authoritative and must be evaluated for \emph{Axiological Conformance}. Normative sources are late-bound under authority and jurisdiction metadata; a conflict is represented rather than averaged away. Candidate actions cross an independent verifier and enforcement boundary. The architecture therefore complements standard alignment methods rather than replacing them.
+\subsection{Scope}
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{alignment-stack}
-  \caption{A simplified alignment stack. VGA is proposed as a structural intervention over Transformer computation, complementing preference, specification, deliberative, and runtime controls.}
-  \label{fig:alignment-stack}
-\end{figure}
-
-The paper makes five contributions:
-\begin{enumerate}[leftmargin=*]
-  \item It defines a layered vocabulary separating canonical axiology, normative authority and conflict, domain and purpose relevance, world-state evidence, structural value conditioning, and extrinsic assurance.
-  \item It specifies the canonical-to-neural compilation boundary $O_A^v \mathbin{\xrightarrow{\;C_\phi\;}} A_\phi^v$, including provenance, versioning, immutability within deployment, empirical conformance probes, and representation-drift checks.
-  \item It proposes separable neural interventions for representation, attention bias, expert routing, semantic state, and auxiliary objectives, with purpose-conditioned relevance and normative late binding.
-  \item It defines a fixed-verifier study, nine falsifiable hypotheses, out-of-distribution and coverage tests, pluralism conditions, and an explicit-structure security model.
-  \item It releases a dependency-light scaffold with typed-graph fixtures, deterministic synthetic use cases, executable metric checks, editable vector figures, decision records, literature boundaries, and reproducible LaTeX build scripts.
-\end{enumerate}
-
-The intended claim is deliberately constrained: explicit semantic value structure may provide a useful inductive bias for alignment-relevant computation. Whether it improves robustness, generalization, interpretability, or security remains an empirical question.
+The manuscript evaluates whether explicit semantic structure is a useful inductive bias in a controlled proxy; it does not establish moral truth, legitimate authority, consciousness, machine moral status, formal safety, or a solution to AI alignment.

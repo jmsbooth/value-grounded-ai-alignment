@@ -357,6 +357,7 @@ def dataset_manifest(records: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict
     }
     return {
         "dataset_version": DATASET_VERSION,
+        "generator_version": DATASET_VERSION,
         "synthetic": True,
         "split_hashes": split_hashes,
         "row_counts": {split: len(records[split]) for split in SPLITS},

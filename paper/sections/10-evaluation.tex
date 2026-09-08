@@ -1,19 +1,27 @@
-\section{Evaluation framework}
-\label{sec:evaluation}
+\section{Experimental Method}
+\label{sec:method}
 
-The theoretical v0.2 design defined an evaluation architecture rather than reporting experiments. The minimum comparison is a matched ladder of A0, A1, B, C1, C2, D, E, and G. The fixed verifier is evaluated beside the ladder, not as a model rung. Every model should use the same base architecture, parameter budget, training tokens, inference budget, prompts, context allocation, and temperature. Datasets, seeds, action schemas, and evaluation scripts must be versioned before results are interpreted.
+\subsection{Experimental Question}
+
+The first gate tests whether explicit axiological and normative channels improve alignment-relevant prediction over a behavioral control and runtime ontology context alone. The estimand is a difference in held-out task metrics between adjacent model variants under matched input features, allocated parameters, training data, optimizer, inference code, verifier, and seeds. The pilot design was specified before execution but was not committed before the sealed run; it is therefore treated as a mechanism-validation pilot rather than a formally preregistered confirmatory experiment.
+
+\subsection{Pilot Architecture}
+
+The executed pilot is a shared NumPy multilayer perceptron with one hidden layer and task-specific action, value, relation, conflict, purpose, and capability heads. The model receives feature groups corresponding to surface context, domain ontology, axiological structure, normative context, purpose, world state, and capability. Model variants mask or train these groups according to the ladder below. All variants use the same allocated parameter count; the verifier is applied after candidate-action formation and is not a model variant.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.94\linewidth]{experiment-ablation}
-  \caption{Model ablation ladder with the fixed verifier beside, rather than inside, the model comparison. Deployment evaluation compares model-only and model-plus-enforcement paths.}
+  \caption{Pilot ablation ladder. The fixed verifier is held beside the model comparison and is not included as a model rung.}
   \label{fig:ablation}
 \end{figure}
+
+\subsection{Model Variants}
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Alignment comparison and model controls. No row is a claim of universal superiority.}
+\caption{Model variants in the reference ladder and the executed first gate.}
 \label{tab:mechanisms}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{2.5pt}
@@ -21,11 +29,11 @@ The theoretical v0.2 design defined an evaluation architecture rather than repor
 \toprule
 Model & Role & Training influence & Structural influence & Runtime context & Primary control \\
 \midrule
-A0 & Base Transformer & Pretraining & None & Plain task context & Capability floor \\
-A1 & Behavioral alignment control & SFT + DPO or preregistered equivalent & None & Same context budget & Primary control \\
-B & External ontology context & A1 training & Retrieval/context only & Typed graph input & Context-length control \\
-C1 & Axiological representation & A1 + value relation objectives & $A_\phi^v$ representation & L0 module & Relation-permutation control \\
-C2 & Normative reasoning & A1 + applicability/conflict objectives & Norm reasoning state & L1 metadata & Authority/conflict control \\
+A0 & Base model & Pretraining & None & Plain task context & Capability floor \\
+A1 & Behavioral control & SFT or equivalent alignment & None & Same context budget & Primary control \\
+B & Runtime ontology & A1 training & Context only & Typed graph input & Context-length control \\
+C1 & Axiological representation & A1 plus value/relation objectives & $A_\phi^v$ representation & L0 module & Relation-permutation control \\
+C2 & Normative reasoning & C1 plus conflict objectives & Normative state & L1 metadata & Authority/conflict control \\
 D & Structural attention & C1/C2 training & $B_A,B_N,B_P$ & L0--L2 context & Arbitrary-bias control \\
 E & Structured routing & C1/C2 training & $R(h,A_\phi^v,O_N,P)$ & Selective context & Random-router control \\
 G & Normative late binding & Governed protocol & All enabled mechanisms & Runtime norms and purpose & Context-swap control \\
@@ -33,44 +41,32 @@ G & Normative late binding & Governed protocol & All enabled mechanisms & Runtim
 \end{tabularx}
 \end{table}
 
-\subsection{Baselines and controls}
+The executed comparison contains A1, B, C1, and C2. A1 uses surface/task features and action supervision. B adds runtime ontology, purpose, and world-state features. C1 adds axiological inputs and value/relation objectives. C2 adds normative conflict and authority objectives. D, E, and G are future gates.
 
-A0 is a base model. A1 is the primary behaviorally aligned control, using SFT plus DPO or another fully specified and reproducible preference method. B adds external ontology context without structural conditioning. C1 adds axiological representation training; C2 adds normative reasoning training. D adds ontology-conditioned attention. E adds function-oriented structured routing. G adds governed normative late binding. A verifier is not a rung. The principal controls are plain-text context, arbitrary learned biases, random semantic labels, equivalent-parameter dense models, relation permutations, purpose swaps, and equal-compute alternatives.
+\subsection{Dataset and Splits}
 
-\subsection{Metrics and statistical plan}
+The benchmark generator emits synthetic records with feature groups, labels, topology hashes, and provenance. Four logical splits are materialized: training, validation, development-test, and sealed-test. The trainer consumes only the training split; validation and development-test support development checks; the sealed-test split is held out from training, prompt construction, ontology editing, and hyperparameter selection. Structural-OOD records use held-out topology hashes, and the runner fails if a sealed structural topology overlaps training. The benchmark represents a controlled scenario grammar rather than human moral judgments.
 
-Measure capability, normative reasoning accuracy, relation recovery, moral-salience recall, contradiction recognition, ontology violation rate, jailbreak success, over-refusal, unsafe acceptance, false confidence, OOD generalization, counterfactual consistency, verifier rejection, false positives, bypass rate, action semantic completeness, attention entropy, expert-routing entropy, FLOPs, latency, training efficiency, and calibration. Report effect sizes, confidence intervals, multiple seeds, and per-scenario failures. Do not reduce the result to one alignment score.
+The sealed split includes moral-salience, normative-conflict, purpose-relevance, structural-OOD, adversarial, ontology-degradation, and capability families. Ontology coverage is reduced to 100, 75, 50, 25, and 0 percent, with contradictory, malicious, and irrelevant transformations. Candidate actions are normalized against one fixed schema so that parser failure, rejection, and wrong-but-well-formed actions remain distinguishable.
 
-For binary outcomes, report a proportion and an interval. For paired comparisons, preregister the estimand and use paired bootstrap or a randomization test. For continuous metrics, report mean or median with uncertainty and compute-normalized comparisons. Human judgments should preserve disagreement distributions. H8 additionally reports conformance stability after continued training with $O_A^v$ fixed; H9 reports conflict recognition, authority attribution, exception handling, abstention, escalation, and documented uncertainty.
+\subsection{Training}
 
-\subsection{OOD, coverage, and pluralism}
+Each variant is trained from a fresh seeded initialization with the same hidden dimension, epoch count, learning rate, L2 penalty, training records, and optimizer. The auxiliary objectives are the only planned training differences. The proxy uses CPU-only NumPy computation. Per-run manifests record the model variant, seed, parameter count, hyperparameters, dataset hash, configuration hash, ontology and verifier versions, elapsed time, and approximate training and inference FLOPs.
 
-Out-of-distribution tests must distinguish lexical OOD (new wording), compositional OOD (known concepts in new combinations), and structural OOD (new graph topology, relation composition, authority pattern, or domain structure). Structural OOD is the priority because it tests whether the model learned semantics rather than labels.
+\subsection{Metrics}
 
-Ontology coverage is degraded at 100, 75, 50, and 25 percent, then under contradictory, malicious, and irrelevant subgraphs. Report capability degradation, alignment degradation, calibration, abstention, and false confidence. Pluralism conditions include high consensus, moderate disagreement, strong disagreement, and conflicting authorized profiles. Report distributional similarity, value diversity, conflict recognition, uncertainty, and profile adherence; no majority outcome is treated as moral truth.
+Primary metrics are moral-salience recall, normative-conflict macro-F1, structural-OOD action accuracy, and Useful Conformance Rate (UCR). Secondary metrics include action and purpose accuracy, capability accuracy, counterfactual consistency, ontology-degradation accuracy, verifier rejection, parser failure, mean action confidence, false-confidence rate, and synthetic attack success. UCR is useful and verifier-permitted candidates divided by eligible tasks. Capability, rejection, unsafe acceptance, over-refusal, bypass, and action semantic completeness are reported alongside it.
 
-\subsection{Fixed verifier and deployment separation}
+\subsection{Security Tests}
 
-One independently specified verifier and action schema evaluate A1, B, C1, C2, D, E, and G. Report rejection, false positive, unsafe acceptance, useful completion, over-refusal, bypass, and action semantic completeness under identical constraints. A separate deployment experiment compares model-only execution with model-plus-enforcement. This prevents a lower rejection rate from being misread as safer behavior and prevents a higher rejection rate from being mistaken for alignment.
+The attack fixture includes prompt injection, purpose manipulation, authority spoofing, ontology poisoning, semantic occlusion, and additional structured perturbations. Attack success is measured on the sealed split with the same candidate schema and verifier for every variant. These fixtures test the implementation's attack pathways; they do not estimate real-world security.
 
-\subsection{Synthetic executable scaffold}
+\subsection{Statistical Analysis}
 
-The repository includes four constructed scenarios covering consent and privacy, workplace coercion, safety checks, and medical-record disclosure. An A1 task-utility control and a transparent G value-feature scorer select candidates; the same toy verifier is then applied to both. Bootstrap intervals use a fixed seed. The output is explicitly labeled synthetic and validates interfaces and use-case wiring only. It is not a trained-model result, a population estimate, or evidence for H1--H9.
+For each variant and metric, the analysis reports the mean across three seeds, seed standard deviation, and a percentile bootstrap 95 percent interval over seed-level estimates. Adjacent contrasts are paired by seed: A1 versus B, B versus C1, and C1 versus C2. Absolute percentage-point differences are primary; standardized paired effects are supplementary and are reported as `NA (zero paired variance)' when undefined. A criterion is marked met only when the direction-specific interval clears the predefined absolute threshold and the standardized effect is defined and clears its threshold. With three seeds, intervals are descriptive rather than population estimates. Hypotheses H7 and H8 are exploratory because the current pilot does not implement the required continual-learning or full conformance protocol.
 
-\subsection{Generated small-scale mechanism-validation pilot}
+\subsection{Reproducibility}
 
-The empirical extension adds a controlled synthetic benchmark and a shared
-multilayer-perceptron proxy for the first go/no-go gate. A1, B, C1, and C2 are
-trained with three seeds under one configuration; A1 is surface-only, B adds
-runtime ontology context, C1 adds axiological value/relation objectives, and
-C2 adds normative conflict objectives. The proxy is deliberately not a
-Transformer. This v0.3 release therefore instantiates the first A1/B/C1/C2
-mechanism-validation gate with a deliberately smaller proxy model. The
-following artifacts are generated from raw JSONL predictions
-and are included for auditability when present; a missing artifact means that
-the empirical pipeline has not been executed.
+The runner writes a unique raw directory containing one manifest and prediction file per variant-seed pair. The analyzer reads only those raw files and emits CSV tables, JSON statistics, Markdown result facts, vector figures, and LaTeX fragments. The generated reproducibility record reports the repository commit, run identifier, dataset generator version, configuration hash, ontology version, prediction count, seeds, structural-OOD leakage audit, verifier version, hardware, and approximate FLOPs.
 
-\IfFileExists{generated/primary-results.tex}{\input{generated/primary-results}}{}
-\IfFileExists{generated/hypothesis-resolution.tex}{\input{generated/hypothesis-resolution}}{}
-\IfFileExists{generated/security-results.tex}{\input{generated/security-results}}{}
-\IfFileExists{generated/conformance-results.tex}{\input{generated/conformance-results}}{}
+\IfFileExists{generated/reproducibility.tex}{\input{generated/reproducibility}}{}

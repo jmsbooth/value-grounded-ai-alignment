@@ -9,11 +9,11 @@
 | --- | --- | --- | --- |
 | 2.1 Contemporary LM alignment | RLHF, instruction tuning, DPO, red teaming, specification gaming | Treats behavioral alignment as the A1 primary control and asks whether semantic structure changes computation | Complement, not replacement |
 | 2.2 Constitutional and deliberative alignment | Written principles, AI feedback, deliberative specification reasoning | Separates canonical axiology, runtime norms, authority metadata, and unresolved conflict | No claim that typed structure resolves legitimacy |
-| 2.3 Neuro-symbolic AI | Differentiable logic, neural predicates, symbolic/LLM hybrids | Places compilation, late binding, and the verifier boundary in one alignment experiment | Architecture hypothesis only |
+| 2.3 Neuro-symbolic reasoning and formal constraint systems | Neuro-symbolic integration, SMT, Z3, SMT-LIB, policy compilation, and TLA+/TLC | Places semantic compilation, late binding, and the verifier boundary in one alignment experiment | Architecture hypothesis only |
 | 2.4 Knowledge and ontology Transformers | Entity linking, graph attention, graph structural encodings, ontology-guided graph learning | Tests whether value/norm relations affect representations, attention, and routing under semantic controls | No claim that graph structure is intrinsically moral |
 | 2.5 Value principles and pluralism | Value-principle retrieval, multidimensional values, multilingual and pluralistic alignment | Keeps value diversity, distributional disagreement, and profile adherence measurable without majority truth | No universal value list |
 | 2.6 Normative conflict and agency | Philosophical accounts of norm conflict and normative human-AI interfaces | Makes authority, jurisdiction, effective dates, exceptions, conflict, abstention, and escalation explicit runtime state | Does not automate legitimate political authority |
-| 2.7 Novelty boundary | See [`novelty-analysis-v2.md`](novelty-analysis-v2.md) | Canonical-to-neural compilation plus governed late binding plus fixed-verifier evaluation is a compound research program | Compound novelty is not component novelty |
+| 2.7 Research gap | See [`novelty-analysis-v2.md`](novelty-analysis-v2.md) | Combines governed canonical semantics, contextual norms, purpose relevance, uncertain state, structural conditioning, and independent assurance as one testable interface | Compound research program; component techniques are established or adjacent |
 
 ## Contemporary language-model alignment
 
@@ -30,6 +30,8 @@ The proposed normative layer follows that boundary: it records sources, authorit
 ## Neuro-symbolic integration
 
 Neuro-symbolic surveys and systems establish many ways to combine learned representations with symbolic constraints, differentiable logic, neural predicates, and probabilistic reasoning \\citep{garcez2019neurosymbolic,deraedt2020neurosymbolic,marra2024survey,badreddine2022logic,manhaeve2018deepproblog}. These works motivate a compilation boundary but do not establish a canonical axiology or a deployment governance model. VGA's `Conforms(A_phi^v,O_A^v)` property is consequently an empirical probe interface, not a formal proof that a neural module has the meaning of the source ontology.
+
+SMT provides a formal constraint layer rather than a neural semantics layer. The SMT-LIB initiative standardizes theories and benchmark interfaces, and Z3 is a representative SMT solver \\citep{barrett2010smtlib,barrett2025smtlib,demoura2008z3}. The AWS Block Public Access work demonstrates policy compilation to a logical formula checked with SMT \\citep{bouchet2020blockpublicaccess}. TLA and TLA+ provide a related state-transition and temporal-specification lineage, with TLC checking finite-state models \\citep{lamport1994tla,yu2003tlaplus}. CSL-Core is tracked as an implementation example of a model-external policy compiler and runtime guard, not as the source of the formal-methods concepts \\citep{chimera2026cslcore}.
 
 ## Knowledge and ontology-conditioned Transformers
 
@@ -49,7 +51,7 @@ Philosophical work on values, capabilities, non-domination, care, and political 
 
 The v0.2 proposal's distinction between L0 value-bearing properties and L1 duties is deliberately unsettled. Concepts such as moral patienthood, agency, autonomy, dignity, flourishing, welfare, suffering, capability, relational dependence, and vulnerability belong in a governed axiological vocabulary; truthfulness, justice, non-domination, confidentiality, informed consent, and fairness are more directly operationalized as norms and duties. This division is a research design choice, not a settled moral boundary.
 
-## Novelty boundary and review conclusion
+## Research gap and review conclusion
 
 The strongest defensible claim is that VGA assembles known ingredients into a specific, falsifiable alignment program: an external, versioned canonical axiology; a derived and non-authoritative neural module; separable representation/attention/routing/state interventions; late-bound normative and purpose context; and a fixed independent verifier evaluated separately from the model ladder. The component techniques are not claimed as new. See [`novelty-analysis-v2.md`](novelty-analysis-v2.md) for the row-by-row matrix and safe wording.
 

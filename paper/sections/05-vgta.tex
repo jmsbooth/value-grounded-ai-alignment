@@ -1,7 +1,7 @@
-\section{Value-Grounded Transformer Architecture}
+\subsection{Semantic-to-Neural Compilation}
 \label{sec:vgta}
 
-VGTA is a family of separable interventions over a Transformer, not one claimed optimal implementation. \Cref{fig:vgta-architecture} shows the information and authority boundaries. The repository exposes interface-level Python modules; it does not train a neural model.
+VGTA is a family of separable interventions over a Transformer. \Cref{fig:vgta-architecture} shows the information and authority boundaries. The reference design is evaluated through the pilot described in Section~\ref{sec:method}; the pilot uses a shared multilayer perceptron rather than a Transformer.
 
 \begin{figure}[t]
   \centering
@@ -10,7 +10,7 @@ VGTA is a family of separable interventions over a Transformer, not one claimed 
   \label{fig:vgta-architecture}
 \end{figure}
 
-\subsection{Canonical-to-neural compilation}
+\subsubsection{Compilation and conformance}
 
 The canonical artifact is a source of semantics and governance, not a checkpoint. A compiler or training process derives
 \[
@@ -23,7 +23,7 @@ $A_\phi^v$ may be a learned adapter, graph encoder, auxiliary representation, or
 \]
 is tested through held-out relation recovery, controlled graph completion, concept-direction stability, relation classification, behavior probes, contradiction tests, and representation-drift measurements. A high probe score does not establish semantic identity or moral truth.
 
-\subsection{Training and compilation pipeline}
+\subsubsection{Training and compilation pipeline}
 
 \Cref{fig:training-pipeline} separates ordinary alignment training from proposed value and norm interventions:
 \[
@@ -47,7 +47,12 @@ Axiological representation training may include relation prediction, graph-compl
   \label{fig:training-pipeline}
 \end{figure}
 
-\subsection{Ontology-conditioned attention}
+\subsection{Structural Conditioning}
+\label{sec:structural-conditioning}
+
+Structural conditioning exposes selected semantic relations to intermediate neural computation. The mechanisms below are separable so that each can be compared with plain context, arbitrary learned structure, and matched-compute controls.
+
+\subsubsection{Ontology-conditioned attention}
 
 For baseline scaled dot-product attention,
 \[
@@ -69,7 +74,7 @@ where
 \]
 Each $g$ should be decomposed and audited as: ontology subgraph selection, input grounding, relation encoding, learned or fixed projection, and attention-matrix construction. The evaluation compares plain text context, arbitrary learned bias, graph-conditioned bias, and semantically constrained bias, with zeroed channels, relation permutation, noisy ontology, irrelevant-subgraph, and equal-compute controls. Coefficients are experimental parameters, not a moral calculus.
 
-\subsection{Ontology-informed expert routing}
+\subsubsection{Ontology-informed expert routing}
 
 Sparse mixture-of-experts models route hidden states to a subset of experts \citep{shazeer2017sparsely,fedus2022switch}. VGTA tests
 \[
@@ -77,7 +82,7 @@ Sparse mixture-of-experts models route hidden states to a subset of experts \cit
 \]
 where $h$ is the current representation. Canonical axiology need not be queried at every token; $A_\phi^v$ can provide a compiled feature or module signal, while norms and purpose remain contextual. Experts should specialize by reasoning function---causal analysis, rights and duties, uncertainty, risk, planning, or domain expertise---rather than a single undifferentiated morality expert. Controls include a standard learned router, random semantic labels, an equivalent-parameter dense model, and an ontology-informed router. Threats include semantic spoofing, expert avoidance, starvation, an overloaded safety expert, and purpose switching.
 
-\subsection{Semantic state and auxiliary objectives}
+\subsubsection{Semantic state and auxiliary objectives}
 
 An optional episode state stores goals, entities, relationships, current purpose, affected moral patients, relevant values, applicable norms, conflicts, constraints, uncertainty, potential harms, capabilities, domain ontology, and provenance. It is a working representation, not a claim of subjective thought. Runtime binding should expose the minimal relevant subgraph and world-state assertions with versions and evidence metadata.
 

@@ -29,29 +29,25 @@
 
 \title{Value-Grounded AI Alignment: Canonical Axiology, Normative Late Binding, and Extrinsic Assurance}
 \author{James Booth}
-\date{September 2026\\[2mm]\small Small-scale empirical mechanism-validation pilot; no Transformer results}
+\date{September 2026\\[2mm]\small Scientific narrative revision; synthetic shared-MLP mechanism-validation pilot}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Alignment methods for language models improve behavioral compliance through supervised fine-tuning, preference optimization, written principles, deliberation, and runtime controls. This paper asks a narrower architectural question: can explicit value and normative structure participate in neural computation without being confused with volatile facts, contextual authority, or formal assurance? We propose Value-Grounded AI Alignment (VGA) and its reference Value-Grounded Transformer Architecture (VGTA). The design uses an external, typed, versioned, provenance-bearing canonical axiology $O_A^v$; a derived but non-authoritative axiological neural module $A_\phi^v=C_\phi(O_A^v)$; late-bound normative sources; separate domain ontology and purpose model; and an uncertain, evidence-bearing world state. Candidate interventions include representation training, ontology-conditioned attention, function-oriented routing, semantic state, and auxiliary objectives. Candidate actions cross an independent verifier boundary rather than treating neural outputs as assured merely because they are value-conditioned. We state nine falsifiable hypotheses, including axiological conformance stability and normative conflict recognition, and define matched controls, structural out-of-distribution tests, coverage degradation, pluralism conditions, security threats, and a fixed-verifier study. We execute a three-seed local pilot with A1, B, C1, and C2 shared-MLP mechanism proxies on a generated frozen benchmark. The pilot produces measurable synthetic results, but no empirical Transformer results are claimed: the proposal does not establish moral truth, consciousness, genuine emotion, or a solution to AI alignment.
+Alignment methods for language models improve behavioral compliance through supervised fine-tuning, preference optimization, written principles, deliberation, and runtime controls. This paper studies whether explicit value and normative structure can participate in neural computation while volatile facts, contextual authority, and formal assurance remain separate. Value-Grounded AI Alignment (VGA) defines an external canonical axiology $O_A^v$, a derived neural module $A_\phi^v=C_\phi(O_A^v)$, late-bound normative sources, a domain ontology, a purpose model, and an evidence-bearing world state. The reference Value-Grounded Transformer Architecture (VGTA) uses these interfaces for representation, attention, routing, semantic state, and candidate-action assurance. A three-seed pilot compares A1, B, C1, and C2 shared-MLP proxies on a frozen synthetic benchmark with structural-OOD, conformance, coverage, calibration, and attack tests. The generated results provide mechanism-level evidence for the controlled scenario grammar and identify semantic-occlusion failures. The artifact contains no empirical Transformer study and does not establish moral truth, legitimate authority, formal safety, consciousness, or a solution to AI alignment.
 \end{abstract}
 
-\noindent\textbf{Status.} Version 0.3.0 pilot. Outputs are labeled \texttt{pilot-uncommitted} and describe a synthetic shared-MLP proxy, not a Transformer or population study. Claims remain limited to generated measurements and controls.
+\noindent\textbf{Status.} Version 0.4.0 scientific narrative revision; empirical protocol v0.3.0. Outputs are labeled \texttt{pilot-uncommitted} and describe a synthetic shared-MLP proxy, not a Transformer or population study. Claims remain limited to generated measurements and controls.
 
 \input{sections/01-introduction}
 \input{sections/02-background}
 \input{sections/03-problem-formulation}
-\input{sections/04-value-grounded-alignment}
-\input{sections/05-vgta}
-\input{sections/06-normative-late-binding}
-\input{sections/07-formal-assurance}
-\input{sections/08-ontology-evolution}
-\input{sections/09-threat-model}
 \input{sections/10-evaluation}
+\input{sections/05-results}
 \input{sections/11-discussion}
 \input{sections/12-limitations}
+\input{sections/14-future-research}
 \input{sections/13-conclusion}
 
 \appendix

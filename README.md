@@ -2,7 +2,7 @@
 
 **Value-Grounded AI Alignment (VGA)** is a theoretical research program for testing whether explicit axiological and normative structure can participate in Transformer computation while authority, purpose, domain semantics, world state, and consequential actions remain separately governed.
 
-**Status: v0.3.0 empirical pilot — synthetic mechanism-validation results, no empirical Transformer results**
+**Status: v0.4.0 scientific narrative revision — v0.3.0 synthetic mechanism-validation pilot, no empirical Transformer results**
 
 > This repository proposes and tests interfaces, equations, controls, and synthetic mechanism-validation fixtures. It does not claim that value-grounded Transformers solve AI alignment, establish moral truth, or provide production safety.
 
@@ -43,6 +43,19 @@ O_A^v is the canonical axiology. A_phi^v is a learned or hybrid derivative and c
 - [docs/literature-review.md](docs/literature-review.md) — literature positioning through 2026-09-08.
 - [docs/research-roadmap.md](docs/research-roadmap.md) — phased experiments, controls, metrics, and falsification gates.
 - [SECURITY.md](SECURITY.md) — responsible-use and threat-model guidance.
+
+## Paper structure
+
+The manuscript follows a conventional scientific sequence:
+
+1. Introduction and research scope.
+2. Background and related work, including neuro-symbolic reasoning, SMT/Z3, SMT-LIB, policy compilation, and TLA+.
+3. Proposed value-grounded alignment model and the reference-versus-pilot boundary.
+4. Experimental method: pilot architecture, variants, data, metrics, security tests, statistics, and reproducibility.
+5. Generated results: primary metrics, structural OOD, candidate conformance, attacks, coverage/calibration, and hypothesis criteria.
+6. Interpretation, gaps and limitations, phased future research, and conclusion.
+
+Observed measurements are generated from raw run outputs. Proposed mechanisms and interpretations are stated in their respective sections; generated pilot results remain synthetic proxy evidence.
 
 ## Run the synthetic fixture
 
