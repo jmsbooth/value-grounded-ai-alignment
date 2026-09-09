@@ -36,6 +36,7 @@ O_A^v is the canonical axiology. A_phi^v is a learned or hybrid derivative and c
 - [experiments/evaluation/run_empirical_small.py](experiments/evaluation/run_empirical_small.py) — matched A1/B/C1/C2 pilot runner with three seeds, frozen logical splits, manifests, and raw predictions.
 - [experiments/preregistration/v0.3.md](experiments/preregistration/v0.3.md) and [experiments/configs/v0.3-small.toml](experiments/configs/v0.3-small.toml) — preregistered scope, metrics, thresholds, controls, and stopping rules.
 - [results/](results/) — generated raw manifests, processed tables, confidence intervals, facts, and figures from executed pilots. Raw run directories are never overwritten.
+- [results/reports/experimental-validation-report.md](results/reports/experimental-validation-report.md) — machine-derived freeze-era report covering methods, harness status, hypotheses, positive/null/negative results, security, calibration, capability, compute, and replication.
 - [paper/generated/](paper/generated/) — LaTeX fragments generated from result tables; no empirical numbers are manually typed into the paper.
 - [docs/architecture.md](docs/architecture.md) — active architecture description.
 - [docs/architecture-decisions.md](docs/architecture-decisions.md) — v0.2 ADR-001 through ADR-007 decision index.

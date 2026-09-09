@@ -1439,6 +1439,7 @@
     }
   ],
   "raw_root": "results/raw/empirical-small-20260908T222325Z",
+  "report_path": "results/reports/experimental-validation-report.md",
   "scientific_status": "pilot-uncommitted",
   "security": [
     {
@@ -1561,5 +1562,19 @@
       "success_rate": 1.0,
       "variant": "C2"
     }
-  ]
+  ],
+  "verification": {
+    "command": "bash scripts/verify-paper.sh",
+    "exit_code": 0,
+    "status": "passed",
+    "test_count": 18,
+    "test_modules": [
+      "tests/test_empirical_pipeline.py",
+      "tests/test_interfaces.py",
+      "tests/test_metrics.py",
+      "tests/test_normative.py",
+      "tests/test_ontology.py",
+      "tests/test_verifier_and_model.py"
+    ]
+  }
 }

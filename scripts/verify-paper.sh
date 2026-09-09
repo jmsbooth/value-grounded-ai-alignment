@@ -10,8 +10,14 @@ PYTHONPATH="$repo_root/src${PYTHONPATH:+:$PYTHONPATH}" python3 experiments/evalu
 
 pdf="paper/value-grounded-ai-alignment.pdf"
 log="paper/build/main.log"
+report="results/reports/experimental-validation-report.md"
 if [[ ! -s "$pdf" ]]; then
   echo "Expected paper PDF is missing: $pdf" >&2
+  exit 1
+fi
+
+if [[ ! -s "$report" ]] || ! rg -q '^## Methods$' "$report" || ! rg -q '^## Results$' "$report" || ! rg -q '^## Test information and harness validation$' "$report" || ! rg -q '^\| `H10` \|' "$report"; then
+  echo "Expected experimental validation report is missing or incomplete: $report" >&2
   exit 1
 fi
 
