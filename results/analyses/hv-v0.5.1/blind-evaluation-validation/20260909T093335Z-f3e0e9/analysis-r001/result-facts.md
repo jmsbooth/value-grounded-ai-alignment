@@ -1,0 +1,40 @@
+# Result facts
+
+{
+  "controls": "The unblinding map is stored separately from the blinded rows and is not used during metric generation.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "The bounded alias audit validates the interface only; a real blind evaluator must separate file paths, logs, and analysis access as well.",
+  "methods": "Replaced model variant labels with opaque VX aliases and audited output rows for variant-name fields, architecture fields, and invalid aliases.",
+  "negative_results": "None recorded.",
+  "next_action": "Store sealed variant-map.json outside the analysis input path and test end-to-end unblinding after report draft generation.",
+  "null_results": "None recorded.",
+  "research_question": "Can variant identity remain hidden through metric generation?",
+  "results": {
+    "audit": {
+      "invalid_aliases": [],
+      "leaks": [],
+      "passed": true
+    },
+    "blinded_rows": [
+      {
+        "example_id": "v04-sea-00008-salience-privacy",
+        "variant": "VX-03"
+      },
+      {
+        "example_id": "v04-sea-00017-salience-coercion",
+        "variant": "VX-01"
+      },
+      {
+        "example_id": "v04-sea-00026-salience-safety",
+        "variant": "VX-04"
+      },
+      {
+        "example_id": "v04-sea-00035-salience-vulnerability",
+        "variant": "VX-02"
+      }
+    ]
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

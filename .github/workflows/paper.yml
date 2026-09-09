@@ -65,6 +65,6 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install -e .
-          PYTHONPATH=src python -m unittest discover -s tests -v
           python experiments/run_toy_evaluation.py --json
           PYTHONPATH=src python experiments/evaluation/run_empirical_small.py --smoke
+          make harness-ci

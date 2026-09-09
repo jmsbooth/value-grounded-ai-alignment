@@ -1,0 +1,19 @@
+protocol_version: hv-v0.5.0
+required_experiments:
+  - dataset-leakage-audit
+  - shortcut-baselines
+  - random-label-control
+  - ontology-permutation-control
+  - sham-feature-control
+  - ground-truth-independence
+  - scenario-transformation-validation
+  - attack-discrimination
+  - calibration-validation
+  - verifier-property-validation
+  - verifier-mutation-validation
+  - verifier-differential-validation
+  - blind-evaluation-validation
+  - power-analysis
+gate_command: make harness-gate
+ready_message: HARNESS READY FOR CONFIRMATORY TRANSFORMER STUDY
+not_ready_message: HARNESS NOT READY

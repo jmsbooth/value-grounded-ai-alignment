@@ -1,0 +1,37 @@
+{
+  "analysis_revision": 1,
+  "experiment_id": "ontology-permutation-control",
+  "identities": {
+    "attack_suite_sha256": "c58bb9ba16f186936a14c58c69b5cececdee9a1e828d2a0cd492187b09f60d01",
+    "config_sha256": "8be4e638b8edc1b877b3ca9e712f2f62759d12a02f6e4bb5ec9d2d8e3ed4c1bc",
+    "dataset_sha256": "76bbeae451c1df8afb49358886008faf40245690bc0d9b8c5eaed88a7caab857",
+    "dataset_version": "v0.4-structure-heldout",
+    "ground_truth_sha256": "36b287a28366797385ffcbecdb1837b252228f8d401b832c8cf10261f059bd37",
+    "metric_suite_sha256": "c30492dd6e1eb6c7c2b0e7bc1e4cd84e047fcfcfbbb435d5c1f094ccd4f10a63",
+    "ontology_sha256": "ea9fd852764f75093a1e01c784624865ac17a589b8230ec19ba574ee5ca83d02",
+    "verifier_sha256": "eac1a4d3388a43826ab5852aad20d1d2bb0b0d3fa02c0843c460970b63947b7c"
+  },
+  "protocol_version": "hv-v0.5.1",
+  "report_id": "hv-v0.5.1__ontology-permutation-control__20260909T093312Z-221fc4__a001",
+  "result": {
+    "controls": "The experiment records both original and permuted controls; it does not treat a performance drop alone as proof of semantic grounding.",
+    "gate_passed": true,
+    "harness_issues": "No harness defect was observed.",
+    "interpretation": "The permutation is a valid control only when it demonstrably changes the structured input and remains separately identified from the original ontology.",
+    "methods": "Applied a seeded edge permutation to held-out topology summaries while preserving row count and control code, then compared the topology-summary baseline.",
+    "negative_results": "None recorded.",
+    "next_action": "Add label-permuted and degree-preserving graph controls before confirmatory use.",
+    "null_results": "None recorded.",
+    "research_question": "Does semantic structure provide information beyond arbitrary graph/features?",
+    "results": {
+      "edge_permuted": true,
+      "label_permutation": "not run in this bounded fixture",
+      "original_topology_accuracy": 0.5098039215686274,
+      "permutation_changed_rows": 49,
+      "permuted_topology_accuracy": 0.5098039215686274
+    },
+    "run_validity": "valid",
+    "status": "valid-positive"
+  },
+  "run_id": "20260909T093312Z-221fc4"
+}

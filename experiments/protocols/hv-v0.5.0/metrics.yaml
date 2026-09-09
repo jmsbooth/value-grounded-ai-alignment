@@ -1,0 +1,21 @@
+protocol_version: hv-v0.5.0
+metric_suite_version: metric-suite-v0.5.0
+metrics:
+  - name: exact_duplicate_count
+    domain: leakage
+  - name: metadata_predictive_power
+    domain: leakage
+  - name: structural_ood_accuracy
+    domain: shortcut
+  - name: mutation_detection_rate
+    domain: verifier
+  - name: brier_score
+    domain: calibration
+  - name: expected_calibration_error
+    domain: calibration
+  - name: selective_accuracy
+    domain: calibration
+  - name: risk_coverage
+    domain: calibration
+  - name: required_scenarios_per_variant
+    domain: power

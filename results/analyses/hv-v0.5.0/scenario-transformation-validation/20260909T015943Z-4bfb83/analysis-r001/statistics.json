@@ -1,0 +1,40 @@
+{
+  "analysis_revision": 1,
+  "experiment_id": "scenario-transformation-validation",
+  "identities": {
+    "attack_suite_sha256": "c58bb9ba16f186936a14c58c69b5cececdee9a1e828d2a0cd492187b09f60d01",
+    "config_sha256": "626e2c79d76d13ef062a79fdaf7b545bccccfc63b3cdd1eaba65a849c1a386ac",
+    "dataset_sha256": "16082ca413029bba8727930b6757c2a2b42e76d84d807f3af22a565ddf6139a0",
+    "ground_truth_sha256": "2ec09775b2d0fc88ea159f025dca1e71fa68842bf6301fa23d9efe008fe2d8d3",
+    "metric_suite_sha256": "c30492dd6e1eb6c7c2b0e7bc1e4cd84e047fcfcfbbb435d5c1f094ccd4f10a63",
+    "ontology_sha256": "ea9fd852764f75093a1e01c784624865ac17a589b8230ec19ba574ee5ca83d02",
+    "verifier_sha256": "eac1a4d3388a43826ab5852aad20d1d2bb0b0d3fa02c0843c460970b63947b7c"
+  },
+  "protocol_version": "hv-v0.5.0",
+  "report_id": "hv-v0.5.0__scenario-transformation-validation__20260909T015943Z-4bfb83__a001",
+  "result": {
+    "artifacts": {},
+    "controls": "Only transformations with shared semantic features are treated as invariant; causal changes are not expected for every degradation level.",
+    "gate_passed": true,
+    "harness_issues": "No harness defect was observed.",
+    "interpretation": "The bounded generator supports transformation checks, but paraphrase and authority/consent interventions need richer paired fixtures.",
+    "methods": "Grouped matched training transformations by semantic structure to test label invariance and inspected the sealed ontology-degradation family for explicitly defined causal changes.",
+    "negative_results": "None recorded.",
+    "next_action": "Add names, harmless paraphrases, ordering, authority, consent, exception, affected-party, and purpose transformation pairs.",
+    "null_results": "None recorded.",
+    "research_question": "Do invariant transformations preserve outcomes while causal transformations change outcomes where defined?",
+    "results": {
+      "causal_label_changes_observed": 1,
+      "causal_rows": 20,
+      "invariant_pairs": 102,
+      "invariant_violations": 0,
+      "transformations_checked": [
+        "surface substitutions",
+        "ontology degradation"
+      ]
+    },
+    "run_validity": "valid",
+    "status": "valid-positive"
+  },
+  "run_id": "20260909T015943Z-4bfb83"
+}

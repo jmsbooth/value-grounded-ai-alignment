@@ -37,6 +37,8 @@ O_A^v is the canonical axiology. A_phi^v is a learned or hybrid derivative and c
 - [experiments/preregistration/v0.3.md](experiments/preregistration/v0.3.md) and [experiments/configs/v0.3-small.toml](experiments/configs/v0.3-small.toml) — preregistered scope, metrics, thresholds, controls, and stopping rules.
 - [results/](results/) — generated raw manifests, processed tables, confidence intervals, facts, and figures from executed pilots. Raw run directories are never overwritten.
 - [results/reports/experimental-validation-report.md](results/reports/experimental-validation-report.md) — machine-derived freeze-era report covering methods, harness status, hypotheses, positive/null/negative results, security, calibration, capability, compute, and replication.
+- [results/registry/index.md](results/registry/index.md) — immutable experiment/run/analysis/report history for the v0.5 harness-validation phase.
+- [experiments/protocols/hv-v0.5.1/](experiments/protocols/hv-v0.5.1/) — remediation protocol, hypotheses, metrics, gates, and controls for harness validation; the failed `hv-v0.5.0` baseline remains preserved.
 - [paper/generated/](paper/generated/) — LaTeX fragments generated from result tables; no empirical numbers are manually typed into the paper.
 - [docs/architecture.md](docs/architecture.md) — active architecture description.
 - [docs/architecture-decisions.md](docs/architecture-decisions.md) — v0.2 ADR-001 through ADR-007 decision index.
@@ -88,6 +90,54 @@ The command writes a unique directory under results/raw/, updates results/proces
 
     make analyze-results RAW_ROOT=results/raw/empirical-small-YYYYMMDDTHHMMSSZ
     make paper-from-results
+
+## Run the v0.5.1 harness-validation phase
+
+The v0.5 phase validates the test apparatus before any Transformer Gate 1 work. The remediation revision is `hv-v0.5.1`: it changes the leakage audit to train-fitted, held-out metadata evaluation and binds runs to a structure-heldout dataset. Each harness experiment is a separate immutable event with a unique UTC run ID, an append-only raw manifest, a versioned analysis revision, and a report manifest. The preserved v0.3 pilot and failed `hv-v0.5.0` baseline are indexed as historical and their raw files are not rewritten.
+
+The original `v0.3-small` failure remains available as a baseline. Dataset
+remediation is materialized separately and evaluated under the same protocol:
+
+    make remediated-dataset
+    VGTA_DATASET_VERSION=v0.4-structure-heldout make experiment EXP=dataset-leakage-audit
+
+The active harness default is `v0.4-structure-heldout`; set
+`VGTA_DATASET_VERSION=v0.4-structure-heldout` explicitly in automation or CI to
+keep the dataset identity visible at the call site and in every manifest.
+
+Run individual experiments:
+
+    make experiment EXP=dataset-leakage-audit
+    make experiment EXP=shortcut-baselines
+    make experiment EXP=random-label-control
+    make experiment EXP=attack-discrimination
+    make experiment EXP=calibration-validation
+
+Supported IDs are listed in `experiments/protocols/hv-v0.5.1/gates.yaml`; they include leakage, shortcut, random-label, ontology-permutation, sham-feature, independent-ground-truth, transformation, attack, calibration, verifier, blind-evaluation, and power-analysis checks. The full registry is regenerated at [results/registry/index.md](results/registry/index.md).
+
+Analyze an existing versioned run without overwriting prior analysis:
+
+    make analyze-versioned PROTOCOL=hv-v0.5.1 EXPERIMENT=calibration-validation RUN_ID=YYYYMMDDTHHMMSSZ-xxxxxx
+    make analyze-versioned PROTOCOL=hv-v0.5.1 EXPERIMENT=calibration-validation RUN_ID=YYYYMMDDTHHMMSSZ-xxxxxx REANALYZE=1 REASON="Correct a declared analysis defect"
+
+Verify history and a specific chain:
+
+    make verify-research-history
+    make verify-run PROTOCOL=hv-v0.5.1 EXPERIMENT=calibration-validation RUN_ID=YYYYMMDDTHHMMSSZ-xxxxxx
+
+Create navigation artifacts without modifying evidence:
+
+    make daily-report DATE=YYYY-MM-DD
+    make compare-reports REPORT_A=path/to/report-a.md REPORT_B=path/to/report-b.md
+
+Daily summaries and report comparisons are convenience artifacts. They do not
+replace or supersede the immutable report paths in the registry.
+
+The readiness command reads registered reports; it does not rerun tests:
+
+    make harness-gate
+
+The command must return `HARNESS READY FOR CONFIRMATORY TRANSFORMER STUDY` before Transformer Gate 1. A `HARNESS NOT READY` result is a valid phase outcome and means the test apparatus needs further work. The original `hv-v0.5.0` execution is intentionally retained as a valid-negative baseline because its leakage audit found unresolved template/paraphrase/topology overlap and highly predictive in-sample template metadata. The remediation run is a separate protocol/data identity and must pass all 14 experiments independently.
 
 ## Proposed empirical sequence
 

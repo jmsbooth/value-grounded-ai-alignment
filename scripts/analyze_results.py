@@ -805,8 +805,25 @@ def analyze(raw_root: Path) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--raw-root", type=Path, required=True)
+    parser.add_argument("--raw-root", type=Path)
+    parser.add_argument("--protocol")
+    parser.add_argument("--experiment")
+    parser.add_argument("--run-id")
+    parser.add_argument("--reanalyze", action="store_true")
+    parser.add_argument("--reason", help="required explanation for an explicit reanalysis")
     args = parser.parse_args()
+    if args.protocol:
+        if not re.fullmatch(r"hv-v[0-9]+\.[0-9]+\.[0-9]+", args.protocol) or not args.experiment or not args.run_id:
+            parser.error("versioned analysis requires a materialized hv-vX.Y.Z protocol, --experiment, and --run-id")
+        sys.path.insert(0, str(ROOT))
+        from experiments.harness.common import analyze_existing
+        report = analyze_existing(protocol=args.protocol, experiment_id=args.experiment, run_id=args.run_id, reanalysis=args.reanalyze, reason=args.reason)
+        print(f"Analyzed versioned run; report={report.relative_to(ROOT)}")
+        return 0
+    if args.raw_root is None:
+        parser.error("either --raw-root or --protocol/--experiment/--run-id is required")
+    if args.reanalyze or args.reason:
+        parser.error("--reanalyze and --reason are only valid for versioned analysis")
     analyze(args.raw_root.resolve())
     print(f"Analyzed raw results from {args.raw_root}")
     return 0

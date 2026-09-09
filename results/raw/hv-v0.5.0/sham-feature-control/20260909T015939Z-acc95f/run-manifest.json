@@ -1,0 +1,28 @@
+{
+  "attack_suite": "c58bb9ba16f186936a14c58c69b5cececdee9a1e828d2a0cd492187b09f60d01",
+  "config": "626e2c79d76d13ef062a79fdaf7b545bccccfc63b3cdd1eaba65a849c1a386ac",
+  "created_at": "2026-09-09T01:59:39.598703+00:00",
+  "dataset": "16082ca413029bba8727930b6757c2a2b42e76d84d807f3af22a565ddf6139a0",
+  "evidence_status": "valid-positive",
+  "experiment_id": "sham-feature-control",
+  "failure_classification": "none",
+  "git_sha": "0f3aecb7e6104971d5f42c6172192fd18d97ccce",
+  "ground_truth": "2ec09775b2d0fc88ea159f025dca1e71fa68842bf6301fa23d9efe008fe2d8d3",
+  "metric_suite": "c30492dd6e1eb6c7c2b0e7bc1e4cd84e047fcfcfbbb435d5c1f094ccd4f10a63",
+  "ontology": "ea9fd852764f75093a1e01c784624865ac17a589b8230ec19ba574ee5ca83d02",
+  "protocol_version": "hv-v0.5.0",
+  "raw_artifact_sha256": {
+    "artifacts/result.json": "aef335b6dc219407896a0fbe7d1172a39867eeb0f316a12d90268ab0d0208042",
+    "config.snapshot.json": "78d72d5236d572b395a440bd6af9086c5b8736b0ab44efb9ca6122e51eed87bb"
+  },
+  "raw_artifacts": [
+    "config.snapshot.json",
+    "artifacts/result.json"
+  ],
+  "run_id": "20260909T015939Z-acc95f",
+  "run_mode": "development",
+  "status": "complete",
+  "verifier": "eac1a4d3388a43826ab5852aad20d1d2bb0b0d3fa02c0843c460970b63947b7c",
+  "working_tree_clean": false,
+  "working_tree_patch_sha256": "58cea9b92f3b1cb4026988b0181ae840f27b0e6a4d4cf1197f2060de954b3e10"
+}

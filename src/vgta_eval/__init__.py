@@ -8,13 +8,15 @@ its generated benchmark, not about frontier language models.
 
 from .metrics import metric_summary
 from .model import MODEL_VARIANT_GROUPS, SmallSemanticModel
-from .scenario_generator import generate_dataset, load_dataset, write_dataset
+from .scenario_generator import generate_dataset, generate_remediated_dataset, load_dataset, write_dataset, write_remediated_dataset
 
 __all__ = [
     "MODEL_VARIANT_GROUPS",
     "SmallSemanticModel",
     "generate_dataset",
+    "generate_remediated_dataset",
     "load_dataset",
     "metric_summary",
     "write_dataset",
+    "write_remediated_dataset",
 ]

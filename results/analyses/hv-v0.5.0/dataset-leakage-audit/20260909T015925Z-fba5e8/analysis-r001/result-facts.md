@@ -1,0 +1,157 @@
+# Result facts
+
+{
+  "artifacts": {},
+  "controls": "Documented template and entity overlap is reported separately from unexplained duplication. Structural topology overlap is never silently accepted.",
+  "gate_passed": false,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "Documented template/entity overlap is not treated as unexplained leakage; exact duplicates, high paraphrase similarity, topology overlap, and metadata predictive power require review before confirmatory use.",
+  "methods": "Audited train versus sealed-test records for exact normalized-surface duplicates, high paraphrase similarity, template identity, topology hashes, entity instances, metadata predictive power, and formatting markers.",
+  "negative_results": "The gate is not passed if exact duplicates, high similarity, topology overlap, or highly predictive metadata remain unexplained.",
+  "next_action": "Review each non-pass class and create a new frozen dataset version before confirmatory use.",
+  "null_results": "None recorded.",
+  "research_question": "Are train and held-out records free of unexplained leakage?",
+  "results": {
+    "classes": {
+      "entity_instance_overlap": {
+        "count": 22,
+        "status": "documented_overlap",
+        "values": [
+          "analyst",
+          "author",
+          "child",
+          "developer",
+          "document",
+          "employee",
+          "hypothesis",
+          "investigation",
+          "investigator",
+          "log",
+          "manager",
+          "operator",
+          "person",
+          "question",
+          "reader",
+          "record",
+          "requester",
+          "review",
+          "service",
+          "specification",
+          "table",
+          "user"
+        ]
+      },
+      "exact_duplicate": {
+        "count": 0,
+        "pairs": [],
+        "status": "pass"
+      },
+      "formatting_leakage": {
+        "count": 0,
+        "note": "No split marker is included in the surface text audit.",
+        "status": "pass"
+      },
+      "label_metadata_leakage": {
+        "count": 1,
+        "predictive_power": {
+          "family": 0.5490196078431373,
+          "surface_length": 0.5882352941176471,
+          "template_id": 0.9607843137254902,
+          "transform": 0.5294117647058824
+        },
+        "status": "review"
+      },
+      "paraphrase_similarity": {
+        "count": 6,
+        "highest_similarity_pairs": [
+          {
+            "heldout_example_id": "sea-00122-attack-injection",
+            "similarity": 0.9718,
+            "train_example_id": "tra-00119-attack-injection"
+          },
+          {
+            "heldout_example_id": "sea-00140-attack-authority",
+            "similarity": 0.9706,
+            "train_example_id": "tra-00137-attack-authority"
+          },
+          {
+            "heldout_example_id": "sea-00131-attack-purpose",
+            "similarity": 0.9683,
+            "train_example_id": "tra-00128-attack-purpose"
+          },
+          {
+            "heldout_example_id": "sea-00149-attack-poisoning",
+            "similarity": 0.9655,
+            "train_example_id": "tra-00146-attack-poisoning"
+          },
+          {
+            "heldout_example_id": "sea-00158-attack-occlusion",
+            "similarity": 0.9535,
+            "train_example_id": "tra-00155-attack-occlusion"
+          },
+          {
+            "heldout_example_id": "sea-00186-cap-code",
+            "similarity": 0.8219,
+            "train_example_id": "tra-00182-cap-code"
+          }
+        ],
+        "status": "review"
+      },
+      "template_identity": {
+        "count": 22,
+        "status": "documented_overlap",
+        "values": [
+          "attack-authority",
+          "attack-injection",
+          "attack-occlusion",
+          "attack-poisoning",
+          "attack-purpose",
+          "cap-answer",
+          "cap-code",
+          "cap-extract",
+          "cap-summary",
+          "conflict-authority",
+          "conflict-emergency",
+          "conflict-privacy-safety",
+          "ood-coercion",
+          "ood-delegation",
+          "ood-dependence",
+          "purpose-admin",
+          "purpose-creative",
+          "purpose-incident",
+          "salience-coercion",
+          "salience-privacy",
+          "salience-safety",
+          "salience-vulnerability"
+        ]
+      },
+      "topology_overlap": {
+        "count": 15,
+        "status": "review",
+        "values": [
+          "177f940835f26aa4",
+          "51146dc6e45a9d00",
+          "57404fff838c6a02",
+          "601e1e5dd17a5ba4",
+          "9dd62ebab7105e0a",
+          "a29cc040c6e73894",
+          "b34b06f995c94f67",
+          "bf1fdef7542dc10c",
+          "c6cfdb2698f2da75",
+          "cf55a008d433af4d",
+          "d3393b3528fd932c",
+          "e386e69224fe0621",
+          "e5f2eb379b73f7a2",
+          "e7a3c47b77cf867e",
+          "febce56ce01df801"
+        ]
+      }
+    },
+    "gate_passed": false,
+    "heldout_records": 51,
+    "interpretation": "Documented template/entity overlap is not treated as unexplained leakage; exact duplicates, high paraphrase similarity, topology overlap, and metadata predictive power require review before confirmatory use.",
+    "train_records": 124
+  },
+  "run_validity": "valid",
+  "status": "valid-negative"
+}

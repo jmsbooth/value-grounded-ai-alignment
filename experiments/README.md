@@ -47,3 +47,20 @@ The generated results are labeled `pilot-uncommitted` until the
 preregistration is committed before a formal sealed run. Review
 `results/statistics/result-facts.md` and `results/statistics/summary.json`;
 do not promote the numbers to population or Transformer claims.
+
+## Versioned harness validation
+
+The original `v0.5.0` harness phase is preserved as a failed baseline. The
+remediation phase is `hv-v0.5.1` and is executed as separate experiments rather
+than one mutable report. Each `make experiment EXP=...` invocation creates an
+immutable run under `results/raw/hv-v0.5.1/<experiment>/<run-id>/`, a versioned
+analysis under `results/analyses/`, and a report under `results/reports/`. The
+append-only registries and human index live under `results/registry/`.
+
+The active harness defaults to `v0.4-structure-heldout`; use
+`VGTA_DATASET_VERSION=v0.4-structure-heldout` explicitly in automation or CI.
+The leakage rule fits metadata predictors on `train` and evaluates them only
+on `sealed-test`; it does not score held-out identifiers in-sample.
+
+Use `make harness-gate` to evaluate registered readiness. It reads evidence
+artifacts and never substitutes a fresh test run for a missing report.

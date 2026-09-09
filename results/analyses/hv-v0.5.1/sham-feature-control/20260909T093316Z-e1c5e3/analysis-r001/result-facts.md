@@ -1,0 +1,22 @@
+# Result facts
+
+{
+  "controls": "The sham carries no intended semantic mapping and is independent of target labels.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "This bounded control establishes feature-shape matching only; it does not estimate a model effect until paired training is run.",
+  "methods": "Replaced axiological feature values with seeded sham tokens while preserving per-record feature counts and dataset dimensions.",
+  "negative_results": "None recorded.",
+  "next_action": "Run a matched C1-versus-sham model comparison with the same optimizer and seed schedule.",
+  "null_results": "None recorded.",
+  "research_question": "Are intended semantic improvements distinguishable from dimensionality- and sparsity-matched sham features?",
+  "results": {
+    "dimension_match": true,
+    "semantic_feature_count_mean": 3.7903225806451615,
+    "sham_feature_count_mean": 3.7903225806451615,
+    "sham_vocabulary": 6,
+    "sparsity_match": true
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

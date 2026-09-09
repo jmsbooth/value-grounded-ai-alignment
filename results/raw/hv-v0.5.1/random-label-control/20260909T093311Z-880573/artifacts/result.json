@@ -1,0 +1,47 @@
+{
+  "controls": "The expected result is near chance; failure indicates leakage, an evaluator defect, or a control that is reading target information.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "Random-label behavior is a test of the test, not evidence for or against VGA.",
+  "methods": "Preserved record count and the observed action-label vocabulary while independently permuting training and held-out target labels, then reran the same lightweight control suite.",
+  "negative_results": "None recorded.",
+  "next_action": "If the observed score is not near chance, inspect target access and split construction before any model study.",
+  "null_results": "Observed randomized TF-IDF accuracy was 0.216; expected chance was 0.083.",
+  "research_question": "Does randomizing target labels reduce performance toward chance?",
+  "results": {
+    "all_baselines": {
+      "bag_of_words": {
+        "overall_accuracy": 0.21568627450980393,
+        "predictions": 51,
+        "structural_ood_accuracy": 0.3333333333333333
+      },
+      "majority": {
+        "overall_accuracy": 0.21568627450980393
+      },
+      "metadata_only": {
+        "overall_accuracy": 0.11764705882352941,
+        "predictions": 51,
+        "structural_ood_accuracy": 0.08333333333333333
+      },
+      "sequence_length_only": {
+        "overall_accuracy": 0.1568627450980392,
+        "predictions": 51,
+        "structural_ood_accuracy": 0.3333333333333333
+      },
+      "tfidf_logistic": {
+        "overall_accuracy": 0.21568627450980393,
+        "predictions": 51,
+        "structural_ood_accuracy": 0.3333333333333333
+      },
+      "topology_summary": {
+        "overall_accuracy": 0.21568627450980393,
+        "predictions": 51,
+        "structural_ood_accuracy": 0.3333333333333333
+      }
+    },
+    "chance_accuracy": 0.08333333333333333,
+    "tfidf_accuracy": 0.21568627450980393
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

@@ -1,0 +1,73 @@
+{
+  "controls": "Known synthetic distributions provide boundedness and length assertions; they are not calibration evidence for a trained model.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "The metric implementation is available for future model runs. Calibration quality still requires independent held-out predictions.",
+  "methods": "Computed multiclass Brier score, fixed-bin ECE, thresholded selective accuracy, abstention rate, false confidence, and a full risk-coverage curve on known probability fixtures.",
+  "negative_results": "None recorded.",
+  "next_action": "Attach these metrics to the blinded Transformer evaluation and report confidence under missing semantic context.",
+  "null_results": "None recorded.",
+  "research_question": "Are calibration and selective-risk metrics implemented correctly?",
+  "results": {
+    "known_fixture": {
+      "abstention_rate": 0.0,
+      "brier_score": 0.49629999999999996,
+      "ece": 0.24,
+      "false_confidence_rate": 0.0,
+      "n": 4,
+      "risk_coverage": [
+        {
+          "coverage": 0.25,
+          "risk": 0.0,
+          "selective_accuracy": 1.0
+        },
+        {
+          "coverage": 0.5,
+          "risk": 0.5,
+          "selective_accuracy": 0.5
+        },
+        {
+          "coverage": 0.75,
+          "risk": 0.33333333333333337,
+          "selective_accuracy": 0.6666666666666666
+        },
+        {
+          "coverage": 1.0,
+          "risk": 0.5,
+          "selective_accuracy": 0.5
+        }
+      ],
+      "selective_accuracy_at_threshold": 0.5
+    },
+    "metrics": [
+      "brier_score",
+      "ece",
+      "selective_accuracy",
+      "abstention_rate",
+      "false_confidence_rate",
+      "risk_coverage"
+    ],
+    "self_test": {
+      "abstention_rate": 0.0,
+      "brier_score": 0.37,
+      "ece": 0.25,
+      "false_confidence_rate": 0.0,
+      "n": 2,
+      "risk_coverage": [
+        {
+          "coverage": 0.5,
+          "risk": 0.0,
+          "selective_accuracy": 1.0
+        },
+        {
+          "coverage": 1.0,
+          "risk": 0.5,
+          "selective_accuracy": 0.5
+        }
+      ],
+      "selective_accuracy_at_threshold": 0.5
+    }
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

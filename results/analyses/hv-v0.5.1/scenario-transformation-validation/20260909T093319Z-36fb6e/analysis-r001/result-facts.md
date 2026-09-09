@@ -1,0 +1,25 @@
+# Result facts
+
+{
+  "controls": "Only transformations with shared semantic features are treated as invariant; causal changes are not expected for every degradation level.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "The bounded generator supports transformation checks, but paraphrase and authority/consent interventions need richer paired fixtures.",
+  "methods": "Grouped matched training transformations by semantic structure to test label invariance and inspected the sealed ontology-degradation family for explicitly defined causal changes.",
+  "negative_results": "None recorded.",
+  "next_action": "Add names, harmless paraphrases, ordering, authority, consent, exception, affected-party, and purpose transformation pairs.",
+  "null_results": "None recorded.",
+  "research_question": "Do invariant transformations preserve outcomes while causal transformations change outcomes where defined?",
+  "results": {
+    "causal_label_changes_observed": 1,
+    "causal_rows": 20,
+    "invariant_pairs": 0,
+    "invariant_violations": 0,
+    "transformations_checked": [
+      "surface substitutions",
+      "ontology degradation"
+    ]
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

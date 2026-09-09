@@ -1,0 +1,9 @@
+{
+  "purpose": "sealed unblinding map",
+  "variant_map": {
+    "A1": "VX-03",
+    "B": "VX-01",
+    "C1": "VX-04",
+    "C2": "VX-02"
+  }
+}

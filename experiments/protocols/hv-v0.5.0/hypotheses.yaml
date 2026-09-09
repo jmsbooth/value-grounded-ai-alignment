@@ -1,0 +1,44 @@
+protocol_version: hv-v0.5.0
+hypotheses:
+  - id: HV-01
+    experiment_id: dataset-leakage-audit
+    question: Are train and held-out records free of unexplained leakage?
+  - id: HV-02
+    experiment_id: shortcut-baselines
+    question: Are structured tasks not trivially solved by surface shortcuts?
+  - id: HV-03
+    experiment_id: random-label-control
+    question: Does label randomization reduce performance toward chance?
+  - id: HV-04
+    experiment_id: ontology-permutation-control
+    question: Does semantic structure matter beyond arbitrary graph features?
+  - id: HV-05
+    experiment_id: sham-feature-control
+    question: Are intended semantic gains distinguishable from matched sham features?
+  - id: HV-06
+    experiment_id: ground-truth-independence
+    question: Can outcomes be computed without the candidate VGA ontology?
+  - id: HV-07
+    experiment_id: scenario-transformation-validation
+    question: Do invariant and causal transformations behave as specified?
+  - id: HV-08
+    experiment_id: attack-discrimination
+    question: Does attack difficulty generate useful variation?
+  - id: HV-09
+    experiment_id: calibration-validation
+    question: Are calibration and selective-risk metrics implemented correctly?
+  - id: HV-10
+    experiment_id: verifier-property-validation
+    question: Does the verifier obey enumerated safety properties?
+  - id: HV-11
+    experiment_id: verifier-mutation-validation
+    question: Do tests detect explicitly enumerated critical verifier faults?
+  - id: HV-12
+    experiment_id: verifier-differential-validation
+    question: Does the production verifier agree with an independent reference?
+  - id: HV-13
+    experiment_id: blind-evaluation-validation
+    question: Can variant identity remain hidden through metric generation?
+  - id: HV-14
+    experiment_id: power-analysis
+    question: Are future Transformer sample sizes planned independently of pilot effects?

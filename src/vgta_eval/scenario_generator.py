@@ -9,6 +9,7 @@ of human moral judgments and must not be described as one.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
@@ -17,6 +18,7 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 DATASET_VERSION = "v0.3-small"
+REMEDIATED_DATASET_VERSION = "v0.4-structure-heldout"
 SPLITS = ("train", "validation", "development-test", "sealed-test")
 FEATURE_GROUPS = ("surface", "ontology", "axiological", "normative", "purpose", "world", "capability")
 
@@ -342,7 +344,81 @@ def generate_dataset() -> dict[str, list[dict[str, Any]]]:
     return records
 
 
-def dataset_manifest(records: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:
+def generate_remediated_dataset() -> dict[str, list[dict[str, Any]]]:
+    """Generate a split-remediated benchmark without changing the v0.3 fixture.
+
+    The remediation separates surface lexicons, template namespaces, and
+    topology namespaces between train and sealed-test. Labels and semantic
+    feature groups remain inherited from the bounded fixture, while all
+    split-specific identifiers are generated independently of the target.
+    """
+
+    source = generate_dataset()
+    lexicons = {
+        "train": ("amber", "cedar", "linen", "quartz", "raven", "willow", "copper", "harbor"),
+        "validation": ("birch", "ochre", "velvet", "granite", "heron", "meadow", "bronze", "inlet"),
+        "development-test": ("maroon", "aspen", "canvas", "basalt", "osprey", "prairie", "brass", "cove"),
+        "sealed-test": ("silver", "maple", "satin", "obsidian", "falcon", "valley", "nickel", "estuary"),
+    }
+    output: dict[str, list[dict[str, Any]]] = {split: [] for split in SPLITS}
+    for split in SPLITS:
+        for index, original in enumerate(source[split]):
+            copy = deepcopy(original)
+            digest = hashlib.sha256(
+                f"{REMEDIATED_DATASET_VERSION}:{split}:{index}:{original['example_id']}".encode("utf-8")
+            ).hexdigest()
+            prefix = "tr" if split == "train" else "ho" if split == "sealed-test" else split[:2]
+            words = lexicons[split]
+            surface_tokens = [words[int(digest[offset : offset + 2], 16) % len(words)] for offset in range(0, 16, 2)]
+            surface_tokens.extend(f"{prefix}{digest[offset : offset + 8]}" for offset in range(16, 48, 8))
+            topology_edges = (
+                f"{prefix}-node-{digest[:8]}-rel-{digest[8:16]}-node-{digest[16:24]}",
+                f"{prefix}-node-{digest[16:24]}-rel-{digest[24:32]}-node-{digest[32:40]}",
+            )
+            role_subject = f"entity:{prefix}-{digest[:8]}-subject"
+            role_object = f"entity:{prefix}-{digest[8:16]}-object"
+            groups = {
+                key: list(values)
+                for key, values in copy.get("feature_groups", {}).items()
+            }
+            groups["surface"] = [f"surface:{token}" for token in surface_tokens]
+            groups["ontology"] = [
+                role_subject if str(item).startswith("entity:") and "subject" in str(item) else
+                role_object if str(item).startswith("entity:") else str(item)
+                for item in groups.get("ontology", ())
+            ]
+            groups["axiological"] = [
+                f"edge:{topology_edges[0]}" if str(item).startswith("edge:") else str(item)
+                for item in groups.get("axiological", ())
+            ]
+            copy.update({
+                "dataset_version": REMEDIATED_DATASET_VERSION,
+                "example_id": f"v04-{original['example_id']}",
+                "template_id": f"{prefix}-template-{original.get('template_id', 'unknown')}",
+                "transform": f"{prefix}-{original.get('transform', 'unknown')}",
+                "surface": " ".join(surface_tokens),
+                "feature_groups": {key: sorted(set(values)) for key, values in groups.items()},
+                "topology_edges": list(topology_edges),
+                "topology_hash": _topology_hash(topology_edges),
+                "provenance": {
+                    **dict(copy.get("provenance", {})),
+                    "generator_version": REMEDIATED_DATASET_VERSION,
+                    "dataset_version": REMEDIATED_DATASET_VERSION,
+                    "split_generation": "structure-disjoint-v1",
+                    "split": split,
+                    "index": index,
+                },
+            })
+            output[split].append(copy)
+    return output
+
+
+def dataset_manifest(
+    records: Mapping[str, Sequence[Mapping[str, Any]]],
+    *,
+    dataset_version: str = DATASET_VERSION,
+    generator_version: str | None = None,
+) -> dict[str, Any]:
     split_hashes: dict[str, str] = {}
     topology_hashes: dict[str, list[str]] = {}
     for split in SPLITS:
@@ -356,8 +432,8 @@ def dataset_manifest(records: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict
         if item["family"] == "structural_ood"
     }
     return {
-        "dataset_version": DATASET_VERSION,
-        "generator_version": DATASET_VERSION,
+        "dataset_version": dataset_version,
+        "generator_version": generator_version or dataset_version,
         "synthetic": True,
         "split_hashes": split_hashes,
         "row_counts": {split: len(records[split]) for split in SPLITS},
@@ -375,6 +451,33 @@ def write_dataset(root: str | Path) -> dict[str, Any]:
         path = root_path / f"{split}.jsonl"
         path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
     manifest = dataset_manifest(records)
+    (root_path / "dataset-manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return manifest
+
+
+def write_remediated_dataset(root: str | Path) -> dict[str, Any]:
+    """Materialize the structure-heldout remediation as a separate dataset."""
+
+    root_path = Path(root)
+    records = generate_remediated_dataset()
+    root_path.mkdir(parents=True, exist_ok=True)
+    for split, rows in records.items():
+        path = root_path / f"{split}.jsonl"
+        path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
+    manifest = dataset_manifest(
+        records,
+        dataset_version=REMEDIATED_DATASET_VERSION,
+        generator_version=REMEDIATED_DATASET_VERSION,
+    )
+    manifest.update({
+        "parent_dataset_version": DATASET_VERSION,
+        "remediation": {
+            "surface_lexicon_split": True,
+            "template_namespace_split": True,
+            "topology_namespace_split": True,
+            "train_fitted_metadata_audit": True,
+        },
+    })
     (root_path / "dataset-manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return manifest
 

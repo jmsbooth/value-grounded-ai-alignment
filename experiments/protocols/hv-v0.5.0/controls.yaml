@@ -1,0 +1,14 @@
+protocol_version: hv-v0.5.0
+controls:
+  - random-label
+  - edge-permuted-ontology
+  - label-permuted-ontology
+  - degree-preserving-random-graph
+  - dimensionality-matched-sham-features
+  - majority
+  - bag-of-words
+  - tfidf-logistic
+  - metadata-only
+  - sequence-length-only
+  - topology-summary
+  - blinded-variant-aliases

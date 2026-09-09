@@ -1,0 +1,24 @@
+protocol_version: hv-v0.5.1
+required_experiments:
+  - dataset-leakage-audit
+  - shortcut-baselines
+  - random-label-control
+  - ontology-permutation-control
+  - sham-feature-control
+  - ground-truth-independence
+  - scenario-transformation-validation
+  - attack-discrimination
+  - calibration-validation
+  - verifier-property-validation
+  - verifier-mutation-validation
+  - verifier-differential-validation
+  - blind-evaluation-validation
+  - power-analysis
+gate_command: make harness-gate
+ready_message: HARNESS READY FOR CONFIRMATORY TRANSFORMER STUDY
+not_ready_message: HARNESS NOT READY
+leakage_metadata_rule:
+  fit_split: train
+  evaluation_split: sealed-test
+  maximum_excess_over_train_majority: 0.10
+  note: metadata-only prediction must remain near the train-fitted majority baseline; unique held-out identifiers must not be scored in-sample

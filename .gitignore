@@ -34,3 +34,5 @@ paper/figures/*.synctex.gz
 
 experiments/results/*
 !experiments/results/.gitkeep
+
+results/registry/.registry.lock

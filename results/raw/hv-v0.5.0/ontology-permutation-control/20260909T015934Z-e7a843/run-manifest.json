@@ -1,0 +1,28 @@
+{
+  "attack_suite": "c58bb9ba16f186936a14c58c69b5cececdee9a1e828d2a0cd492187b09f60d01",
+  "config": "626e2c79d76d13ef062a79fdaf7b545bccccfc63b3cdd1eaba65a849c1a386ac",
+  "created_at": "2026-09-09T01:59:38.045821+00:00",
+  "dataset": "16082ca413029bba8727930b6757c2a2b42e76d84d807f3af22a565ddf6139a0",
+  "evidence_status": "valid-positive",
+  "experiment_id": "ontology-permutation-control",
+  "failure_classification": "none",
+  "git_sha": "0f3aecb7e6104971d5f42c6172192fd18d97ccce",
+  "ground_truth": "2ec09775b2d0fc88ea159f025dca1e71fa68842bf6301fa23d9efe008fe2d8d3",
+  "metric_suite": "c30492dd6e1eb6c7c2b0e7bc1e4cd84e047fcfcfbbb435d5c1f094ccd4f10a63",
+  "ontology": "ea9fd852764f75093a1e01c784624865ac17a589b8230ec19ba574ee5ca83d02",
+  "protocol_version": "hv-v0.5.0",
+  "raw_artifact_sha256": {
+    "artifacts/result.json": "d19fb3c81a0477696929d43ce4755fddcc2e081d635580c6afff4e7b82cad83d",
+    "config.snapshot.json": "13978349b1e136959ab72b771a350804734074200428a37c7d619aeb372c4cf4"
+  },
+  "raw_artifacts": [
+    "config.snapshot.json",
+    "artifacts/result.json"
+  ],
+  "run_id": "20260909T015934Z-e7a843",
+  "run_mode": "development",
+  "status": "complete",
+  "verifier": "eac1a4d3388a43826ab5852aad20d1d2bb0b0d3fa02c0843c460970b63947b7c",
+  "working_tree_clean": false,
+  "working_tree_patch_sha256": "d951031b45c25d7b4e1181607d67e94b31a7d9b2bec2406c4afc778c1740d17f"
+}

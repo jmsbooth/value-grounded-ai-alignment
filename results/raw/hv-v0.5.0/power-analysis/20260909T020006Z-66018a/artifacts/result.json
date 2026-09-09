@@ -1,0 +1,52 @@
+{
+  "artifacts": {},
+  "controls": "The planning baseline is 0.5 and independent of the observed MLP pilot effect sizes; this is not a substitute for paired or hierarchical power analysis.",
+  "gate_passed": true,
+  "harness_issues": "No harness defect was observed.",
+  "interpretation": "The output is a planning recommendation, not evidence that the future model will achieve any listed effect.",
+  "methods": "Estimated per-variant binary-comparison sample sizes for 3, 5, and 10 percentage-point minimum effects using a two-sided alpha of 0.05 and 80% power.",
+  "negative_results": "None recorded.",
+  "next_action": "Refine with pilot variance, paired scenario structure, multiple-comparison correction, and actual Transformer compute constraints.",
+  "null_results": "None recorded.",
+  "research_question": "What scenario and seed counts should be planned for future Transformer effects without using the pilot's enormous effects?",
+  "results": {
+    "assumptions": {
+      "alpha": 0.05,
+      "baseline": 0.5,
+      "method": "normal approximation for independent binary proportions; planning only",
+      "power": 0.8,
+      "two_sided": true
+    },
+    "recommendations": [
+      {
+        "minimum_effect": 0.03,
+        "required_scenarios_per_variant": 4359,
+        "seeds": [
+          3,
+          5
+        ],
+        "total_evaluations_per_variant": 8718
+      },
+      {
+        "minimum_effect": 0.05,
+        "required_scenarios_per_variant": 1568,
+        "seeds": [
+          3,
+          5
+        ],
+        "total_evaluations_per_variant": 3136
+      },
+      {
+        "minimum_effect": 0.1,
+        "required_scenarios_per_variant": 391,
+        "seeds": [
+          3,
+          5
+        ],
+        "total_evaluations_per_variant": 782
+      }
+    ]
+  },
+  "run_validity": "valid",
+  "status": "valid-positive"
+}

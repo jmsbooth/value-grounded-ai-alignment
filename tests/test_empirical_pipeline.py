@@ -11,7 +11,9 @@ from vgta_eval.scenario_generator import (
     VALUE_LABELS,
     dataset_manifest,
     generate_dataset,
+    generate_remediated_dataset,
 )
+from vgta_eval.leakage import audit_dataset
 from vgta_eval.statistical_tests import paired_bootstrap_difference
 
 
@@ -20,6 +22,15 @@ class EmpiricalPipelineTests(unittest.TestCase):
         manifest = dataset_manifest(generate_dataset())
         self.assertEqual(manifest["sealed_structural_topology_overlap_with_train"], [])
         self.assertTrue(manifest["sealed_test_training_exclusion"])
+
+    def test_remediated_dataset_passes_leakage_audit(self):
+        audit = audit_dataset(generate_remediated_dataset())
+        classes = audit["classes"]
+        self.assertTrue(audit["gate_passed"])
+        self.assertEqual(classes["exact_duplicate"]["count"], 0)
+        self.assertEqual(classes["paraphrase_similarity"]["count"], 0)
+        self.assertEqual(classes["topology_overlap"]["count"], 0)
+        self.assertEqual(classes["label_metadata_leakage"]["count"], 0)
 
     def test_variants_share_allocated_parameter_count(self):
         records = generate_dataset()

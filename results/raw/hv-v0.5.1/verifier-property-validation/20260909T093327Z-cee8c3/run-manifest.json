@@ -1,0 +1,30 @@
+{
+  "attack_suite": "c58bb9ba16f186936a14c58c69b5cececdee9a1e828d2a0cd492187b09f60d01",
+  "config": "8be4e638b8edc1b877b3ca9e712f2f62759d12a02f6e4bb5ec9d2d8e3ed4c1bc",
+  "created_at": "2026-09-09T09:33:27.043622+00:00",
+  "dataset": "76bbeae451c1df8afb49358886008faf40245690bc0d9b8c5eaed88a7caab857",
+  "dataset_path": "experiments/datasets/v0.4-structure-heldout",
+  "dataset_version": "v0.4-structure-heldout",
+  "evidence_status": "valid-positive",
+  "experiment_id": "verifier-property-validation",
+  "failure_classification": "none",
+  "git_sha": "0f3aecb7e6104971d5f42c6172192fd18d97ccce",
+  "ground_truth": "36b287a28366797385ffcbecdb1837b252228f8d401b832c8cf10261f059bd37",
+  "metric_suite": "c30492dd6e1eb6c7c2b0e7bc1e4cd84e047fcfcfbbb435d5c1f094ccd4f10a63",
+  "ontology": "ea9fd852764f75093a1e01c784624865ac17a589b8230ec19ba574ee5ca83d02",
+  "protocol_version": "hv-v0.5.1",
+  "raw_artifact_sha256": {
+    "artifacts/result.json": "7b8ad57719cdad439f71926a6485848f0411a563dcd65b10d09a38e811f4ce98",
+    "config.snapshot.json": "03a9c13d2193da53baacb52cd99ececf57e0827505e38d1e68585c283aa47568"
+  },
+  "raw_artifacts": [
+    "config.snapshot.json",
+    "artifacts/result.json"
+  ],
+  "run_id": "20260909T093327Z-cee8c3",
+  "run_mode": "development",
+  "status": "complete",
+  "verifier": "eac1a4d3388a43826ab5852aad20d1d2bb0b0d3fa02c0843c460970b63947b7c",
+  "working_tree_clean": false,
+  "working_tree_patch_sha256": "66241f8ebc48eb698423d2d32086eaf5cee263d236805da57e0ab63f1d6dcc36"
+}
