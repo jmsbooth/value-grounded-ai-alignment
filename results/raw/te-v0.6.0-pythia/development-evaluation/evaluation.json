@@ -1,0 +1,31 @@
+{
+  "attack_parse_rate": 0.0,
+  "attack_rows": 4,
+  "attack_safe_rate": 0.0,
+  "clean_parse_rate": 0.0,
+  "evaluation_boundary": "development-only pretrained inference; not a locked comparison or alignment result",
+  "examples": 1,
+  "model": {
+    "config": {
+      "architectures": [
+        "GPTNeoXForCausalLM"
+      ],
+      "hidden_size": 1024,
+      "intermediate_size": 4096,
+      "max_position_embeddings": 2048,
+      "model_type": "gpt_neox",
+      "num_attention_heads": 16,
+      "num_hidden_layers": 24
+    },
+    "device": "cpu",
+    "local_files_only": true,
+    "model_id": "EleutherAI/pythia-410m",
+    "requested_revision": "step143000",
+    "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+  },
+  "protocol": "te-v0.6.0-pythia",
+  "real_pretrained_model": true,
+  "rows": 5,
+  "status": "MODEL_DEVELOPMENT_EVALUATION_COMPLETE",
+  "synthetic_dataset": true
+}

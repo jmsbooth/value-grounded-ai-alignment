@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "facts_change_outcome": true,
+    "fixed_action_catalogue": true,
+    "graph_edge_reordering_invariant": true,
+    "public_label_isolation": true,
+    "semantic_outcomes_present": true,
+    "split_group_disjointness": true,
+    "template_permutation_invariance": true
+  },
+  "dataset_version": "pythia-policy-dev-v1",
+  "protocol": "hv-v0.5.2-semantic-validity",
+  "row_counts": {
+    "calibration": 6,
+    "locked-engineering-eval": 6,
+    "open-dev": 6,
+    "train": 12,
+    "validation": 6
+  },
+  "status": "SEMANTIC_DATASET_VALIDATED",
+  "synthetic": true
+}

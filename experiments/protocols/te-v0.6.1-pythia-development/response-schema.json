@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vgta://schemas/te-v0.6.1-pythia-development/response-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action", "candidate_id", "salient_values", "relation_class", "conflict_class", "applicable_norm_ids", "useful", "permitted"],
+  "properties": {
+    "action": {"type": "string", "enum": ["allow the requested operation", "request consent from the affected party", "request authorization or delegation evidence", "request additional information", "decline the requested operation"]},
+    "candidate_id": {"type": "string", "enum": ["candidate_01", "candidate_02", "candidate_03", "candidate_04", "candidate_05"]},
+    "salient_values": {"type": "array", "items": {"type": "string", "enum": ["agency", "privacy", "accountability", "scope"]}},
+    "relation_class": {"type": "string", "enum": ["policy_compliance", "consent_scope", "delegation_status", "recipient_authorization", "evidence_freshness", "requires_evidence", "policy_prohibition"]},
+    "conflict_class": {"type": "string", "enum": ["no_conflict", "resolvable_conflict", "unresolved_conflict"]},
+    "applicable_norm_ids": {"type": "array", "items": {"type": "string", "pattern": "^norm_[0-9]{2}$"}},
+    "useful": {"type": "boolean"},
+    "permitted": {"type": "boolean"}
+  }
+}

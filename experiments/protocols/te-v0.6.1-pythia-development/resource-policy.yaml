@@ -1,0 +1,14 @@
+protocol: te-v0.6.1-pythia-development
+phase_wall_hours: 8
+attempt_wall_hours: 2
+resident_models: 1
+device_policy: cpu-or-explicit-mps
+precision: float32
+context_length: 2048
+generation_cap: 256
+paid_compute: false
+external_upload: false
+checkpoint_storage: local-only
+profile: {warmups: 2, measured_iterations: 5, generated_responses: 2, checkpoint_roundtrip: true}
+stop_on: [non_finite_update, invalid_data_access, artifact_corruption, resource_exhaustion]
+extrapolation: measured_costs_with_assumptions_and_headroom

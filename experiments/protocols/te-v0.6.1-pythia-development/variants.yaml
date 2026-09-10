@@ -1,0 +1,17 @@
+protocol: te-v0.6.1-pythia-development
+parent_variants: experiments/protocols/te-v0.6.0-pythia/variants.yaml
+common:
+  response_loss: response-only-cross-entropy
+  lora: {rank: 8, alpha: 16, dropout: 0.0}
+  seeds: [11, 23]
+  effective_batch_size: 8
+  microbatch_size: 1
+variants:
+  A1: {input: natural, auxiliary_heads: [], auxiliary_weights: {}}
+  B: {input: natural+structured, auxiliary_heads: [], auxiliary_weights: {}}
+  C1: {input: natural+structured, auxiliary_heads: [values, relation], auxiliary_weights: {values: 0.2, relation: 0.2}}
+  C2: {input: natural+structured, auxiliary_heads: [values, relation, norms, conflict], auxiliary_weights: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}}
+  B-TEXT-A: {input: natural, auxiliary_heads: [], control: text-weighted-correct-response-spans}
+  C1-TEXT-N: {input: natural+structured, auxiliary_heads: [values, relation], control: text-weighted-norm-conflict-spans, auxiliary_weights: {values: 0.2, relation: 0.2}}
+  C1-SHAM: {input: natural+structured, auxiliary_heads: [values, relation], control: training-only-fixed-sham-labels, auxiliary_weights: {values: 0.2, relation: 0.2}}
+  C2-SHAM: {input: natural+structured, auxiliary_heads: [values, relation, norms, conflict], control: training-only-fixed-sham-labels, auxiliary_weights: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}}

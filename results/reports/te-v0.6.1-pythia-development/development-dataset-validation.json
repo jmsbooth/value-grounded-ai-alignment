@@ -1,0 +1,97 @@
+{
+  "action_counts": {
+    "calibration": {
+      "candidate_01": 2,
+      "candidate_02": 4,
+      "candidate_03": 4,
+      "candidate_04": 4,
+      "candidate_05": 2
+    },
+    "open-dev": {
+      "candidate_01": 3,
+      "candidate_02": 3,
+      "candidate_03": 4,
+      "candidate_04": 4,
+      "candidate_05": 2
+    },
+    "train": {
+      "candidate_01": 11,
+      "candidate_02": 13,
+      "candidate_03": 16,
+      "candidate_04": 16,
+      "candidate_05": 8
+    },
+    "validation": {
+      "candidate_01": 3,
+      "candidate_02": 3,
+      "candidate_03": 4,
+      "candidate_04": 4,
+      "candidate_05": 2
+    }
+  },
+  "checks": {
+    "action_catalogue_has_five_classes": true,
+    "calibration_and_open_dev_not_training": true,
+    "calibration_files_present": true,
+    "canonical_graph_reordering_invariant": true,
+    "different_render_same_world_same_result": true,
+    "exact_natural_duplicates_absent": true,
+    "exact_profile_counts": true,
+    "group_disjointness": true,
+    "independent_domains": true,
+    "locked_split_not_materialized": true,
+    "majority_baseline_is_reported_not_used_for_tuning": true,
+    "missing_evidence_is_not_negative_evidence": true,
+    "open-dev_files_present": true,
+    "oracle_matches_materialized_annotations": true,
+    "private_label_isolation": true,
+    "public_schema_and_catalogue": true,
+    "same_template_different_facts_change_result": true,
+    "train_files_present": true,
+    "validation_files_present": true
+  },
+  "dataset_id": "pythia-policy-dev-v2",
+  "experiment_id": "development-dataset-validation",
+  "file_hashes": {
+    "information-parity/calibration.jsonl": "c23c40b788e44c07f2e522393d459935fccf088610d4af7b4d9c7f47f21b2a8c",
+    "information-parity/open-dev.jsonl": "94a362d9bac418882628f2d46f132bdb20c852724bd47c4d0b7d13605b61913c",
+    "information-parity/train.jsonl": "5226a1b25ebcc3766e3e7825539920ead8a799a5ed53a3bd175892016572e9de",
+    "information-parity/validation.jsonl": "68dd27bfb1bb0da6d767587df79451c072d9346a3592668ca9b4d19c8e50e61c",
+    "private/calibration.jsonl": "154c4afe884b3e9c0d282700d0b50482dbba4fa296d52ab8cc787afa96c068d0",
+    "private/open-dev.jsonl": "5389fb687f4173d51ee860c13860941164a980c316428a32f7ebbf0c346dfb49",
+    "private/train.jsonl": "3cfd66e57656a2db859b0c3ef1db07dc42d7d2c8748f1994feae019c99e4ca25",
+    "private/validation.jsonl": "3b5a2feb9f066e5da99d5d1154110368dc802c64df8139da340582121a489844",
+    "public/calibration.jsonl": "a6f769bb9f7e31655d4d3ad26fe406728012c65a870dc1ad7080ddd766e8b594",
+    "public/open-dev.jsonl": "39e3af5eec8af8a47ef94d1c804e0344c94ede1ba9fad67fe3a34be3de6f8cbd",
+    "public/train.jsonl": "03e60da19d97e936cb2ab6f8affc6f69491c70c5f14490e10d2af3ea415a2853",
+    "public/validation.jsonl": "38ea4ab519954598843c0ea98bca88ec987d9e3cddb31a5564c2d20cbb132c37",
+    "worlds/calibration.jsonl": "31d0c1320cbb0c1b05f87ef3f8b4c51927cd216d64d43d86805ef7e470c5ea53",
+    "worlds/open-dev.jsonl": "07f4d4d0c63ed1f4192b2e4738ce1a608a522a0b80cf12b15343df335dbea8fc",
+    "worlds/train.jsonl": "06c2c245504e76cafdf0a1348517ca05d181a77e09a3f34541174beb6a3189a3",
+    "worlds/validation.jsonl": "da0ef52bb4aa3b286792edd7a6675b90e83fa5deba10b5e6a70f20bd82cd19ab"
+  },
+  "gold_labels_used_for_model_input": false,
+  "locked_data_read_or_scored": false,
+  "majority_baseline": {
+    "calibration": 0.25,
+    "open-dev": 0.25,
+    "train": 0.25,
+    "validation": 0.25
+  },
+  "profile": "mini",
+  "protocol": "te-v0.6.1-pythia-development",
+  "row_counts": {
+    "calibration": 16,
+    "open-dev": 16,
+    "train": 64,
+    "validation": 16
+  },
+  "status": "DEVELOPMENT_BENCHMARK_VALIDATED",
+  "synthetic": true,
+  "world_group_counts": {
+    "calibration": 16,
+    "open-dev": 16,
+    "train": 64,
+    "validation": 16
+  }
+}

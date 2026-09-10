@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-09T13:22:30.623252Z",
+  "input_digest": "81331be34e4c6d2ad09e3e1005da54816ad6bac0b467f5c9f54be6ddbcbbbb0f",
+  "producer_kind": "analysis",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "fb712d231889a37041ea3a90e27d747c25de40f69360a7231b0963fdb0dd55fb",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "ANALYSIS_COMPLETE",
+  "unit_of_inference": "world_group_id"
+}

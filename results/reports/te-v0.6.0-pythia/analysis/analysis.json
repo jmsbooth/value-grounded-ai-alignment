@@ -1,0 +1,10 @@
+{
+  "contrasts": [],
+  "created_at": "2026-09-09T13:09:07.480832Z",
+  "data_regenerated": false,
+  "protocol": "te-v0.6.0-pythia",
+  "raw_denominators": {},
+  "status": "ANALYSIS_BLOCKED_NO_MODEL_PREDICTIONS",
+  "training_performed": false,
+  "unit_of_inference": "world_group_id"
+}

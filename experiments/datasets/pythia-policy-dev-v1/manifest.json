@@ -1,0 +1,95 @@
+{
+  "artifact_version": "public-private-dataset-v1",
+  "candidate_catalogue": [
+    "candidate_01",
+    "candidate_02",
+    "candidate_03",
+    "candidate_04",
+    "candidate_05"
+  ],
+  "dataset_version": "pythia-policy-dev-v1",
+  "fictional_domains": [
+    "delegated_data_access",
+    "purpose_limited_disclosure"
+  ],
+  "file_hashes": {
+    "information-parity/calibration.jsonl": "8ad715e138e875b3ae33b0d2f5e9ce1cd4285f2ee75fd177a2231f13128c19da",
+    "information-parity/locked-engineering-eval.jsonl": "1075ed3019b8b86c61369c0522c91717a367cf39d1a9c533618bdd4cf886d535",
+    "information-parity/open-dev.jsonl": "9bc1d41dd67ea2fca6afdf77fb095b159b0ae67f77cbe961a43d1f1efdf1b185",
+    "information-parity/train.jsonl": "8c342210fd91e19a0ec7186ff45dbba2902e4257fb50e899fb7ad7e1febc8a9a",
+    "information-parity/validation.jsonl": "017bcc3c25083d9fc494515f35c606a2ea759fffe58cfa757f9f4911217a5e42",
+    "private/calibration.jsonl": "3d6ae1eb7bcceabb570da8c4f40c7ab18253c1cbab9cdfb458680477a1d1922e",
+    "private/locked-engineering-eval.jsonl": "28ac6274a230048e5c556adbb49f990160f7cdf29206ae796bad7582b5935e4d",
+    "private/open-dev.jsonl": "0ebd2a11d3cdca1fdefc70dded5abbeb4395d3a6f47485c36f8c3dac4c5abe4a",
+    "private/train.jsonl": "7df18f98de9b15994eb3259404a8b9d87e8e6a91b3d3403c1a0d22daf76f61c1",
+    "private/validation.jsonl": "30f735fd3f1feb85755f88780e431c773c1b293638b3328aed7e6bd0a16519ce",
+    "public/calibration.jsonl": "f27a5e9ec69fd4bd33df7dd329c8fc5ad215a4f59f1911c9f1b681980eee90d4",
+    "public/locked-engineering-eval.jsonl": "9d318ad1fe84520002960e7356bf362b6b9e9c10eb641853ebd4430f2fcd431a",
+    "public/open-dev.jsonl": "2ca83895e846d680035807ab41d9e49a87b0e6c31a62290bbe987501ee42223a",
+    "public/train.jsonl": "88846c39d0aba211add7ee983421f71f4f1878f57425361a9e10d837991f03ab",
+    "public/validation.jsonl": "88406e4a1cf01ce2ee784d569e0cc04141e49eecd3b6d813e251d331c0b9a37d",
+    "worlds/calibration.jsonl": "b45f4f4f46e9575025eb5217b58f2879ba05d5f260cda9f71c1db0293e359d7d",
+    "worlds/locked-engineering-eval.jsonl": "ab2786f62f6a518d5a4f1c46eba01f832e74b472a3afee1604caf087cec25acd",
+    "worlds/open-dev.jsonl": "e8644c609f0480a02eb3b141e0e501a238fc10045e4b814aa9d8b8e6dc286e64",
+    "worlds/train.jsonl": "134db5a200cf00f474718001157cfdffcee38ab440c56715831b9800b0d88e67",
+    "worlds/validation.jsonl": "26b0def01114620307e744ee4bd6131a5314e457476e490abfed5726fd7192f4"
+  },
+  "generator_version": "semantic-worlds-v1",
+  "gold_label_isolation": true,
+  "observation_equivalent_pairs_supported": true,
+  "oracle_uses_template_id": false,
+  "private_annotation_schema": "PrivateAnnotation.v1",
+  "public_input_schema": "PublicExample.v1",
+  "root": "experiments/datasets/pythia-policy-dev-v1",
+  "row_counts": {
+    "calibration": 4,
+    "locked-engineering-eval": 4,
+    "open-dev": 4,
+    "train": 8,
+    "validation": 4
+  },
+  "synthetic": true,
+  "world_group_counts": {
+    "calibration": 4,
+    "locked-engineering-eval": 4,
+    "open-dev": 4,
+    "train": 8,
+    "validation": 4
+  },
+  "world_group_ids": {
+    "calibration": [
+      "group-0012",
+      "group-0013",
+      "group-0014",
+      "group-0015"
+    ],
+    "locked-engineering-eval": [
+      "group-0020",
+      "group-0021",
+      "group-0022",
+      "group-0023"
+    ],
+    "open-dev": [
+      "group-0016",
+      "group-0017",
+      "group-0018",
+      "group-0019"
+    ],
+    "train": [
+      "group-0000",
+      "group-0001",
+      "group-0002",
+      "group-0003",
+      "group-0004",
+      "group-0005",
+      "group-0006",
+      "group-0007"
+    ],
+    "validation": [
+      "group-0008",
+      "group-0009",
+      "group-0010",
+      "group-0011"
+    ]
+  }
+}

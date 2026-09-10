@@ -1,0 +1,44 @@
+{
+  "a1_end_to_end_policy_rates": [
+    0.0,
+    0.0
+  ],
+  "a1_format_rates": [
+    0.0,
+    0.0
+  ],
+  "best_constant_action_rate": 0.25,
+  "calibration": "not_measured",
+  "capability_sentinel": "not_measured",
+  "evidence": {
+    "a1_development": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/run-summary.json",
+    "dataset_validation": "results/reports/te-v0.6.1-pythia-development/development-dataset-validation.json",
+    "memorization": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/run-summary.json",
+    "preflight": "docs/experiments/te-v0.6.1-pythia-development/preflight.json",
+    "raw_output_audit": "results/reports/te-v0.6.1-pythia-development/raw-output-audit.json",
+    "resource_profile": "results/raw/te-v0.6.1-pythia-development/resource-profile/20260909T204420Z-resource/resource-profile.json",
+    "trained_attack_audit": "results/raw/te-v0.6.1-pythia-development/trained-output-and-attack-audit/20260910T140805Z-attack-audit/result.json",
+    "training_contracts": "results/reports/te-v0.6.1-pythia-development/training-contracts.json",
+    "variant_smoke": "results/raw/te-v0.6.1-pythia-development/variant-training-smoke/20260909T223326Z-variant-smoke/run-summary.json"
+  },
+  "experiment_id": "development-readiness",
+  "gates": {
+    "A1_DEVELOPMENT_TRAINING_COMPLETE": true,
+    "A1_FORMAT_READY": false,
+    "A1_MEMORIZATION_CRITERION_MET": false,
+    "AUXILIARY_BACKPROP_VALIDATED": true,
+    "DEVELOPMENT_BENCHMARK_VALIDATED": true,
+    "DEVELOPMENT_READY_FOR_COHORT_REVIEW": false,
+    "OUTPUT_PATH_AUDITED": true,
+    "RESOURCE_PLAN_MEASURED": true,
+    "TRAINING_CONTRACT_VALIDATED": true,
+    "VARIANT_SMOKE_COMPLETE": false
+  },
+  "locked_cohort_authorized": false,
+  "locked_data_read_or_scored": false,
+  "next_decision": "Do not request a locked cohort. Review the failed engineering/model gate, preserve all attempts, and either investigate a named defect or open a separately budgeted development attempt.",
+  "policy_skill_status": "BASELINE_POLICY_SKILL_LIMITED",
+  "protocol": "te-v0.6.1-pythia-development",
+  "scientific_claim": "No VGA effectiveness, alignment, moral-truth, or population-generalization claim is supported.",
+  "status": "DEVELOPMENT_NOT_READY_FOR_COHORT_REVIEW"
+}

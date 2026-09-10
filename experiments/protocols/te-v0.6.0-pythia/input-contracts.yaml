@@ -1,0 +1,25 @@
+protocol: te-v0.6.0-pythia
+dataset_version: pythia-policy-dev-v1
+public_input:
+  contains:
+    - public_policy_text
+    - observed_facts
+    - typed_graph
+    - question
+    - fixed_action_catalogue
+    - generic_value_definitions
+  excludes:
+    - target_action
+    - candidate_id
+    - labels
+    - world_id
+    - world_group_id
+    - template_id
+    - private_annotation
+private_annotation:
+  join_key: public_id
+  not_model_visible: true
+response_target:
+  format: fixed-json
+  fields: [action, candidate_id, salient_values, relation_class, conflict_class, applicable_norm_ids, useful, permitted]
+

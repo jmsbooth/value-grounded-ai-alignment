@@ -1,0 +1,283 @@
+{
+  "approval_required": true,
+  "created_at": "2026-09-09T13:09:06.924677Z",
+  "dataset_manifest_digest": "373e5b7d475086a4ce77e71700e1bee2efb8daa5f3b83b42e2db698c7c5549a6",
+  "dataset_version": "pythia-policy-dev-v1",
+  "estimated_cost": {
+    "basis": "character-count proxy; not measured tokenization or wall time",
+    "locked_cost_measured": false,
+    "prompt_bytes": 13006,
+    "training_steps_per_run": 128
+  },
+  "model": {
+    "model_id": "EleutherAI/pythia-410m",
+    "requested_revision": "step143000",
+    "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+  },
+  "plan_digest": "c684d4871b27b0414c405636f52095f5485b66f5c7475cf19a3a31abde807c9c",
+  "plan_version": "cohort-plan-v1",
+  "protocol": "te-v0.6.0-pythia",
+  "resource_gate": "measured resource plan and owner-approved committed protocol required before locked execution",
+  "run_count": 40,
+  "runs": [
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "a1-seed-11",
+      "seed": 11,
+      "variant": "A1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "a1-seed-23",
+      "seed": 23,
+      "variant": "A1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "a1-seed-37",
+      "seed": 37,
+      "variant": "A1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "a1-seed-53",
+      "seed": 53,
+      "variant": "A1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "a1-seed-71",
+      "seed": 71,
+      "variant": "A1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-seed-11",
+      "seed": 11,
+      "variant": "B"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-seed-23",
+      "seed": 23,
+      "variant": "B"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-seed-37",
+      "seed": 37,
+      "variant": "B"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-seed-53",
+      "seed": 53,
+      "variant": "B"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-seed-71",
+      "seed": 71,
+      "variant": "B"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-seed-11",
+      "seed": 11,
+      "variant": "C1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-seed-23",
+      "seed": 23,
+      "variant": "C1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-seed-37",
+      "seed": 37,
+      "variant": "C1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-seed-53",
+      "seed": 53,
+      "variant": "C1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-seed-71",
+      "seed": 71,
+      "variant": "C1"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-seed-11",
+      "seed": 11,
+      "variant": "C2"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-seed-23",
+      "seed": 23,
+      "variant": "C2"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-seed-37",
+      "seed": 37,
+      "variant": "C2"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-seed-53",
+      "seed": 53,
+      "variant": "C2"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-seed-71",
+      "seed": 71,
+      "variant": "C2"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-text-a-seed-11",
+      "seed": 11,
+      "variant": "B-TEXT-A"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-text-a-seed-23",
+      "seed": 23,
+      "variant": "B-TEXT-A"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-text-a-seed-37",
+      "seed": 37,
+      "variant": "B-TEXT-A"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-text-a-seed-53",
+      "seed": 53,
+      "variant": "B-TEXT-A"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "b-text-a-seed-71",
+      "seed": 71,
+      "variant": "B-TEXT-A"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-text-n-seed-11",
+      "seed": 11,
+      "variant": "C1-TEXT-N"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-text-n-seed-23",
+      "seed": 23,
+      "variant": "C1-TEXT-N"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-text-n-seed-37",
+      "seed": 37,
+      "variant": "C1-TEXT-N"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-text-n-seed-53",
+      "seed": 53,
+      "variant": "C1-TEXT-N"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-text-n-seed-71",
+      "seed": 71,
+      "variant": "C1-TEXT-N"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-sham-seed-11",
+      "seed": 11,
+      "variant": "C1-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-sham-seed-23",
+      "seed": 23,
+      "variant": "C1-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-sham-seed-37",
+      "seed": 37,
+      "variant": "C1-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-sham-seed-53",
+      "seed": 53,
+      "variant": "C1-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c1-sham-seed-71",
+      "seed": 71,
+      "variant": "C1-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-sham-seed-11",
+      "seed": 11,
+      "variant": "C2-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-sham-seed-23",
+      "seed": 23,
+      "variant": "C2-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-sham-seed-37",
+      "seed": 37,
+      "variant": "C2-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-sham-seed-53",
+      "seed": 53,
+      "variant": "C2-SHAM"
+    },
+    {
+      "mode": "locked-pending-freeze",
+      "run_id": "c2-sham-seed-71",
+      "seed": 71,
+      "variant": "C2-SHAM"
+    }
+  ],
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "status": "PLANNED_NOT_FROZEN",
+  "synthetic_dataset": true,
+  "variants": [
+    "A1",
+    "B",
+    "C1",
+    "C2",
+    "B-TEXT-A",
+    "C1-TEXT-N",
+    "C1-SHAM",
+    "C2-SHAM"
+  ]
+}

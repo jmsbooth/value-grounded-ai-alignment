@@ -1,0 +1,17 @@
+protocol: te-v0.6.1-pythia-development
+dataset_id: pythia-policy-dev-v2
+model_visible:
+  natural: [public_policy_text, observed_facts, question, fixed_action_catalogue, generic_value_definitions]
+  structured: [typed_public_observation, public_rules, typed_graph, public_action_catalogue]
+model_excludes: [target_action, candidate_id, labels, correctness, verdict, world_id, world_group_id, template_id, split, private_annotation, hidden_world_state]
+private_join:
+  key: public_id
+  inference_visible: false
+response:
+  schema: response-schema.json
+  supervised_fields: [action, candidate_id, salient_values, relation_class, conflict_class, applicable_norm_ids, useful, permitted]
+  extraction: tensor-continuation-slice-by-input-width
+  primary_parser: strict-json-no-repair
+reference:
+  action_catalogue: fixed-five-public-candidates
+  norm_ids: public-policy-rules-only

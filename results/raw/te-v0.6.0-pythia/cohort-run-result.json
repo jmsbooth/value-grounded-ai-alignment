@@ -1,0 +1,11 @@
+{
+  "created_at": "2026-09-09T13:09:07.335402Z",
+  "execution": "not started",
+  "protocol": "te-v0.6.0-pythia",
+  "reasons": [
+    "worktree is not clean; protocol/config ownership is not committed",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/protocol.md",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/gates.yaml"
+  ],
+  "status": "LOCKED_RUN_NOT_STARTED"
+}

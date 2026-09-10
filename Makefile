@@ -3,7 +3,7 @@ LATEX_PLUGIN ?= /Users/jamesbooth/.codex/plugins/cache/openai-bundled/latex/0.2.
 PAPER_DIR := paper
 PAPER_PDF := $(PAPER_DIR)/value-grounded-ai-alignment.pdf
 
-.PHONY: all figures paper verify empirical-small remediated-dataset analyze-results analyze-versioned paper-from-results harness-gate harness-ci verify-run verify-research-history compare-reports daily-report experiment register-history clean
+.PHONY: all figures paper verify empirical-small remediated-dataset analyze-results analyze-versioned paper-from-results harness-gate harness-ci verify-run verify-research-history compare-reports daily-report experiment register-history clean te-preflight te-semantic-audit te-model-smoke te-train-diagnostics te-evaluate-model te-plan-cohort te-freeze-cohort te-run-cohort te-analyze te-gate te-report te-ci te-dev-preflight te-audit-generations te-test-training-contracts te-profile-resources te-build-dev-data te-validate-dev-data te-train-memorization te-train-a1-dev te-test-aux-gradients te-run-variant-smoke te-evaluate-trained-dev te-analyze-dev te-dev-gate
 
 all: figures paper verify
 
@@ -81,3 +81,83 @@ verify:
 
 clean:
 	./scripts/clean.sh
+
+te-preflight:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/preflight.py
+
+te-semantic-audit:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/semantic_audit.py
+
+te-model-smoke:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/model_smoke.py $(if $(DOWNLOAD),--download,) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-train-diagnostics:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/train_diagnostics.py $(if $(DOWNLOAD),--download,) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-evaluate-model:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/evaluate_model.py $(if $(LIMIT),--limit "$(LIMIT)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-plan-cohort:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/plan_cohort.py $(if $(DEVELOPMENT),--development,)
+
+te-freeze-cohort:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/freeze_cohort.py
+
+te-run-cohort:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/run_cohort.py
+
+te-analyze:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/analyze.py $(if $(INPUT),--input "$(INPUT)",)
+
+te-gate:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/gate.py
+
+te-report:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/report_phase.py
+
+te-ci:
+	PYTHONPATH=src $(PYTHON) -m pytest -q
+	PYTHONPATH=src $(PYTHON) experiments/transformer/semantic_audit.py
+	PYTHONPATH=src $(PYTHON) -m compileall -q src scripts experiments tests
+	PYTHONPATH=src $(PYTHON) scripts/verify_research_history.py
+
+te-dev-preflight:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/preflight_development.py
+
+te-audit-generations:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/audit_generations.py $(if $(SOURCE_RUN),--source "$(SOURCE_RUN)",)
+
+te-test-training-contracts:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/training_contracts.py
+
+te-profile-resources:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/resource_profile.py $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-build-dev-data:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/build_dataset.py --version v2 --profile "$(if $(PROFILE),$(PROFILE),mini)"
+
+te-validate-dev-data:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/validate_dev_data.py --profile "$(if $(PROFILE),$(PROFILE),mini)"
+
+te-train-memorization:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/train_memorization.py $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-train-a1-dev:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/train_a1_dev.py $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-test-aux-gradients: te-test-training-contracts
+
+te-run-variant-smoke:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/variant_smoke.py $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-evaluate-trained-dev:
+	@if [ -z "$(CHECKPOINT)" ]; then echo 'Usage: make te-evaluate-trained-dev CHECKPOINT=exact/path'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/evaluate_trained_dev.py --checkpoint "$(CHECKPOINT)" $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-analyze-dev:
+	@if [ -z "$(MEMORIZATION)" ] || [ -z "$(A1)" ] || [ -z "$(VARIANTS)" ] || [ -z "$(RESOURCE)" ]; then echo 'Usage: make te-analyze-dev MEMORIZATION=... A1=... VARIANTS=... RESOURCE=...'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/analyze_dev.py --memorization "$(MEMORIZATION)" --a1 "$(A1)" --variants "$(VARIANTS)" --resource "$(RESOURCE)"
+
+te-dev-gate:
+	@if [ -z "$(MEMORIZATION)" ] || [ -z "$(A1)" ] || [ -z "$(VARIANTS)" ] || [ -z "$(RESOURCE)" ]; then echo 'Usage: make te-dev-gate MEMORIZATION=... A1=... VARIANTS=... RESOURCE=...'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/development_readiness.py --memorization "$(MEMORIZATION)" --a1 "$(A1)" --variants "$(VARIANTS)" --resource "$(RESOURCE)" $(if $(ATTACK),--attack "$(ATTACK)",)

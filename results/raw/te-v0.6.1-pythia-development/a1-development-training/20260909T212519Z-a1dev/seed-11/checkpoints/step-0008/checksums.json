@@ -1,0 +1,8 @@
+{
+  "adapter/README.md": "ee270d06e2cd81c78e22129ef6864338a76fe298cca856e1949e5a914d0b4821",
+  "adapter/adapter_config.json": "5783960daa83b002d31e347b5196d9c7735a64c08cd882b7aa30ccceecd513f3",
+  "adapter/adapter_model.safetensors": "04354b66492bb29fbc55a8ffd9bdbdb59303828e22a1a89e7e8ba6fdc1e1ead2",
+  "metadata.json": "6d8b84fe8099f3b4d69a89f55ce33282e2eeed5d4d86c8eb6644c113f374aa44",
+  "optimizer.pt": "947f6826701a6e682b827315e2eee8258b9bfcec0514c6942a939d4dfeffbd96",
+  "random-state.pt": "441a50b9d13fdc63ca7e04f091a676fbc952afecf664682056fdf71532bc8564"
+}

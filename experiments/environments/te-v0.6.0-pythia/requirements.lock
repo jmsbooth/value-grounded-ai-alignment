@@ -1,0 +1,10 @@
+# Direct dependencies for the isolated Pythia environment.
+# This lock is intentionally separate from the lightweight fixture environment.
+torch==2.14.0
+transformers==5.16.1
+peft==0.20.0
+safetensors==0.8.0
+psutil==7.2.2
+accelerate==1.15.0
+tokenizers==0.23.2
+pytest==9.1.1

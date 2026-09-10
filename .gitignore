@@ -36,3 +36,6 @@ experiments/results/*
 !experiments/results/.gitkeep
 
 results/registry/.registry.lock
+/.venv-pythia/
+/.cache/pythia/
+/experiments/artifacts/te-v0.6.0-pythia/

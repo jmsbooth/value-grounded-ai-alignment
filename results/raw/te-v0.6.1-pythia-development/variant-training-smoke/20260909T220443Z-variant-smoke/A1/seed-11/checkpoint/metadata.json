@@ -1,0 +1,8 @@
+{
+  "experiment_id": "variant-training-smoke",
+  "protocol": "te-v0.6.1-pythia-development",
+  "seed": 11,
+  "sham_permutation": null,
+  "update_count": 32,
+  "variant": "A1"
+}

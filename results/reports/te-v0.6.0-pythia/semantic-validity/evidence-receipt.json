@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "facts_change_outcome": true,
+    "fixed_action_catalogue": true,
+    "graph_edge_reordering_invariant": true,
+    "public_label_isolation": true,
+    "semantic_outcomes_present": true,
+    "split_group_disjointness": true,
+    "template_permutation_invariance": true
+  },
+  "created_at": "2026-09-09T13:32:05.229211Z",
+  "producer_kind": "semantic_audit",
+  "protocol": "hv-v0.5.2-semantic-validity",
+  "receipt_digest": "e983a9d7ceddbb43e1f464c9b41a903ed59c5b8c99c5a6a7b3b02a9fcf145102",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "SEMANTIC_DATASET_VALIDATED",
+  "synthetic": true
+}

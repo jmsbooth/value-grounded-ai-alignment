@@ -1,0 +1,20 @@
+protocol: te-v0.6.1-pythia-development
+parent_protocol: te-v0.6.0-pythia
+mode: bounded-local-development
+model:
+  id: EleutherAI/pythia-410m
+  requested_revision: step143000
+  resolved_revision_sha: bba6a464f54bbf08fc174cfb351d9794d58af21d
+  local_files_only: true
+data:
+  dataset_id: pythia-policy-dev-v2
+  profiles: [mini, standard]
+  active_profile: mini
+  splits: [train, validation, calibration, open-dev]
+  locked_split_created: false
+  synthetic: true
+  domains: [delegated_data_access, purpose_limited_disclosure]
+arms: [A1, B, C1, C2, B-TEXT-A, C1-TEXT-N, C1-SHAM, C2-SHAM]
+seeds: [11, 23]
+excluded: [locked-40-run-cohort, OLMo, C3, structural-attention, MoE, solver-backed-production]
+manuscript_frozen: true

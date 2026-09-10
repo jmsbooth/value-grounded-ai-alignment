@@ -1,0 +1,7 @@
+{
+  "experiment_id": "a1-memorization",
+  "protocol": "te-v0.6.1-pythia-development",
+  "seed": 23,
+  "selection": "fixed-eight-train-examples",
+  "update_count": 50
+}

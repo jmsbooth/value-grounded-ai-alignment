@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-09T13:09:07.481455Z",
+  "input_digest": null,
+  "producer_kind": "analysis",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "b4c5389f325e81b2909d8bc7bd5af5f0afd6a36f30f466ba88b8e64e35ba10a2",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "ANALYSIS_BLOCKED_NO_MODEL_PREDICTIONS",
+  "unit_of_inference": "world_group_id"
+}

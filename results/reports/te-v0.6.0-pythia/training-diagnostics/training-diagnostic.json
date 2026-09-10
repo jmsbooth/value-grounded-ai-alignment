@@ -1,0 +1,21 @@
+{
+  "checkpoint_path": "results/reports/te-v0.6.0-pythia/training-diagnostics/checkpoint",
+  "checkpoint_roundtrip_verified": true,
+  "frozen_backbone_unchanged": true,
+  "lora_trainable_parameters": 3145728,
+  "metrics": {
+    "conflict": 0.731559693813324,
+    "gradient_norm": 11.347464561462402,
+    "loss": 2.4762542247772217,
+    "norms": 0.8793691396713257,
+    "relation": 0.8163621425628662,
+    "response": 1.829512119293213,
+    "values": 0.806419849395752
+  },
+  "real_pretrained_model": true,
+  "status": "PYTHIA_TRAINING_DIAGNOSTIC_PASSED",
+  "steps": 1,
+  "synthetic_dataset": true,
+  "trainable_parameters": 3165203,
+  "use_cache": false
+}

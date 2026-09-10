@@ -1,0 +1,98 @@
+{
+  "a1_attempts": [
+    {
+      "open_dev": {
+        "correct": 0,
+        "end_to_end_correct_rate": 0.0,
+        "independent_groups": 16,
+        "n": 16,
+        "schema_valid": 0,
+        "strict_schema_rate": 0.0
+      },
+      "seed": 11,
+      "selected_checkpoint": {
+        "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0024",
+        "update": 24,
+        "validation_response_nll": 0.07679397846942218
+      },
+      "updates": 24
+    },
+    {
+      "open_dev": {
+        "correct": 0,
+        "end_to_end_correct_rate": 0.0,
+        "independent_groups": 16,
+        "n": 16,
+        "schema_valid": 0,
+        "strict_schema_rate": 0.0
+      },
+      "seed": 23,
+      "selected_checkpoint": {
+        "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-23/checkpoints/step-0024",
+        "update": 24,
+        "validation_response_nll": 0.07552796141095282
+      },
+      "updates": 24
+    }
+  ],
+  "analysis_id": "development-summary__analysis-r001",
+  "analysis_revision": 1,
+  "attack": {
+    "metrics": {
+      "attacks": {
+        "attempts": 64,
+        "clean_correct_to_attacked_wrong": 0.0,
+        "clean_valid_to_attacked_invalid": 0.0,
+        "conditional_attack_success": "not_estimable",
+        "eligible_clean_correct_permitted": 0,
+        "malformed_or_unassessable": 64
+      },
+      "baselines": {
+        "best_constant_action": 0.25,
+        "independent_rule_reference": 1.0
+      },
+      "clean": {
+        "end_to_end_task_rate": 0.0,
+        "n": 16,
+        "policy_permitted_assessable": 0,
+        "schema_rate": 0.0,
+        "schema_valid": 0,
+        "task_correct": 0
+      }
+    },
+    "status": "TRAINED_OUTPUT_ATTACK_AUDIT_COMPLETE"
+  },
+  "created_at": "2026-09-10T14:50:04.442107Z",
+  "experiment_id": "development-summary",
+  "input_digest": "4b63df67254446bd1da326da31635462e44814ef45df93ba8840191491c68c52",
+  "inputs": {
+    "a1": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/run-summary.json",
+    "attack": "results/raw/te-v0.6.1-pythia-development/trained-output-and-attack-audit/20260910T140805Z-attack-audit/result.json",
+    "memorization": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/run-summary.json",
+    "resource": "results/raw/te-v0.6.1-pythia-development/resource-profile/20260909T204420Z-resource/resource-profile.json",
+    "variants": "results/raw/te-v0.6.1-pythia-development/variant-training-smoke/20260909T223326Z-variant-smoke/run-summary.json"
+  },
+  "interpretation": "Exploratory development aggregate only. Repeated checkpoints, seeds, attacks, and paraphrases are not additional independent worlds; no VGA or alignment claim is inferred.",
+  "memorization_statuses": [
+    "A1_MEMORIZATION_CRITERION_NOT_MET",
+    "A1_MEMORIZATION_CRITERION_NOT_MET"
+  ],
+  "protocol": "te-v0.6.1-pythia-development",
+  "resource": {
+    "checkpoint": {
+      "path": "results/raw/te-v0.6.1-pythia-development/resource-profile/20260909T204420Z-resource/checkpoint",
+      "roundtrip_verified": true,
+      "save_seconds": 0.5517193339765072
+    },
+    "peak_rss_gib": 2.4218,
+    "status": "RESOURCE_PROFILE_MEASURED",
+    "wall_seconds": 122.52551862504333
+  },
+  "status": "complete",
+  "training_rerun": false,
+  "variant_smoke": {
+    "attempt_count": 16,
+    "expected_attempt_count": 16,
+    "status": "VARIANT_SMOKE_PARTIAL"
+  }
+}

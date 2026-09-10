@@ -1,0 +1,46 @@
+[
+  {
+    "effective_batch_size": 8,
+    "examples": 8,
+    "gradient_norm": 4.213104724884033,
+    "loss": 1.887412428855896,
+    "response": 1.887412428855896,
+    "response_token_count": 743.0,
+    "seed": 11,
+    "update": 1,
+    "variant": "B-TEXT-A"
+  },
+  {
+    "effective_batch_size": 8,
+    "examples": 8,
+    "gradient_norm": 2.9356422424316406,
+    "loss": 1.5750585794448853,
+    "response": 1.5750585794448853,
+    "response_token_count": 743.0,
+    "seed": 11,
+    "update": 2,
+    "variant": "B-TEXT-A"
+  },
+  {
+    "effective_batch_size": 8,
+    "examples": 8,
+    "gradient_norm": 3.117138147354126,
+    "loss": 1.3156189918518066,
+    "response": 1.3156189918518066,
+    "response_token_count": 743.0,
+    "seed": 11,
+    "update": 3,
+    "variant": "B-TEXT-A"
+  },
+  {
+    "effective_batch_size": 8,
+    "examples": 8,
+    "gradient_norm": 2.8521533012390137,
+    "loss": 1.0820186138153076,
+    "response": 1.0820186138153076,
+    "response_token_count": 743.0,
+    "seed": 11,
+    "update": 4,
+    "variant": "B-TEXT-A"
+  }
+]

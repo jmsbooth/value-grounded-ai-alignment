@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-09-09T13:24:44.522789Z",
+  "producer_kind": "training_diagnostic",
+  "protocol": "te-v0.6.0-pythia",
+  "real_pretrained_model": true,
+  "receipt_digest": "f74db9c0b5cbb6c83fb1153e8dc079fe16f9885ff63aabacca8c2a82da15b76b",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "PYTHIA_TRAINING_DIAGNOSTIC_PASSED"
+}

@@ -64,3 +64,83 @@ on `sealed-test`; it does not score held-out identifiers in-sample.
 
 Use `make harness-gate` to evaluate registered readiness. It reads evidence
 artifacts and never substitutes a fresh test run for a missing report.
+
+## Pythia v0.6.1 development/training phase
+
+The active next protocol is `te-v0.6.1-pythia-development`, with the prior
+`te-v0.6.0-pythia` integration report preserved. It is separate from the
+historical MLP and `hv-v0.5.x` harness artifacts. The v0.6.1 benchmark is
+`pythia-policy-dev-v2`: readable fictional policy worlds, explicit observed
+facts and rules, typed graphs, a fixed public action catalogue, private
+annotations, and an oracle independent of template names and candidate
+answers. Its mini profile has 64/16/16/16 grouped rows for train,
+validation, calibration, and open development; it has no locked split.
+
+Run the lightweight path first:
+
+```bash
+make te-preflight
+make te-semantic-audit
+make te-plan-cohort DEVELOPMENT=1
+```
+
+Run the bounded development path:
+
+```bash
+make te-dev-preflight PROTOCOL=te-v0.6.1-pythia-development
+make te-audit-generations PROTOCOL=te-v0.6.1-pythia-development
+make te-test-training-contracts PROTOCOL=te-v0.6.1-pythia-development
+make te-profile-resources PROTOCOL=te-v0.6.1-pythia-development
+make te-build-dev-data PROTOCOL=te-v0.6.1-pythia-development PROFILE=mini
+make te-validate-dev-data PROTOCOL=te-v0.6.1-pythia-development
+make te-train-memorization PROTOCOL=te-v0.6.1-pythia-development
+make te-train-a1-dev PROTOCOL=te-v0.6.1-pythia-development PROFILE=mini
+make te-run-variant-smoke PROTOCOL=te-v0.6.1-pythia-development
+```
+
+The development parser is strict and uses continuation token IDs sliced at
+the actual generation-call tensor width. Raw generated IDs, prompts, parser
+taxonomy, checkpoint lineage, and resource measurements are retained. A1 is
+task-SFT rather than a generally aligned assistant; format competence and
+policy skill are reported independently. Calibration and capability sentinel
+measurements are `not_measured` unless a separately declared diagnostic is
+run.
+
+Optional Pythia dependencies are isolated and pinned in
+`environments/te-v0.6.0-pythia/requirements.lock`. The model loader pins the
+reviewed `step143000` revision, disables remote code, validates the GPT-NeoX
+configuration, and defaults to local-files-only. Use `DOWNLOAD=1` only for the
+first explicitly authorized local cache fill.
+
+The command sequence is:
+
+```bash
+make te-model-smoke
+make te-train-diagnostics
+make te-evaluate-model LIMIT=1
+make te-plan-cohort
+make te-freeze-cohort
+make te-run-cohort
+make te-analyze
+make te-gate
+```
+
+`te-freeze-cohort` and `te-run-cohort` fail closed until the protocol/config is
+tracked in a clean owner-approved commit, the semantic gate passes, model and
+environment hashes are verified, and the resource plan is measured. A blocked
+or null phase is a valid result. No command in this phase changes the paper or
+reruns `make paper-from-results`.
+
+The v0.6.1 readiness command reads exact development evidence paths and never
+runs training as a side effect. It cannot authorize a locked cohort:
+
+```bash
+make te-dev-gate PROTOCOL=te-v0.6.1-pythia-development \
+  MEMORIZATION=... A1=... VARIANTS=... RESOURCE=...
+```
+
+The executed development chain is recorded in the
+[v0.6.1 experimental validation report](../results/reports/te-v0.6.1-pythia-development/development-summary/20260910T145343Z-development-summary/analysis-r001/experimental-validation-report.md).
+Its readiness state is `DEVELOPMENT_NOT_READY_FOR_COHORT_REVIEW`: the v2
+benchmark, training contracts, A1 training, and clean/attack audit completed,
+but the A1 format criterion and full variant smoke gate did not.

@@ -1,0 +1,11 @@
+{
+  "created_at": "2026-09-09T20:50:20.508321Z",
+  "dataset_version": "pythia-policy-dev-v2",
+  "manifest_digest": "b68381c18a8845c8159419771cdbd11204cee62de2f7160fa018cb9ed78c7cb8",
+  "producer_kind": "known_fixture",
+  "protocol": "te-v0.6.1-pythia-development",
+  "receipt_digest": "e06749ef5e8cbdb8a6050dd47f0e15a547aa4cc77a8e7e0cfba6ed9bac930866",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "SEMANTIC_DATASET_MATERIALIZED",
+  "synthetic": true
+}

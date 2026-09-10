@@ -1,0 +1,71 @@
+{
+  "accelerators": {
+    "cuda_available": false,
+    "mps_possible": true
+  },
+  "constraints": {
+    "external_upload": false,
+    "locked_run": false,
+    "paid_compute": false,
+    "publish": false,
+    "push": false
+  },
+  "created_at": "2026-09-09T13:27:14.971140Z",
+  "dependencies": {
+    "peft": true,
+    "psutil": true,
+    "safetensors": true,
+    "torch": true,
+    "transformers": true
+  },
+  "environment_digest": "7bbacd453774d2de120c68b749cd7b28b25ab1f48ca323a61e2e05044b0ba212",
+  "host": {
+    "cpu_count": 8,
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.14.4",
+    "release": "25.3.0",
+    "system": "Darwin"
+  },
+  "memory_and_disk": {
+    "disk_free_bytes": 9793478656,
+    "disk_free_gib": 9.121,
+    "disk_total_bytes": 245107195904
+  },
+  "model": {
+    "cache_configured": false,
+    "expected_config": {
+      "architectures": [
+        "GPTNeoXForCausalLM"
+      ],
+      "hidden_size": 1024,
+      "intermediate_size": 4096,
+      "max_position_embeddings": 2048,
+      "model_type": "gpt_neox",
+      "num_attention_heads": 16,
+      "num_hidden_layers": 24
+    },
+    "model_id": "EleutherAI/pythia-410m",
+    "requested_revision": "step143000",
+    "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+  },
+  "protocol": "te-v0.6.0-pythia",
+  "repo": {
+    "branch": "main",
+    "head": "7aa20ea115239bab646225b63642693590ec0d4d",
+    "worktree_clean": false
+  },
+  "resolved_packages": {
+    "PyYAML": "6.0.3",
+    "accelerate": "1.15.0",
+    "numpy": "2.5.3",
+    "peft": "0.20.0",
+    "psutil": "7.2.2",
+    "pytest": "9.1.1",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.23.2",
+    "torch": "2.14.0",
+    "transformers": "5.16.1"
+  },
+  "status": "PREFLIGHT_RECORDED"
+}

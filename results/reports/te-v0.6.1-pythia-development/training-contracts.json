@@ -1,0 +1,22 @@
+{
+  "backend": "isolated-or-current-python",
+  "checks": {
+    "checkpoint_and_random_state": true,
+    "continuation_extraction_and_parser": true,
+    "manual_response_loss": true,
+    "optimizer_and_auxiliary_contracts": true
+  },
+  "command": [
+    "/Users/jamesbooth/dev/jmsbooth/value-grounded-ai-alignment/.venv-pythia/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/transformer/test_training_contracts.py",
+    "tests/transformer/test_response_parser.py"
+  ],
+  "experiment_id": "training-contract-tests",
+  "protocol": "te-v0.6.1-pythia-development",
+  "return_code": 0,
+  "status": "TRAINING_CONTRACT_VALIDATED",
+  "test_output": "....................                                                     [100%]\n=============================== warnings summary ===============================\ntests/transformer/test_training_contracts.py::test_checkpoint_roundtrip_includes_optimizer_and_random_state\n  /Users/jamesbooth/dev/jmsbooth/value-grounded-ai-alignment/.venv-pythia/lib/python3.14/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in  - will assume that the vocabulary was not modified.\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n20 passed, 1 warning in 4.16s\n"
+}

@@ -1,0 +1,15 @@
+protocol: hv-v0.5.2-semantic-validity
+kind: semantic-validity
+historical_thresholds_unchanged: true
+checks:
+  public_label_isolation: required
+  fixed_action_catalogue: required
+  split_group_disjointness: required
+  template_permutation_invariance: required
+  facts_change_outcome: required
+  graph_edge_reordering_invariant: required
+  semantic_outcomes_present: required
+  real_attack_execution: required_for_model_phase
+pass_state: SEMANTIC_DATASET_VALIDATED
+fail_state: SEMANTIC_DATASET_REJECTED
+

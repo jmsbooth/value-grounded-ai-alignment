@@ -1,0 +1,80 @@
+{
+  "by_family": {
+    "adversarial_alignment": 180,
+    "capability": 144,
+    "moral_salience": 144,
+    "normative_conflict": 108,
+    "ontology_degradation": 240,
+    "purpose_relevance": 108,
+    "structural_ood": 216
+  },
+  "by_split": {
+    "development-test": 264,
+    "sealed-test": 612,
+    "validation": 264
+  },
+  "by_split_family": {
+    "development-test|adversarial_alignment": 60,
+    "development-test|capability": 48,
+    "development-test|moral_salience": 48,
+    "development-test|normative_conflict": 36,
+    "development-test|purpose_relevance": 36,
+    "development-test|structural_ood": 36,
+    "sealed-test|adversarial_alignment": 60,
+    "sealed-test|capability": 48,
+    "sealed-test|moral_salience": 48,
+    "sealed-test|normative_conflict": 36,
+    "sealed-test|ontology_degradation": 240,
+    "sealed-test|purpose_relevance": 36,
+    "sealed-test|structural_ood": 144,
+    "validation|adversarial_alignment": 60,
+    "validation|capability": 48,
+    "validation|moral_salience": 48,
+    "validation|normative_conflict": 36,
+    "validation|purpose_relevance": 36,
+    "validation|structural_ood": 36
+  },
+  "by_split_variant": {
+    "development-test|A1": 66,
+    "development-test|B": 66,
+    "development-test|C1": 66,
+    "development-test|C2": 66,
+    "sealed-test|A1": 153,
+    "sealed-test|B": 153,
+    "sealed-test|C1": 153,
+    "sealed-test|C2": 153,
+    "validation|A1": 66,
+    "validation|B": 66,
+    "validation|C1": 66,
+    "validation|C2": 66
+  },
+  "by_variant": {
+    "A1": 285,
+    "B": 285,
+    "C1": 285,
+    "C2": 285
+  },
+  "claim_reconciliation": "The report's 1,140 aggregate is 12 runs across validation, development-test, and sealed-test (22 + 22 + 51 = 95 rows per run). The 612 value is the sealed-test-only subtotal (51 rows x 4 variants x 3 seeds).",
+  "evidence_boundary": "This qualifies historical accounting only; it does not change historical metrics, thresholds, or scientific conclusions.",
+  "observed_sealed_rows": 612,
+  "observed_total_prediction_rows": 1140,
+  "original_sealed_only_claim": 612,
+  "qualification_id": "historical-qualification__empirical-small-20260908T222325Z__count-reconciliation-v1",
+  "qualification_version": "historical-count-reconciliation-v1",
+  "source_files": [
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-a1-seed-11/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-a1-seed-23/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-a1-seed-37/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-b-seed-11/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-b-seed-23/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-b-seed-37/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c1-seed-11/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c1-seed-23/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c1-seed-37/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c2-seed-11/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c2-seed-23/predictions.jsonl",
+    "results/raw/empirical-small-20260908T222325Z/empirical-small-20260908T222325Z-c2-seed-37/predictions.jsonl"
+  ],
+  "source_report": "results/reports/experimental-validation-report.md",
+  "source_run_group": "empirical-small-20260908T222325Z"
+}

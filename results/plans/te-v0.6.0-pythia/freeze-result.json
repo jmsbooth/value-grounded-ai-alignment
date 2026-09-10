@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-09-09T13:09:07.190118Z",
+  "plan": "results/plans/te-v0.6.0-pythia/cohort-plan.json",
+  "protocol": "te-v0.6.0-pythia",
+  "reasons": [
+    "worktree is not clean; protocol/config ownership is not committed",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/protocol.md",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/gates.yaml"
+  ],
+  "status": "COHORT_FREEZE_BLOCKED",
+  "worktree_clean": false
+}

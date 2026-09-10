@@ -1,0 +1,16 @@
+protocol: te-v0.6.0-pythia
+mode: development-until-owner-freeze
+max_sequence_length: 2048
+batch_size: 1
+gradient_accumulation_steps: 1
+learning_rate: 0.00002
+max_steps_development: 8
+max_steps_locked: 128
+warmup_steps: 0
+weight_decay: 0.0
+precision: float32
+device_policy: cpu-or-explicit-mps
+use_cache: false
+automatic_tuning: false
+resource_rule: measured_cost_and_disk_budget_required_before_locked_run
+

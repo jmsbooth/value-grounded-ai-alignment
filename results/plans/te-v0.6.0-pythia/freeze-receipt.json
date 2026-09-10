@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-09-09T13:09:07.190760Z",
+  "producer_kind": "gate",
+  "protocol": "te-v0.6.0-pythia",
+  "reasons": [
+    "worktree is not clean; protocol/config ownership is not committed",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/protocol.md",
+    "protocol file is not tracked: experiments/protocols/te-v0.6.0-pythia/gates.yaml"
+  ],
+  "receipt_digest": "838314272c43d93bc889e25addf674ce76c69cedba24e8544fabca9d877f5d2a",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "COHORT_FREEZE_BLOCKED"
+}

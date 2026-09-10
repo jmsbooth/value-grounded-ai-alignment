@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-09-09T13:22:30.793858Z",
+  "observed_sealed": 612,
+  "observed_total": 1140,
+  "producer_kind": "historical_qualification",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "6a05d803382458b28f47a849b2c93d441f362b3f0901affeefb18fb52f0f96e0",
+  "receipt_version": "evidence-receipt-v1",
+  "report_digest": "c09c6a9516a88986238c49940f7d299272271e703b3c34b47b0f7985605537fc",
+  "source_run_group": "empirical-small-20260908T222325Z",
+  "status": "HISTORICAL_COUNT_QUALIFIED"
+}

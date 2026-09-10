@@ -1,0 +1,19 @@
+protocol: te-v0.6.0-pythia
+required_before_locked_run:
+  - protocol_config_committed
+  - semantic_gate_passed
+  - environment_hash_verified
+  - model_revision_verified
+  - cohort_plan_frozen
+  - locked_eval_uninspected
+  - resource_plan_approved
+  - real_model_attack_path_verified
+states:
+  fixture: FIXTURE_TESTS_PASSED
+  semantic: SEMANTIC_DATASET_VALIDATED
+  integration: PYTHIA_INTEGRATION_VALIDATED
+  locked: LOCKED_PYTHIA_COMPARISON_COMPLETE
+  handoff: READY_FOR_OLMO_PROTOCOL_DESIGN
+fail_closed: true
+favorable_result_not_required: true
+

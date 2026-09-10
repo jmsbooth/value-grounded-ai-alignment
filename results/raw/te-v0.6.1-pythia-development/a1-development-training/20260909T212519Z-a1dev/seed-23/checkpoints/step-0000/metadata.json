@@ -1,0 +1,8 @@
+{
+  "experiment_id": "a1-development-training",
+  "profile": "mini",
+  "protocol": "te-v0.6.1-pythia-development",
+  "seed": 23,
+  "selection_rule": "lowest_mean_validation_response_nll_then_earlier_update",
+  "update_count": 0
+}

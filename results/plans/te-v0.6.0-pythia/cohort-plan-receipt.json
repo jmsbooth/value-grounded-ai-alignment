@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-09T13:09:06.925651Z",
+  "plan_digest": "c684d4871b27b0414c405636f52095f5485b66f5c7475cf19a3a31abde807c9c",
+  "producer_kind": "known_fixture",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "99bc7ded9af86f236a893c959e483e69ad16883722e007b1cfcf46352de03fa5",
+  "receipt_version": "evidence-receipt-v1",
+  "run_count": 40,
+  "status": "PLANNED_NOT_FROZEN"
+}

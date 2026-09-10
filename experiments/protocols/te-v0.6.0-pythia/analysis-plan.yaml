@@ -1,0 +1,13 @@
+protocol: te-v0.6.0-pythia
+estimand: paired_difference_in_grouped_locked_engineering_performance
+unit_of_inference: world_group_id
+bootstrap:
+  resamples: 2000
+  seed: 20260909
+  cluster: world_group_id
+  stratify_by: [domain, seed]
+multiple_comparisons: descriptive_with_family_labels_no_confirmatory_claim
+missingness: report_parse_failures_and_incomplete_runs_never_impute_as_success
+denominators: raw_counts_by_split_variant_seed_and_attack
+no_training_in_analysis: true
+

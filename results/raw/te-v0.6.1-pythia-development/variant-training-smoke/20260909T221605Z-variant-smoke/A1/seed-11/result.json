@@ -1,0 +1,74 @@
+{
+  "active_auxiliary_heads": [],
+  "allocated_trainable_parameters": 408479744,
+  "attempt_id": "A1-seed-11",
+  "checkpoint": {
+    "path": "results/raw/te-v0.6.1-pythia-development/variant-training-smoke/20260909T221605Z-variant-smoke/A1/seed-11/checkpoint",
+    "reloaded": true,
+    "verified": true
+  },
+  "experiment_id": "variant-training-smoke",
+  "locked_data_read_or_scored": false,
+  "open_dev": {
+    "n": 8,
+    "schema_valid": 0,
+    "task_correct": 0
+  },
+  "protocol": "te-v0.6.1-pythia-development",
+  "same_public_training_bytes_as_paired_arm": false,
+  "seed": 11,
+  "status": "VARIANT_SMOKE_ATTEMPT_COMPLETE",
+  "structured_input": false,
+  "train_examples_per_update": 8,
+  "training_metrics": [
+    {
+      "effective_batch_size": 8,
+      "examples": 8,
+      "gradient_norm": 4.213104724884033,
+      "loss": 1.887412428855896,
+      "response": 1.887412428855896,
+      "response_token_count": 743.0,
+      "seed": 11,
+      "update": 1,
+      "variant": "A1"
+    },
+    {
+      "effective_batch_size": 8,
+      "examples": 8,
+      "gradient_norm": 2.9356422424316406,
+      "loss": 1.5750585794448853,
+      "response": 1.5750585794448853,
+      "response_token_count": 743.0,
+      "seed": 11,
+      "update": 2,
+      "variant": "A1"
+    },
+    {
+      "effective_batch_size": 8,
+      "examples": 8,
+      "gradient_norm": 3.117138147354126,
+      "loss": 1.3156189918518066,
+      "response": 1.3156189918518066,
+      "response_token_count": 743.0,
+      "seed": 11,
+      "update": 3,
+      "variant": "A1"
+    },
+    {
+      "effective_batch_size": 8,
+      "examples": 8,
+      "gradient_norm": 2.8521533012390137,
+      "loss": 1.0820186138153076,
+      "response": 1.0820186138153076,
+      "response_token_count": 743.0,
+      "seed": 11,
+      "update": 4,
+      "variant": "A1"
+    }
+  ],
+  "updated_adapter_parameters": 3145728,
+  "updated_auxiliary_parameters": 0,
+  "updates_completed": 4,
+  "variant": "A1",
+  "wall_seconds": 64.86447558307555
+}

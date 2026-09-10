@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vgta://schemas/te-v0.6.0-pythia/artifact-v1",
+  "type": "object",
+  "required": ["receipt_version", "producer_kind", "protocol", "status", "created_at"],
+  "properties": {
+    "receipt_version": {"type": "string"},
+    "producer_kind": {"enum": ["known_fixture", "semantic_audit", "preflight", "model_smoke", "training_diagnostic", "model_prediction", "analysis", "gate", "historical_qualification"]},
+    "protocol": {"type": "string"},
+    "status": {"type": "string"},
+    "created_at": {"type": "string"},
+    "receipt_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_hashes": {"type": "object", "additionalProperties": {"type": "string"}},
+    "config_hash": {"type": "string"},
+    "model_revision_sha": {"type": "string"},
+    "environment_hash": {"type": "string"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,17 @@
+{
+  "contrasts": [],
+  "created_at": "2026-09-09T13:22:30.622344Z",
+  "data_regenerated": false,
+  "input_digest": "81331be34e4c6d2ad09e3e1005da54816ad6bac0b467f5c9f54be6ddbcbbbb0f",
+  "protocol": "te-v0.6.0-pythia",
+  "raw_denominators": {
+    "pretrained-base-natural|None|open-dev|None": 1,
+    "pretrained-base-natural|None|open-dev|authority_spoofing": 1,
+    "pretrained-base-natural|None|open-dev|prompt_injection": 1,
+    "pretrained-base-natural|None|open-dev|purpose_manipulation": 1,
+    "pretrained-base-natural|None|open-dev|semantic_occlusion": 1
+  },
+  "status": "ANALYSIS_COMPLETE",
+  "training_performed": false,
+  "unit_of_inference": "world_group_id"
+}

@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-09-09T13:27:15.071709Z",
+  "dependencies": {
+    "peft": true,
+    "psutil": true,
+    "safetensors": true,
+    "torch": true,
+    "transformers": true
+  },
+  "disk_free_gib": 9.121,
+  "environment_digest": "7bbacd453774d2de120c68b749cd7b28b25ab1f48ca323a61e2e05044b0ba212",
+  "model_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+  "producer_kind": "preflight",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "3fd7b18c0a9f8f14fe27db5b3e53fea192defc06b673a8cac736efc14ba589d5",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "PREFLIGHT_RECORDED"
+}

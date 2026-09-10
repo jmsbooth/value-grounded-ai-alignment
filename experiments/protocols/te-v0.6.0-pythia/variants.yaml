@@ -1,0 +1,36 @@
+protocol: te-v0.6.0-pythia
+seeds: [11, 23, 37, 53, 71]
+lora:
+  rank: 8
+  alpha: 16
+  dropout: 0.0
+variants:
+  A1:
+    input: natural
+    auxiliary_heads: []
+  B:
+    input: natural+structured
+    auxiliary_heads: []
+  C1:
+    input: natural+structured
+    auxiliary_heads: [values, relation]
+  C2:
+    input: natural+structured
+    auxiliary_heads: [values, relation, norms, conflict]
+  B-TEXT-A:
+    input: natural
+    auxiliary_heads: []
+    control: text-only-ablated-structure
+  C1-TEXT-N:
+    input: natural+structured
+    auxiliary_heads: [values, relation]
+    control: null-auxiliary-labels
+  C1-SHAM:
+    input: natural+structured
+    auxiliary_heads: [values, relation]
+    control: sham-auxiliary-targets
+  C2-SHAM:
+    input: natural+structured
+    auxiliary_heads: [values, relation, norms, conflict]
+    control: sham-auxiliary-targets
+

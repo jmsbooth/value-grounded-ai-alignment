@@ -1,0 +1,133 @@
+{
+  "attempt_id": "seed-11",
+  "calibration_used_for_selection": false,
+  "checkpoints": [
+    {
+      "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0000",
+      "update": 0,
+      "validation_response_nll": 1.9258149013116235
+    },
+    {
+      "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0008",
+      "update": 8,
+      "validation_response_nll": 0.3184807502093897
+    },
+    {
+      "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0016",
+      "update": 16,
+      "validation_response_nll": 0.11628703222481182
+    },
+    {
+      "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0024",
+      "update": 24,
+      "validation_response_nll": 0.07679397846942218
+    }
+  ],
+  "curve": [
+    {
+      "elapsed_seconds": 86.99201833305415,
+      "learning_rate": 0.00020869565217391305,
+      "seed": 11,
+      "train": {
+        "examples": 64.0,
+        "response_nll": 1.935794809146261,
+        "response_tokens": 5849.0
+      },
+      "update": 0,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 1.9258149013116235,
+        "response_tokens": 1467.0
+      }
+    },
+    {
+      "elapsed_seconds": 357.7161750419764,
+      "learning_rate": 0.0001391304347826087,
+      "seed": 11,
+      "train": {
+        "examples": 64.0,
+        "response_nll": 0.3175984273090956,
+        "response_tokens": 5849.0
+      },
+      "update": 8,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 0.3184807502093897,
+        "response_tokens": 1467.0
+      }
+    },
+    {
+      "elapsed_seconds": 597.7380884579616,
+      "learning_rate": 6.956521739130436e-05,
+      "seed": 11,
+      "train": {
+        "examples": 64.0,
+        "response_nll": 0.11614187974734354,
+        "response_tokens": 5849.0
+      },
+      "update": 16,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 0.11628703222481182,
+        "response_tokens": 1467.0
+      }
+    },
+    {
+      "elapsed_seconds": 850.5275887920288,
+      "learning_rate": 0.0,
+      "seed": 11,
+      "train": {
+        "examples": 64.0,
+        "response_nll": 0.07698650848439544,
+        "response_tokens": 5849.0
+      },
+      "update": 24,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 0.07679397846942218,
+        "response_tokens": 1467.0
+      }
+    }
+  ],
+  "experiment_id": "a1-development-training",
+  "locked_data_read_or_scored": false,
+  "model": {
+    "config": {
+      "architectures": [
+        "GPTNeoXForCausalLM"
+      ],
+      "hidden_size": 1024,
+      "intermediate_size": 4096,
+      "max_position_embeddings": 2048,
+      "model_type": "gpt_neox",
+      "num_attention_heads": 16,
+      "num_hidden_layers": 24
+    },
+    "device": "cpu",
+    "local_files_only": true,
+    "model_id": "EleutherAI/pythia-410m",
+    "requested_revision": "step143000",
+    "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+  },
+  "open_dev": {
+    "correct": 0,
+    "end_to_end_correct_rate": 0.0,
+    "independent_groups": 16,
+    "n": 16,
+    "schema_valid": 0,
+    "strict_schema_rate": 0.0
+  },
+  "passes_completed": 3.0,
+  "profile": "mini",
+  "protocol": "te-v0.6.1-pythia-development",
+  "seed": 11,
+  "selected_checkpoint": {
+    "path": "results/raw/te-v0.6.1-pythia-development/a1-development-training/20260909T212519Z-a1dev/seed-11/checkpoints/step-0024",
+    "update": 24,
+    "validation_response_nll": 0.07679397846942218
+  },
+  "selection_rule": "lowest mean validation response NLL; exact ties choose earlier update",
+  "status": "A1_DEVELOPMENT_TRAINING_COMPLETE",
+  "synthetic_data": true,
+  "updates_completed": 24
+}

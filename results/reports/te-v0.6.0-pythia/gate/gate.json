@@ -1,0 +1,11 @@
+{
+  "inputs": {
+    "freeze": "COHORT_FREEZE_BLOCKED",
+    "model_smoke": "PYTHIA_INTEGRATION_VALIDATED",
+    "semantic": "SEMANTIC_DATASET_VALIDATED",
+    "training_diagnostic": "PYTHIA_TRAINING_DIAGNOSTIC_PASSED"
+  },
+  "locked_comparison_claim": false,
+  "protocol": "te-v0.6.0-pythia",
+  "state": "SEMANTIC_DATASET_VALIDATED"
+}

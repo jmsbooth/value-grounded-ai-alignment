@@ -2,9 +2,9 @@
 
 **Value-Grounded AI Alignment (VGA)** is a theoretical research program for testing whether explicit axiological and normative structure can participate in Transformer computation while authority, purpose, domain semantics, world state, and consequential actions remain separately governed.
 
-**Status: v0.4.0 scientific narrative revision — v0.3.0 synthetic mechanism-validation pilot, no empirical Transformer results**
+**Status: v0.6.1 Pythia development/training phase — no locked Transformer comparison results**
 
-> This repository proposes and tests interfaces, equations, controls, and synthetic mechanism-validation fixtures. It does not claim that value-grounded Transformers solve AI alignment, establish moral truth, or provide production safety.
+> This repository proposes and tests interfaces, equations, controls, synthetic mechanism-validation fixtures, and bounded Pythia integration diagnostics. It does not claim that value-grounded Transformers solve AI alignment, establish moral truth, or provide production safety.
 
 ## Research question
 
@@ -37,8 +37,17 @@ O_A^v is the canonical axiology. A_phi^v is a learned or hybrid derivative and c
 - [experiments/preregistration/v0.3.md](experiments/preregistration/v0.3.md) and [experiments/configs/v0.3-small.toml](experiments/configs/v0.3-small.toml) — preregistered scope, metrics, thresholds, controls, and stopping rules.
 - [results/](results/) — generated raw manifests, processed tables, confidence intervals, facts, and figures from executed pilots. Raw run directories are never overwritten.
 - [results/reports/experimental-validation-report.md](results/reports/experimental-validation-report.md) — machine-derived freeze-era report covering methods, harness status, hypotheses, positive/null/negative results, security, calibration, capability, compute, and replication.
+- [results/reports/te-v0.6.0-pythia/phase-execution-report.md](results/reports/te-v0.6.0-pythia/phase-execution-report.md) — prior one-step Pythia integration report with methods, test outputs, resource limits, and the explicit non-locked result.
+- [results/reports/te-v0.6.1-pythia-development/](results/reports/te-v0.6.1-pythia-development/) — v0.6.1 development reports covering strict output audit, training contracts, v2 benchmark validation, real multi-step Pythia runs, variant smoke, attack audit, and readiness.
+- [results/reports/historical-qualification/mlp-count-reconciliation/count-reconciliation.md](results/reports/historical-qualification/mlp-count-reconciliation/count-reconciliation.md) — append-only qualification reconciling historical raw-row counts without rewriting the prior report.
 - [results/registry/index.md](results/registry/index.md) — immutable experiment/run/analysis/report history for the v0.5 harness-validation phase.
 - [experiments/protocols/hv-v0.5.1/](experiments/protocols/hv-v0.5.1/) — remediation protocol, hypotheses, metrics, gates, and controls for harness validation; the failed `hv-v0.5.0` baseline remains preserved.
+- [experiments/protocols/te-v0.6.0-pythia/](experiments/protocols/te-v0.6.0-pythia/) — Pythia phase protocol, fixed input contracts, variants, analysis plan, artifact schema, and fail-closed gates.
+- [experiments/protocols/hv-v0.5.2-semantic-validity/](experiments/protocols/hv-v0.5.2-semantic-validity/) — semantic validity gate for readable fictional policy worlds, typed graphs, public/private isolation, and fact-grounded reference decisions.
+- [src/vgta_transformer/](src/vgta_transformer/) — optional exact Pythia loader, LoRA adaptation, auxiliary heads, masked losses, deterministic decoding, and checkpoint helpers.
+- [experiments/transformer/](experiments/transformer/) — preflight, semantic audit, dataset materialization, model smoke, diagnostics, cohort planning, analysis, and fail-closed gate commands.
+- [docs/research-context.md](docs/research-context.md) and [docs/experiments/te-v0.6.0-pythia/](docs/experiments/te-v0.6.0-pythia/) — current phase boundaries, resources, decisions, ledger, and OLMo handoff.
+- [docs/experiments/te-v0.6.1-pythia-development/](docs/experiments/te-v0.6.1-pythia-development/) — v0.6.1 preflight, protected-paper hashes, source inventory, and execution ledger.
 - [paper/generated/](paper/generated/) — LaTeX fragments generated from result tables; no empirical numbers are manually typed into the paper.
 - [docs/architecture.md](docs/architecture.md) — active architecture description.
 - [docs/architecture-decisions.md](docs/architecture-decisions.md) — v0.2 ADR-001 through ADR-007 decision index.
@@ -133,6 +142,92 @@ Create navigation artifacts without modifying evidence:
 Daily summaries and report comparisons are convenience artifacts. They do not
 replace or supersede the immutable report paths in the registry.
 
+## Pythia phase: semantic gate and development integration
+
+The Pythia phase uses `EleutherAI/pythia-410m` at reviewed checkpoint
+`step143000`, resolved to an immutable revision in the protocol. The active
+development benchmark is `pythia-policy-dev-v1`: synthetic, fictional policy
+worlds covering delegated data access and purpose-limited disclosure. The
+reference policy is an executable project oracle, not human adjudication or
+moral ground truth.
+
+Run the dependency-light phase checks:
+
+    make te-preflight PROTOCOL=te-v0.6.0-pythia
+    make te-semantic-audit PROTOCOL=te-v0.6.0-pythia
+    make te-plan-cohort PROTOCOL=te-v0.6.0-pythia
+
+The optional model environment is isolated and pinned separately from the
+base fixture environment:
+
+    python3 -m venv .venv-pythia
+    .venv-pythia/bin/python -m pip install -r experiments/environments/te-v0.6.0-pythia/requirements.lock
+    source .venv-pythia/bin/activate
+    make te-model-smoke PROTOCOL=te-v0.6.0-pythia DOWNLOAD=1
+    make te-train-diagnostics PROTOCOL=te-v0.6.0-pythia
+    make te-evaluate-model PROTOCOL=te-v0.6.0-pythia LIMIT=1
+
+Model weights remain in an external local cache and are never committed. The
+smoke and diagnostic commands report explicit dependency/cache/model states. A
+semantic green or model integration smoke does not establish a locked
+comparison, capability result, or alignment result.
+
+The five-seed cohort is fail-closed:
+
+    make te-freeze-cohort PROTOCOL=te-v0.6.0-pythia
+    make te-run-cohort PROTOCOL=te-v0.6.0-pythia
+    make te-analyze PROTOCOL=te-v0.6.0-pythia
+    make te-gate PROTOCOL=te-v0.6.0-pythia
+
+Freezing requires a clean worktree, tracked protocol/configuration, passing
+semantic validation, verified model/environment artifacts, a measured resource
+plan, and owner approval. This checkout may therefore produce a truthful
+blocked state before a locked run; no locked result is inferred from fixtures.
+
+## Pythia v0.6.1 development/training phase
+
+Protocol `te-v0.6.1-pythia-development` is the bounded training phase after
+the one-step integration diagnostic. It uses the separate synthetic
+`pythia-policy-dev-v2` mini profile (64 train, 16 validation, 16 calibration,
+16 open-development groups) and never creates or reads a locked split. The
+strict primary parser slices generated token continuations by actual tensor
+width, rejects repair/trailing prose/unknown references, and records format,
+policy, uncertainty, and mock-enforcement outcomes separately.
+
+The phase runs real Pythia task-SFT for A1, an eight-example memorization
+diagnostic, all eight parent arms as bounded smoke attempts, and paired clean /
+attack development evaluation where a selected checkpoint is available.
+Pretrained, one-step, memorization, and task-trained checkpoints are separate
+lineages. Synthetic development output is not an alignment or population
+generalization result.
+
+Run the permitted sequence in the isolated `.venv-pythia` environment:
+
+```bash
+make te-dev-preflight PROTOCOL=te-v0.6.1-pythia-development
+make te-audit-generations PROTOCOL=te-v0.6.1-pythia-development
+make te-test-training-contracts PROTOCOL=te-v0.6.1-pythia-development
+make te-profile-resources PROTOCOL=te-v0.6.1-pythia-development
+make te-build-dev-data PROTOCOL=te-v0.6.1-pythia-development PROFILE=mini
+make te-validate-dev-data PROTOCOL=te-v0.6.1-pythia-development
+make te-train-memorization PROTOCOL=te-v0.6.1-pythia-development MAX_UPDATES=200
+make te-train-a1-dev PROTOCOL=te-v0.6.1-pythia-development PROFILE=mini
+make te-run-variant-smoke PROTOCOL=te-v0.6.1-pythia-development
+```
+
+Use exact checkpoint and run paths for `te-evaluate-trained-dev` and the
+reporting/gate commands. `te-freeze-cohort` and `te-run-cohort` remain blocked
+for this development protocol. Do not run `make all` or
+`make paper-from-results` as part of this phase; the protected manuscript is
+hash-verified separately.
+
+Recorded execution:
+[v0.6.1 experimental validation report](results/reports/te-v0.6.1-pythia-development/development-summary/20260910T145343Z-development-summary/analysis-r001/experimental-validation-report.md)
+and [readiness gate](results/reports/te-v0.6.1-pythia-development/development-readiness.json).
+The gate is intentionally `DEVELOPMENT_NOT_READY_FOR_COHORT_REVIEW`: repository
+tests and v2 benchmark validation passed, while the A1 format criterion and
+full variant smoke did not. No locked cohort is authorized.
+
 The readiness command reads registered reports; it does not rerun tests:
 
     make harness-gate
@@ -142,9 +237,10 @@ The command must return `HARNESS READY FOR CONFIRMATORY TRANSFORMER STUDY` befor
 ## Proposed empirical sequence
 
 1. Validate the current A1/B/C1/C2 mechanism pilot and review the generated negative and positive findings.
-2. Replace the proxy with a matched small open-weight decoder-only Transformer only after the dataset and controls are stable.
-3. Add D structural attention only after the preregistered C1/C2 gate; add E routing and G late binding only after later gates.
-4. Preserve held-out structural-OOD compositions, multiple seeds, effect sizes, confidence intervals, capability, attacks, and conformance stability at every scale.
+2. Complete semantic validation and local Pythia integration diagnostics with the new policy-grounded benchmark.
+3. Replace the proxy with a matched small open-weight decoder-only Transformer only after the dataset and controls are stable.
+4. Add D structural attention only after the preregistered C1/C2 gate; add E routing and G late binding only after later gates.
+5. Preserve held-out structural-OOD compositions, multiple seeds, effect sizes, confidence intervals, capability, attacks, and conformance stability at every scale.
 
 The roadmap requires multiple seeds, effect sizes, confidence intervals, compute-normalized comparisons, disagreement-preserving evaluation, provenance, versioning, and rollback. The verifier remains a separate experiment from the model ladder.
 

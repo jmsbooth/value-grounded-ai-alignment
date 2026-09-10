@@ -1,0 +1,15 @@
+protocol: te-v0.6.1-pythia-development
+fail_closed: true
+gates:
+  OUTPUT_PATH_AUDITED: [historical_or_missing_declared, extraction_tests, strict_parser_tests]
+  TRAINING_CONTRACT_VALIDATED: [masking, accumulation, optimizer_update, checkpoint_resume, causal_boundary]
+  A1_MEMORIZATION_CRITERION_MET: [eight_example_generated_output_criterion]
+  DEVELOPMENT_BENCHMARK_VALIDATED: [v2_profile_materialized, public_private_isolation, grouped_splits, semantic_audit]
+  A1_DEVELOPMENT_TRAINING_COMPLETE: [multi_step_run, selected_checkpoint, held_out_outputs]
+  A1_FORMAT_READY: [strict_schema_validity_at_least_0.90, at_least_16_independent_groups]
+  AUXILIARY_BACKPROP_VALIDATED: [values, relation, norms, conflict, detached_state_detection]
+  VARIANT_SMOKE_COMPLETE: [all_eight_arms_and_two_seeds]
+  RESOURCE_PLAN_MEASURED: [representative_training_generation_checkpoint_measurements]
+  DEVELOPMENT_READY_FOR_COHORT_REVIEW: [all_required_receipts_valid, unresolved_issues_reviewed, locked_authority_still_external]
+states: {pass: PASS, fail: FAIL, partial: PARTIAL, missing: MISSING, not_measured: NOT_MEASURED}
+locked_commands: [te-freeze-cohort, te-run-cohort]

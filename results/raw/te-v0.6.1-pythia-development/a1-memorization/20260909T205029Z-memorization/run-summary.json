@@ -1,0 +1,224 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "seed-11",
+      "checkpoints": [
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-11/checkpoints/step-0000",
+          "update": 0
+        },
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-11/checkpoints/step-0025",
+          "update": 25
+        },
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-11/checkpoints/step-0050",
+          "update": 50
+        }
+      ],
+      "criterion_curve": [
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 1.887351942575796,
+          "schema_valid": 0,
+          "update": 0
+        },
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 0.03647687234245191,
+          "schema_valid": 0,
+          "update": 25
+        },
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 0.0033836161989147097,
+          "schema_valid": 0,
+          "update": 50
+        }
+      ],
+      "evaluation_curve": [
+        {
+          "elapsed_seconds": 7.7612879580119625,
+          "examples": 8.0,
+          "response_nll": 1.887351942575796,
+          "response_tokens": 743.0,
+          "seed": 11,
+          "update": 0
+        },
+        {
+          "elapsed_seconds": 426.8507728750119,
+          "examples": 8.0,
+          "response_nll": 0.03647687234245191,
+          "response_tokens": 743.0,
+          "seed": 11,
+          "update": 25
+        },
+        {
+          "elapsed_seconds": 850.3151822499931,
+          "examples": 8.0,
+          "response_nll": 0.0033836161989147097,
+          "response_tokens": 743.0,
+          "seed": 11,
+          "update": 50
+        }
+      ],
+      "experiment_id": "a1-memorization",
+      "generated_output_count": 24,
+      "locked_data_read_or_scored": false,
+      "max_updates_requested": 50,
+      "model": {
+        "config": {
+          "architectures": [
+            "GPTNeoXForCausalLM"
+          ],
+          "hidden_size": 1024,
+          "intermediate_size": 4096,
+          "max_position_embeddings": 2048,
+          "model_type": "gpt_neox",
+          "num_attention_heads": 16,
+          "num_hidden_layers": 24
+        },
+        "device": "cpu",
+        "local_files_only": true,
+        "model_id": "EleutherAI/pythia-410m",
+        "requested_revision": "step143000",
+        "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+      },
+      "prediction_model_state": "fresh-adapter-a1",
+      "protocol": "te-v0.6.1-pythia-development",
+      "seed": 11,
+      "selected_domains": [
+        "delegated_data_access",
+        "purpose_limited_disclosure"
+      ],
+      "selected_public_ids": [
+        "public-v2-world-0000",
+        "public-v2-world-0001",
+        "public-v2-world-0002",
+        "public-v2-world-0004",
+        "public-v2-world-0006",
+        "public-v2-world-0003",
+        "public-v2-world-0005",
+        "public-v2-world-0007"
+      ],
+      "status": "A1_MEMORIZATION_CRITERION_NOT_MET",
+      "synthetic_data": true,
+      "updates_completed": 50
+    },
+    {
+      "attempt_id": "seed-23",
+      "checkpoints": [
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-23/checkpoints/step-0000",
+          "update": 0
+        },
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-23/checkpoints/step-0025",
+          "update": 25
+        },
+        {
+          "path": "results/raw/te-v0.6.1-pythia-development/a1-memorization/20260909T205029Z-memorization/seed-23/checkpoints/step-0050",
+          "update": 50
+        }
+      ],
+      "criterion_curve": [
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 1.887351942575796,
+          "schema_valid": 0,
+          "update": 0
+        },
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 0.03600763680079944,
+          "schema_valid": 0,
+          "update": 25
+        },
+        {
+          "acceptable_action": 0,
+          "n": 8,
+          "nll": 0.004816859179022214,
+          "schema_valid": 0,
+          "update": 50
+        }
+      ],
+      "evaluation_curve": [
+        {
+          "elapsed_seconds": 8.468915874953382,
+          "examples": 8.0,
+          "response_nll": 1.887351942575796,
+          "response_tokens": 743.0,
+          "seed": 23,
+          "update": 0
+        },
+        {
+          "elapsed_seconds": 422.5235199999297,
+          "examples": 8.0,
+          "response_nll": 0.03600763680079944,
+          "response_tokens": 743.0,
+          "seed": 23,
+          "update": 25
+        },
+        {
+          "elapsed_seconds": 838.8105092080077,
+          "examples": 8.0,
+          "response_nll": 0.004816859179022214,
+          "response_tokens": 743.0,
+          "seed": 23,
+          "update": 50
+        }
+      ],
+      "experiment_id": "a1-memorization",
+      "generated_output_count": 24,
+      "locked_data_read_or_scored": false,
+      "max_updates_requested": 50,
+      "model": {
+        "config": {
+          "architectures": [
+            "GPTNeoXForCausalLM"
+          ],
+          "hidden_size": 1024,
+          "intermediate_size": 4096,
+          "max_position_embeddings": 2048,
+          "model_type": "gpt_neox",
+          "num_attention_heads": 16,
+          "num_hidden_layers": 24
+        },
+        "device": "cpu",
+        "local_files_only": true,
+        "model_id": "EleutherAI/pythia-410m",
+        "requested_revision": "step143000",
+        "resolved_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+      },
+      "prediction_model_state": "fresh-adapter-a1",
+      "protocol": "te-v0.6.1-pythia-development",
+      "seed": 23,
+      "selected_domains": [
+        "delegated_data_access",
+        "purpose_limited_disclosure"
+      ],
+      "selected_public_ids": [
+        "public-v2-world-0000",
+        "public-v2-world-0001",
+        "public-v2-world-0002",
+        "public-v2-world-0004",
+        "public-v2-world-0006",
+        "public-v2-world-0003",
+        "public-v2-world-0005",
+        "public-v2-world-0007"
+      ],
+      "status": "A1_MEMORIZATION_CRITERION_NOT_MET",
+      "synthetic_data": true,
+      "updates_completed": 50
+    }
+  ],
+  "experiment_id": "a1-memorization",
+  "protocol": "te-v0.6.1-pythia-development",
+  "run_id": "20260909T205029Z-memorization",
+  "status": "COMPLETE"
+}

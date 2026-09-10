@@ -1,0 +1,28 @@
+{
+  "environment_version": "te-v0.6.0-pythia-env-v1",
+  "python_requirement": ">=3.10",
+  "install_target": ".venv-pythia",
+  "lock_file": "experiments/environments/te-v0.6.0-pythia/requirements.lock",
+  "status": "installed-and-smoke-validated-2026-09-09",
+  "resolved_direct_versions": {
+    "torch": "2.14.0",
+    "transformers": "5.16.1",
+    "peft": "0.20.0",
+    "safetensors": "0.8.0",
+    "psutil": "7.2.2",
+    "accelerate": "1.15.0",
+    "tokenizers": "0.23.2",
+    "numpy": "2.5.3",
+    "PyYAML": "6.0.3",
+    "pytest": "9.1.1"
+  },
+  "verification": {
+    "model_smoke": "PYTHIA_INTEGRATION_VALIDATED",
+    "training_diagnostic": "PYTHIA_TRAINING_DIAGNOSTIC_PASSED",
+    "environment_digest": "7bbacd453774d2de120c68b749cd7b28b25ab1f48ca323a61e2e05044b0ba212",
+    "model_asset_digest": "d65a3c37a54360759a43bcb05b80df1ddbb982ed0a1d2b97bb67746d5c07a9c7"
+  },
+  "model_cache_must_remain_outside_repository": true,
+  "downloaded_weights_committed": false,
+  "network_required_only_for_initial_model_resolution": true
+}

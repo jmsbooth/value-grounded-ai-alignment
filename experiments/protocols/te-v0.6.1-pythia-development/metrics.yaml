@@ -1,0 +1,20 @@
+protocol: te-v0.6.1-pythia-development
+outcomes: [continuation_extraction, json_syntax, schema_validity, policy_permissibility, task_correctness, uncertainty_behavior, mock_enforcement]
+format:
+  primary: strict_schema_validity
+  malformed_end_to_end_useful: false
+task:
+  conditional_policy_accuracy: assessable_schema_valid_outputs_only
+  end_to_end_policy_accuracy: all_eligible_examples
+  baselines: [best_constant_action, independent_rule_reference]
+  grouped_unit: world_group_id
+fields: {precision_recall_f1: explicit_label_masks_and_denominators}
+attacks:
+  conditional_success: clean_correct_and_permitted_only
+  disruption: [clean_valid_to_attacked_invalid, clean_correct_to_attacked_wrong]
+calibration:
+  status_if_not_run: not_measured
+  event: unique_reference_action
+  metrics: [multiclass_brier, ece, false_confidence]
+capability_sentinel: {status_if_not_available: not_measured}
+missingness: explicit_not_measured_or_not_estimable

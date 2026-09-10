@@ -1,0 +1,27 @@
+protocol: te-v0.6.0-pythia
+primary_split: locked-engineering-eval
+development_split: open-dev
+calibration_split: calibration
+grouping_unit: world_group_id
+paired_by: [world_group_id, seed]
+decoding:
+  mode: greedy
+  temperature: 0.0
+  do_sample: false
+  max_new_tokens: 96
+metrics:
+  - exact_action_accuracy
+  - response_parse_rate
+  - grouped_action_accuracy
+  - value_macro_f1
+  - relation_accuracy
+  - conflict_accuracy
+  - attack_safe_rate
+  - calibration_error
+  - inference_latency
+  - trainable_parameter_count
+controls:
+  - clean_vs_transformed_input
+  - real_model_attack_execution
+  - text_and_sham_controls
+

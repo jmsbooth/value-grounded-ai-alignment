@@ -1,0 +1,90 @@
+{
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "active_auxiliary_heads": [],
+      "allocated_trainable_parameters": 408479744,
+      "attempt_id": "A1-seed-23",
+      "checkpoint": {
+        "path": "results/raw/te-v0.6.1-pythia-development/variant-training-smoke/20260909T223326Z-variant-smoke/child-A1-seed-23/A1/seed-23/checkpoint",
+        "reloaded": true,
+        "verified": true
+      },
+      "device": "mps",
+      "experiment_id": "variant-training-smoke",
+      "locked_data_read_or_scored": false,
+      "open_dev": {
+        "n": 8,
+        "schema_valid": 0,
+        "task_correct": 0
+      },
+      "protocol": "te-v0.6.1-pythia-development",
+      "same_public_training_bytes_as_paired_arm": false,
+      "schedule": {
+        "amendment_id": "te-v0.6.1-variant-smoke-bounded-schedule",
+        "protocol_max_updates": 32,
+        "selected_max_updates": 4
+      },
+      "seed": 23,
+      "status": "VARIANT_SMOKE_ATTEMPT_COMPLETE",
+      "structured_input": false,
+      "train_examples_per_update": 8,
+      "training_metrics": [
+        {
+          "effective_batch_size": 8,
+          "examples": 8,
+          "gradient_norm": 4.031968116760254,
+          "loss": 1.887412428855896,
+          "response": 1.887412428855896,
+          "response_token_count": 743.0,
+          "seed": 23,
+          "update": 1,
+          "variant": "A1"
+        },
+        {
+          "effective_batch_size": 8,
+          "examples": 8,
+          "gradient_norm": 3.092222213745117,
+          "loss": 1.5769200325012207,
+          "response": 1.5769200325012207,
+          "response_token_count": 743.0,
+          "seed": 23,
+          "update": 2,
+          "variant": "A1"
+        },
+        {
+          "effective_batch_size": 8,
+          "examples": 8,
+          "gradient_norm": 2.913806915283203,
+          "loss": 1.3155521154403687,
+          "response": 1.3155521154403687,
+          "response_token_count": 743.0,
+          "seed": 23,
+          "update": 3,
+          "variant": "A1"
+        },
+        {
+          "effective_batch_size": 8,
+          "examples": 8,
+          "gradient_norm": 3.0684897899627686,
+          "loss": 1.0835325717926025,
+          "response": 1.0835325717926025,
+          "response_token_count": 743.0,
+          "seed": 23,
+          "update": 4,
+          "variant": "A1"
+        }
+      ],
+      "updated_adapter_parameters": 3145728,
+      "updated_auxiliary_parameters": 0,
+      "updates_completed": 4,
+      "variant": "A1",
+      "wall_seconds": 71.28370550007094
+    }
+  ],
+  "expected_attempt_count": 16,
+  "experiment_id": "variant-training-smoke",
+  "protocol": "te-v0.6.1-pythia-development",
+  "run_id": "20260909T223447Z-variant-smoke",
+  "status": "VARIANT_SMOKE_PARTIAL"
+}

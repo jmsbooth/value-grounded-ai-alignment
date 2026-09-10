@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-09-09T13:26:51.307348Z",
+  "finite_logits": true,
+  "model_asset_digest": "d65a3c37a54360759a43bcb05b80df1ddbb982ed0a1d2b97bb67746d5c07a9c7",
+  "model_asset_file_count": 5,
+  "model_revision_sha": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+  "producer_kind": "model_smoke",
+  "protocol": "te-v0.6.0-pythia",
+  "receipt_digest": "673b05c222a9da78e32fb35d4261eb57d1412268989e9abe8b13bfbd5be8ac19",
+  "receipt_version": "evidence-receipt-v1",
+  "status": "PYTHIA_INTEGRATION_VALIDATED"
+}

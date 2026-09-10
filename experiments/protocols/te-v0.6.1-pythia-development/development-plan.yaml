@@ -1,0 +1,38 @@
+protocol: te-v0.6.1-pythia-development
+profile: mini
+historical_audit: {generations: 5, missing_policy: HISTORICAL_RAW_OUTPUTS_UNAVAILABLE}
+work_packages:
+  WP0: development-preflight
+  WP1: [raw-output-audit, parser-contract-tests]
+  WP2: [training-contract-tests, auxiliary-gradient-isolation]
+  WP3: resource-profile
+  WP4: a1-memorization
+  WP5: development-dataset-validation
+  WP6: a1-development-training
+  WP7: variant-training-smoke
+  WP8: [trained-output-and-attack-audit, development-readiness]
+memorization:
+  examples: 8
+  seeds: [11, 23]
+  learning_rate: 0.0002
+  weight_decay: 0.0
+  max_updates: 200
+  evaluation_steps: [0, 25, 50, 75, 100, 125, 150, 175, 200]
+  early_stop: {schema_valid: 7, acceptable_action: 7, nll_relative_improvement: 0.30, consecutive_evaluations: 2}
+a1_development:
+  seeds: [11, 23]
+  learning_rate: 0.0002
+  alternative_learning_rate: 0.0001
+  weight_decay: 0.01
+  max_updates: 512
+  max_passes: 3
+  effective_batch_size: 8
+  warmup_fraction: 0.05
+  validation_frequency_updates: 50
+  selection: lowest_mean_validation_response_nll_then_earlier_update
+variant_smoke:
+  arms: [A1, B, C1, C2, B-TEXT-A, C1-TEXT-N, C1-SHAM, C2-SHAM]
+  seeds: [11, 23]
+  max_updates: 32
+  open_dev_examples: 8
+locked_cohort: {authorized: false, reason: development_protocol_cannot_authorize_locked_runs}

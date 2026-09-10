@@ -1,0 +1,31 @@
+{
+  "protocol": "te-v0.6.0-pythia",
+  "status": "local-development-only",
+  "host": {
+    "platform": "macOS arm64",
+    "cpu": "Apple M2",
+    "cpu_cores": 8,
+    "memory_gib": 16,
+    "accelerator": "MPS possible; CUDA unavailable"
+  },
+  "inventory_disk_free_gib": 14.0,
+  "constraints": {
+    "paid_compute_authorized": false,
+    "external_upload_authorized": false,
+    "full_locked_cohort_authorized": false,
+    "model_weights_in_repository": false
+  },
+  "development_budget": {
+    "dataset": "fixture-sized local semantic dataset",
+    "model": "one official Pythia-410M checkpoint in external cache",
+    "diagnostics": "one-step and short-run integration checks",
+    "full_cohort": "not claimed feasible until measured"
+  },
+  "measured_development_runs": {
+    "model_smoke_cpu_wall_seconds": 4.52,
+    "one_step_training_diagnostic_cpu_wall_seconds": 20.05,
+    "post_install_disk_free_gib_observed": 7.6,
+    "measurement_scope": "single local development runs; not a full-cohort forecast"
+  },
+  "promotion_rule": "Record measured wall time, peak memory, disk use, and complete-run cost before any locked cohort request."
+}

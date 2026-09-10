@@ -1,0 +1,13 @@
+{
+  "analysis_sha256": "079a24d4d29fb8dc148470a75fe4152f3f9a62c589053ec68f2e8bdeeef8a5d8",
+  "created_at": "2026-09-10T14:54:24.979630Z",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "analysis",
+  "protocol": "te-v0.6.1-pythia-development",
+  "readiness_path": "results/reports/te-v0.6.1-pythia-development/development-readiness.json",
+  "receipt_digest": "6cc8ebe7721ced0b474abdeff964956a7f33879b76d454579250666db443b0d0",
+  "receipt_version": "evidence-receipt-v1",
+  "report_sha256": "9eb5fd45dee1773ebefd8a3c45fa08295e8cc878f183bb1f55a94883ad7eacd3",
+  "run_manifest_sha256": "346ceabe6dcf2eb0b1381b98ffc9adb5a90ea0510571824f94f8d0a8b5b209a5",
+  "status": "DEVELOPMENT_NOT_READY_FOR_COHORT_REVIEW"
+}

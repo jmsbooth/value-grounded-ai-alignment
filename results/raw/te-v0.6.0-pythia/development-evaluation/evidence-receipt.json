@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-09-09T13:19:33.311798Z",
+  "producer_kind": "model_prediction",
+  "protocol": "te-v0.6.0-pythia",
+  "real_pretrained_model": true,
+  "receipt_digest": "46711c0c313b98985d8eac3626d0df37adf135d0abeeeed5da4b2464af0550c0",
+  "receipt_version": "evidence-receipt-v1",
+  "row_count": 5,
+  "status": "MODEL_DEVELOPMENT_EVALUATION_COMPLETE"
+}
