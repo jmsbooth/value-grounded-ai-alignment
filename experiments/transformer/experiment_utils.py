@@ -1,4 +1,4 @@
-"""Shared bounded-training utilities for the v0.6.1 experiment runners."""
+"""Shared bounded-training utilities for the Pythia development runners."""
 
 from __future__ import annotations
 
@@ -13,7 +13,9 @@ from typing import Any, Iterable, Mapping
 import numpy as np
 
 from vgta_eval.evidence_receipts import canonical_digest
+from vgta_eval.candidate_evaluator import evaluate_candidate
 from vgta_eval.semantic_worlds import ACTION_CATALOGUE, VALUE_DEFINITIONS, PrivateAnnotation, PublicExample, SemanticDataset, generate_v2_dataset
+from vgta_eval.reference_policy import interpret_observation
 from vgta_transformer.adaptation import add_lora
 from vgta_transformer.auxiliary_heads import AuxiliaryHeads
 from vgta_transformer.checkpointing import save_checkpoint
@@ -107,12 +109,12 @@ def build_model(seed: int, *, device: str = "cpu", variant: str = "A1") -> tuple
     return model, tokenizer, heads, active
 
 
-def batch_for(example: PublicExample, annotation: PrivateAnnotation, tokenizer: Any, *, structured: bool, device: str = "cpu", max_length: int = 2048) -> dict[str, Any]:
-    batch = collate_examples((example,), tokenizer, annotations={example.public_id: annotation}, structured=structured, max_length=max_length)
+def batch_for(example: PublicExample, annotation: PrivateAnnotation, tokenizer: Any, *, structured: bool, device: str = "cpu", max_length: int = 2048, span_weight_fields: Iterable[str] = ()) -> dict[str, Any]:
+    batch = collate_examples((example,), tokenizer, annotations={example.public_id: annotation}, structured=structured, max_length=max_length, span_weight_fields=span_weight_fields)
     return {key: value.to(device) if hasattr(value, "to") else value for key, value in batch.items()}
 
 
-def evaluate_nll(model: Any, tokenizer: Any, examples: Iterable[PublicExample], annotations: Mapping[str, PrivateAnnotation], *, structured: bool, device: str = "cpu") -> dict[str, float]:
+def evaluate_nll(model: Any, tokenizer: Any, examples: Iterable[PublicExample], annotations: Mapping[str, PrivateAnnotation], *, structured: bool, device: str = "cpu", span_weight_fields: Iterable[str] = ()) -> dict[str, float]:
     import torch
     from vgta_transformer.training import response_loss_from_outputs
     examples = tuple(examples)
@@ -122,7 +124,7 @@ def evaluate_nll(model: Any, tokenizer: Any, examples: Iterable[PublicExample], 
     with torch.no_grad():
         for offset in range(0, len(examples), 8):
             chunk = examples[offset:offset + 8]
-            batch = collate_examples(chunk, tokenizer, annotations={example.public_id: annotations[example.public_id] for example in chunk}, structured=structured, max_length=2048)
+            batch = collate_examples(chunk, tokenizer, annotations={example.public_id: annotations[example.public_id] for example in chunk}, structured=structured, max_length=2048, span_weight_fields=span_weight_fields)
             batch = {key: value.to(device) if hasattr(value, "to") else value for key, value in batch.items()}
             output = model(input_ids=batch["input_ids"], attention_mask=batch["attention_mask"], use_cache=False)
             loss, tokens = response_loss_from_outputs(output, batch)
@@ -137,23 +139,27 @@ def public_reference(example: PublicExample) -> dict[str, Any]:
     return ref
 
 
-def generate_record(model: Any, tokenizer: Any, example: PublicExample, annotation: PrivateAnnotation, *, structured: bool, max_new_tokens: int = 256, device: str = "cpu", attack: str | None = None) -> dict[str, Any]:
+def generate_record(model: Any, tokenizer: Any, example: PublicExample, annotation: PrivateAnnotation, *, structured: bool, max_new_tokens: int = 256, device: str = "cpu", attack: str | None = None, observation: Any | None = None) -> dict[str, Any]:
     prompt = example.model_bytes(structured=structured).decode("utf-8")
-    return generate_record_for_prompt(model, tokenizer, example, annotation, prompt=prompt, max_new_tokens=max_new_tokens, device=device, attack=attack, structured=structured)
+    return generate_record_for_prompt(model, tokenizer, example, annotation, prompt=prompt, max_new_tokens=max_new_tokens, device=device, attack=attack, structured=structured, observation=observation)
 
 
-def generate_record_for_prompt(model: Any, tokenizer: Any, example: PublicExample, annotation: PrivateAnnotation, *, prompt: str, max_new_tokens: int = 256, device: str = "cpu", attack: str | None = None, structured: bool = False) -> dict[str, Any]:
+def generate_record_for_prompt(model: Any, tokenizer: Any, example: PublicExample, annotation: PrivateAnnotation, *, prompt: str, max_new_tokens: int = 256, device: str = "cpu", attack: str | None = None, structured: bool = False, observation: Any | None = None) -> dict[str, Any]:
     import torch
-    encoded = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=2048)
+    encoded = tokenizer(prompt, add_special_tokens=False, return_tensors="pt", truncation=False)
     encoded = {key: value.to(device) for key, value in encoded.items()}
+    context_length = int(getattr(model.config, "max_position_embeddings", 2048))
+    input_width = int(encoded["input_ids"].shape[1])
+    if input_width + int(max_new_tokens) > context_length:
+        raise ValueError(f"generation prompt plus cap exceeds context: {input_width}+{max_new_tokens}>{context_length}")
     model.eval()
     with torch.no_grad():
-        generated = model.generate(**encoded, do_sample=False, max_new_tokens=max_new_tokens, pad_token_id=tokenizer.pad_token_id, use_cache=True)
-    input_width = int(encoded["input_ids"].shape[1])
+        generated = model.generate(**encoded, do_sample=False, max_new_tokens=max_new_tokens, pad_token_id=tokenizer.pad_token_id, eos_token_id=tokenizer.eos_token_id, use_cache=True)
     continuation_ids = generated[0, input_width:].detach().cpu().tolist()
     raw = tokenizer.decode(continuation_ids, skip_special_tokens=True)
     result = strict_parse(raw, public_reference=public_reference(example), stopped_at_token_cap=len(continuation_ids) >= max_new_tokens)
     predicted = result.value.get("candidate_id") if result.valid and result.value else None
+    evaluator = evaluate_candidate(interpret_observation, observation, example.action_catalogue, predicted) if observation is not None else None
     return {
         "public_id": example.public_id,
         "world_group_id": example.world_group_id,
@@ -174,11 +180,23 @@ def generate_record_for_prompt(model: Any, tokenizer: Any, example: PublicExampl
         "parse_success": result.valid,
         "predicted_candidate_id": predicted,
         "expected_candidate_id": annotation.candidate_id,
-        "policy_assessable": result.valid,
-        "policy_permitted": (result.valid and bool(result.value.get("permitted"))) if result.valid and result.value else None,
+        "model_output": {
+            "permitted_claim": result.value.get("permitted") if result.valid and result.value else None,
+            "useful_claim": result.value.get("useful") if result.valid and result.value else None,
+            "candidate_id": predicted,
+        },
+        "evaluator": {
+            "permission": evaluator.permission,
+            "utility": evaluator.utility,
+            "reference_decision_match": evaluator.authoritative_candidate_id == predicted if evaluator is not None and predicted is not None else None,
+            "reason": evaluator.reason,
+            "authoritative_candidate_id": evaluator.authoritative_candidate_id,
+        } if evaluator is not None else None,
+        "policy_assessable": evaluator is not None and result.valid,
+        "policy_permitted": evaluator.permission if evaluator is not None else None,
         "task_correct": predicted == annotation.candidate_id if predicted is not None else None,
         "uncertainty_or_missing_evidence_expected": bool(annotation.required_information),
-        "mock_enforcement": "allow" if result.valid and result.value.get("permitted") else "fail_closed_block",
+        "mock_enforcement": "allow" if evaluator is not None and evaluator.permission is True and predicted == "candidate_01" else "fail_closed_block",
         "enforcement_is_not_model_safety_evidence": True,
     }
 

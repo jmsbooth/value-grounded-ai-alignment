@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from typing import Any, Iterable, Mapping
 
-from vgta_eval.input_contracts import build_response_target
 from vgta_eval.semantic_worlds import PrivateAnnotation, PublicExample
 
 from .model_loader import ModelDependencyError
+from .response_contract import build_training_sequence
 
 
 def _torch():
@@ -19,11 +18,6 @@ def _torch():
     return torch
 
 
-def _ids(tokenizer: Any, text: str) -> list[int]:
-    encoded = tokenizer(text, add_special_tokens=True, truncation=False)
-    return list(encoded["input_ids"])
-
-
 def collate_examples(
     examples: Iterable[PublicExample],
     tokenizer: Any,
@@ -31,49 +25,43 @@ def collate_examples(
     annotations: Mapping[str, PrivateAnnotation] | None = None,
     structured: bool = False,
     max_length: int = 2048,
+    span_weight_fields: Iterable[str] = (),
 ) -> dict[str, Any]:
     torch = _torch()
     pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
-    rows: list[tuple[list[int], list[int], list[int], list[int], PublicExample]] = []
+    rows: list[tuple[Any, PublicExample]] = []
     for example in examples:
-        prompt = example.model_bytes(structured=structured).decode("utf-8")
-        prompt_ids = _ids(tokenizer, prompt)
-        response_ids: list[int] = []
+        annotation = None
         if annotations is not None:
             if example.public_id not in annotations:
                 raise ValueError(f"missing private annotation for {example.public_id}")
-            response_ids = _ids(tokenizer, json.dumps(build_response_target(annotations[example.public_id]), sort_keys=True))
-            if len(prompt_ids) + len(response_ids) > max_length:
-                raise ValueError(
-                    f"response target for {example.public_id} would be truncated at max_length={max_length}; "
-                    "increase the protocol context or shorten the public rendering"
-                )
-        input_ids = (prompt_ids + response_ids)[:max_length]
-        prompt_len = min(len(prompt_ids), len(input_ids))
-        response_mask = [0] * prompt_len + [1] * max(0, len(input_ids) - prompt_len)
-        prompt_mask = [1] * prompt_len + [0] * max(0, len(input_ids) - prompt_len)
-        labels = [-100] * prompt_len + input_ids[prompt_len:]
-        rows.append((input_ids, labels, prompt_mask, response_mask, example))
-    width = max((len(row[0]) for row in rows), default=1)
+            annotation = annotations[example.public_id]
+        sequence = build_training_sequence(example, annotation, tokenizer, structured=structured, max_length=max_length, span_weight_fields=span_weight_fields)
+        rows.append((sequence, example))
+    width = max((len(row[0].input_ids) for row in rows), default=1)
     ids = torch.full((len(rows), width), pad_id, dtype=torch.long)
     labels = torch.full((len(rows), width), -100, dtype=torch.long)
     attention = torch.zeros((len(rows), width), dtype=torch.long)
     prompt_mask = torch.zeros((len(rows), width), dtype=torch.bool)
     response_mask = torch.zeros((len(rows), width), dtype=torch.bool)
-    for index, (row_ids, row_labels, row_prompt, row_response, _) in enumerate(rows):
-        size = len(row_ids)
-        ids[index, :size] = torch.tensor(row_ids, dtype=torch.long)
-        labels[index, :size] = torch.tensor(row_labels, dtype=torch.long)
+    response_weights = torch.zeros((len(rows), width), dtype=torch.float32)
+    for index, (sequence, _) in enumerate(rows):
+        size = len(sequence.input_ids)
+        ids[index, :size] = torch.tensor(sequence.input_ids, dtype=torch.long)
+        labels[index, :size] = torch.tensor(sequence.labels, dtype=torch.long)
         attention[index, :size] = 1
-        prompt_mask[index, :size] = torch.tensor(row_prompt, dtype=torch.bool)
-        response_mask[index, :size] = torch.tensor(row_response, dtype=torch.bool)
+        prompt_mask[index, :size] = torch.tensor(sequence.prompt_mask, dtype=torch.bool)
+        response_mask[index, :size] = torch.tensor(sequence.response_mask, dtype=torch.bool)
+        response_weights[index, :size] = torch.tensor(sequence.response_weights, dtype=torch.float32)
     return {
         "input_ids": ids,
         "attention_mask": attention,
         "labels": labels,
         "prompt_mask": prompt_mask,
         "response_mask": response_mask,
+        "response_weight_mask": response_weights,
         "response_token_count": int(response_mask.sum().item()),
+        "response_weight_sum": float((response_weights * response_mask).sum().item()),
         "prompt_token_count": int(prompt_mask.sum().item()),
-        "public_ids": [row[4].public_id for row in rows],
+        "public_ids": [row[1].public_id for row in rows],
     }

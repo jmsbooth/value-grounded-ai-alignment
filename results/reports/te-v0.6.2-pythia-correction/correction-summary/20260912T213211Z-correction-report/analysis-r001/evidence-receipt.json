@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-09-12T21:32:11.345876Z",
+  "experiment_id": "correction-report",
+  "json_sha256": "184ef06d476cf4205be4f9859be2411d8e0b0a2fa277595cf3727537b966a666",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "analysis",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "receipt_digest": "1983a7a8bff3f415b2d845061f00a8d84ee1d99159e4756d984f1dde543f7eb3",
+  "receipt_version": "evidence-receipt-v1",
+  "report_sha256": "77ccf2568340c4a229ec7f18c44921d57fed459cb964856d29a3fae26ee2bb9e",
+  "run_id": "20260912T213211Z-correction-report",
+  "status": "CORRECTION_REPORT_RECORDED"
+}

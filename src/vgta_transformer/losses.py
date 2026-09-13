@@ -36,12 +36,23 @@ def weighted_cross_entropy(logits: Any, targets: Any, weights: Any) -> Any:
 
 
 def masked_bce_with_logits(logits: Any, targets: Any, mask: Any | None = None) -> Any:
+    numerator, count = masked_bce_with_logits_stats(logits, targets, mask)
+    return numerator / count.clamp_min(1.0)
+
+
+def masked_bce_with_logits_stats(logits: Any, targets: Any, mask: Any | None = None) -> tuple[Any, Any]:
+    """Return an auxiliary numerator and valid-element denominator."""
+
     torch, F = _imports()
     losses = F.binary_cross_entropy_with_logits(logits, targets.to(dtype=logits.dtype), reduction="none")
     if mask is not None:
-        losses = losses * mask.to(dtype=losses.dtype)
-        return losses.sum() / mask.to(dtype=losses.dtype).sum().clamp_min(1.0)
-    return losses.mean()
+        weights = mask.to(dtype=losses.dtype)
+        return (losses * weights).sum(), weights.sum()
+    return losses.sum(), losses.new_tensor(losses.numel(), dtype=losses.dtype)
+
+
+def auxiliary_loss_stats(logits: Any, targets: Any, mask: Any | None = None) -> tuple[Any, Any]:
+    return masked_bce_with_logits_stats(logits, targets, mask)
 
 
 def total_loss(*, response_loss: Any, auxiliary_logits: Mapping[str, Any] | None = None, auxiliary_targets: Mapping[str, Any] | None = None, weights: Mapping[str, float] | None = None) -> tuple[Any, dict[str, float]]:
@@ -60,3 +71,34 @@ def total_loss(*, response_loss: Any, auxiliary_logits: Mapping[str, Any] | None
         if name != "response":
             combined = combined + float(weights[name]) * loss
     return combined, {name: float(value.detach().cpu()) for name, value in terms.items()}
+
+
+def total_loss_stats(
+    *,
+    response_numerator: Any,
+    response_denominator: Any,
+    auxiliary_logits: Mapping[str, Any] | None = None,
+    auxiliary_targets: Mapping[str, Any] | None = None,
+    auxiliary_masks: Mapping[str, Any] | None = None,
+    weights: Mapping[str, float] | None = None,
+    response_coefficient: float = 1.0,
+) -> tuple[Any, dict[str, Any]]:
+    """Combine globally-normalized response and auxiliary terms.
+
+    The returned tensors retain their graphs.  Callers performing gradient
+    accumulation should supply denominators computed across all microbatches.
+    """
+
+    terms: dict[str, Any] = {}
+    combined = response_numerator / response_denominator.clamp_min(1.0) * float(response_coefficient)
+    terms["response"] = response_numerator / response_denominator.clamp_min(1.0)
+    weights = dict(weights or {})
+    if auxiliary_logits and auxiliary_targets:
+        for name, logits in auxiliary_logits.items():
+            coefficient = float(weights.get(name, 0.0))
+            if name not in auxiliary_targets or coefficient == 0.0:
+                continue
+            numerator, denominator = masked_bce_with_logits_stats(logits, auxiliary_targets[name], (auxiliary_masks or {}).get(name))
+            terms[name] = (numerator, denominator, coefficient)
+            combined = combined + coefficient * numerator / denominator.clamp_min(1.0)
+    return combined, terms

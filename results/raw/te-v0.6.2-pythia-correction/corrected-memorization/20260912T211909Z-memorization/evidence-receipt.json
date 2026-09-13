@@ -1,0 +1,13 @@
+{
+  "attempt_count": 1,
+  "created_at": "2026-09-12T21:21:49.782620Z",
+  "experiment_id": "corrected-memorization",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "model_prediction",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "receipt_digest": "21089079ea4853ca01a6d9d3723d805c98adeee1efde26ccc54e417128834556",
+  "receipt_version": "evidence-receipt-v1",
+  "result_sha256": "5636abd36f026ac65b9f79bb1d4490b0a8e950418ec0b535bccc24505f56c0fe",
+  "run_id": "20260912T211909Z-memorization",
+  "status": "COMPLETE"
+}

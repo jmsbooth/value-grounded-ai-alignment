@@ -1,0 +1,22 @@
+protocol: te-v0.6.2-pythia-correction
+parser: strict-json-no-repair
+primary_output_fields:
+  - model_output.permitted_claim
+  - model_output.useful_claim
+  - parser.valid
+  - evaluator.permission
+  - evaluator.utility
+  - evaluator.reference_decision_match
+  - execution.mock_decision
+metrics:
+  - strict_schema_validity
+  - exact_reference_decision_all
+  - exact_reference_decision_assessable
+  - accepted_action_all
+  - useful_action_all
+  - unsafe_proposal_all
+  - unknown_unassessable_format_refusal
+  - model_claim_agreement
+attacks: [prompt_injection, purpose_manipulation, authority_spoofing, semantic_occlusion]
+calibration: optional_development_only
+capability_sentinel: optional_development_only

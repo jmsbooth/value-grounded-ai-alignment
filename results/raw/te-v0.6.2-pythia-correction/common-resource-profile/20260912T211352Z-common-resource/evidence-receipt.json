@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-09-12T21:16:22.145386Z",
+  "experiment_id": "common-resource-profile",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "historical_qualification",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "receipt_digest": "a07ead5a5ba1a6981df30b24d8dad11b37fdb2466f3c1f65b79863e418073c3a",
+  "receipt_version": "evidence-receipt-v1",
+  "result_sha256": "8471e4ef9ec3bd15c2f5ef83506e5c904379d0f68df30966cf9af668e264b1f5",
+  "status": "COMMON_RESOURCE_PROFILE_MEASURED",
+  "variants": [
+    "B",
+    "C2"
+  ]
+}

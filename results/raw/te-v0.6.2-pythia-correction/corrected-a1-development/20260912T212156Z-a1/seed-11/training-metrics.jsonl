@@ -1,0 +1,1 @@
+{"effective_batch_size": 8, "gradient_norm": 4.7508392333984375, "loss": 2.258418067845295, "microbatches": 8, "response_token_count": 637.0, "seed": 11, "train_indices": [0, 1, 2, 3, 4, 5, 6, 7], "update": 1}

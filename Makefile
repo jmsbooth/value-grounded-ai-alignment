@@ -3,7 +3,7 @@ LATEX_PLUGIN ?= /Users/jamesbooth/.codex/plugins/cache/openai-bundled/latex/0.2.
 PAPER_DIR := paper
 PAPER_PDF := $(PAPER_DIR)/value-grounded-ai-alignment.pdf
 
-.PHONY: all figures paper verify empirical-small remediated-dataset analyze-results analyze-versioned paper-from-results harness-gate harness-ci verify-run verify-research-history compare-reports daily-report experiment register-history clean te-preflight te-semantic-audit te-model-smoke te-train-diagnostics te-evaluate-model te-plan-cohort te-freeze-cohort te-run-cohort te-analyze te-gate te-report te-ci te-dev-preflight te-audit-generations te-test-training-contracts te-profile-resources te-build-dev-data te-validate-dev-data te-train-memorization te-train-a1-dev te-test-aux-gradients te-run-variant-smoke te-evaluate-trained-dev te-analyze-dev te-dev-gate
+.PHONY: all figures paper verify empirical-small remediated-dataset analyze-results analyze-versioned paper-from-results harness-gate harness-ci verify-run verify-research-history compare-reports daily-report experiment register-history clean te-preflight te-semantic-audit te-model-smoke te-train-diagnostics te-evaluate-model te-plan-cohort te-freeze-cohort te-run-cohort te-analyze te-gate te-report te-ci te-dev-preflight te-audit-generations te-test-training-contracts te-profile-resources te-build-dev-data te-validate-dev-data te-train-memorization te-train-a1-dev te-test-aux-gradients te-run-variant-smoke te-evaluate-trained-dev te-analyze-dev te-dev-gate te-fix-preflight te-audit-eos te-test-independent-scoring te-test-variant-contracts te-test-accumulation te-test-aux-only te-profile-common te-retest-memorization te-retest-a1 te-corrected-variant-smoke te-evaluate-corrected te-correction-report te-correction-gate
 
 all: figures paper verify
 
@@ -161,3 +161,45 @@ te-analyze-dev:
 te-dev-gate:
 	@if [ -z "$(MEMORIZATION)" ] || [ -z "$(A1)" ] || [ -z "$(VARIANTS)" ] || [ -z "$(RESOURCE)" ]; then echo 'Usage: make te-dev-gate MEMORIZATION=... A1=... VARIANTS=... RESOURCE=...'; exit 1; fi
 	PYTHONPATH=src $(PYTHON) experiments/transformer/development_readiness.py --memorization "$(MEMORIZATION)" --a1 "$(A1)" --variants "$(VARIANTS)" --resource "$(RESOURCE)" $(if $(ATTACK),--attack "$(ATTACK)",)
+
+te-fix-preflight:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/preflight_correction.py
+
+te-audit-eos:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/audit_eos_correction.py
+
+te-test-independent-scoring:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/independent_scoring_audit.py
+
+te-test-variant-contracts:
+	PYTHONPATH=src $(PYTHON) -m pytest -q tests/transformer/test_variant_correction.py tests/transformer/test_response_contract.py
+
+te-test-accumulation:
+	PYTHONPATH=src $(PYTHON) -m pytest -q tests/transformer/test_accumulation.py
+
+te-test-aux-only:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/auxiliary_isolation_correction.py --actual $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-profile-common:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/resource_profile_correction.py $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-retest-memorization:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/corrected_training.py --mode memorization $(if $(CONFIG),--config "$(CONFIG)",) $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-retest-a1:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/corrected_training.py --mode a1 $(if $(CONFIG),--config "$(CONFIG)",) $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",)
+
+te-corrected-variant-smoke:
+	PYTHONPATH=src $(PYTHON) experiments/transformer/corrected_variant_smoke.py $(if $(CONFIG),--config "$(CONFIG)",) $(if $(MAX_UPDATES),--max-updates "$(MAX_UPDATES)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",) $(if $(DEVICE),--device "$(DEVICE)",) $(if $(ISOLATE),--isolate-attempts,)
+
+te-evaluate-corrected:
+	@if [ -z "$(CHECKPOINT)" ]; then echo 'Usage: make te-evaluate-corrected CHECKPOINT=exact/path'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/evaluate_corrected.py --checkpoint "$(CHECKPOINT)" $(if $(DEVICE),--device "$(DEVICE)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",)
+
+te-correction-report:
+	@if [ -z "$(COHORT)" ]; then echo 'Usage: make te-correction-report COHORT=path/to/run-summary.json'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_report.py --cohort "$(COHORT)"
+
+te-correction-gate:
+	@if [ -z "$(COHORT)" ]; then echo 'Usage: make te-correction-gate COHORT=path/to/report.json'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_gate.py --cohort "$(COHORT)"

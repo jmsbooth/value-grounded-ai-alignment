@@ -1,0 +1,13 @@
+{
+  "actual_pythia": true,
+  "created_at": "2026-09-12T21:13:36.604906Z",
+  "experiment_id": "auxiliary-isolation",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "training_diagnostic",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "receipt_digest": "538936a1761df16fa3de42097fb5ef3ae46846b439d1bfb2c7452a92ac6e2ee3",
+  "receipt_version": "evidence-receipt-v1",
+  "result_sha256": "e5e9b43904d47d33f74d664e9de8628a77539b6835b9795c23dffc2512114994",
+  "run_id": "20260912T211208Z-aux-only",
+  "status": "AUXILIARY_ISOLATION_ACTUAL_PYTHIA"
+}

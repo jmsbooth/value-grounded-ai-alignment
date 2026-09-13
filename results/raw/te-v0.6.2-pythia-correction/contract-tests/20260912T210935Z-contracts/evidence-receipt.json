@@ -1,0 +1,14 @@
+{
+  "compile_return_code": 0,
+  "created_at": "2026-09-12T21:09:41.052093Z",
+  "experiment_id": "correction-contract-tests",
+  "locked_data_read_or_scored": false,
+  "producer_kind": "training_diagnostic",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "pytest_return_code": 0,
+  "receipt_digest": "03106c2b88913f7d6c2398a17f371a7c5dbb88ac83f4f23302d2d9dd940f22bd",
+  "receipt_version": "evidence-receipt-v1",
+  "result_sha256": "e40a6c44f877b11581dd9873b2a6ec910289e20843dcaf7d8af69aad0fe44747",
+  "run_id": "20260912T210935Z-contracts",
+  "status": "CORRECTION_IMPLEMENTATION_VALIDATED"
+}

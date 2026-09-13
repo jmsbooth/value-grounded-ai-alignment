@@ -1,0 +1,60 @@
+{
+  "attempt_id": "seed-11",
+  "checkpoints": [
+    {
+      "path": "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/checkpoints/step-0000",
+      "update": 0,
+      "validation_response_nll": 2.2986468606524997,
+      "verified": true
+    },
+    {
+      "path": "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/checkpoints/step-0001",
+      "update": 1,
+      "validation_response_nll": 1.93300964501169,
+      "verified": true
+    }
+  ],
+  "curve": [
+    {
+      "elapsed_seconds": 29.79768054210581,
+      "seed": 11,
+      "update": 0,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 2.2986468606524997,
+        "response_tokens": 1260.0
+      }
+    },
+    {
+      "elapsed_seconds": 103.11763566709124,
+      "seed": 11,
+      "update": 1,
+      "validation": {
+        "examples": 16.0,
+        "response_nll": 1.93300964501169,
+        "response_tokens": 1260.0
+      }
+    }
+  ],
+  "experiment_id": "corrected-a1-development",
+  "locked_data_read_or_scored": false,
+  "open_dev": {
+    "evaluator_assessable": 0,
+    "n": 16,
+    "reference_decision_match": 0,
+    "strict_schema_valid": 0
+  },
+  "passes_completed": 0.125,
+  "protocol": "te-v0.6.2-pythia-correction",
+  "seed": 11,
+  "selected_checkpoint": {
+    "path": "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/checkpoints/step-0001",
+    "update": 1,
+    "validation_response_nll": 1.93300964501169,
+    "verified": true
+  },
+  "selection_rule": "lowest validation response NLL then earlier update",
+  "status": "CORRECTED_A1_DEVELOPMENT_COMPLETE",
+  "synthetic_data": true,
+  "updates_completed": 1
+}

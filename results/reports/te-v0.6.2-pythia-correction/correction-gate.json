@@ -1,0 +1,28 @@
+{
+  "experiment_id": "correction-gate",
+  "gates": {
+    "CORRECTION_IMPLEMENTATION_VALIDATED": true,
+    "EOS_REAL_TOKENIZER_AUDIT": true,
+    "HISTORY_BOUNDARY_RECORDED": true,
+    "IMPLEMENTATION_CONTRACTS": true,
+    "INDEPENDENT_SCORING": true,
+    "NO_LOCKED_AUTHORIZATION": true,
+    "NO_LOCKED_DATA": true
+  },
+  "locked_cohort_authorized": false,
+  "locked_data_read_or_scored": false,
+  "next_decision": "No locked cohort execution. Resolve each missing receipt or resource block in a separately budgeted development phase.",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "receipt_count": 11,
+  "receipt_statuses": [
+    "AUXILIARY_ISOLATION_ACTUAL_PYTHIA",
+    "COMMON_RESOURCE_PROFILE_MEASURED",
+    "COMPLETE",
+    "CORRECTED_CLEAN_ATTACK_EVALUATION_COMPLETE",
+    "CORRECTED_VARIANT_SMOKE_COMPLETE",
+    "CORRECTION_IMPLEMENTATION_VALIDATED",
+    "EOS_REAL_TOKENIZER_AUDIT_COMPLETE",
+    "INDEPENDENT_SCORING_VALIDATED"
+  ],
+  "status": "CORRECTION_IMPLEMENTATION_VALIDATED"
+}

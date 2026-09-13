@@ -1,0 +1,17 @@
+{
+  "end_historical_tree_digests": {
+    "docs": "967adae657f08c4f5d692eef9615dbf66198f3f0e12c17f6f17046f651fa7f2d",
+    "raw": "4bcc90730260a415df84f45044a46b99fa82bd90e6321234893d85919673b13c",
+    "reports": "11fa620a6d6af3261c8a4b27e1e125eaaf882f553e1b5039791ddfa575c2bffc"
+  },
+  "end_paper_tree_digest": "dc705ae0b8693dcb75679ad41c67a1289122f37a6c54c76743f3f6db8f99794b",
+  "finalized_at": "2026-09-12T21:47:53.908350Z",
+  "historical_hashes_unchanged": true,
+  "locked_cohort_authorized": false,
+  "locked_data_read_or_scored": false,
+  "next_decision": "No locked execution; human review is required after all development evidence and unresolved resource limits are considered.",
+  "paper_hashes_unchanged": true,
+  "protected_history_comparison": "MATCH",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "status": "CORRECTION_IMPLEMENTATION_VALIDATED"
+}

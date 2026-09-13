@@ -1,0 +1,15 @@
+protocol: te-v0.6.2-pythia-correction
+fail_closed: true
+gates:
+  F01_F10_CONTRACTS: [named_defect_tests, mutation_tests, receipt_linked]
+  EOS_REAL_TOKENIZER_AUDIT: [eight_memorization_examples, fixed_dev_slice, special_token_modes, one_eos]
+  INDEPENDENT_SCORING: [public_catalogue, truth_table, mutation_invariance, executed_reference_outputs]
+  VARIANT_FIDELITY: [eight_arm_plan, exact_B_inputs, intended_sham_only, deterministic_span_map]
+  AUXILIARY_ISOLATION: [aux_only, detach, disabled_head, combined_vs_isolated, tiny_and_actual_pythia]
+  ACCUMULATION: [global_response_denominator,_global_aux_denominator, partial_final_batch, full_micro_equivalence]
+  RESOURCE_QUALIFICATION: [longest_B_C2, backend_precision_config, peak_memory, fresh_child_attempts]
+  CORRECTED_MODEL_EVIDENCE: [memorization, A1, all_arm_smoke, clean_attack_pairing]
+  HISTORY_AND_CI: [protected_hashes_unchanged, paper_workflow, transformer_contract_workflow]
+  READY_FOR_LOCKED_COHORT_PROTOCOL_REVIEW: [all_required_receipts, no_locked_data, external_human_authorization]
+states: {pass: PASS, fail: FAIL, partial: PARTIAL, missing: MISSING, not_measured: NOT_MEASURED}
+locked_commands: [te-freeze-cohort, te-run-cohort]

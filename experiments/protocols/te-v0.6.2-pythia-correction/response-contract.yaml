@@ -1,0 +1,21 @@
+protocol: te-v0.6.2-pythia-correction
+contract: te-v0.6.2-response-eos-v1
+tokenizer:
+  prompt_add_special_tokens: false
+  response_add_special_tokens: false
+  append_existing_eos_id: exactly_once
+  no_new_vocabulary: true
+sequence:
+  order: [exact_inference_prompt_tokens, response_json_tokens, eos]
+  labels: [ignore_prompt, supervise_response_json_and_eos, ignore_padding_by_position]
+  response_mask: [json_tokens, eos]
+  pad_equals_eos_allowed: true
+  eos_is_masked_by_position_only: true
+  context_budget: prompt_plus_response_plus_eos
+generation:
+  greedy: true
+  batch_size: 1
+  eval_mode: true
+  max_new_tokens: 256
+  constrained_decoding: false
+  repair_or_brace_stopping: false

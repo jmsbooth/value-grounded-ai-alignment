@@ -1,0 +1,20 @@
+protocol: te-v0.6.2-pythia-correction
+memorization:
+  examples: 8
+  seeds: [11, 23]
+  max_updates: 100
+  evaluation_steps: [0, 25, 50, 75, 100]
+  criterion: {strict_schema: 7, accepted_action: 7, consecutive_evaluations: 2, nll_relative_reduction: 0.30, minimum_eos_rate: 0.875}
+a1_development:
+  examples: {train: 64, validation: 16, open_dev: 16}
+  seeds: [11, 23]
+  max_updates: 24
+  passes: 3
+  effective_batch_size: 8
+  selection: lowest_validation_response_nll_then_earlier_update
+corrected_variant_smoke:
+  arms: [A1, B, C1, C2, B-TEXT-A, C1-TEXT-N, C1-SHAM, C2-SHAM]
+  seeds: [11, 23]
+  max_updates: 32
+  effective_batch_size: 8
+  open_dev_examples: 16

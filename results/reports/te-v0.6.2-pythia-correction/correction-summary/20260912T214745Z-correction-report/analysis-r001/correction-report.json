@@ -1,0 +1,372 @@
+{
+  "artifact_inventory": {
+    "checkpoints": [
+      "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/b-checkpoint/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/c2-checkpoint/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211612Z-common-resource/b-checkpoint/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/checkpoints/step-0000/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/checkpoints/step-0001/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/checkpoints/step-0000/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/checkpoints/step-0001/checksums.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/C2-SHAM/seed-11/checkpoint/checksums.json"
+    ],
+    "contract_tests": [
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211003Z-aux-only/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211208Z-aux-only/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/clean-attack-evaluation/20260912T214533Z-corrected-eval/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T210935Z-contracts/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T213317Z-contracts/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/C2-SHAM/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/independent-scoring/20260912T210941Z-independent-score/result.json"
+    ],
+    "eos_audits": [
+      "results/raw/te-v0.6.2-pythia-correction/eos-tokenizer-audit/20260912T210948Z-eos-audit/eos-audit.json"
+    ],
+    "independent_scoring": [
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211003Z-aux-only/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211208Z-aux-only/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/clean-attack-evaluation/20260912T214533Z-corrected-eval/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T210935Z-contracts/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T213317Z-contracts/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/C2-SHAM/seed-11/result.json",
+      "results/raw/te-v0.6.2-pythia-correction/independent-scoring/20260912T210941Z-independent-score/result.json"
+    ],
+    "predictions": [
+      "results/raw/te-v0.6.2-pythia-correction/clean-attack-evaluation/20260912T214533Z-corrected-eval/predictions.jsonl",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/seed-11/predictions.jsonl",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/predictions.jsonl",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/C2-SHAM/seed-11/predictions.jsonl"
+    ],
+    "receipts": [
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211003Z-aux-only/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/auxiliary-isolation/20260912T211208Z-aux-only/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/clean-attack-evaluation/20260912T214533Z-corrected-eval/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T210935Z-contracts/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/contract-tests/20260912T213317Z-contracts/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-a1-development/20260912T212156Z-a1/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/eos-tokenizer-audit/20260912T210948Z-eos-audit/evidence-receipt.json",
+      "results/raw/te-v0.6.2-pythia-correction/independent-scoring/20260912T210941Z-independent-score/evidence-receipt.json"
+    ],
+    "resource_profiles": [
+      "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/resource-profile.json"
+    ]
+  },
+  "cohort": {
+    "attempt_count": 1,
+    "attempts": [
+      {
+        "active_auxiliary_heads": [
+          "values",
+          "relation",
+          "norms",
+          "conflict"
+        ],
+        "attempt_id": "C2-SHAM-seed-11",
+        "checkpoint": {
+          "path": "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/C2-SHAM/seed-11/checkpoint",
+          "reloaded": true,
+          "verified": true
+        },
+        "device": "cpu",
+        "experiment_id": "corrected-variant-smoke",
+        "input_mode": "exact-b-structured",
+        "locked_data_read_or_scored": false,
+        "open_dev": {
+          "evaluator_assessable": 0,
+          "n": 16,
+          "strict_schema_valid": 0
+        },
+        "parameter_accounting": {
+          "adapter_parameters": 3145728,
+          "auxiliary_head_parameters": 19475,
+          "frozen_model_parameters": 405334016,
+          "nonzero_gradient_parameters": 1788947,
+          "optimizer_parameters": 3165203,
+          "total_model_parameters": 408479744,
+          "trainable_model_parameters": 3145728
+        },
+        "protocol": "te-v0.6.2-pythia-correction",
+        "seed": 11,
+        "sham_mapping": {
+          "conflict": {
+            "seed": 104740,
+            "source_hash": "905ce00f25f1b8ab4647236bfdc0996633551f29a559cdd1237d8b1d5cacf2c8",
+            "source_indices": [
+              42,
+              36,
+              15,
+              18,
+              40,
+              30,
+              55,
+              62,
+              44,
+              54,
+              37,
+              20,
+              27,
+              26,
+              43,
+              59,
+              32,
+              51,
+              52,
+              17,
+              53,
+              25,
+              2,
+              1,
+              5,
+              19,
+              57,
+              10,
+              50,
+              63,
+              49,
+              13,
+              4,
+              0,
+              39,
+              58,
+              33,
+              21,
+              47,
+              34,
+              48,
+              12,
+              24,
+              46,
+              35,
+              22,
+              16,
+              60,
+              56,
+              23,
+              29,
+              38,
+              45,
+              3,
+              31,
+              61,
+              7,
+              9,
+              6,
+              41,
+              8,
+              14,
+              28,
+              11
+            ],
+            "target": "conflict"
+          },
+          "norms": {
+            "seed": 104740,
+            "source_hash": "c92bd1a61204fec91483855bbf8e8d991d8d17aaf0bd68f8e54a19865e80865d",
+            "source_indices": [
+              42,
+              36,
+              15,
+              18,
+              40,
+              30,
+              55,
+              62,
+              44,
+              54,
+              37,
+              20,
+              27,
+              26,
+              43,
+              59,
+              32,
+              51,
+              52,
+              17,
+              53,
+              25,
+              2,
+              1,
+              5,
+              19,
+              57,
+              10,
+              50,
+              63,
+              49,
+              13,
+              4,
+              0,
+              39,
+              58,
+              33,
+              21,
+              47,
+              34,
+              48,
+              12,
+              24,
+              46,
+              35,
+              22,
+              16,
+              60,
+              56,
+              23,
+              29,
+              38,
+              45,
+              3,
+              31,
+              61,
+              7,
+              9,
+              6,
+              41,
+              8,
+              14,
+              28,
+              11
+            ],
+            "target": "norms"
+          }
+        },
+        "span_weight_fields": [],
+        "status": "CORRECTED_VARIANT_ATTEMPT_COMPLETE",
+        "structured_input": true,
+        "training_metrics": [
+          {
+            "conflict": 1.6373680178076029,
+            "effective_batch_size": 8,
+            "gradient_norm": 12.938298225402832,
+            "loss": 7.321613090112805,
+            "microbatch_count": 8.0,
+            "norms": 1.1512685269117355,
+            "relation": 0.9539242759346962,
+            "response": 2.3525940775871277,
+            "response_token_count": 637.0,
+            "seed": 11,
+            "train_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "update": 1,
+            "values": 1.226458191871643,
+            "variant": "C2-SHAM"
+          }
+        ],
+        "updates_completed": 1,
+        "variant": "C2-SHAM",
+        "variant_fingerprint": "f19e40cb404d442da4900161e60b8b05c4a1b6d7203b4b18b91a7e4b3a8a16e9",
+        "wall_seconds": 315.4990128339268
+      }
+    ],
+    "expected_attempt_count": 1,
+    "experiment_id": "corrected-variant-smoke",
+    "locked_data_read_or_scored": false,
+    "protocol": "te-v0.6.2-pythia-correction",
+    "run_id": "20260912T212527Z-corrected-smoke",
+    "status": "CORRECTED_VARIANT_SMOKE_COMPLETE"
+  },
+  "cohort_path": "results/raw/te-v0.6.2-pythia-correction/corrected-variant-smoke/20260912T212527Z-corrected-smoke/run-summary.json",
+  "defects": {
+    "F01": {
+      "correction": "response_contract explicit EOS",
+      "reproducer": "auto-special tokenizer path and missing explicit EOS",
+      "residual": "real Pythia model training outcome remains development evidence only",
+      "test_or_run": "tests/transformer/test_response_contract.py"
+    },
+    "F02": {
+      "correction": "exact-b-structured plus salient_values/relation_class span weights",
+      "reproducer": "B-TEXT-A plan used natural input",
+      "residual": "model effect not isolated by this contract test",
+      "test_or_run": "tests/transformer/test_variant_correction.py"
+    },
+    "F03": {
+      "correction": "applicable_norm_ids/conflict_class span weights",
+      "reproducer": "C1-TEXT-N had no normative span weighting",
+      "residual": "model effect not isolated by this contract test",
+      "test_or_run": "tests/transformer/test_variant_correction.py"
+    },
+    "F04": {
+      "correction": "declared intended target arrays only",
+      "reproducer": "sham path could permute all auxiliary targets",
+      "residual": "permutation receipt requires a smoke attempt",
+      "test_or_run": "tests/transformer/test_variant_correction.py"
+    },
+    "F05": {
+      "correction": "auxiliary-only and detach/disabled-head diagnostics",
+      "reproducer": "response loss included in auxiliary diagnostic",
+      "residual": "actual Pythia status depends on measured receipt",
+      "test_or_run": "experiments/transformer/auxiliary_isolation_correction.py"
+    },
+    "F06": {
+      "correction": "candidate-evaluator-v1 and model-claim separation",
+      "reproducer": "model booleans and literal reference score used",
+      "residual": "fictional project oracle is not external normative ground truth",
+      "test_or_run": "tests/transformer/test_independent_scoring.py"
+    },
+    "F07": {
+      "correction": "one-example microbatch global denominators",
+      "reproducer": "physical batch and A1 accumulation differed",
+      "residual": "full Pythia schedule is resource-bounded",
+      "test_or_run": "tests/transformer/test_accumulation.py"
+    },
+    "F08": {
+      "correction": "parameter_accounting categories",
+      "reproducer": "allocated count included frozen parameters",
+      "residual": "changed-parameter count is available after a training update",
+      "test_or_run": "tests/transformer/test_parameter_accounting.py"
+    },
+    "F09": {
+      "correction": "paper working directory and CPU workflow",
+      "reproducer": "paper path and Transformer coverage were incomplete",
+      "residual": "remote CI result is not available locally",
+      "test_or_run": ".github/workflows/paper.yml and .github/workflows/transformer-contracts.yml"
+    },
+    "F10": {
+      "correction": "report/gate require receipt-linked artifacts",
+      "reproducer": "readiness relied on names/counts/booleans",
+      "residual": "no locked cohort authorization",
+      "test_or_run": "experiments/transformer/correction_gate.py"
+    }
+  },
+  "experiment_id": "correction-report",
+  "locked_cohort_authorized": false,
+  "locked_data_read_or_scored": false,
+  "next_decision": "Review the receipt-linked correction gate. If any engineering or resource gate is missing, open a separately budgeted development attempt; do not run a locked cohort.",
+  "protected_history": {
+    "comparison": "MATCH",
+    "final_state_path": "docs/experiments/te-v0.6.2-pythia-correction/final-state.json",
+    "preflight_path": "docs/experiments/te-v0.6.2-pythia-correction/preflight.json",
+    "preflight_sha256": "b0ff9e420d22af658a5d6f77f8ec5393f3b652bef5e781eb232a3f4a1b74715b"
+  },
+  "protocol": "te-v0.6.2-pythia-correction",
+  "resources_and_next_cohort": "Use only measured B/C2 longest-input cost and explicitly budget fresh processes; no locked estimate is inferred from a partial run.",
+  "scientific_boundary": "Synthetic fictional benchmark and project oracle only; no alignment, moral-truth, safety, or population-generalization claim.",
+  "status": "CORRECTION_REPORT_RECORDED",
+  "work_package_status": {
+    "actual_auxiliary_isolation": "PASS",
+    "calibration": "NOT_MEASURED",
+    "capability_sentinel": "NOT_MEASURED",
+    "clean_attack_evaluation": "PASS",
+    "common_resource_profile": "PASS",
+    "corrected_model_results": "RECORDED",
+    "eos_real_tokenizer_audit": "PASS",
+    "implementation_contracts": "PASS",
+    "independent_scoring": "PASS"
+  }
+}

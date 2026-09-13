@@ -1,0 +1,7 @@
+{
+  "experiment_id": "corrected-memorization",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "response_contract": "te-v0.6.2-response-eos-v1",
+  "seed": 11,
+  "update_count": 1
+}

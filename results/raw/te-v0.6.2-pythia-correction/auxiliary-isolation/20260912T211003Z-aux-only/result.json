@@ -1,0 +1,66 @@
+{
+  "active_heads": [
+    "values",
+    "relation",
+    "norms",
+    "conflict"
+  ],
+  "actual_pythia": true,
+  "device": "cpu",
+  "experiment_id": "auxiliary-isolation",
+  "locked_data_read_or_scored": false,
+  "parameter_accounting": {
+    "adapter_parameters": 3145728,
+    "auxiliary_head_parameters": 19475,
+    "frozen_model_parameters": 405334016,
+    "nonzero_gradient_parameters": 4100,
+    "optimizer_parameters": 3165203,
+    "total_model_parameters": 408479744,
+    "trainable_model_parameters": 3145728
+  },
+  "protocol": "te-v0.6.2-pythia-correction",
+  "response_loss_included": false,
+  "rows": [
+    {
+      "head": "values",
+      "head_nonzero_gradient": true,
+      "loss": 1.5086557865142822,
+      "optimizer_step_taken": false,
+      "response_loss_coefficient": 0.0,
+      "shared_lora_nonzero_gradient": true
+    },
+    {
+      "head": "relation",
+      "head_nonzero_gradient": true,
+      "loss": 0.7171039581298828,
+      "optimizer_step_taken": false,
+      "response_loss_coefficient": 0.0,
+      "shared_lora_nonzero_gradient": true
+    },
+    {
+      "head": "norms",
+      "head_nonzero_gradient": true,
+      "loss": 1.0459104776382446,
+      "optimizer_step_taken": false,
+      "response_loss_coefficient": 0.0,
+      "shared_lora_nonzero_gradient": true
+    },
+    {
+      "head": "conflict",
+      "head_nonzero_gradient": true,
+      "loss": 1.634273886680603,
+      "optimizer_step_taken": false,
+      "response_loss_coefficient": 0.0,
+      "shared_lora_nonzero_gradient": true
+    },
+    {
+      "head_nonzero_gradient": true,
+      "optimizer_step_taken": false,
+      "shared_lora_nonzero_gradient": false,
+      "test": "detached_pooled_representation"
+    }
+  ],
+  "run_id": "20260912T211003Z-aux-only",
+  "status": "AUXILIARY_ISOLATION_ACTUAL_PYTHIA",
+  "weight_decay_counted_as_gradient": false
+}

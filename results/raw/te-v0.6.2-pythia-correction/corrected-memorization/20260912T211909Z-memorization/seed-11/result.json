@@ -1,0 +1,70 @@
+{
+  "attempt_id": "seed-11",
+  "checkpoints": [
+    {
+      "path": "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/checkpoints/step-0000",
+      "update": 0,
+      "verified": true
+    },
+    {
+      "path": "results/raw/te-v0.6.2-pythia-correction/corrected-memorization/20260912T211909Z-memorization/seed-11/checkpoints/step-0001",
+      "update": 1,
+      "verified": true
+    }
+  ],
+  "criterion_curve": [
+    {
+      "accepted_action": 0,
+      "eos_rate": 0.0,
+      "n": 8,
+      "nll": 2.258413553237915,
+      "strict_schema": 0,
+      "update": 0
+    },
+    {
+      "accepted_action": 0,
+      "eos_rate": 0.0,
+      "n": 8,
+      "nll": 1.8972947597503662,
+      "strict_schema": 0,
+      "update": 1
+    }
+  ],
+  "evaluation_curve": [
+    {
+      "elapsed_seconds": 15.986693083075806,
+      "examples": 8.0,
+      "response_nll": 2.258413553237915,
+      "response_tokens": 637.0,
+      "seed": 11,
+      "update": 0
+    },
+    {
+      "elapsed_seconds": 113.66088387509808,
+      "examples": 8.0,
+      "response_nll": 1.8972947597503662,
+      "response_tokens": 637.0,
+      "seed": 11,
+      "update": 1
+    }
+  ],
+  "experiment_id": "corrected-memorization",
+  "generated_output_count": 16,
+  "locked_data_read_or_scored": false,
+  "max_updates_requested": 1,
+  "protocol": "te-v0.6.2-pythia-correction",
+  "seed": 11,
+  "selected_public_ids": [
+    "public-v2-world-0000",
+    "public-v2-world-0001",
+    "public-v2-world-0002",
+    "public-v2-world-0003",
+    "public-v2-world-0004",
+    "public-v2-world-0005",
+    "public-v2-world-0006",
+    "public-v2-world-0007"
+  ],
+  "status": "CORRECTED_MEMORIZATION_CRITERION_NOT_MET",
+  "synthetic_data": true,
+  "updates_completed": 1
+}

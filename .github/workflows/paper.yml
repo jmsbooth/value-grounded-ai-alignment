@@ -30,9 +30,10 @@ jobs:
       - name: Compile manuscript with TeX Live
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: paper/main.tex
+          working_directory: paper
+          root_file: main.tex
           latexmk_use_xelatex: false
-          args: -pdf -interaction=nonstopmode -halt-on-error -outdir=paper/build
+          args: -pdf -interaction=nonstopmode -halt-on-error -outdir=build
 
       - name: Fail on unresolved references or citations
         shell: bash

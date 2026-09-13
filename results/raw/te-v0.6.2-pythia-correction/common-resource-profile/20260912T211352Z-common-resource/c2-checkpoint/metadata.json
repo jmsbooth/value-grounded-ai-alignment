@@ -1,0 +1,9 @@
+{
+  "effective_batch_size": 1,
+  "experiment_id": "common-resource-profile",
+  "longest_example": "public-v2-world-0048",
+  "physical_microbatch_size": 1,
+  "protocol": "te-v0.6.2-pythia-correction",
+  "seed": 11,
+  "variant": "C2"
+}

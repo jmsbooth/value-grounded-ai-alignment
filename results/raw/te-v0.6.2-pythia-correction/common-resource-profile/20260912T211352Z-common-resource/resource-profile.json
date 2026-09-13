@@ -1,0 +1,52 @@
+{
+  "context_length": 2048,
+  "device": "cpu",
+  "disk_free_gib_after": 10.28,
+  "effective_batch_size": 1,
+  "experiment_id": "common-resource-profile",
+  "generation_cap": 256,
+  "locked_data_read_or_scored": false,
+  "physical_microbatch_size": 1,
+  "precision": "float32",
+  "protocol": "te-v0.6.2-pythia-correction",
+  "same_config_for_arms": true,
+  "selected": {
+    "B": {
+      "checkpoint": "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/b-checkpoint",
+      "generation_parse_success": false,
+      "generation_seconds": 56.81088012480177,
+      "peak_rss_bytes": 2396028928,
+      "peak_rss_gib": 2.2315,
+      "prompt_tokens": 1049,
+      "public_id": "public-v2-world-0048",
+      "response_tokens": 90,
+      "sequence_tokens": 1139,
+      "train_metrics": {
+        "gradient_norm": 5.6200642585754395,
+        "loss": 1.9330356121063232,
+        "response_token_count": 90.0
+      },
+      "train_seconds": 7.679301999974996
+    },
+    "C2": {
+      "checkpoint": "results/raw/te-v0.6.2-pythia-correction/common-resource-profile/20260912T211352Z-common-resource/c2-checkpoint",
+      "generation_parse_success": false,
+      "generation_seconds": 61.160856375005096,
+      "peak_rss_bytes": 2454470656,
+      "peak_rss_gib": 2.2859,
+      "prompt_tokens": 1049,
+      "public_id": "public-v2-world-0048",
+      "response_tokens": 90,
+      "sequence_tokens": 1139,
+      "train_metrics": {
+        "gradient_norm": 5.6200642585754395,
+        "loss": 1.9330356121063232,
+        "response_token_count": 90.0
+      },
+      "train_seconds": 17.6069512499962
+    }
+  },
+  "status": "COMMON_RESOURCE_PROFILE_MEASURED",
+  "unsafe_mps_watermark_override": false,
+  "wall_seconds": 149.96285112481564
+}

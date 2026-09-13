@@ -1,0 +1,14 @@
+protocol: te-v0.6.2-pythia-correction
+parent_protocol: te-v0.6.1-pythia-development
+reviewed_commit: 0598a9795b5cb2721d26e9c0950377bae52676c0
+defects:
+  F01: {area: response_eos, failure: automatic_or_missing_supervised_eos, correction: explicit_response_eos_and_real_tokenizer_audit}
+  F02: {area: B-TEXT-A, failure: natural_input_and_uniform_loss, correction: exact_B_input_and_value_relation_span_weight_2}
+  F03: {area: C1-TEXT-N, failure: no_norm_conflict_span_weight, correction: exact_B_input_and_norm_conflict_span_weight_2}
+  F04: {area: C2-SHAM, failure: all_auxiliary_targets_shuffled, correction: preserve_values_relation_and_shuffle_norms_conflict_only}
+  F05: {area: auxiliary_gradients, failure: response_loss_contaminates_diagnostic, correction: aux_only_isolated_detach_and_disabled_head_tests}
+  F06: {area: evaluation, failure: model_booleans_and_literal_reference_score, correction: independent_candidate_level_evaluator_and_executed_reference}
+  F07: {area: accumulation, failure: physical_batch_and_objective_diverge, correction: one_microbatch_global_denominator_update}
+  F08: {area: accounting, failure: allocated_count_includes_frozen_model, correction: separate_total_frozen_adapter_aux_optimizer_gradient_changed_counts}
+  F09: {area: ci, failure: relative_paper_path_and_incomplete_transformer_suite, correction: working_directory_and_cpu_contract_workflow}
+  F10: {area: readiness, failure: names_and_booleans_without_receipts, correction: artifact_linked_non_vacuous_gate}

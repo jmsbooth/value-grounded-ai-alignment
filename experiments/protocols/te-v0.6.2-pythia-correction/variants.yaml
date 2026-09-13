@@ -1,0 +1,23 @@
+protocol: te-v0.6.2-pythia-correction
+parent_variants: experiments/protocols/te-v0.6.1-pythia-development/variants.yaml
+common:
+  model: EleutherAI/pythia-410m
+  requested_revision: step143000
+  resolved_revision_sha: bba6a464f54bbf08fc174cfb351d9794d58af21d
+  response_contract: te-v0.6.2-response-eos-v1
+  response_loss: weighted-response-cross-entropy
+  lora: {rank: 8, alpha: 16, dropout: 0.0}
+  auxiliary_coefficient: 0.2
+  span_weight: 2.0
+  seeds: [11, 23]
+  physical_microbatch_size: 1
+  effective_batch_size: 8
+variants:
+  A1: {input_mode: natural, auxiliary_heads: [], auxiliary_weights: {}, span_weight_fields: [], shuffled_targets: []}
+  B: {input_mode: exact-b-structured, auxiliary_heads: [], auxiliary_weights: {}, span_weight_fields: [], shuffled_targets: []}
+  C1: {input_mode: exact-b-structured, auxiliary_heads: [values, relation], auxiliary_weights: {values: 0.2, relation: 0.2}, span_weight_fields: [], shuffled_targets: []}
+  C2: {input_mode: exact-b-structured, auxiliary_heads: [values, relation, norms, conflict], auxiliary_weights: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}, span_weight_fields: [], shuffled_targets: []}
+  B-TEXT-A: {input_mode: exact-b-structured, auxiliary_heads: [], auxiliary_weights: {}, span_weight_fields: [salient_values, relation_class], shuffled_targets: []}
+  C1-TEXT-N: {input_mode: exact-b-structured, auxiliary_heads: [values, relation], auxiliary_weights: {values: 0.2, relation: 0.2}, span_weight_fields: [applicable_norm_ids, conflict_class], shuffled_targets: []}
+  C1-SHAM: {input_mode: exact-b-structured, auxiliary_heads: [values, relation], auxiliary_weights: {values: 0.2, relation: 0.2}, span_weight_fields: [], shuffled_targets: [values, relation]}
+  C2-SHAM: {input_mode: exact-b-structured, auxiliary_heads: [values, relation, norms, conflict], auxiliary_weights: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}, span_weight_fields: [], shuffled_targets: [norms, conflict]}

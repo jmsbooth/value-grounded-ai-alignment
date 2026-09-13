@@ -1,0 +1,54 @@
+name: Transformer contracts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/vgta_transformer/**"
+      - "src/vgta_eval/**"
+      - "tests/transformer/**"
+      - "experiments/protocols/te-v0.6.2-pythia-correction/**"
+      - ".github/workflows/transformer-contracts.yml"
+  pull_request:
+    paths:
+      - "src/vgta_transformer/**"
+      - "src/vgta_eval/**"
+      - "tests/transformer/**"
+      - "experiments/protocols/te-v0.6.2-pythia-correction/**"
+      - ".github/workflows/transformer-contracts.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+      CUDA_VISIBLE_DEVICES: ""
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned CPU contract dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-cache-dir \
+            "torch==2.4.1" \
+            "transformers==4.46.3" \
+            "peft==0.13.2" \
+            "PyYAML==6.0.2" \
+            "pytest==8.3.3"
+      - name: Run CPU Transformer contract and mutation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/transformer
+          python -m pytest -q tests/transformer/test_independent_scoring.py tests/transformer/test_variant_correction.py

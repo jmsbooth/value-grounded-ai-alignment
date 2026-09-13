@@ -1,0 +1,27 @@
+[
+  {
+    "conflict": 1.6373680178076029,
+    "effective_batch_size": 8,
+    "gradient_norm": 12.938298225402832,
+    "loss": 7.321613090112805,
+    "microbatch_count": 8.0,
+    "norms": 1.1512685269117355,
+    "relation": 0.9539242759346962,
+    "response": 2.3525940775871277,
+    "response_token_count": 637.0,
+    "seed": 11,
+    "train_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "update": 1,
+    "values": 1.226458191871643,
+    "variant": "C2-SHAM"
+  }
+]
