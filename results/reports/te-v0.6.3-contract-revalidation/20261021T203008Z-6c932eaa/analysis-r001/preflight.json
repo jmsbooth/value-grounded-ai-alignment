@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-21T20:30:08.425734+00:00",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "cpu_count": 5,
+  "cgroup_cpu": "400000 100000",
+  "memory_limit_bytes": 4294967296,
+  "disk_free_bytes": 32024150016,
+  "packages": {"torch": "2.10.0+cpu", "transformers": null, "peft": null, "numpy": "2.3.5", "pytest": "9.0.2", "PyYAML": "6.0.3", "huggingface_hub": "1.16.1"},
+  "source_access": "GitHub connector; git clone failed DNS",
+  "registration_sha256": "aae8244e3c7945dff14d6df6acfbaa7b2bceb96bef9e80d348acc592899e005b",
+  "actual_pythia_load": {"status": "blocked_environment", "type": "ModelDependencyError", "message": "install the isolated Pythia environment to use model integration"},
+  "actual_snapshot_verification": {"status": "blocked_environment", "type": "LocalEntryNotFoundError", "message": "Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input."}
+}
