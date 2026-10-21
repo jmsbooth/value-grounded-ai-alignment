@@ -176,7 +176,18 @@ def accumulated_train_step(
         scheduler.step()
     if grad_norm == 0.0:
         raise FloatingPointError("zero gradient norm")
-    metrics.update({"loss": float(sum(totals.values())), "gradient_norm": grad_norm, **totals})
+    # Component means are diagnostic; loss is the objective differentiated above.
+    weighted_objective = float(response_loss_coefficient) * totals.get("response", 0.0)
+    weighted_objective += sum(
+        float((auxiliary_weights or {}).get(name, 0.0)) * value
+        for name, value in totals.items() if name != "response"
+    )
+    metrics.update({
+        "loss": weighted_objective,
+        "unweighted_component_sum": float(sum(totals.values())),
+        "gradient_norm": grad_norm,
+        **totals,
+    })
     return metrics
 
 

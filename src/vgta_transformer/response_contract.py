@@ -44,7 +44,7 @@ def serialize_response_target(annotation: PrivateAnnotation) -> ResponseSerializ
 
     def render(node: Any, path: str = "") -> str:
         if isinstance(node, dict):
-            parts: list[str] = []
+            parts: list[str] = ["{"]  # Include the brace in absolute value offsets.
             for index, key in enumerate(sorted(node)):
                 if index:
                     parts.append(",")
@@ -56,7 +56,7 @@ def serialize_response_target(annotation: PrivateAnnotation) -> ResponseSerializ
                 value_end = sum(len(part) for part in parts)
                 if key in {"salient_values", "relation_class", "applicable_norm_ids", "conflict_class"}:
                     spans.setdefault(key, []).append((value_start, value_end))
-            return "{" + "".join(parts) + "}"
+            return "".join(parts) + "}"
         if isinstance(node, list):
             return "[" + ",".join(render(item, path) for item in node) + "]"
         return json.dumps(node, ensure_ascii=False, separators=(",", ":"))

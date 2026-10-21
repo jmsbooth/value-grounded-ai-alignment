@@ -1,0 +1,27 @@
+{
+  "after": {"errors": 0, "failed": 0, "passed": 46, "seconds": 12.96, "skipped": 0, "tests": 46},
+  "before": {"orchestration": {"failed": 5, "passed": 0, "tests": 5}, "source_contracts": {"failed": 13, "passed": 1, "tests": 14}},
+  "execution": "selected_contract_suite_complete",
+  "full_repository_regression": "NOT_RUN",
+  "locked_launch_authorized": false,
+  "master_protocol": "vga-master-v1.0.0",
+  "real_model_outputs": 0,
+  "real_pythia_training": "BLOCKED_ENVIRONMENT",
+  "repository_archival_status": "summary and source fixes only; full logs/inventory in conversation bundle; registry ingestion pending",
+  "run_id": "20261021T203008Z-6c932eaa",
+  "scientific_outcome": "not_tested",
+  "scope": "fixture",
+  "source_base": "e9147ac91bee999c7347cd8be2d2457d1c81beb1",
+  "study_id": "te-v0.6.3-contract-revalidation",
+  "tested_git_blobs": {
+    "experiments/transformer/corrected_variant_smoke.py": "b25a693b03c6db837b2508c1154fb4b9e7c8edbf",
+    "experiments/transformer/correction_gate.py": "3d26208ebc81f6074d2c6df2cef42307eea7d449",
+    "src/vgta_eval/verified_inventory.py": "d0fc4226eed770cf3bb3ab9dfe0802376e35606f",
+    "src/vgta_transformer/response_contract.py": "f9d0803d0f7b6bcec8d6cd2011c0511c4eb84e62",
+    "src/vgta_transformer/training.py": "605b50761f0969298ec293935fddae1f4fcba1e0",
+    "tests/protocol/test_contract_revalidation.py": "ec2966f3ed305aa33099659e34bf1042e3fd1515",
+    "tests/protocol/test_evidence_gate_cli.py": "422114443332d06b8781169bb4e4d25cbe397acf",
+    "tests/protocol/test_smoke_orchestration.py": "857760ae45a210003ed7cb53e51fcb96ae254ef4",
+    "tests/protocol/test_verified_inventory.py": "f61c122e11a1d68ee637bb29fbd40bd29804129a"
+  }
+}
