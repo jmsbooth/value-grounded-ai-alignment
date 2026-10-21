@@ -1,0 +1,315 @@
+# Copy to a new study directory; do not execute this template.
+# This is a prospective registration contract, NOT an assertion that current
+# runners already implement or validate these fields. An adapter/validator
+# must reject unresolved required fields, unknown keys and plan/code mismatch.
+# Resolve every null, or mark it not_applicable with a reviewed reason.
+# Never add a real approval, signature, hash or passed result without evidence.
+schema_version: vga-study-registration-v1
+master_protocol: vga-master-v1.0.0
+registration_status: draft_unresolved
+execution_authorized: false
+study_id: null
+study_version: null
+phase: null  # P1/P2/P3/P4/P5/P6/P7
+scope: null  # fixture/canary/development/locked/replication
+research_question: null
+owner: James Booth
+owner_approval:
+  approval_id: null
+  approved_at: null
+  scope: null
+  budget: null
+review:
+  methodology_reviewer: null
+  independence_description: null
+  review_artifact: null
+  remaining_limitations: []
+
+provenance:
+  master_document_sha256: null
+  registration_commit: null
+  source_commit: null
+  resolved_plan_sha256: null
+  dirty_tree_allowed: false
+  dirty_patch_sha256: null
+  untracked_source_manifest_sha256: null
+  parent_study_id: null
+  amendment_id: null
+  prior_results_exposed: []
+  changed_estimand_or_endpoint: null
+
+claims:
+  claim_register: experiments/protocols/vga-master-v1.0.0/claims.yaml
+  selected_ids: []
+  manuscript_commit: null
+  exact_manuscript_hypothesis_mapping: []
+  implementation_subset: null
+  primary_estimand: null
+  target_task_population: null
+  external_validity_scope: null
+
+model:
+  model_id: EleutherAI/pythia-410m
+  requested_revision: step143000
+  resolved_revision_sha: bba6a464f54bbf08fc174cfb351d9794d58af21d
+  asset_manifest_path: null
+  asset_manifest_sha256: null
+  tokenizer_manifest_sha256: null
+  architecture_config_sha256: null
+  cache_verified: false
+  local_files_only_after_verification: true
+  trust_remote_code: false
+  quantization: none
+  pretrained_weights_identical_across_arms: true
+adaptation:
+  method: lora
+  rank: 8
+  alpha: 16
+  dropout: 0.0
+  exact_target_modules: null
+  frozen_parameter_names_sha256: null
+  trainable_parameter_manifest_sha256: null
+  base_weight_change_test: null
+
+arms:
+  A1: {input: natural, auxiliary_heads: [], auxiliary_coefficients: {}, weighted_response_fields: [], shuffled_targets: []}
+  B: {input: exact_b_structured, auxiliary_heads: [], auxiliary_coefficients: {}, weighted_response_fields: [], shuffled_targets: []}
+  C1: {input: exact_b_structured, auxiliary_heads: [values, relation], auxiliary_coefficients: {values: 0.2, relation: 0.2}, weighted_response_fields: [], shuffled_targets: []}
+  C2: {input: exact_b_structured, auxiliary_heads: [values, relation, norms, conflict], auxiliary_coefficients: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}, weighted_response_fields: [], shuffled_targets: []}
+  B-TEXT-A: {input: exact_b_structured, auxiliary_heads: [], auxiliary_coefficients: {}, weighted_response_fields: [salient_values, relation_class], shuffled_targets: []}
+  C1-TEXT-N: {input: exact_b_structured, auxiliary_heads: [values, relation], auxiliary_coefficients: {values: 0.2, relation: 0.2}, weighted_response_fields: [applicable_norm_ids, conflict_class], shuffled_targets: []}
+  C1-SHAM: {input: exact_b_structured, auxiliary_heads: [values, relation], auxiliary_coefficients: {values: 0.2, relation: 0.2}, weighted_response_fields: [], shuffled_targets: [values, relation]}
+  C2-SHAM: {input: exact_b_structured, auxiliary_heads: [values, relation, norms, conflict], auxiliary_coefficients: {values: 0.2, relation: 0.2, norms: 0.2, conflict: 0.2}, weighted_response_fields: [], shuffled_targets: [norms, conflict]}
+arm_fidelity:
+  common_gold_response_information: true
+  identical_b_c1_c2_prompt_bytes: true
+  information_parity_audit: null
+  exact_variant_plan_sha256: null
+  prompt_target_loss_tensor_audit: null
+  sham_rng_and_permutation_manifest: null
+  sham_actual_label_change_fractions: null
+  input_overhead_and_capacity_differences: null
+inference_only_controls: [A0, A1_plus_context]
+
+response_contract:
+  version: null
+  schema_path: null
+  schema_sha256: null
+  common_target_serializer_sha256: null
+  eos_policy: one_explicit_supervised_eos
+  special_tokens_automatic: false
+  teacher_forcing_prompt_equals_inference_prefix: true
+  response_spans_exact_audit: null
+  selected_value_token_weight: 2.0
+  ordinary_and_eos_weight: 1.0
+  repair: prohibited
+  forced_formatting: prohibited_in_primary_path
+  self_reported_permission_authoritative: false
+  auxiliary_pool_position: last_valid_prompt_position
+
+training:
+  seeds: [11, 23, 37, 53, 71]
+  selected_arm_ids: [A1, B, C1, C2, B-TEXT-A, C1-TEXT-N, C1-SHAM, C2-SHAM]
+  protocol_expected_arm_seed_count: 40
+  selected_execution_arm_seed_count: 40
+  physical_microbatch_size: 1
+  effective_examples_per_update: 8
+  partial_final_batch_policy: null
+  max_updates_by_arm: null
+  evaluation_updates: null
+  optimizer: AdamW
+  learning_rate: null
+  betas: [0.9, 0.999]
+  epsilon: 0.00000001
+  weight_decay: null
+  learning_rate_schedule: null
+  warmup_updates: null
+  global_gradient_clip_norm: 1.0
+  response_loss_coefficient: 1.0
+  auxiliary_loss_definition: null
+  missing_label_masks: null
+  response_normalization: total_effective_batch_supervised_token_weight
+  auxiliary_normalization: per_head_total_effective_batch_eligible_elements
+  exact_sample_order_manifest: null
+  use_cache_during_training: false
+  gradient_checkpointing: null
+  checkpoint_schedule: null
+  checkpoint_selection: lowest_unweighted_validation_response_nll_then_earlier_update
+  resume_policy_and_equivalence_test: null
+  termination_conditions: [nonfinite_update, unauthorized_data_access, corrupt_artifact, approved_budget_exhausted]
+
+tuning:
+  comparison_type: null  # fixed_configuration/equal_budget_tuned
+  grid_per_arm: null
+  maximum_trials_per_arm: null
+  maximum_device_hours_per_arm: null
+  selection_split: validation
+  selected_configuration_manifest: null
+  all_trial_manifest: null
+  unequal_budget_justification: null
+  locked_scores_used_for_selection: false
+
+benchmark:
+  dataset_id: null
+  dataset_manifest_sha256: null
+  generator_sha256: null
+  public_renderer_sha256: null
+  observation_projector_sha256: null
+  ontology_version_and_sha256: null
+  policy_interpreter_sha256: null
+  annotation_builder_sha256: null
+  domains: [delegated_data_access, purpose_limited_disclosure]
+  fictional_policies: true
+  human_review_status: null
+  independent_unit: world_group_id
+  split_manifest_sha256: null
+  group_counts: {train: null, validation: null, calibration: null, open_development: null, locked_evaluation: null}
+  record_counts: {train: null, validation: null, calibration: null, open_development: null, locked_evaluation: null}
+  class_support_and_entropy_audit: null
+  exact_and_semantic_overlap_audit: null
+  graph_canonicalization_and_isomorphism_audit: null
+  id_lexical_compositional_structural_partitions: null
+  world_and_domain_weighting: null
+  candidate_order_counterbalancing: null
+  public_private_type_separation_test: null
+  oracle_known_answer_and_mutation_tests: null
+  task_eligibility_rule: null
+  predeclared_exclusions: []
+
+power_and_precision:
+  simulation_code_sha256: null
+  simulation_report: null
+  baseline_and_cluster_assumptions: null
+  alternative_effect_for_power: null
+  requested_power: 0.80
+  achieved_power_and_interval_coverage: null
+  world_and_seed_count_justification: null
+  precision_limited_design: null
+
+evaluation:
+  checkpoint_inventory_sha256: null
+  parser_version_and_sha256: null
+  candidate_evaluator_version_and_sha256: null
+  acceptable_action_set_definition: null
+  model_permission_claim_is_prediction_only: true
+  independent_reference_outputs_measured: true
+  decoding: greedy
+  sampling: false
+  generation_cap: 256
+  response_cap_feasibility_audit: null
+  context_overflow_policy: fail_before_execution
+  eos_id: null
+  stop_reason_from_actual_token_ids: true
+  raw_prediction_and_token_retention: true
+  malformed_outputs_remain_in_denominator: true
+  gold_join_after_predictions_sealed: true
+  attack_suite_sha256: null
+  attack_query_budget: null
+  attack_reference_semantics: null
+  conditional_attack_denominator_rule: clean_independently_correct_and_permitted
+  conditional_zero_denominator: not_estimable
+  grammar_or_choice_diagnostic_is_separate: true
+
+endpoints:
+  primary:
+    - {id: C01, treatment: B, control: A1, metric: UCR, delta: 0.05}
+    - {id: C02, treatment: C1, control: B, metric: salience_macro_f1, delta: 0.05}
+    - {id: C03, treatment: C1, control: B-TEXT-A, metric: salience_macro_f1, delta: 0.05}
+    - {id: C04, treatment: C2, control: C1, metric: conflict_macro_f1, delta: 0.05}
+    - {id: C05, treatment: C2, control: C1-TEXT-N, metric: conflict_macro_f1, delta: 0.05}
+    - {id: C06, treatment: C2, control: B, metric: UCR, delta: 0.05}
+  mandatory_secondary: [strict_format_rate, end_to_end_acceptable_action_accuracy, conditional_semantic_accuracy, salience_precision, salience_recall, conflict_confusion_matrix, norm_applicability, structural_ood_accuracy, sham_contrasts, over_refusal, missing_evidence_behavior, attack_disruption, calibration, capability_retention, compute]
+  frozen_metric_vocabulary: null
+  malformed_metric_conventions: null
+  metric_code_sha256: null
+  capability_sentinel_manifest: null
+  calibration_probability_event_and_scoring_path: null
+  calibration_fit_split: calibration
+  calibration_bins_and_confidence_threshold: null
+  guardrails:
+    capability_decline_margin: 0.02
+    brier_increase_margin: 0.02
+    attack_and_overrefusal_margins: null
+    compute_budget_limit: null
+    normalization_and_justification: null
+    not_measured_is_unknown: true
+
+analysis:
+  script_sha256: null
+  raw_inventory_sha256: null
+  contrast_direction: treatment_minus_control
+  independent_axes: [fine_tuning_seed, world_group_id]
+  method: paired_crossed_bootstrap
+  resample_within_domain_strata: true
+  preserve_all_world_derivatives_and_arm_pairing: true
+  recompute_nonlinear_metrics_each_replicate: true
+  replicates: 20000
+  bootstrap_seed: null
+  pointwise_confidence: 0.95
+  primary_family_size: 6
+  familywise_confidence: 0.95
+  familywise_method: bonferroni_two_sided_intervals
+  decision_interval_coverage: 0.9916666666666667
+  numeric_fixture_and_null_coverage_validation: null
+  degenerate_or_boundary_interval_policy: null
+  missing_seed_or_arm_policy: partial_not_silently_complete
+  standardized_effect_zero_variance: undefined_zero_variance
+  posthoc_analyses_labeled_exploratory: true
+  directional_benefit_rule: lower_decision_bound_gt_zero
+  meaningful_benefit_rule: lower_decision_bound_gt_delta
+  meaningful_benefit_ruled_out_rule: upper_decision_bound_lt_delta
+  practical_equivalence_rule: whole_decision_interval_inside_minus_delta_plus_delta
+  directional_harm_rule: upper_decision_bound_lt_zero
+
+custody:
+  lock_status: not_locked
+  generation_or_custodian_record: null
+  locked_set_manifest_sha256: null
+  prior_access_register: null
+  label_store_and_permissions: null
+  variant_alias_mapping_custodian: null
+  blinding_limitations: null
+  unblinding_condition: primary_metrics_and_tables_frozen
+  previously_inspected_test_set_reused_as_fresh_confirmation: false
+
+resources:
+  environment_lock_sha256: null
+  hardware: null
+  backend: null
+  precision: null
+  attention_implementation: null
+  deterministic_settings: null
+  longest_structured_input_profile: null
+  measured_training_generation_checkpoint_cost: null
+  full_schedule_cost_estimate_and_headroom: null
+  phase_wall_hours_limit: null
+  attempt_wall_hours_limit: null
+  disk_and_memory_limits: null
+  simultaneous_resident_models: 1
+  paid_compute_authorized: false
+  unsafe_memory_limit_override: false
+  silent_backend_fallback: false
+
+readiness:
+  implementation_validator_version: null
+  exact_required_evidence_inventory: null
+  evidence_receipt_and_content_hash_checks: false
+  actual_model_vs_fixture_checks: false
+  expected_vs_actual_scope_checks: false
+  protected_tree_final_comparison: null
+  critical_tests_skipped: null
+  open_blockers: []
+  overall_status: NOT_REGISTERED_NOT_AUTHORIZED
+
+reporting:
+  immutable_run_and_attempt_ids: true
+  immutable_analysis_revision: true
+  current_pointer_is_navigation_only: true
+  preserve_all_trials_and_partial_failures: true
+  mandatory_planned_vs_executed_table: true
+  separate_execution_validity_scope_scientific_outcome: true
+  change_log_path: null
+  final_report_path: null
+  manuscript_update_authorized: false
+  historical_artifact_mutation_authorized: false
+  locked_launch_authorized: false

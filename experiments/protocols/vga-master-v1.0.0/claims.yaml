@@ -1,0 +1,166 @@
+# Prospective operational claim register; this is not an empirical result table.
+# Historical manuscript H1-H10 keep their original IDs and wording. Each study
+# must add an exact-commit quotation mapping before making a hypothesis claim.
+register_version: vga-claims-v1
+master_protocol: vga-master-v1.0.0
+result_status: not_assessed_by_this_document
+historical_hypothesis_renumbering: prohibited
+claims:
+  - id: VGA-CONTEXT
+    phase: [P3, P4, P5]
+    question: Does structured presentation improve useful candidate conformance over the same policy facts in ordinary text?
+    treatment: B
+    controls: [A1, A1_plus_context]
+    primary_contrast: C01
+    primary_endpoint: UCR
+    alternative_explanations: [context_length, presentation_redundancy, format_training]
+    scope: A representation and training-format effect, not pure compute parity.
+    manuscript_mapping_required: true
+
+  - id: VGA-AXIOLOGICAL-OBJECTIVE
+    phase: [P3, P4, P5]
+    question: Does value/relation representation supervision help beyond identical inputs and ordinary use of the same correct labels?
+    treatment: C1
+    controls: [B, B-TEXT-A, C1-SHAM]
+    primary_contrasts: [C02, C03]
+    primary_endpoint: salience_macro_f1
+    required_secondary: [salience_precision, salience_recall, relation_recovery, UCR, calibration, capability_retention]
+    benefit_interpretation: Interpret both meaningful-control contrasts; beating shuffled supervision alone is insufficient.
+    scope: Auxiliary objectives on shared LoRA, not a protected canonical graph compiler.
+    manuscript_mapping_required: true
+
+  - id: VGA-NORMATIVE-OBJECTIVE
+    phase: [P3, P4, P5]
+    question: Does norm/conflict representation supervision improve conflict recognition beyond conventional supervision with the same labels?
+    treatment: C2
+    controls: [C1, C1-TEXT-N, C2-SHAM]
+    primary_contrasts: [C04, C05]
+    primary_endpoint: conflict_macro_f1
+    required_secondary: [applicable_norm_f1, UCR, unauthorized_silent_resolution, calibration, capability_retention]
+    semantic_precondition: All declared conflict classes must have meaningful support in the scored task.
+    scope: Recognition under explicit fictional policy, not a universal theory of moral conflict resolution.
+    manuscript_mapping_required: true
+
+  - id: VGA-USEFUL-ACTION
+    phase: [P4, P5]
+    question: Does the full initial objective treatment improve independently permitted useful actions beyond contextual structure alone?
+    treatment: C2
+    controls: [B, A1]
+    primary_contrast: C06
+    primary_endpoint: UCR
+    secondary_contrast: C2_minus_A1
+    evaluator_boundary: Permission and utility come from the candidate evaluator, never the model's booleans.
+    scope: The declared action catalogue, public observation and task distribution.
+    manuscript_mapping_required: true
+
+  - id: VGA-STRUCTURAL-TRANSFER
+    phase: [P4, P5, P7]
+    question: Do any observed gains transfer to genuinely held-out graph shapes or typed compositions?
+    treatments: [B, C1, C2]
+    controls: [A1, B-TEXT-A, C1-TEXT-N, lexical_baselines]
+    endpoint: structural_ood_acceptable_action_accuracy
+    default_role: secondary_diagnostic
+    primary_promotion: Requires a prospective comparison-family and power revision.
+    precondition: Instance renaming must not change structural identity.
+    manuscript_mapping_required: true
+
+  - id: VGA-ROBUSTNESS-TRADEOFF
+    phase: [P3, P4, P5, P7]
+    question: Does explicit semantic conditioning alter actual attack vulnerability or false confidence?
+    treatments: [B, C1, C2]
+    controls: [A1, matched_training_controls]
+    endpoints: [clean_UCR, attacked_UCR, assessable_semantic_violation, format_disruption, Brier_score, risk_coverage]
+    default_role: safety_diagnostic
+    preconditions: [actual_model_outputs, frozen_attack_budget, independent_scoring, declared_conditional_denominators]
+    insufficient_evidence: Generated difficulty rates and malformed outputs alone do not establish semantic attack success.
+    manuscript_mapping_required: true
+
+  - id: VGA-COVERAGE
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: C3
+    controls: [C2, generic_confidence_head, matched_abstention_training, shuffled_missingness_labels]
+    question: Does explicit coverage estimation improve uncertainty-aware decisions under missing or corrupted observable evidence?
+    endpoints: [UCR_at_fixed_coverage, selective_risk, observable_missingness_detection, over_abstention]
+    identifiability_boundary: Do not require distinguishing hidden worlds with identical observations.
+    manuscript_mapping_required: true
+
+  - id: VGTA-CANONICAL-COMPILATION
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: separable_canonical_to_neural_module
+    controls: [canonical_text_context, ordinary_adapter, parameter_matched_graph_control]
+    question: Does a derived neural module retain and use governed ontology semantics better than simpler representations?
+    endpoints: [relation_application_transfer, behavioral_intervention_effect, conformance_drift, capability_cost]
+    limitation: Representation probes alone do not establish behavioral alignment or governance integrity.
+    manuscript_mapping_required: true
+
+  - id: VGTA-ATTENTION
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: D
+    controls: [same_pre_attention_model, arbitrary_learned_bias, zero_bias, relation_permuted_bias]
+    question: Do semantically grounded attention interventions improve decisions beyond generic capacity and bias changes?
+    endpoints: [UCR, structural_transfer, calibration, measured_compute, intervention_sensitivity]
+    limitation: Raw attention visualization is not a causal explanation.
+    manuscript_mapping_required: true
+
+  - id: VGTA-PURPOSE
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: explicit_purpose_conditioning
+    controls: [same_information_as_text, irrelevant_purpose_swap, legitimate_purpose_swap]
+    question: Does a separate purpose representation improve relevance without hiding important affected parties or constraints?
+    endpoints: [task_relevance, UCR, purpose_manipulation_risk, over_restriction]
+    manuscript_mapping_required: true
+
+  - id: VGTA-ROUTING
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: E
+    controls: [standard_MoE, semantic_sham_router, declared_dense_comparators]
+    question: Does ontology-conditioned routing improve the performance-cost tradeoff over standard routing?
+    endpoints: [UCR, capability, active_FLOPs, latency, routing_stability, attack_evasion]
+    precondition: Report total and active parameters separately; expert names are not evidence of specialization.
+    manuscript_mapping_required: true
+
+  - id: VGA-LATE-BINDING
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: G
+    controls: [plain_contextual_norms, authority_metadata_ablation, unauthorized_profile_swap]
+    question: Can fixed model weights apply changed authorized norms without accepting unauthorized overrides?
+    endpoints: [applicability_accuracy, conflict_handling, unauthorized_override_rate, UCR]
+    precondition: Authority verification assumptions must be explicit and independently testable.
+    manuscript_mapping_required: true
+
+  - id: VGA-CONTINUAL-STABILITY
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatments: [frozen_value_module, regularized_value_module]
+    controls: [unrestricted_finetuning, ordinary_behavioral_baseline]
+    question: Does protecting a value representation preserve intended behavior without preventing useful adaptation?
+    endpoints: [conformance_drift, behavioral_retention, new_domain_capability, calibration]
+    manuscript_mapping_required: true
+
+  - id: VGA-FORMAL-ASSURANCE
+    phase: [P6, P7]
+    status: requires_separate_study
+    treatment: independently_verified_action_enforcement
+    controls: [same_raw_candidates_with_fixed_evaluator, model_only_execution]
+    question: What does a separately validated solver-backed boundary prevent, and what formalization gaps remain?
+    endpoints: [useful_execution, false_permit, false_deny, unknown_or_timeout, semantic_omission_bypass, verification_cost]
+    implementations: [SMT_with_Z3, CSL_Core_or_equivalent_constraint_language, temporal_model_checking_where_applicable]
+    limitation: Constraint conformance depends on the encoding and observations; it is not moral legitimacy or proof of complete world knowledge.
+    manuscript_mapping_required: true
+
+outcome_rules:
+  measured_directional_benefit: lower_simultaneous_interval_bound_gt_zero
+  practical_benefit_established: lower_simultaneous_interval_bound_gt_registered_delta
+  practical_benefit_ruled_out: upper_simultaneous_interval_bound_lt_registered_delta
+  practical_equivalence: whole_decision_interval_inside_registered_equivalence_bounds
+  harm: upper_simultaneous_interval_bound_lt_zero
+  uncertainty: interval_does_not_resolve_registered_question
+  invalid_measurement: evidenced_contract_or_measurement_defect_with_scoped_qualification
+  not_tested: absent_implementation_or_no_valid_observations
+  requirement: Record flags per contrast, scope, raw counts, uncertainty, deviations and all required controls.
