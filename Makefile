@@ -197,9 +197,8 @@ te-evaluate-corrected:
 	PYTHONPATH=src $(PYTHON) experiments/transformer/evaluate_corrected.py --checkpoint "$(CHECKPOINT)" $(if $(DEVICE),--device "$(DEVICE)",) $(if $(GENERATION_CAP),--generation-cap "$(GENERATION_CAP)",)
 
 te-correction-report:
-	@if [ -z "$(COHORT)" ]; then echo 'Usage: make te-correction-report COHORT=path/to/run-summary.json'; exit 1; fi
-	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_report.py --cohort "$(COHORT)"
-
+	@if [ -z "$(INVENTORY)" ] || [ -z "$(PLAN_SHA256)" ] || [ -z "$(SCOPE)" ]; then echo 'Usage: make te-correction-report INVENTORY=path PLAN_SHA256=64hex SCOPE=fixture|canary|development|locked|replication [EVIDENCE_ROOT=path] [OUTPUT_DIR=path]'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_report.py --inventory "$(INVENTORY)" --approved-plan-sha256 "$(PLAN_SHA256)" --scope "$(SCOPE)" $(if $(EVIDENCE_ROOT),--root "$(EVIDENCE_ROOT)",) $(if $(OUTPUT_DIR),--output-dir "$(OUTPUT_DIR)",)
 te-correction-gate:
-	@if [ -z "$(COHORT)" ]; then echo 'Usage: make te-correction-gate COHORT=path/to/report.json'; exit 1; fi
-	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_gate.py --cohort "$(COHORT)"
+	@if [ -z "$(INVENTORY)" ] || [ -z "$(PLAN_SHA256)" ] || [ -z "$(SCOPE)" ]; then echo 'Usage: make te-correction-gate INVENTORY=path PLAN_SHA256=64hex SCOPE=fixture|canary|development|locked|replication [EVIDENCE_ROOT=path] [OUTPUT=path]'; exit 1; fi
+	PYTHONPATH=src $(PYTHON) experiments/transformer/correction_gate.py --inventory "$(INVENTORY)" --approved-plan-sha256 "$(PLAN_SHA256)" --scope "$(SCOPE)" $(if $(EVIDENCE_ROOT),--root "$(EVIDENCE_ROOT)",) $(if $(OUTPUT),--output "$(OUTPUT)",)
